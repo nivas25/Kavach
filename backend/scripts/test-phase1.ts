@@ -50,9 +50,19 @@ async function runTest() {
     }
     const redisData = typeof redisDataStr === 'string' ? JSON.parse(redisDataStr) : redisDataStr;
     console.log("✅ Redis Data Verified.");
-    console.log("- Status:", redisData.status);
-    console.log("- Title extracted:", redisData.extractedData.title);
-    console.log("- Risk Level:", redisData.extractedData.riskLevel);
+    
+    console.log("\n=======================================================");
+    console.log("📄 LLAMAPARSE EXTRACTED MARKDOWN (PREVIEW)");
+    console.log("=======================================================");
+    const mdPreview = redisData.markdown.substring(0, 500);
+    console.log(mdPreview + (redisData.markdown.length > 500 ? "\n... [TRUNCATED]" : ""));
+    console.log("=======================================================\n");
+
+    console.log("=======================================================");
+    console.log("🧠 GEMINI 2.5 PRO DYNAMIC JSON EXTRACTION");
+    console.log("=======================================================");
+    console.log(JSON.stringify(redisData.extractedData, null, 2));
+    console.log("=======================================================\n");
 
     // 4. Verify Supabase Storage
     console.log("🔍 Verifying Supabase Storage...");

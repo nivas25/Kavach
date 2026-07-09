@@ -8,11 +8,11 @@ export class DocumentProcessorService {
   private llamaParseApiKey: string;
 
   constructor() {
-    // Phase 1: We use GEMINI_API_KEY_1 for extraction
-    if (!process.env.GEMINI_API_KEY_1) {
-      throw new Error("GEMINI_API_KEY_1 is missing in environment variables.");
+    // Phase 1: We use GEMINI_API_KEY_3 for extraction due to Key 1 & 2 quota limits on 2.5-pro
+    if (!process.env.GEMINI_API_KEY_3) {
+      throw new Error("GEMINI_API_KEY_3 is missing in environment variables.");
     }
-    this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY_1);
+    this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY_3);
     
     if (!process.env.LLAMAPARSE_API_KEY) {
       throw new Error("LLAMAPARSE_API_KEY is missing in environment variables.");
@@ -79,25 +79,29 @@ export class DocumentProcessorService {
    * Uses Gemini to extract a structured JSON representation of the contract.
    */
   async extractWithGemini(markdown: string): Promise<any> {
-    console.log(`[Gemini] Extracting structured JSON from markdown...`);
+    console.log(`[Gemini] Extracting dynamic structured JSON from markdown using gemini-2.5-flash...`);
     const model = this.genAI.getGenerativeModel({ 
       model: "gemini-2.5-flash",
       generationConfig: { responseMimeType: "application/json" }
     });
 
     const prompt = `
-      Analyze the following legal document (provided in markdown format) and extract structured information.
-      Return a JSON object with the exact following schema:
-      {
-        "title": "Document Title",
-        "type": "Contract Type (e.g., NDA, Employment, Lease, etc.)",
-        "parties": ["Party A", "Party B"],
-        "summary": "A concise summary of the document",
-        "keyClauses": [
-          { "title": "Clause Title", "content": "Brief description of the clause" }
-        ],
-        "riskLevel": "Low" | "Medium" | "High" | "Critical"
-      }
+      You are an elite, highly experienced legal AI architect analyzing a document.
+      Your task is to extract a comprehensive, dynamic JSON representation of the provided legal document.
+
+      REQUIREMENTS:
+      1. You MUST include a "title" string field (the name or best guessed title of the document).
+      2. You MUST include a "riskLevel" string field representing the overall legal/business risk. It MUST be exactly one of: "low", "medium", "high", "critical".
+      3. BEYOND those two required fields, you must dynamically create an intelligent schema that best fits the specific type of document provided (e.g., NDA, Lease, Employment, MSA).
+      4. Extract deep, granular details. Examples of dynamic fields you might create:
+         - "parties": detailed breakdown of entities involved.
+         - "keyDates": effective date, expiration, milestones.
+         - "coreObligations": what each party is required to do.
+         - "financialTerms": payment schedules, penalties.
+         - "governingLaw": jurisdiction and dispute resolution.
+         - "criticalClauses": a deep dive into specific clauses, highlighting any unusual liabilities, indemnification, or auto-renewals.
+      5. Do not hallucinate. Only extract what is present in the markdown.
+      6. Return ONLY valid JSON.
 
       Document:
       ${markdown}
