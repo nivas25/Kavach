@@ -1,0 +1,25 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@mastra/core": "^1.46.0",
+    "@qdrant/js-client-rest": "^1.18.0",
+    "@supabase/supabase-js": "^2.110.2",
+    "@upstash/redis": "^1.38.0",
+    "dotenv": "^16.4.5",
+    "fastify": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.0"
+  }
+}

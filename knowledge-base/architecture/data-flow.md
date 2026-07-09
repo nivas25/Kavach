@@ -1,349 +1,546 @@
-# End-to-End Data Flow
+# Complete Data Flow — Kavach v2.0
 
-This document traces the complete journey of data through Kavach — from the moment a user uploads a contract to the delivery of the final risk report.
+> **The definitive guide to data movement through Kavach — from document upload to final report.**
 
----
+This document traces every piece of data through the system, explains when and where it is stored, how sessions are managed, and how the system guarantees zero data loss.
 
-## Flow Summary
-
-```
-User → Upload → Parse → Extract Clauses → Debate (2 Rounds) → Score → Benchmark → Alternatives → Safety Check → Report
-```
+*Last updated: July 2026*
 
 ---
 
-## Detailed Step-by-Step Flow
+## End-to-End Flow Summary
 
-### Step 1 — User Onboarding & Context Setting
+```
+User Uploads Document
+        │
+        ▼
+┌─ Phase 1: Preprocessing ─────────────────────────────────────────┐
+│  Step 1.1: User onboarding (role, industry, concerns)            │
+│  Step 1.2: LlamaParse → Convert PDF/DOCX to Markdown             │
+│  Step 1.3: Gemini 2.5 Pro → Extract clauses into JSON            │
+│  Step 1.4: Generate session_id                                    │
+│  Step 1.5: Store Markdown + JSON → Redis (TTL: 2h)               │
+└──────────────────────────────────┬────────────────────────────────┘
+                                   │
+                                   ▼
+┌─ Phase 2: Multi-Agent Debate ────────────────────────────────────┐
+│  Step 2.1: Mastra Workflow starts with session_id                │
+│  Step 2.2: For each clause → 5-round debate:                     │
+│            Round 1: Opening Statements (3 agents, parallel)      │
+│            Round 2: Rebuttal 1 (3 agents, sequential)            │
+│            Round 3: Rebuttal 2 (3 agents, sequential)            │
+│            Round 4: Cross Examination (3 agents, sequential)     │
+│            Round 5: Closing Arguments (3 agents, sequential)     │
+│  Step 2.3: All messages stored → Redis (Mastra Memory)           │
+│  Step 2.4: Agents query → Qdrant (laws + industry standards)     │
+│  Step 2.5: Tool calls logged → Redis (then Supabase)             │
+└──────────────────────────────────┬────────────────────────────────┘
+                                   │
+                                   ▼
+┌─ Phase 3: Scoring & Verdict ─────────────────────────────────────┐
+│  Step 3.1: Neutral Judge reads full debate from Mastra Memory    │
+│  Step 3.2: Judge applies 3-Factor Scoring Formula                │
+│  Step 3.3: Judge output → Redis (Mastra Memory)                  │
+│  Step 3.4: Benchmarking (Qdrant queries)                         │
+│  Step 3.5: Safer alternatives generated (Gemini 2.5 Pro)         │
+└──────────────────────────────────┬────────────────────────────────┘
+                                   │
+                                   ▼
+┌─ Phase 4: Safety Validation ─────────────────────────────────────┐
+│  Step 4.1: Enkrypt AI Checkpoint 1 → Legal citation check        │
+│  Step 4.2: Enkrypt AI Checkpoint 2 → Bias detection              │
+│  Step 4.3: Enkrypt AI Checkpoint 3 → Output validation           │
+└──────────────────────────────────┬────────────────────────────────┘
+                                   │
+                                   ▼
+┌─ Phase 5: Persistence & Delivery ────────────────────────────────┐
+│  Step 5.1: Transfer ALL data from Redis → Supabase               │
+│            → analyses table (full results)                        │
+│            → debate_messages table (every message)                │
+│            → tool_usage_log table (every tool call)               │
+│  Step 5.2: Clean up Redis keys                                    │
+│  Step 5.3: Return report to frontend                              │
+└──────────────────────────────────────────────────────────────────-┘
+```
+
+---
+
+## Detailed Step-by-Step Data Flow
+
+### Phase 1: Document Upload & Preprocessing
+
+#### Step 1.1 — User Onboarding & Context Setting
 
 ```
 Frontend (Next.js)
 │
 ├─ User selects role: Job Seeker | Freelancer | Consumer | Custom
-├─ User answers 3–5 optional context questions
-│   Example (Job Seeker): experience level, industry, specific concerns
-└─ Context object created: { role, experience, industry, concerns[] }
+├─ User answers context questions (optional):
+│   • Experience level (Fresher / Mid / Senior)
+│   • Industry (IT / Consulting / Healthcare / etc.)
+│   • Specific concerns (Non-compete / IP / Salary / etc.)
+└─ Context object created
 ```
 
-**Data Created:**
+**Data created:**
 ```typescript
 interface UserContext {
   role: 'job_seeker' | 'freelancer' | 'consumer' | 'custom';
-  experience?: string;
+  experience?: 'fresher' | 'mid' | 'senior';
   industry?: string;
   concerns?: string[];
   customContext?: string;
 }
 ```
 
+**Stored in:** Passed to API route (not stored yet)
+
 ---
 
-### Step 2 — Document Upload & Processing
+#### Step 1.2 — LlamaParse: Document → Markdown
 
 ```
-Frontend → API Route → Mastra Workflow Engine
+API Route receives file
 │
-├─ User uploads PDF / DOCX / plain text
-├─ File sent to Mastra via API route
-├─ Mastra tool calls Gemini Flash for document processing:
-│   ├─ Extract raw text from file
-│   ├─ Normalize formatting
-│   └─ Convert to structured text representation
-└─ Output: Clean structured document text
+├─ Validate file (type, size ≤ 10MB)
+├─ Send to LlamaParse API
+│   ├─ PDF: Full structural parsing (tables, headers, columns)
+│   ├─ DOCX: Full structural parsing
+│   └─ Text: Pass through (already text)
+└─ Output: Clean, structured Markdown
 ```
 
-**Data Created:**
+**Data created:** `string` — Full Markdown representation of the document
+
+**Stored in:** Held in memory, passed to Step 1.3
+
+---
+
+#### Step 1.3 — Gemini 2.5 Pro: Markdown → Structured JSON
+
+```
+Markdown from Step 1.2
+│
+├─ Send to Gemini 2.5 Pro with extraction prompt
+├─ Extract:
+│   ├─ Document metadata (parties, dates, contract type, jurisdiction)
+│   ├─ Substantive clauses with categories
+│   └─ Filter out boilerplate (headers, signatures, ToC)
+└─ Output: Structured JSON
+```
+
+**Data created:**
 ```typescript
-interface ProcessedDocument {
-  id: string;
-  originalFileName: string;
-  rawText: string;
-  structuredText: string;
-  uploadedAt: Date;
-  userId: string;
-}
-```
-
----
-
-### Step 3 — Smart Section Extraction
-
-```
-Mastra Workflow Engine (Gemini Flash tool)
-│
-├─ Identifies substantive clauses from structured text
-├─ Filters out boilerplate (headers, signature blocks, formatting)
-├─ Extracts sections by category:
-│   ├─ Compensation & Payment Terms
-│   ├─ Termination Conditions
-│   ├─ Non-Compete & Non-Solicitation
-│   ├─ Intellectual Property Assignment
-│   ├─ Liability & Indemnification
-│   ├─ Confidentiality & NDA
-│   ├─ Dispute Resolution
-│   └─ Governing Law
-└─ Each section becomes a debate topic
-```
-
-**Data Created:**
-```typescript
-interface ExtractedClause {
-  id: string;
-  category: ClauseCategory;
-  originalText: string;
-  summary: string;
-  position: number; // order in document
-}
-
-type ClauseCategory =
-  | 'compensation_payment'
-  | 'termination'
-  | 'non_compete'
-  | 'ip_assignment'
-  | 'liability_indemnification'
-  | 'confidentiality_nda'
-  | 'dispute_resolution'
-  | 'governing_law'
-  | 'other';
-```
-
----
-
-### Step 4 — Multi-Agent Debate (Round 1 — Opening Arguments)
-
-```
-Mastra Workflow → Dispatches 3 agents per clause (can run in parallel)
-│
-├─ User Advocate Agent (Groq Llama)
-│   ├─ Input: clause text + user context
-│   ├─ Action: Identifies risks, worst-case scenarios, power imbalances
-│   └─ Output: Opening argument (stored in Mastra Memory)
-│
-├─ Company Defender Agent (Groq Llama)
-│   ├─ Input: clause text + industry standards (from Qdrant)
-│   ├─ Action: Explains business rationale, identifies standard aspects
-│   └─ Output: Opening argument (stored in Mastra Memory)
-│
-└─ India Legal Expert Agent (Gemini Flash)
-    ├─ Input: clause text
-    ├─ Action: Queries Qdrant for Indian laws, assesses enforceability
-    ├─ Qdrant Query: Semantic search on clause text → retrieve matching statutes
-    └─ Output: Legal analysis with citations (stored in Mastra Memory)
-```
-
-**Data Flow:**
-```
-Clause Text → Agent → LLM (Groq/Gemini) → Argument → Mastra Memory (Redis)
-                                                    → Enkrypt AI (Legal Expert output only)
-```
-
----
-
-### Step 5 — Multi-Agent Debate (Round 2 — Rebuttals)
-
-```
-Mastra Workflow → Agents read Round 1 from Memory → Produce rebuttals
-│
-├─ User Advocate reads Company Defender's + Legal Expert's Round 1
-│   └─ Responds with rebuttal, may cite Legal Expert to strengthen case
-│
-├─ Company Defender reads User Advocate's + Legal Expert's Round 1
-│   └─ Concedes valid points, defends reasonable protections
-│
-└─ India Legal Expert reads Advocate's + Defender's Round 1
-    └─ Refines analysis with more targeted legal references from Qdrant
-```
-
-**Data Flow:**
-```
-Mastra Memory (Round 1 args) → Agent → LLM → Rebuttal → Mastra Memory (Round 2)
-```
-
----
-
-### Step 6 — Neutral Judge Scoring & Verdict
-
-```
-Neutral Judge Agent (Gemini Flash)
-│
-├─ Input: Full debate transcript (6 messages: 3 opening + 3 rebuttals)
-│         Retrieved from Mastra Memory
-├─ Action:
-│   ├─ Evaluates strength of each argument
-│   ├─ Identifies consensus and disagreement points
-│   ├─ Applies 3-Factor Weighted Scoring Formula:
-│   │   Risk Score = (Harm × 0.40) + (Legal × 0.35) + (Likelihood × 0.25)
-│   │   Each factor scored 1–10, final score normalized to 0–100
-│   ├─ Classifies risk level: Low / Medium / High / Critical
-│   └─ Generates plain-language explanation
-└─ Output: Verdict object (score, factors, explanation, recommendation)
-```
-
-**Data Created:**
-```typescript
-interface ClauseVerdict {
-  clauseId: string;
-  riskScore: number; // 0–100
-  riskLevel: 'low' | 'medium' | 'high' | 'critical';
-  factors: {
-    harmPotential: { score: number; reasoning: string };
-    legalStrength: { score: number; reasoning: string };
-    practicalLikelihood: { score: number; reasoning: string };
+interface ExtractionResult {
+  metadata: {
+    parties: string[];
+    contractType: string;
+    effectiveDate?: string;
+    jurisdiction?: string;
+    governingLaw?: string;
   };
-  explanation: string; // plain language
-  recommendation: string;
-  debateSummary: string;
+  clauses: Array<{
+    id: string;
+    category: ClauseCategory;
+    originalText: string;
+    summary: string;
+    position: number;
+  }>;
 }
+```
+
+**Stored in:** Held in memory, passed to Step 1.5
+
+---
+
+#### Step 1.4 — Generate Session ID
+
+```typescript
+const sessionId = crypto.randomUUID(); // e.g., "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+```
+
+**The `session_id` is the universal key** that links all data across Redis, Supabase, and Mastra Memory.
+
+---
+
+#### Step 1.5 — Store in Redis
+
+```
+Redis
+│
+├─ doc:{session_id}  (Hash, TTL: 2h)
+│   ├─ markdown: Full LlamaParse output
+│   ├─ json: Structured extraction from Gemini 2.5 Pro
+│   ├─ metadata: { file_name, file_type, file_size, clause_count, upload_time }
+│   └─ status: 'ready'
+│
+└─ session:{session_id}:status  (String/JSON, TTL: 1h)
+    └─ { status: 'extracting', totalClauses: N, ... }
+```
+
+**Why Redis (not Supabase) at this stage?**
+- Speed: Redis read/write is sub-millisecond
+- The debate pipeline will read this data many times during the next 5–10 minutes
+- No need for durability yet — the analysis hasn't completed
+- If the process crashes, the user simply re-uploads (no stale data in Supabase)
+
+---
+
+### Phase 2: Multi-Agent Debate (Core Intelligence)
+
+#### Step 2.1 — Start Mastra Workflow
+
+```
+Mastra Workflow Engine
+│
+├─ Input: { session_id, clauses[], userContext }
+├─ Read extracted data from Redis: doc:{session_id}
+├─ Update session status: 'debating'
+└─ Begin clause-by-clause debate loop
 ```
 
 ---
 
-### Step 7 — Benchmarking
+#### Step 2.2 — 5-Round Debate Per Clause
+
+For **each extracted clause**, the following sequence executes:
+
+```
+┌─── Round 1: Opening Statements ────────────────────────────────┐
+│  Execution: PARALLEL (3 agents run simultaneously)              │
+│                                                                  │
+│  User Advocate (Groq Llama 3.3)                                 │
+│  ├─ Input: clause text + user context                            │
+│  ├─ Identifies risks, worst-case scenarios, power imbalances    │
+│  └─ Output → Mastra Memory (Redis)                               │
+│                                                                  │
+│  Company Defender (Groq Llama 3.3)                               │
+│  ├─ Input: clause text + industry standards (from Qdrant)        │
+│  ├─ Explains business rationale, identifies standard aspects    │
+│  └─ Output → Mastra Memory (Redis)                               │
+│                                                                  │
+│  India Legal Expert (Gemini 2.5 Pro)                             │
+│  ├─ Input: clause text                                           │
+│  ├─ Queries Qdrant for Indian laws, assesses enforceability     │
+│  ├─ → Enkrypt AI Checkpoint 1 (hallucination check)             │
+│  └─ Output → Mastra Memory (Redis)                               │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─── Round 2: Rebuttal 1 ────────────────────────────────────────┐
+│  Execution: SEQUENTIAL (agents read Round 1 from Memory first)  │
+│                                                                  │
+│  Each agent reads the other two agents' Round 1 arguments       │
+│  from Mastra Memory, then produces a rebuttal.                   │
+│                                                                  │
+│  All 3 rebuttals → Mastra Memory (Redis)                         │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─── Round 3: Rebuttal 2 ────────────────────────────────────────┐
+│  Same pattern: read Rounds 1-2, produce deeper arguments        │
+│  All 3 messages → Mastra Memory (Redis)                          │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─── Round 4: Cross Examination ─────────────────────────────────┐
+│  Agents directly challenge each other's specific claims         │
+│  User Advocate vs. Company Defender (primary conflict)           │
+│  Legal Expert verifies/corrects claims from both sides          │
+│  → Enkrypt AI Checkpoint 1 (re-check legal citations)           │
+│  All 3 messages → Mastra Memory (Redis)                          │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─── Round 5: Closing Arguments ─────────────────────────────────┐
+│  Each agent gives final stance after hearing everything          │
+│  All 3 messages → Mastra Memory (Redis)                          │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+**Data flow per round:**
+```
+Clause Text + Previous Rounds (from Redis)
+    → Agent
+    → LLM (Groq or Gemini)
+    → Response
+    → Mastra Memory (Redis): debate:{session_id}:{clause_id}
+```
+
+---
+
+#### Step 2.3 — Agent Tool Calls to Qdrant
+
+During the debate, agents make tool calls to Qdrant:
+
+| Agent | Qdrant Collection | Query Type | Rounds |
+|-------|-------------------|------------|--------|
+| India Legal Expert | `indian_laws` | Indian statutes + precedents | 1, 4 |
+| Company Defender | `industry_standards` | Industry norms + benchmarks | 1 |
+
+All Qdrant queries pass through the Redis cache (`cache:qdrant:*`, TTL: 30min) to avoid redundant searches.
+
+---
+
+### Phase 3: Scoring & Verdict
+
+#### Step 3.1–3.3 — Neutral Judge
+
+```
+Neutral Judge (Gemini 2.5 Pro)
+│
+├─ Input: Full debate transcript (15 messages from Mastra Memory)
+│         + Clause text + User context
+├─ Evaluates argument strength from all 5 rounds
+├─ Identifies consensus points and disagreements
+├─ Applies 3-Factor Weighted Scoring:
+│   Risk Score = (Harm × 0.40) + (Legal × 0.35) + (Likelihood × 0.25)
+├─ Classifies: Low (0–25) / Medium (26–50) / High (51–75) / Critical (76–100)
+└─ Output: Verdict JSON → Mastra Memory (Redis)
+```
+
+#### Step 3.4 — Benchmarking
 
 ```
 Qdrant Retrieval
 │
 ├─ Indian Law Benchmark:
-│   ├─ Query: clause category + key terms → Qdrant legal collection
-│   ├─ Returns: matching Indian statutes with sections
-│   └─ Comparison: clause vs. legal requirements
+│   ├─ Query: clause category → indian_laws collection
+│   └─ Compliance: 'compliant' | 'ambiguous' | 'non_compliant'
 │
 └─ Industry Standard Benchmark:
-    ├─ Query: clause category + user industry → Qdrant standards collection
-    ├─ Returns: typical clause norms for that industry
-    └─ Comparison: clause vs. industry norms
+    ├─ Query: clause category + user industry → industry_standards collection
+    └─ Deviation: 'within_norm' | 'slightly_stricter' | 'significantly_stricter'
 ```
 
-**Data Created:**
-```typescript
-interface BenchmarkResult {
-  clauseId: string;
-  legalBenchmark: {
-    relevantLaws: Array<{ actName: string; section: string; summary: string }>;
-    compliance: 'compliant' | 'ambiguous' | 'non_compliant';
-    details: string;
-  };
-  industryBenchmark: {
-    standardPractice: string;
-    deviation: 'within_norm' | 'slightly_stricter' | 'significantly_stricter';
-    details: string;
-  };
-}
-```
-
----
-
-### Step 8 — Safer Alternative Generation
+#### Step 3.5 — Safer Alternatives
 
 ```
-Mastra Workflow (Gemini Flash)
+Gemini 2.5 Pro
 │
-├─ Input: risky clause + verdict + benchmark data
-├─ For clauses with riskLevel = 'medium' | 'high' | 'critical':
-│   ├─ Identifies risk-driving elements
-│   ├─ Retrieves enforceability standards from Qdrant
-│   └─ Generates 1–2 alternative clause versions
-├─ Alternatives must:
-│   ├─ Reduce identified risk factors
-│   ├─ Maintain legitimate business purpose
-│   ├─ Align with industry standard language
-│   └─ Remain enforceable under Indian law
-└─ Output: SaferAlternative[]
-```
-
-**Data Created:**
-```typescript
-interface SaferAlternative {
-  clauseId: string;
-  alternativeNumber: 1 | 2;
-  rewrittenClause: string;
-  estimatedRiskScore: number;
-  changesExplained: string;
-}
+├─ For clauses with risk >= 'medium':
+│   ├─ 1 alternative for medium risk
+│   └─ 2 alternatives for high/critical risk
+├─ Maintains legitimate business purpose
+├─ Aligns with Indian law requirements
+└─ Generates ready-to-send negotiation messages
 ```
 
 ---
 
-### Step 9 — Enkrypt AI Safety Validation
+### Phase 4: Safety Validation (Enkrypt AI)
 
 ```
 Enkrypt AI Safety Layer
 │
-├─ Checkpoint 1: Legal Citation Verification
-│   ├─ Scans all cited act names, section numbers, case references
-│   ├─ Flags hallucination markers
-│   └─ If flagged → regenerate with stricter Qdrant retrieval
+├─ Checkpoint 1 (already ran after Legal Expert in Rounds 1 & 4)
+│   └─ Legal citation hallucination detection
 │
-├─ Checkpoint 2: Agent Bias Detection
-│   ├─ Analyzes Judge's scoring for disproportionate bias
-│   ├─ Checks all perspectives were genuinely engaged
-│   └─ If flagged → regenerate Judge verdict with bias warning
+├─ Checkpoint 2 (after Judge verdict)
+│   ├─ Bias detection: does Judge favor one agent?
+│   └─ If bias detected → re-run Judge with anti-bias prompt
 │
-└─ Checkpoint 3: Output Validation
-    ├─ Verifies score arithmetic consistency
-    ├─ Checks alternatives don't introduce new risks
-    ├─ Confirms plain-language accuracy
-    └─ Screens for unauthorized legal advice
+└─ Checkpoint 3 (before final report)
+    ├─ Score arithmetic consistency
+    ├─ Alternative clause safety
+    ├─ Plain-language accuracy
+    └─ Legal advice boundary check
 ```
 
 ---
 
-### Step 10 — Report Compilation & Delivery
+### Phase 5: Persistence & Delivery — Redis → Supabase Transfer
 
-```
-Mastra Workflow → Compiles all results → PostgreSQL → Frontend
-│
-├─ Assembles final report:
-│   ├─ Overall contract risk score (average of clause scores)
-│   ├─ Clause-by-clause breakdown
-│   ├─ Key findings summary
-│   └─ Recommended actions (prioritized by severity)
-│
-├─ Saves to PostgreSQL (Reports Database)
-│
-└─ Returns to Frontend for rendering
-```
+This is the **critical data transfer** phase. ALL useful data moves from Redis to permanent Supabase storage.
 
-**Final Report Structure:**
+#### Step 5.1 — Transfer to Supabase
+
 ```typescript
-interface ContractReport {
-  id: string;
-  userId: string;
-  documentId: string;
-  overallRiskScore: number;
-  overallRiskLevel: string;
-  clauses: Array<{
-    clause: ExtractedClause;
-    verdict: ClauseVerdict;
-    benchmark: BenchmarkResult;
-    alternatives: SaferAlternative[];
-    negotiationMessage: string;
-    debateTranscript: DebateMessage[];
-  }>;
-  keyFindings: string[];
-  recommendedActions: string[];
-  createdAt: Date;
-  enkryptValidation: {
-    hallucinationCheckPassed: boolean;
-    biasCheckPassed: boolean;
-    outputValidationPassed: boolean;
-  };
+async function persistToSupabase(sessionId: string, analysisResult: AnalysisResult) {
+  // ═══ 1. Insert into analyses table ═══
+  const { data: analysis } = await supabase
+    .from('analyses')
+    .insert({
+      session_id: sessionId,
+      user_role: analysisResult.userContext.role,
+      user_experience: analysisResult.userContext.experience,
+      user_industry: analysisResult.userContext.industry,
+      user_concerns: analysisResult.userContext.concerns,
+      original_file_name: analysisResult.document.fileName,
+      file_type: analysisResult.document.fileType,
+      file_size_bytes: analysisResult.document.fileSize,
+      extracted_markdown: analysisResult.document.markdown,       // From Redis doc:{session_id}
+      extracted_json: analysisResult.document.extractedJson,      // From Redis doc:{session_id}
+      overall_risk_score: analysisResult.overallScore,
+      overall_risk_level: analysisResult.overallLevel,
+      total_clauses_analyzed: analysisResult.clauses.length,
+      clause_results: analysisResult.clauses,                     // Full clause analysis JSONB
+      key_findings: analysisResult.keyFindings,
+      recommended_actions: analysisResult.recommendedActions,
+      enkrypt_hallucination_passed: analysisResult.enkrypt.hallucinationPassed,
+      enkrypt_bias_passed: analysisResult.enkrypt.biasPassed,
+      enkrypt_output_validation_passed: analysisResult.enkrypt.outputPassed,
+      status: 'completed',
+      completed_at: new Date().toISOString(),
+      processing_time_ms: Date.now() - analysisResult.startTime,
+    })
+    .select('id')
+    .single();
+
+  // ═══ 2. Insert ALL debate messages ═══
+  const debateMessages = [];
+  for (const clause of analysisResult.clauses) {
+    // Read all messages from Mastra Memory (Redis)
+    const threadMessages = await memory.get({
+      threadId: `debate:${sessionId}:${clause.clauseId}`,
+    });
+
+    for (const msg of threadMessages) {
+      debateMessages.push({
+        analysis_id: analysis.id,
+        clause_id: clause.clauseId,
+        clause_category: clause.category,
+        agent_role: msg.metadata.agentName,
+        round_number: msg.metadata.round,
+        phase: msg.metadata.phase,
+        content: msg.content,
+        content_length: msg.content.length,
+        llm_provider: msg.metadata.model.includes('gemini') ? 'google' : 'groq',
+        llm_model: msg.metadata.model,
+        tokens_used: msg.metadata.tokensUsed,
+        latency_ms: msg.metadata.latencyMs,
+      });
+    }
+  }
+
+  await supabase.from('debate_messages').insert(debateMessages);
+
+  // ═══ 3. Insert tool usage logs ═══
+  await supabase.from('tool_usage_log').insert(analysisResult.toolUsageLogs);
+
+  return analysis.id;
 }
 ```
 
+#### Step 5.2 — Redis Cleanup
+
+```typescript
+async function cleanupRedis(sessionId: string, clauseIds: string[]) {
+  await redis.del([
+    `doc:${sessionId}`,
+    `session:${sessionId}:status`,
+    ...clauseIds.map(id => `debate:${sessionId}:${id}`),
+  ]);
+}
+```
+
+#### Step 5.3 — Return Report to Frontend
+
+```typescript
+// GET /api/report/{session_id}
+// Reads from Supabase (permanent storage)
+const report = await supabase
+  .from('analyses')
+  .select('*')
+  .eq('session_id', sessionId)
+  .single();
+```
+
 ---
 
-### Step 11 — Interactive Exploration (Post-Report)
+## Data Lifecycle Summary
+
+| Data Type | During Analysis (Redis) | After Analysis (Supabase) | Redis Key | Supabase Table/Column |
+|-----------|------------------------|--------------------------|-----------|----------------------|
+| Extracted Markdown | ✅ `doc:{sid}` hash field | ✅ `extracted_markdown` | `doc:{session_id}` | `analyses.extracted_markdown` |
+| Extracted JSON | ✅ `doc:{sid}` hash field | ✅ `extracted_json` | `doc:{session_id}` | `analyses.extracted_json` |
+| Debate messages (all rounds) | ✅ Mastra Memory threads | ✅ Full history | `debate:{sid}:{cid}` | `debate_messages` table |
+| Session progress | ✅ `session:{sid}:status` | ❌ Not needed | `session:{sid}:status` | — |
+| Qdrant cache | ✅ `cache:qdrant:*` | ❌ Not needed | `cache:qdrant:{hash}` | — |
+| Final risk scores | ✅ In memory | ✅ `clause_results` JSONB | — | `analyses.clause_results` |
+| Benchmarks | ✅ In memory | ✅ Inside `clause_results` | — | `analyses.clause_results` |
+| Safer alternatives | ✅ In memory | ✅ Inside `clause_results` | — | `analyses.clause_results` |
+| Tool call history | ✅ In memory | ✅ Full audit trail | — | `tool_usage_log` table |
+| Enkrypt AI results | ✅ In memory | ✅ Validation flags | — | `analyses.enkrypt_*` columns |
+
+---
+
+## Session Management with `session_id`
+
+### How `session_id` Works
+
+The `session_id` is a UUID generated when the user uploads a document. It is the **universal correlation key** that ties everything together:
 
 ```
-Frontend (Next.js)
-│
-├─ User views overall risk score with visual gauge
-├─ Expands any clause to see full debate transcript
-├─ Copies negotiation messages
-├─ Uses Negotiation Simulator:
-│   ├─ Edits a clause
-│   ├─ Submits to Mastra for re-analysis
-│   └─ Sees updated risk score
-└─ Downloads report as PDF
+session_id = "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+
+Redis keys using session_id:
+├── doc:a1b2c3d4-...                    → Extracted document
+├── debate:a1b2c3d4-...:clause-001      → Debate thread for clause 1
+├── debate:a1b2c3d4-...:clause-002      → Debate thread for clause 2
+├── debate:a1b2c3d4-...:clause-003      → Debate thread for clause 3
+└── session:a1b2c3d4-...:status         → Pipeline progress
+
+Supabase record:
+└── analyses WHERE session_id = 'a1b2c3d4-...'
+    ├── debate_messages WHERE analysis_id = ...
+    └── tool_usage_log WHERE analysis_id = ...
 ```
+
+### Session Lifecycle
+
+```
+┌────────────┐     ┌────────────┐     ┌────────────┐     ┌──────────────┐
+│  Created   │ ──► │  Active    │ ──► │ Completed  │ ──► │  Cleaned Up  │
+│            │     │ (in Redis) │     │ (→ Supabase)│     │ (Redis freed)│
+└────────────┘     └────────────┘     └────────────┘     └──────────────┘
+  Upload time       5-10 minutes      Instant transfer    Immediate after
+                                                          Supabase write
+```
+
+---
+
+## Zero Data Loss Guarantee
+
+The system ensures **no agent conversation data is lost** through these mechanisms:
+
+### 1. Write-Ahead in Redis
+Every agent message is written to Mastra Memory (Redis) **immediately** after the LLM responds, before any further processing. If the pipeline crashes after a message is written, it's already in Redis.
+
+### 2. Full Transfer Before Cleanup
+The Redis → Supabase transfer (Phase 5) happens **atomically** before any Redis keys are deleted. The sequence is:
+1. Read ALL debate messages from Redis
+2. Write to Supabase `debate_messages` table
+3. Verify Supabase write succeeded
+4. **Only then** delete Redis keys
+
+### 3. Redis TTL as Safety Net
+Even if the cleanup step fails, Redis data expires naturally after 2 hours. The data in Supabase is already safe.
+
+### 4. Idempotent Transfers
+The transfer uses `session_id` as a unique constraint in Supabase. If a transfer is retried (e.g., after a network blip), it won't create duplicates.
+
+### 5. Crash Recovery
+If the pipeline crashes mid-debate:
+- Redis data survives (TTL: 2 hours)
+- Session status shows the last completed step
+- The pipeline can be restarted from the last known good state
+- In practice, the user re-uploads (simpler UX for hackathon)
+
+---
+
+## Performance Characteristics
+
+| Operation | Expected Latency | Store |
+|-----------|------------------|-------|
+| Redis write (per message) | < 1ms | Redis |
+| Redis read (debate thread) | < 5ms | Redis |
+| Supabase write (full analysis) | 50–200ms | Supabase |
+| Supabase read (report fetch) | 20–100ms | Supabase |
+| Qdrant search | 20–50ms | Qdrant |
+| LlamaParse (document) | 3–8 seconds | LlamaParse API |
+| Gemini 2.5 Pro (extraction) | 5–15 seconds | Google API |
+| Groq Llama (debate round) | 1–3 seconds | Groq API |
+| Gemini 2.5 Pro (judge verdict) | 5–10 seconds | Google API |
+| **Total per clause (5 rounds)** | **~60–90 seconds** | — |
+| **Total for 8 clauses (3 parallel)** | **~5–8 minutes** | — |

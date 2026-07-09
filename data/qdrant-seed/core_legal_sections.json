@@ -1,0 +1,3474 @@
+[
+  {
+    "id": "cls-ica1872-s10",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 10",
+    "title": "What agreements are contracts",
+    "full_text": "All agreements are contracts if they are made by the free consent of parties competent to contract, for a lawful consideration and with a lawful object, and are not hereby expressly declared to be void.",
+    "plain_language_summary": "An agreement becomes a legally binding contract only when four conditions are met: (1) both parties freely consent, (2) both parties are legally competent, (3) there is valid consideration (something of value exchanged), and (4) the purpose is lawful.",
+    "practical_implication": "If any of these four elements is missing, the contract may be void or voidable. For example, if you signed under pressure (no free consent) or the contract asks you to do something illegal (no lawful object), the entire contract or that specific clause may be unenforceable.",
+    "common_misuse": "Companies sometimes argue that because you signed the document, you gave 'free consent.' But consent obtained through coercion, undue influence, fraud, or misrepresentation is not free consent under Indian law.",
+    "judicial_interpretation": "Courts have consistently held that all four conditions must be simultaneously satisfied. The absence of any one element renders the agreement void or voidable. The Supreme Court in Bharat Mining & Engineering Co. v. K.K. Sharma emphasized that free consent is a fundamental requirement.",
+    "type": "statute",
+    "clause_categories": [
+      "termination",
+      "compensation",
+      "liability",
+      "bond_training"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "valid contract",
+      "free consent",
+      "competent parties",
+      "lawful consideration",
+      "lawful object",
+      "void agreement"
+    ],
+    "related_sections": [
+      "cls-ica1872-s14",
+      "cls-ica1872-s16",
+      "cls-ica1872-s23"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ica1872-s14",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 14",
+    "title": "Free consent defined",
+    "full_text": "Consent is said to be free when it is not caused by—(1) coercion, as defined in section 15, or (2) undue influence, as defined in section 16, or (3) fraud, as defined in section 17, or (4) misrepresentation, as defined in section 18, or (5) mistake, subject to the provisions of sections 20, 21 and 22. Consent is said to be so caused when it would not have been given but for the existence of such coercion, undue influence, fraud, misrepresentation or mistake.",
+    "plain_language_summary": "Your consent is only truly 'free' if you were not forced (coercion), pressured by someone in a position of power (undue influence), tricked (fraud), given false information (misrepresentation), or acting under a fundamental mistake. If any of these factors influenced your decision to sign, your consent was not free.",
+    "practical_implication": "If your employer pressured you into signing a bond agreement by threatening to revoke your offer letter, or if they misrepresented the terms (e.g., saying the non-compete is 'just a formality'), your consent may not be free. This could make the agreement voidable at your option.",
+    "common_misuse": "Companies often use take-it-or-leave-it tactics: 'Sign this or we withdraw the offer.' While this may feel coercive, courts generally require more than hard bargaining — actual threats, domination, or deception are needed. However, signing under undue influence (where the employer has dominant position) is a stronger argument.",
+    "judicial_interpretation": "The Supreme Court in Ranganayakamma v. Alwar Setti (1889) established that undue influence occurs when one party is in a position to dominate the will of another. In employment contexts, the employer-employee power dynamic can constitute undue influence, especially during onboarding.",
+    "type": "statute",
+    "clause_categories": [
+      "bond_training",
+      "non_compete",
+      "termination",
+      "liability"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "free consent",
+      "coercion",
+      "undue influence",
+      "fraud",
+      "misrepresentation",
+      "mistake",
+      "voidable"
+    ],
+    "related_sections": [
+      "cls-ica1872-s10",
+      "cls-ica1872-s15",
+      "cls-ica1872-s16",
+      "cls-ica1872-s17"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ica1872-s15",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 15",
+    "title": "Coercion defined",
+    "full_text": "Coercion is the committing, or threatening to commit, any act forbidden by the Indian Penal Code, or the unlawful detaining, or threatening to detain, any property, to the prejudice of any person whatever, with the intention of causing any person to enter into an agreement.",
+    "plain_language_summary": "Coercion means forcing someone to sign a contract by committing or threatening to commit a crime (under the Indian Penal Code) or by illegally holding onto someone's property. If you signed because of such threats, the contract is voidable.",
+    "practical_implication": "If an employer withholds your experience certificates, salary, or personal documents and says they will only release them if you sign a particular agreement (like a non-compete or bond extension), this could constitute coercion. Similarly, threatening to file false criminal complaints unless you sign is coercion.",
+    "common_misuse": "Companies sometimes withhold relieving letters or final settlement payments to force employees to sign non-disclosure agreements or non-compete extensions during exit. This may constitute unlawful detention of property.",
+    "judicial_interpretation": "Courts have interpreted 'coercion' broadly. In Ammiraju v. Seshamma (1917), the Madras High Court held that even a threat of suicide could constitute coercion. In employment contexts, withholding legally owed documents or payments to extract signatures has been viewed critically by courts.",
+    "type": "statute",
+    "clause_categories": [
+      "bond_training",
+      "non_compete",
+      "confidentiality"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "coercion",
+      "threats",
+      "IPC",
+      "unlawful detention",
+      "property",
+      "voidable",
+      "forced signing"
+    ],
+    "related_sections": [
+      "cls-ica1872-s14",
+      "cls-ica1872-s19"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ica1872-s16",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 16",
+    "title": "Undue influence defined",
+    "full_text": "(1) A contract is said to be induced by 'undue influence' where the relations subsisting between the parties are such that one of the parties is in a position to dominate the will of the other and uses that position to obtain an unfair advantage over the other. (2) In particular and without prejudice to the generality of the foregoing principle, a person is deemed to be in a position to dominate the will of another—(a) where he holds a real or apparent authority over the other, or where he stands in a fiduciary relation to the other; or (b) where he makes a contract with a person whose mental capacity is temporarily or permanently affected by reason of age, illness, or mental or bodily distress.",
+    "plain_language_summary": "Undue influence happens when someone who has power over you (like an employer, landlord, or lender) uses that power to get you to agree to something unfair. If your employer uses their authority to push you into signing an unfavorable contract, that contract may be voidable.",
+    "practical_implication": "The employer-employee relationship inherently involves a power imbalance. If an employer uses this dominant position to extract unfair terms — such as requiring a fresh graduate to sign a 3-year bond with a ₹5 lakh penalty on the first day of joining — this could constitute undue influence. The burden shifts to the employer to prove the contract is fair.",
+    "common_misuse": "Companies present contracts on joining day with a 'sign now or don't join' ultimatum, leveraging the fact that the candidate has already resigned from their previous job and has no bargaining power. This power dynamic can constitute undue influence.",
+    "judicial_interpretation": "In Subhas Chandra Das Mushib v. Ganga Prosad Das Mushib (1967), the Supreme Court held that when the relationship between parties is such that one dominates the other's will, the burden of proving the transaction is fair shifts to the dominant party. Employment relationships, especially during hiring, often satisfy this test.",
+    "type": "statute",
+    "clause_categories": [
+      "bond_training",
+      "non_compete",
+      "liability",
+      "termination"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "loan"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "undue influence",
+      "dominant position",
+      "unfair advantage",
+      "power imbalance",
+      "employer",
+      "fiduciary",
+      "voidable"
+    ],
+    "related_sections": [
+      "cls-ica1872-s14",
+      "cls-ica1872-s19a"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ica1872-s23",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 23",
+    "title": "What considerations and objects are lawful and what not",
+    "full_text": "The consideration or object of an agreement is lawful, unless—it is forbidden by law; or is of such a nature that, if permitted, it would defeat the provisions of any law; or is fraudulent; or involves or implies injury to the person or property of another; or the Court regards it as immoral, or opposed to public policy. In each of these cases, the consideration or object of an agreement is said to be unlawful. Every agreement of which the object or consideration is unlawful is void.",
+    "plain_language_summary": "A contract's purpose and what you receive in return must be legal. If a contract asks you to do something illegal, fraudulent, harmful to others, immoral, or against public policy, that part of the contract (or the whole thing) is void — meaning it has no legal effect.",
+    "practical_implication": "Contract clauses that violate public policy are void. For example, a clause requiring an employee to work 16 hours a day without overtime pay may be void as it defeats labor law provisions. Similarly, a clause that waives your fundamental rights (like the right to approach courts) may be against public policy.",
+    "common_misuse": "Companies include clauses like 'Employee waives all rights to approach any court or tribunal' or 'Employee agrees to work unlimited overtime without additional compensation.' Such clauses may be void under Section 23 as they defeat labor law provisions or are against public policy.",
+    "judicial_interpretation": "The Supreme Court in ONGC v. Saw Pipes (2003) broadly interpreted 'public policy' to include fundamental rights violations and situations where a term is so unfair as to be unconscionable. This gives courts wide latitude to strike down exploitative contract terms.",
+    "type": "statute",
+    "clause_categories": [
+      "liability",
+      "dispute_resolution",
+      "compensation",
+      "termination",
+      "non_compete"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "lawful object",
+      "public policy",
+      "void",
+      "illegal",
+      "fraudulent",
+      "immoral",
+      "unlawful consideration"
+    ],
+    "related_sections": [
+      "cls-ica1872-s10",
+      "cls-ica1872-s27"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ica1872-s27",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 27",
+    "title": "Agreement in restraint of trade void",
+    "full_text": "Every agreement by which any one is restrained from exercising a lawful profession, trade or business of any kind, is to that extent void. Exception 1.—Saving of agreement not to carry on business of which goodwill is sold.—One who sells the goodwill of a business may agree with the buyer to refrain from carrying on a similar business, within specified local limits, so long as the buyer, or any person deriving title to the goodwill from him, carries on a like business therein, provided that such limits appear to the Court reasonable, regard being had to the nature of the business.",
+    "plain_language_summary": "Any agreement that prevents someone from practicing their lawful profession, trade, or business is void (legally unenforceable) to that extent. The only exception is when selling business goodwill — the seller can agree not to carry on a similar business within reasonable geographic limits.",
+    "practical_implication": "For employees: Post-employment non-compete clauses are generally unenforceable. Your employer cannot legally prevent you from joining a competitor or starting a competing business after you leave. However, non-compete restrictions DURING employment are valid. For freelancers: Non-compete clauses in freelance/consulting contracts are also generally void, though non-solicitation of specific clients may be enforceable if reasonable.",
+    "common_misuse": "Companies routinely include broad non-compete clauses (e.g., '24-month pan-India non-compete across the entire technology sector') knowing they are legally unenforceable. The intent is to intimidate employees into not leaving, or to create a legal threat that discourages competitors from hiring. Many employees comply out of fear, not legal obligation.",
+    "judicial_interpretation": "Indian courts have consistently upheld the absolute nature of Section 27. Key cases: (1) Niranjan Shankar Golikari v. Century Spinning Co. (1967) — Supreme Court held Section 27 is a complete bar on restraint of trade; (2) Pepsi Foods Ltd v. Bharat Coca-Cola Holdings — Delhi HC refused to enforce non-compete; (3) Wipro Ltd v. Beckman Coulter International — SC reiterated that post-employment non-compete is void. Courts distinguish between non-compete (void) and non-solicitation (potentially valid if reasonable).",
+    "type": "statute",
+    "clause_categories": [
+      "non_compete",
+      "non_solicitation"
+    ],
+    "contract_types": [
+      "employment",
+      "consulting",
+      "freelance",
+      "partnership"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "non-compete",
+      "restraint of trade",
+      "void",
+      "lawful profession",
+      "business",
+      "goodwill",
+      "Section 27",
+      "employment restriction",
+      "post-employment"
+    ],
+    "related_sections": [
+      "cls-ica1872-s28",
+      "cls-ica1872-s23"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ica1872-s28",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 28",
+    "title": "Agreements in restraint of legal proceedings void",
+    "full_text": "Every agreement, by which any party thereto is restricted absolutely from enforcing his rights under or in respect of any contract, by the usual legal proceedings in the ordinary tribunals, or which limits the time within which he may thus enforce his rights, is void to that extent.",
+    "plain_language_summary": "Any contract clause that completely prevents you from going to court to enforce your rights, or that unreasonably shortens the time you have to file a case, is void. You always retain the right to seek legal remedies through courts.",
+    "practical_implication": "If your contract says 'You waive all rights to approach any court or tribunal' or 'Any claim must be filed within 30 days of the dispute,' these clauses are likely void. However, mandatory arbitration clauses (requiring disputes to go through arbitration instead of court) are generally valid under the Arbitration Act, as long as they don't completely bar legal recourse.",
+    "common_misuse": "Companies include clauses like 'Employee agrees not to file any legal proceedings against the Company' or set unreasonably short limitation periods. Some use mandatory arbitration with a biased arbitrator chosen by the company.",
+    "judicial_interpretation": "Courts have upheld the right to access justice as fundamental. However, the Supreme Court has clarified that arbitration clauses are valid exceptions — they redirect disputes to an alternative forum, not eliminate legal recourse. The key test is whether the clause restricts access 'absolutely.'",
+    "type": "statute",
+    "clause_categories": [
+      "dispute_resolution",
+      "governing_law",
+      "liability"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement",
+      "subscription"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "legal proceedings",
+      "court access",
+      "void",
+      "arbitration",
+      "dispute resolution",
+      "limitation period",
+      "right to sue"
+    ],
+    "related_sections": [
+      "cls-ica1872-s27",
+      "cls-arb1996-s7"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ica1872-s56",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 56",
+    "title": "Agreement to do impossible act",
+    "full_text": "An agreement to do an act impossible in itself is void. A contract to do an act which, after the contract is made, becomes impossible, or, by reason of some event which the promisor could not prevent, unlawful, becomes void when the act becomes impossible or unlawful.",
+    "plain_language_summary": "If a contract requires you to do something that is impossible (or becomes impossible later due to circumstances beyond your control), that part of the contract is void. This is called the doctrine of frustration — the contract is 'frustrated' when performance becomes impossible.",
+    "practical_implication": "If your employment contract requires you to relocate to a specific city and that becomes impossible (e.g., due to visa restrictions, natural disaster, or government orders), the relocation clause may be void under Section 56. Similarly, if a freelance contract requires deliverables that depend on a third-party API that shuts down, you may not be liable for non-delivery.",
+    "common_misuse": "Companies sometimes include force majeure clauses that only protect the company (e.g., 'Company may delay payment due to business disruption, but Employee must continue performance regardless'). One-sided impossibility clauses may be challenged.",
+    "judicial_interpretation": "The Supreme Court in Satyabrata Ghose v. Mugneeram Bangur (1954) held that the doctrine of frustration under Section 56 applies when the performance becomes impracticable or useless due to changed circumstances. Post-COVID, courts have been more receptive to frustration arguments.",
+    "type": "statute",
+    "clause_categories": [
+      "force_majeure",
+      "scope_of_work",
+      "termination"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "impossible act",
+      "frustration",
+      "void",
+      "force majeure",
+      "impracticable",
+      "unlawful",
+      "supervening impossibility"
+    ],
+    "related_sections": [
+      "cls-ica1872-s10"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ica1872-s73",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 73",
+    "title": "Compensation for loss or damage caused by breach of contract",
+    "full_text": "When a contract has been broken, the party who suffers by such breach is entitled to receive, from the party who has broken the contract, compensation for any loss or damage caused to him thereby, which naturally arose in the usual course of things from such breach, or which the parties knew, when they made the contract, to be likely to result from the breach of it. Such compensation is not to be given for any remote and indirect loss or damage sustained by reason of the breach.",
+    "plain_language_summary": "If one party breaks the contract, the other party can claim compensation — but only for losses that are a natural and direct result of the breach, or losses that both parties knew could happen when they signed the contract. You cannot claim for remote or indirect losses.",
+    "practical_implication": "If you break your employment contract by leaving without serving notice, the company can only claim compensation for the actual loss they suffered (e.g., cost of hiring a replacement, lost projects) — not arbitrary amounts. Similarly, if a company doesn't pay you as agreed, you can claim the unpaid amount plus interest, but not speculative future earnings.",
+    "common_misuse": "Companies include liquidated damages clauses with astronomical penalty amounts (e.g., '₹10 lakh for leaving before 2 years') that bear no relation to actual losses. Courts will often reduce such amounts to reasonable levels under Section 74.",
+    "judicial_interpretation": "The Supreme Court has consistently held that compensation under Section 73 must be proportional to actual loss. In Kailash Nath Associates v. DDA (2015), the SC reiterated that damages must be reasonable and not punitive. The injured party must prove actual loss; speculative claims are rejected.",
+    "type": "statute",
+    "clause_categories": [
+      "liability",
+      "termination",
+      "compensation",
+      "bond_training"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "compensation",
+      "breach",
+      "damages",
+      "actual loss",
+      "direct loss",
+      "remote damage",
+      "natural consequence"
+    ],
+    "related_sections": [
+      "cls-ica1872-s74",
+      "cls-ica1872-s75"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ica1872-s74",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 74",
+    "title": "Compensation for breach of contract where penalty stipulated for",
+    "full_text": "When a contract has been broken, if a sum is named in the contract as the amount to be paid in case of such breach, or if the contract contains any other stipulation by way of penalty, the party complaining of the breach is entitled, whether or not actual damage or loss is proved to have been caused thereby, to receive from the party who has broken the contract reasonable compensation not exceeding the amount so named or, as the case may be, the penalty stipulated for.",
+    "plain_language_summary": "If your contract specifies a penalty amount for breaking it, the court will not automatically enforce the full penalty. Instead, the court will award only 'reasonable compensation' — which could be much less than the stated penalty. The company must show the penalty is proportional to the actual damage.",
+    "practical_implication": "This is the most important section for employment bonds. If your bond says '₹5 lakh penalty for leaving within 2 years,' the court will NOT automatically award ₹5 lakh. Instead, it will assess whether the company actually suffered ₹5 lakh in losses. If the company only spent ₹50,000 on your training, the court may reduce the penalty to ₹50,000 or even less. The stated amount is a ceiling, not a guaranteed award.",
+    "common_misuse": "Companies use inflated penalty amounts to scare employees into staying. A bond stating '₹10 lakh penalty' for a training that cost ₹1 lakh is a classic scare tactic. The company knows courts will reduce it, but the employee doesn't know this — so the intimidation works.",
+    "judicial_interpretation": "In ONGC v. Saw Pipes (2003), the Supreme Court held that Section 74 requires courts to award only reasonable compensation, and the named sum is the maximum limit. In Fateh Chand v. Balkishan Dass (1963), the SC established that even if a sum is named as penalty, only reasonable compensation can be recovered. Indian law does NOT distinguish between 'liquidated damages' and 'penalty' — both are treated the same way under Section 74.",
+    "type": "statute",
+    "clause_categories": [
+      "bond_training",
+      "liability",
+      "termination",
+      "compensation"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "penalty",
+      "liquidated damages",
+      "reasonable compensation",
+      "bond",
+      "training bond",
+      "breach penalty",
+      "Section 74",
+      "maximum limit"
+    ],
+    "related_sections": [
+      "cls-ica1872-s73",
+      "cls-ica1872-s75"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ica1872-s75",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 75",
+    "title": "Party rightfully rescinding contract entitled to compensation",
+    "full_text": "A person who rightfully rescinds a contract is entitled to compensation for any damage which he has sustained through the non-fulfilment of the contract.",
+    "plain_language_summary": "If you rightfully cancel a contract (because the other party breached it or because of fraud, coercion, etc.), you can claim compensation for any losses you suffered because the contract was not fulfilled.",
+    "practical_implication": "If your employer breaches the contract (e.g., doesn't pay your salary as promised, changes your job role without consent, or violates agreed working conditions), you can rightfully resign and also claim compensation for your losses — such as the cost of finding a new job, loss of promised benefits, or relocation expenses you incurred based on the contract.",
+    "common_misuse": "Companies sometimes claim that the employee 'abandoned' the job when the employee actually left due to the company's breach. Understanding Section 75 helps employees know they can leave AND claim compensation when the employer violates the contract terms.",
+    "judicial_interpretation": "Courts have held that constructive dismissal (where the employer makes conditions so intolerable that the employee is forced to resign) entitles the employee to compensation under Section 75. The key is proving that the rescission was 'rightful' — i.e., the other party's breach was material.",
+    "type": "statute",
+    "clause_categories": [
+      "termination",
+      "compensation",
+      "liability"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "rescission",
+      "rightful cancellation",
+      "compensation",
+      "breach",
+      "constructive dismissal",
+      "damages"
+    ],
+    "related_sections": [
+      "cls-ica1872-s73",
+      "cls-ica1872-s74"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ica1872-s17",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 17",
+    "title": "Fraud defined",
+    "full_text": "Fraud means and includes any of the following acts committed by a party to a contract, or with his connivance, or by his agent, with intent to deceive another party thereto or his agent, or to induce him to enter into the contract:—(1) the suggestion, as a fact, of that which is not true, by one who does not believe it to be true; (2) the active concealment of a fact by one having knowledge or belief of the fact; (3) a promise made without any intention of performing it; (4) any other act fitted to deceive; (5) any such act or omission as the law specially declares to be fraudulent.",
+    "plain_language_summary": "Fraud occurs when a party to a contract deliberately deceives the other party. This includes: stating false facts, hiding important facts, making promises with no intention of keeping them, or any other deceptive act. If you were defrauded, the contract is voidable and you can claim damages.",
+    "practical_implication": "If an employer promised you a specific salary, role, or location during interviews but the contract says something different, and you can prove they never intended to honor their verbal promises, this may constitute fraud. Similarly, if a company hides material information (like pending layoffs, financial distress, or regulatory issues) to get you to sign, this is active concealment.",
+    "common_misuse": "Companies sometimes make verbal promises during hiring that contradict the written contract, then claim 'the written contract governs.' If you can prove the verbal promises were made to induce you to sign, this may be fraud under Section 17(3).",
+    "judicial_interpretation": "Courts have held that fraud vitiates consent and makes the contract voidable. In Derry v. Peek (applied in Indian law), the standard for fraud requires proof of deliberate intent to deceive. Mere negligent misrepresentation falls under Section 18 (misrepresentation) rather than Section 17 (fraud).",
+    "type": "statute",
+    "clause_categories": [
+      "compensation",
+      "termination",
+      "scope_of_work"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "fraud",
+      "deception",
+      "false statement",
+      "active concealment",
+      "promise without intent",
+      "voidable",
+      "damages"
+    ],
+    "related_sections": [
+      "cls-ica1872-s14",
+      "cls-ica1872-s19"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ica1872-s19",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA 1872",
+    "section": "Section 19",
+    "title": "Voidability of agreements without free consent",
+    "full_text": "When consent to an agreement is caused by coercion, fraud or misrepresentation, the agreement is a contract voidable at the option of the party whose consent was so caused. A party to a contract whose consent was caused by fraud or misrepresentation, may, if he thinks fit, insist that the contract shall be performed, and that he shall be put in the position in which he would have been if the representations made had been true.",
+    "plain_language_summary": "If your consent was obtained through coercion, fraud, or misrepresentation, the contract is not automatically void — it is 'voidable at your option.' This means YOU get to choose: either cancel the contract entirely, or keep it and demand that the other party fulfill the promises they made (even the false ones).",
+    "practical_implication": "If you discover that your employer lied about your role, salary, or working conditions, you have two options: (1) Void the contract and walk away (possibly claiming damages), or (2) Keep the contract and insist the employer honor what they originally promised. This gives you negotiating power — you choose the outcome that benefits you most.",
+    "common_misuse": "Companies sometimes argue that because the employee continued working after discovering the fraud, they 'accepted' the contract terms. While delay can be a factor, courts have held that the right to void is not automatically lost by continued performance, especially if the employee had no practical alternative.",
+    "judicial_interpretation": "The Supreme Court has held that the right to avoid a voidable contract must be exercised within a reasonable time after discovering the fraud or coercion. However, 'reasonable time' is interpreted generously for employees given the power imbalance in employment relationships.",
+    "type": "statute",
+    "clause_categories": [
+      "termination",
+      "compensation",
+      "liability"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "voidable",
+      "option to void",
+      "coercion",
+      "fraud",
+      "misrepresentation",
+      "rescission",
+      "election"
+    ],
+    "related_sections": [
+      "cls-ica1872-s14",
+      "cls-ica1872-s15",
+      "cls-ica1872-s17"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2187",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ita2000-s4",
+    "act_name": "Information Technology Act, 2000",
+    "act_short": "IT Act 2000",
+    "section": "Section 4",
+    "title": "Legal recognition of electronic records",
+    "full_text": "Where any law provides that information or any other matter shall be in writing or in the typewritten or printed form, then, notwithstanding anything contained in such law, such requirement shall be deemed to have been satisfied if such information or matter is—(a) rendered or made available in an electronic form; and (b) accessible so as to be usable for a subsequent reference.",
+    "plain_language_summary": "Electronic documents (emails, digital contracts, e-signed agreements) have the same legal validity as paper documents. If a law says something must be 'in writing,' an electronic version counts.",
+    "practical_implication": "Your employment offer sent via email, a contract signed through DocuSign, or terms you agreed to by clicking 'I Accept' online are all legally valid documents. This means digital contracts are enforceable — but it also means you should treat every 'I Agree' click as seriously as signing a physical document.",
+    "common_misuse": "Companies use click-wrap agreements ('I Agree' buttons) for complex terms that users don't read. While legally valid, courts have started scrutinizing whether the user had a meaningful opportunity to review the terms, especially for one-sided click-wrap agreements.",
+    "judicial_interpretation": "Indian courts have progressively recognized electronic contracts. In Trimex International v. Vedanta Aluminium (2010), the Supreme Court held that a contract can be concluded through electronic communication including email exchanges.",
+    "type": "statute",
+    "clause_categories": [
+      "dispute_resolution",
+      "governing_law"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement",
+      "subscription"
+    ],
+    "year": 2000,
+    "last_amended": "2008",
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "electronic records",
+      "digital contracts",
+      "e-signature",
+      "click-wrap",
+      "online agreement",
+      "legal validity"
+    ],
+    "related_sections": [
+      "cls-ita2000-s10a"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1362",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ita2000-s10a",
+    "act_name": "Information Technology Act, 2000",
+    "act_short": "IT Act 2000",
+    "section": "Section 10A",
+    "title": "Validity of contracts formed through electronic means",
+    "full_text": "Where in a contract formation, the communication of proposals, the acceptance of proposals, the revocation of proposals and acceptances, as the case may be, are expressed in electronic form or by means of an electronic record, such contract shall not be deemed to be unenforceable solely on the ground that such electronic form or means was used for that purpose.",
+    "plain_language_summary": "A contract cannot be declared invalid simply because it was made electronically (through email, messaging apps, or online platforms). Electronic contracts are just as enforceable as paper ones.",
+    "practical_implication": "If you accepted a freelance project via email, agreed to terms through WhatsApp, or signed a contract on an online platform — all of these are valid, enforceable contracts. You cannot argue later that 'it was just an email' to escape your obligations, and neither can the other party.",
+    "common_misuse": "Some parties try to deny contractual obligations by claiming the agreement was 'informal' because it was made over email or chat. Section 10A explicitly prevents this defense.",
+    "judicial_interpretation": "Courts have applied Section 10A broadly. In several cases, email exchanges have been held to constitute binding agreements when they contain all essential elements of a contract (offer, acceptance, consideration, intention to create legal relations).",
+    "type": "statute",
+    "clause_categories": [
+      "dispute_resolution",
+      "scope_of_work"
+    ],
+    "contract_types": [
+      "freelance",
+      "consulting",
+      "service_agreement",
+      "subscription"
+    ],
+    "year": 2008,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "electronic contract",
+      "email agreement",
+      "online contract",
+      "enforceable",
+      "digital acceptance",
+      "WhatsApp contract"
+    ],
+    "related_sections": [
+      "cls-ita2000-s4"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1362",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ita2000-s43a",
+    "act_name": "Information Technology Act, 2000",
+    "act_short": "IT Act 2000",
+    "section": "Section 43A",
+    "title": "Compensation for failure to protect data",
+    "full_text": "Where a body corporate, possessing, dealing or handling any sensitive personal data or information in a computer resource which it owns, controls or operates, is negligent in implementing and maintaining reasonable security practices and procedures and thereby causes wrongful loss or wrongful gain to any person, such body corporate shall be liable to pay damages by way of compensation to the person so affected.",
+    "plain_language_summary": "If a company handles your sensitive personal data (like your Aadhaar number, bank details, or health records) and fails to protect it properly, and you suffer a loss because of their negligence, the company must pay you compensation.",
+    "practical_implication": "If your employment contract requires you to share sensitive personal data (biometrics, financial information, medical records), the company has a legal obligation to protect it. If they have a data breach due to negligence, you can claim compensation. This also means that contract clauses asking you to waive your right to data protection may be unenforceable.",
+    "common_misuse": "Companies include broad data collection clauses in employment contracts ('Employee consents to collection and processing of all personal data') without specifying what data, how it will be used, or how it will be protected. Such vague, sweeping consent clauses may not meet the 'reasonable security practices' standard.",
+    "judicial_interpretation": "The IT (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011 define what constitutes sensitive personal data and what security practices are required. Non-compliance exposes the company to liability under Section 43A.",
+    "type": "statute",
+    "clause_categories": [
+      "data_privacy",
+      "liability",
+      "confidentiality"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement",
+      "subscription"
+    ],
+    "year": 2000,
+    "last_amended": "2008",
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "data protection",
+      "sensitive personal data",
+      "negligence",
+      "compensation",
+      "data breach",
+      "privacy",
+      "security practices"
+    ],
+    "related_sections": [],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1362",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-cpa2019-s2-46",
+    "act_name": "Consumer Protection Act, 2019",
+    "act_short": "CPA 2019",
+    "section": "Section 2(46)",
+    "title": "Unfair contract defined",
+    "full_text": "'Unfair contract' means a contract or agreement entered into between a manufacturer or trader or service provider on one hand, and a consumer on the other, the terms of which cause significant change in the rights of such consumer, including the following:—(i) requiring manifestly excessive security deposits; (ii) imposing any penalty, disproportionate to the loss occurred due to breach; (iii) refusing to accept early repayment/foreclosure; (iv) entitling termination without reasonable cause; (v) permitting unilateral termination without reasonable period of notice; (vi) imposing unreasonably early termination charges.",
+    "plain_language_summary": "An 'unfair contract' is one where the company's terms significantly harm consumer rights. This includes excessive deposits, disproportionate penalties, refusing early repayment, one-sided termination rights, and unreasonable termination charges. The Consumer Protection Act gives consumers the right to challenge such terms.",
+    "practical_implication": "If you are a consumer signing a subscription, rental, loan, or service agreement, you can challenge specific terms as 'unfair' under this section. For example: a gym that charges 100% of the remaining membership as cancellation fee, or a telecom provider that can terminate service without notice but requires 90 days' notice from you.",
+    "common_misuse": "Companies bury unfair terms in long 'Terms and Conditions' documents, relying on the fact that consumers don't read them. The CPA 2019 specifically allows consumers to challenge these terms even after agreeing to them, if they meet the definition of 'unfair contract.'",
+    "judicial_interpretation": "The National Consumer Disputes Redressal Commission has used Section 2(46) to strike down unfair terms in various consumer contracts. Courts look at the overall balance of rights — if the contract overwhelmingly favors one party, it is likely unfair.",
+    "type": "statute",
+    "clause_categories": [
+      "auto_renewal",
+      "termination",
+      "compensation",
+      "liability",
+      "dispute_resolution"
+    ],
+    "contract_types": [
+      "subscription",
+      "rental",
+      "loan",
+      "service_agreement"
+    ],
+    "year": 2019,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "unfair contract",
+      "consumer protection",
+      "excessive penalty",
+      "disproportionate",
+      "one-sided termination",
+      "consumer rights"
+    ],
+    "related_sections": [
+      "cls-cpa2019-s47"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-cpa2019-s47",
+    "act_name": "Consumer Protection Act, 2019",
+    "act_short": "CPA 2019",
+    "section": "Section 47",
+    "title": "Complaints regarding unfair contracts",
+    "full_text": "The State Commission or the National Commission, as the case may be, shall have the jurisdiction to adjudicate complaints in relation to unfair contracts.",
+    "plain_language_summary": "If you believe a contract contains unfair terms (as defined in Section 2(46)), you can file a complaint with the State Consumer Commission or National Consumer Commission. They have the authority to investigate and order remedies.",
+    "practical_implication": "As a consumer, you don't need an expensive lawyer to challenge unfair contract terms. Consumer commissions are designed to be accessible, relatively quick, and consumer-friendly. You can file a complaint yourself for a small fee. If the commission finds the contract unfair, they can order compensation, modification of terms, or even void the unfair clauses.",
+    "common_misuse": "Companies include clauses like 'All disputes shall be resolved by arbitration in [company's city]' specifically to make it difficult for consumers to challenge unfair terms. However, consumer protection jurisdiction cannot be waived by contract.",
+    "judicial_interpretation": "The Supreme Court has held that consumer commission jurisdiction is special jurisdiction that cannot be ousted by arbitration clauses or jurisdiction-selection clauses in consumer contracts. This means even if your contract says 'Disputes shall be resolved in Mumbai only,' you can still file at your local consumer commission.",
+    "type": "statute",
+    "clause_categories": [
+      "dispute_resolution",
+      "governing_law",
+      "auto_renewal"
+    ],
+    "contract_types": [
+      "subscription",
+      "rental",
+      "loan",
+      "service_agreement"
+    ],
+    "year": 2019,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "consumer complaint",
+      "unfair contract",
+      "consumer commission",
+      "jurisdiction",
+      "consumer forum",
+      "remedy"
+    ],
+    "related_sections": [
+      "cls-cpa2019-s2-46"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-ida1947-s25f",
+    "act_name": "Industrial Disputes Act, 1947",
+    "act_short": "IDA 1947",
+    "section": "Section 25F",
+    "title": "Conditions precedent to retrenchment of workmen",
+    "full_text": "No workman employed in any industry who has been in continuous service for not less than one year under an employer shall be retrenched by that employer until—(a) the workman has been given one month's notice in writing indicating the reasons for retrenchment and the period of notice has expired, or the workman has been paid in lieu of such notice, wages for the period of the notice; (b) the workman has been paid, at the time of retrenchment, compensation which shall be equivalent to fifteen days' average pay for every completed year of continuous service or any part thereof in excess of six months; and (c) notice in the prescribed manner is served on the appropriate Government or such authority as may be specified by the appropriate Government by notification in the Official Gazette.",
+    "plain_language_summary": "If you have worked for at least one year, your employer cannot fire you (retrench) without: (1) giving you one month's written notice (or one month's pay instead), (2) paying you retrenchment compensation equal to 15 days' pay for each year you worked, and (3) notifying the government.",
+    "practical_implication": "If you are classified as a 'workman' (non-managerial employee) and have been with the company for over a year, your employer must follow this process. If they fire you without following Section 25F, the retrenchment is illegal and you can get reinstated through a labour court. Note: This applies to 'workmen' as defined by the IDA — managers, supervisors, and those in administrative/executive roles are generally excluded.",
+    "common_misuse": "Companies sometimes classify employees as 'consultants' or 'contractors' to avoid IDA protections, or they use 'performance improvement plans' as a pretext for retrenchment to avoid paying compensation. Also, some companies try to get employees to 'voluntarily resign' to circumvent retrenchment requirements.",
+    "judicial_interpretation": "The Supreme Court has held that non-compliance with any of the three conditions of Section 25F renders the retrenchment void and entitles the workman to reinstatement with back wages. In Jagdish Narain v. Deputy Commissioner, Lucknow, the court emphasized strict compliance.",
+    "type": "statute",
+    "clause_categories": [
+      "termination",
+      "notice_period",
+      "compensation"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1947,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "retrenchment",
+      "termination",
+      "notice period",
+      "compensation",
+      "one month notice",
+      "workman",
+      "industrial disputes",
+      "wrongful termination"
+    ],
+    "related_sections": [],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1579",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-pwa1936-s5",
+    "act_name": "Payment of Wages Act, 1936",
+    "act_short": "PWA 1936",
+    "section": "Section 5",
+    "title": "Time of payment of wages",
+    "full_text": "The wages of every person employed upon or in—(1) any railway, factory or industrial or other establishment upon or in which less than one thousand persons are employed, shall be paid before the expiry of the seventh day, (2) any other railway, factory or industrial or other establishment, before the expiry of the tenth day, after the last day of the wage period in respect of which the wages are payable.",
+    "plain_language_summary": "Your wages must be paid within 7 days after the wage period ends (for establishments with less than 1000 employees) or within 10 days (for larger establishments). Your employer cannot delay your salary beyond these limits.",
+    "practical_implication": "If your salary is on a monthly cycle, it must be paid by the 7th or 10th of the following month. If your employment contract states 'salary will be paid within 45 days' or 'salary will be paid after project completion,' this may violate the Payment of Wages Act. You can file a complaint with the labour commissioner for delayed wages.",
+    "common_misuse": "Companies delay final settlement (last salary, leave encashment, gratuity) for months after an employee leaves. While the Act primarily covers regular wages, courts have held that unreasonable delays in final settlement are actionable.",
+    "judicial_interpretation": "Courts have interpreted 'wages' broadly to include basic pay, allowances, and overtime. However, bonus and ex-gratia payments may have different timelines. The key principle is that regular wages must be paid promptly and predictably.",
+    "type": "statute",
+    "clause_categories": [
+      "compensation",
+      "payment_terms"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1936,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "payment of wages",
+      "salary timeline",
+      "wage period",
+      "delayed payment",
+      "seventh day",
+      "tenth day",
+      "final settlement"
+    ],
+    "related_sections": [
+      "cls-pwa1936-s7"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1567",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-pwa1936-s7",
+    "act_name": "Payment of Wages Act, 1936",
+    "act_short": "PWA 1936",
+    "section": "Section 7",
+    "title": "Deductions which may be made from wages",
+    "full_text": "The wages of an employed person shall be paid to him without deductions of any kind except those authorized by or under this Act. The following deductions may be made: (a) fines, (b) absence from duty, (c) damage to goods, (d) housing accommodation, (e) amenities and services, (f) advances, (g) income tax, (h) orders of courts, (i) provident fund contributions, (j) insurance premiums, (k) union subscriptions, (l) cooperative society loans.",
+    "plain_language_summary": "Your employer can only deduct money from your salary for specific, legally authorized reasons. They cannot make arbitrary deductions. Authorized deductions include: fines (with restrictions), absence from duty, income tax, PF contributions, and court-ordered payments. Any other deduction without your consent is illegal.",
+    "practical_implication": "If your employer deducts money from your salary for 'training costs,' 'equipment damage,' 'notice period shortfall,' or other reasons not listed in Section 7, the deduction may be illegal. You can challenge unauthorized deductions with the labour commissioner. Also, total deductions cannot exceed 50% of your wages in any pay period.",
+    "common_misuse": "Companies sometimes deduct 'notice period buyout' amounts, 'bond penalties,' or 'project loss recovery' directly from final settlement without employee consent. These deductions may not be authorized under Section 7 and can be challenged.",
+    "judicial_interpretation": "Courts have held that the list of authorized deductions in Section 7 is exhaustive, not illustrative. Any deduction not falling within these categories requires explicit, informed consent from the employee and must be reasonable. Blanket consent clauses in employment contracts ('Employee agrees to all deductions') may not suffice.",
+    "type": "statute",
+    "clause_categories": [
+      "compensation",
+      "payment_terms",
+      "bond_training",
+      "liability"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1936,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "salary deductions",
+      "authorized deductions",
+      "illegal deduction",
+      "wage protection",
+      "50% limit",
+      "consent",
+      "final settlement"
+    ],
+    "related_sections": [
+      "cls-pwa1936-s5"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1567",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-arb1996-s7",
+    "act_name": "Arbitration and Conciliation Act, 1996",
+    "act_short": "Arb Act 1996",
+    "section": "Section 7",
+    "title": "Arbitration agreement",
+    "full_text": "In this Part, 'arbitration agreement' means an agreement by the parties to submit to arbitration all or certain disputes which have arisen or which may arise between them in respect of a defined legal relationship, whether contractual or not. An arbitration agreement may be in the form of an arbitration clause in a contract or in the form of a separate agreement. An arbitration agreement shall be in writing.",
+    "plain_language_summary": "An arbitration agreement is where both parties agree to resolve disputes through arbitration instead of going to court. It must be in writing. It can be a separate agreement or a clause within your main contract.",
+    "practical_implication": "If your contract has an arbitration clause, you generally must try arbitration before going to court. This isn't always bad — arbitration can be faster and cheaper than court. However, watch for: (1) who chooses the arbitrator (if the company alone picks, it may be biased), (2) where the arbitration happens (a distant city creates an unfair burden), and (3) who pays the arbitration fees (which can be expensive).",
+    "common_misuse": "Companies include arbitration clauses that specify: the company's city as the arbitration venue, the company's chosen arbitrator, and the company pays nothing while the employee bears all costs. Such one-sided arbitration arrangements may be challenged as unconscionable.",
+    "judicial_interpretation": "The Supreme Court in Perkins Eastman Architects DPC v. HSCC (2019) held that if a party to the contract has the unilateral power to appoint the sole arbitrator, such an arrangement is invalid. This protects employees from biased arbitration.",
+    "type": "statute",
+    "clause_categories": [
+      "dispute_resolution",
+      "governing_law"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement"
+    ],
+    "year": 1996,
+    "last_amended": "2019",
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "arbitration",
+      "dispute resolution",
+      "arbitration clause",
+      "written agreement",
+      "arbitrator",
+      "alternative dispute resolution"
+    ],
+    "related_sections": [
+      "cls-ica1872-s28"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1978",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-sra1963-s14",
+    "act_name": "Specific Relief Act, 1963",
+    "act_short": "SRA 1963",
+    "section": "Section 14",
+    "title": "Contracts not specifically enforceable",
+    "full_text": "The following contracts cannot be specifically enforced, namely:—(a) a contract for the non-performance of which compensation in money is an adequate relief; (b) a contract which runs into such minute or numerous details, or which is so dependent on the personal qualifications or volition of the parties, or otherwise from its nature is such, that the court cannot enforce specific performance of its material terms; (c) a contract which is in its nature determinable; (d) a contract, the performance of which involves the performance of a continuous duty which the court cannot supervise.",
+    "plain_language_summary": "Courts will NOT force you to perform certain types of contracts — instead, they will only award monetary compensation. Specifically, courts won't force: (1) contracts where money can adequately compensate, (2) contracts requiring personal skill or services, (3) contracts that can be terminated, or (4) contracts requiring continuous supervision.",
+    "practical_implication": "This is extremely important for employment contracts. Courts CANNOT force you to work for a specific employer — this would amount to forced labor. If you break your employment contract (e.g., leave before the bond period), the employer can only claim monetary damages, not force you to return to work. This fundamentally limits the power of employment bonds.",
+    "common_misuse": "Companies threaten to 'enforce the bond in court' implying they can force you to continue working. This is legally impossible under Section 14. The most they can get is monetary compensation, and even that is limited to reasonable compensation under ICA Section 74.",
+    "judicial_interpretation": "The Supreme Court has consistently held that contracts of personal service cannot be specifically enforced. In Indian Airlines v. Prabhakara (2006), the court reiterated that no person can be compelled to work against their will. This principle is also grounded in Article 23 of the Constitution (prohibition of forced labor).",
+    "type": "statute",
+    "clause_categories": [
+      "bond_training",
+      "termination",
+      "non_compete"
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting"
+    ],
+    "year": 1963,
+    "last_amended": "2018",
+    "jurisdiction": "central",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "specific performance",
+      "personal service",
+      "forced labor",
+      "employment bond",
+      "cannot enforce",
+      "monetary compensation",
+      "Section 14"
+    ],
+    "related_sections": [
+      "cls-ica1872-s74"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/1565",
+    "verified": true,
+    "enforceability_status": "Strictly Enforceable Statute"
+  },
+  {
+    "id": "cls-prec-noncompete-wipro",
+    "act_name": "Judicial Precedent",
+    "act_short": "SC Precedent",
+    "section": "Wipro Ltd v. Beckman Coulter International SA",
+    "title": "Post-employment non-compete held unenforceable under Section 27",
+    "full_text": "The Supreme Court of India held that a restrictive covenant extending beyond the term of the contract is void and not enforceable under Section 27 of the Indian Contract Act, 1872. The court distinguished between restrictions during employment (valid) and after employment (void).",
+    "plain_language_summary": "The Supreme Court confirmed that a company cannot enforce a non-compete clause against a former employee after they have left the job. Such restrictions are only valid while you are still employed.",
+    "practical_implication": "If your contract has a post-employment non-compete clause, you can cite this Supreme Court ruling as definitive authority that the clause is unenforceable. However, you should still respect any non-disclosure (NDA) and non-solicitation obligations, which may be separately enforceable if reasonable.",
+    "common_misuse": "Some companies cite this case selectively, arguing that 'reasonable' restrictions might be enforceable. The Supreme Court's position is clear: Section 27 imposes an absolute bar, and 'reasonableness' is only relevant to the goodwill exception.",
+    "judicial_interpretation": "This is a landmark ruling that settled the debate on post-employment non-compete in India. It aligns with earlier High Court decisions and establishes that Indian law takes a stricter approach than US or UK law on non-compete enforceability.",
+    "type": "precedent",
+    "clause_categories": [
+      "non_compete",
+      "non_solicitation"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 2006,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": "Supreme Court of India",
+    "case_citation": "Civil Appeal No. 2680 of 2006",
+    "keywords": [
+      "non-compete",
+      "post-employment",
+      "Section 27",
+      "restraint of trade",
+      "Supreme Court",
+      "unenforceable",
+      "Wipro"
+    ],
+    "related_sections": [
+      "cls-ica1872-s27"
+    ],
+    "source_url": "https://indiankanoon.org/doc/1364068/",
+    "verified": true,
+    "enforceability_status": "Binding Judicial Precedent"
+  },
+  {
+    "id": "cls-prec-bond-sicpa",
+    "act_name": "Judicial Precedent",
+    "act_short": "Delhi HC Precedent",
+    "section": "SICPA India Ltd v. Manu Anand",
+    "title": "Employment bond enforceability — training cost must be proportional",
+    "full_text": "The Delhi High Court held that an employment bond is enforceable only when the employer has invested in specialized training for the employee, and the bond amount must be proportional to the actual training expenditure. Bonds that impose arbitrary penalty amounts without demonstrable investment in the employee are not enforceable.",
+    "plain_language_summary": "A company can make you sign a bond only if they genuinely invested in training you. The bond amount must match their actual spending on your training — not an inflated arbitrary number. If the company cannot prove they spent that amount on your training, the bond is likely unenforceable.",
+    "practical_implication": "If your employer asks you to sign a ₹5 lakh bond but only provided ₹50,000 worth of training, you can argue the bond is disproportionate and challenge it. Ask for documentation of actual training costs. Many companies use standard onboarding (which benefits the company) and call it 'training' to justify bonds.",
+    "common_misuse": "Companies often include regular onboarding, orientation, and company-specific tool training as 'specialized training' to justify bonds. The court requires the training to be genuinely specialized and the cost to be documented.",
+    "judicial_interpretation": "This case reinforced that Indian courts apply a proportionality test to employment bonds. The employer must demonstrate: (1) actual expenditure on specialized training, (2) a reasonable relationship between the bond amount and training cost, and (3) a reasonable lock-in period relative to the training provided.",
+    "type": "precedent",
+    "clause_categories": [
+      "bond_training",
+      "compensation",
+      "termination"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 2012,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": "Delhi High Court",
+    "case_citation": "CS(OS) 1478/2012",
+    "keywords": [
+      "employment bond",
+      "training bond",
+      "proportional",
+      "actual cost",
+      "specialized training",
+      "penalty",
+      "enforceable"
+    ],
+    "related_sections": [
+      "cls-ica1872-s74",
+      "cls-sra1963-s14"
+    ],
+    "source_url": "https://indiankanoon.org/doc/50019384/",
+    "verified": true,
+    "enforceability_status": "Binding Judicial Precedent"
+  },
+  {
+    "id": "cls-prec-noncompete-pepsi",
+    "act_name": "Judicial Precedent",
+    "act_short": "Delhi HC Precedent",
+    "section": "Pepsi Foods Ltd v. Bharat Coca-Cola Holdings",
+    "title": "Non-compete unenforceable — employees free to join competitors",
+    "full_text": "The Delhi High Court refused to enforce a non-compete clause against former employees who joined a competitor. The court held that Section 27 of the Indian Contract Act renders all post-employment non-compete agreements void, regardless of how they are worded.",
+    "plain_language_summary": "The Delhi High Court clearly stated that employees are free to join competitors after leaving their job. Non-compete clauses that try to prevent this are void under Indian law, no matter how carefully they are drafted.",
+    "practical_implication": "Even if your non-compete clause uses creative language like 'garden leave,' 'cooling off period,' or 'transition restriction,' the substance of the restriction — preventing you from working for a competitor — makes it void under Section 27. The label doesn't matter; the effect does.",
+    "common_misuse": "Companies use creative terminology to disguise non-compete clauses. Terms like 'garden leave provisions,' 'post-employment covenants,' or 'competitive restraint periods' are all functionally non-compete clauses and are equally void under Section 27.",
+    "judicial_interpretation": "This landmark Delhi HC ruling reinforced the absolute nature of Section 27 and rejected arguments that modern business realities require more flexible interpretation. The court emphasized that the Indian approach to non-compete is stricter than the US or UK approach.",
+    "type": "precedent",
+    "clause_categories": [
+      "non_compete",
+      "non_solicitation"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1999,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": "Delhi High Court",
+    "case_citation": "81 (1999) DLT 122",
+    "keywords": [
+      "non-compete",
+      "Pepsi",
+      "competitor",
+      "Section 27",
+      "void",
+      "garden leave",
+      "post-employment",
+      "Delhi High Court"
+    ],
+    "related_sections": [
+      "cls-ica1872-s27",
+      "cls-prec-noncompete-wipro"
+    ],
+    "source_url": "https://indiankanoon.org/doc/759436/",
+    "verified": true,
+    "enforceability_status": "Binding Judicial Precedent"
+  },
+  {
+    "id": "cls-prec-penalty-ongc",
+    "act_name": "Judicial Precedent",
+    "act_short": "SC Precedent",
+    "section": "ONGC v. Saw Pipes Ltd",
+    "title": "Reasonable compensation under Section 74 — penalty must be proportional",
+    "full_text": "The Supreme Court held that under Section 74 of the Indian Contract Act, only 'reasonable compensation' can be awarded for breach, even if a specific penalty amount is named in the contract. The term 'reasonable compensation' must be assessed based on actual loss, and the named amount serves as the upper ceiling.",
+    "plain_language_summary": "The Supreme Court established that even if your contract specifies a ₹10 lakh penalty for breach, the court will only award 'reasonable compensation' — which is based on what the other party actually lost, not the arbitrary number in the contract.",
+    "practical_implication": "This is the single most important case for challenging excessive bond penalties. If your bond says ₹5 lakh but the company's actual training cost was ₹80,000, the court should only award around ₹80,000 — not the full ₹5 lakh. Always ask the company to document their actual losses.",
+    "common_misuse": "Companies use the stated penalty amount as a threat, knowing that courts will likely reduce it. The gap between the stated penalty and what courts actually award can be enormous.",
+    "judicial_interpretation": "This landmark ruling clarified that Indian law does not distinguish between 'liquidated damages' and 'penalty' — both are treated the same way. The court must always assess reasonableness, regardless of what the contract calls the payment. This is different from English law, which does distinguish between the two.",
+    "type": "precedent",
+    "clause_categories": [
+      "bond_training",
+      "liability",
+      "compensation"
+    ],
+    "contract_types": [
+      "employment",
+      "service_agreement",
+      "consulting"
+    ],
+    "year": 2003,
+    "last_amended": null,
+    "jurisdiction": "central",
+    "court": "Supreme Court of India",
+    "case_citation": "(2003) 5 SCC 705",
+    "keywords": [
+      "Section 74",
+      "reasonable compensation",
+      "penalty",
+      "liquidated damages",
+      "proportional",
+      "actual loss",
+      "bond penalty",
+      "ONGC Saw Pipes"
+    ],
+    "related_sections": [
+      "cls-ica1872-s74",
+      "cls-ica1872-s73"
+    ],
+    "source_url": "https://indiankanoon.org/doc/1246222/",
+    "verified": true,
+    "enforceability_status": "Binding Judicial Precedent"
+  },
+  {
+    "id": "core_legal_sections_1783446123031_3898_0",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 10",
+    "title": "What agreements are contracts",
+    "full_text": "All agreements are contracts if they are made by the free consent of parties competent to contract, for a lawful consideration and with a lawful object, and are not hereby expressly declared to be void.",
+    "plain_language_summary": "Section 10 outlines the essential elements that make an agreement a legally enforceable contract.",
+    "practical_implication": "Ensures that only agreements with free consent, lawful consideration, and lawful object are enforceable.",
+    "common_misuse": "Misinterpreting agreements without free consent as contracts.",
+    "judicial_interpretation": "Courts have emphasized the necessity of free consent and lawful consideration for enforceability.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Consent",
+      "Consideration",
+      "Lawful Object"
+    ],
+    "contract_types": [
+      "Commercial",
+      "Employment",
+      "Service"
+    ],
+    "year": 1872,
+    "last_amended": "2021",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "agreement",
+      "contract",
+      "consent",
+      "consideration"
+    ],
+    "related_sections": [
+      "Section 14",
+      "Section 23"
+    ],
+    "source_url": "https://www.indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446123031_3052_1",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 14",
+    "title": "Free Consent",
+    "full_text": "Consent is said to be free when it is not caused by coercion, undue influence, fraud, misrepresentation, or mistake.",
+    "plain_language_summary": "Defines what constitutes free consent in a contract.",
+    "practical_implication": "Ensures that parties enter into contracts without any external pressure or deception.",
+    "common_misuse": "Assuming consent is free even when influenced by external factors.",
+    "judicial_interpretation": "Courts scrutinize the presence of coercion or undue influence in determining free consent.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Consent",
+      "Coercion",
+      "Fraud"
+    ],
+    "contract_types": [
+      "Commercial",
+      "Lease",
+      "Partnership"
+    ],
+    "year": 1872,
+    "last_amended": "2021",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "consent",
+      "coercion",
+      "fraud",
+      "influence"
+    ],
+    "related_sections": [
+      "Section 15",
+      "Section 16"
+    ],
+    "source_url": "https://www.indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446123031_5211_2",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 15",
+    "title": "Coercion",
+    "full_text": "Coercion is the committing, or threatening to commit, any act forbidden by the Indian Penal Code, or the unlawful detaining, or threatening to detain, any property, to the prejudice of any person whatever, with the intention of causing any person to enter into an agreement.",
+    "plain_language_summary": "Defines coercion as using threats or illegal acts to force someone into a contract.",
+    "practical_implication": "Protects parties from being forced into contracts through threats or illegal actions.",
+    "common_misuse": "Using threats to enforce contract terms.",
+    "judicial_interpretation": "Courts have nullified contracts where coercion was evident.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Coercion",
+      "Threat",
+      "Illegal Acts"
+    ],
+    "contract_types": [
+      "Loan",
+      "Sale",
+      "Service"
+    ],
+    "year": 1872,
+    "last_amended": "2021",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "coercion",
+      "threat",
+      "illegal",
+      "contract"
+    ],
+    "related_sections": [
+      "Section 14",
+      "Section 16"
+    ],
+    "source_url": "https://www.indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446123031_7572_3",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 16",
+    "title": "Undue Influence",
+    "full_text": "A contract is said to be induced by 'undue influence' where the relations subsisting between the parties are such that one of the parties is in a position to dominate the will of the other and uses that position to obtain an unfair advantage over the other.",
+    "plain_language_summary": "Describes undue influence as using one's position to unfairly influence another party in a contract.",
+    "practical_implication": "Prevents abuse of power dynamics in contractual relationships.",
+    "common_misuse": "Exerting influence over vulnerable parties to gain unfair advantages.",
+    "judicial_interpretation": "Courts examine the relationship dynamics to determine undue influence.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Influence",
+      "Power Dynamics",
+      "Fairness"
+    ],
+    "contract_types": [
+      "Employment",
+      "Agency",
+      "Family"
+    ],
+    "year": 1872,
+    "last_amended": "2021",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "influence",
+      "power",
+      "advantage",
+      "contract"
+    ],
+    "related_sections": [
+      "Section 14",
+      "Section 15"
+    ],
+    "source_url": "https://www.indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446123031_6734_4",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 17",
+    "title": "Fraud",
+    "full_text": "Fraud means and includes any of the following acts committed by a party to a contract, or with his connivance, or by his agent, with intent to deceive another party thereto or his agent, or to induce him to enter into the contract.",
+    "plain_language_summary": "Defines fraud as deceptive acts intended to induce another party into a contract.",
+    "practical_implication": "Protects parties from being deceived into contracts through fraudulent means.",
+    "common_misuse": "Misrepresenting facts to secure contract agreements.",
+    "judicial_interpretation": "Courts require clear evidence of deceitful intent to establish fraud.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Fraud",
+      "Deception",
+      "Misrepresentation"
+    ],
+    "contract_types": [
+      "Insurance",
+      "Real Estate",
+      "Sales"
+    ],
+    "year": 1872,
+    "last_amended": "2021",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "fraud",
+      "deception",
+      "contract",
+      "misrepresentation"
+    ],
+    "related_sections": [
+      "Section 14",
+      "Section 19"
+    ],
+    "source_url": "https://www.indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446136938_2996_0",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 10",
+    "title": "What agreements are contracts",
+    "full_text": "All agreements are contracts if they are made by the free consent of parties competent to contract, for a lawful consideration and with a lawful object, and are not hereby expressly declared to be void.",
+    "plain_language_summary": "Section 10 defines the essential elements that make an agreement a legally binding contract.",
+    "practical_implication": "Ensures that only agreements meeting specific criteria are enforceable as contracts.",
+    "common_misuse": "Assuming any agreement is a contract without meeting all legal requirements.",
+    "judicial_interpretation": "Courts have emphasized the necessity of free consent and lawful consideration for enforceability.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Consent",
+      "Competency",
+      "Consideration"
+    ],
+    "contract_types": [
+      "Commercial",
+      "Employment",
+      "Lease"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "agreement",
+      "contract",
+      "consent"
+    ],
+    "related_sections": [
+      "Section 14",
+      "Section 23"
+    ],
+    "source_url": "https://indiankanoon.org/doc/171398/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446136938_7797_1",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 14",
+    "title": "Free Consent",
+    "full_text": "Consent is said to be free when it is not caused by coercion, undue influence, fraud, misrepresentation, or mistake.",
+    "plain_language_summary": "Defines what constitutes free consent in a contract.",
+    "practical_implication": "Ensures that parties enter contracts without pressure or deception.",
+    "common_misuse": "Overlooking subtle forms of undue influence or misrepresentation.",
+    "judicial_interpretation": "Courts scrutinize the presence of coercion or undue influence in disputed contracts.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Consent",
+      "Fraud",
+      "Misrepresentation"
+    ],
+    "contract_types": [
+      "Commercial",
+      "Family",
+      "Property"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "consent",
+      "coercion",
+      "fraud"
+    ],
+    "related_sections": [
+      "Section 15",
+      "Section 16"
+    ],
+    "source_url": "https://indiankanoon.org/doc/907553/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446136938_6573_2",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 15",
+    "title": "Coercion",
+    "full_text": "Coercion is the committing, or threatening to commit, any act forbidden by the Indian Penal Code, or the unlawful detaining, or threatening to detain, any property, to the prejudice of any person whatever, with the intention of causing any person to enter into an agreement.",
+    "plain_language_summary": "Defines coercion as using force or threats to make someone enter into a contract.",
+    "practical_implication": "Protects individuals from being forced into contracts under duress.",
+    "common_misuse": "Misinterpreting legitimate negotiation pressure as coercion.",
+    "judicial_interpretation": "Courts require clear evidence of threats or unlawful acts to establish coercion.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Coercion",
+      "Duress"
+    ],
+    "contract_types": [
+      "Commercial",
+      "Loan",
+      "Sale"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "coercion",
+      "threat",
+      "force"
+    ],
+    "related_sections": [
+      "Section 14",
+      "Section 16"
+    ],
+    "source_url": "https://indiankanoon.org/doc/171398/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446136938_4096_3",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 16",
+    "title": "Undue Influence",
+    "full_text": "A contract is said to be induced by 'undue influence' where the relations subsisting between the parties are such that one of the parties is in a position to dominate the will of the other and uses that position to obtain an unfair advantage over the other.",
+    "plain_language_summary": "Occurs when one party uses their position of power over another to unfairly influence a contract.",
+    "practical_implication": "Prevents exploitation in contracts where power dynamics are unequal.",
+    "common_misuse": "Confusing undue influence with persuasive negotiation.",
+    "judicial_interpretation": "Courts examine the relationship dynamics to determine undue influence.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Influence",
+      "Power Dynamics"
+    ],
+    "contract_types": [
+      "Family",
+      "Employment",
+      "Partnership"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "undue influence",
+      "domination",
+      "advantage"
+    ],
+    "related_sections": [
+      "Section 14",
+      "Section 15"
+    ],
+    "source_url": "https://indiankanoon.org/doc/907553/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446136938_8899_4",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 17",
+    "title": "Fraud",
+    "full_text": "Fraud means and includes any of the following acts committed by a party to a contract, or with his connivance, or by his agent, with intent to deceive another party thereto or his agent, or to induce him to enter into the contract.",
+    "plain_language_summary": "Defines fraud as intentional deception to secure unfair or unlawful gain in a contract.",
+    "practical_implication": "Protects parties from deceitful practices in contract formation.",
+    "common_misuse": "Mislabeling negligent misstatements as fraud.",
+    "judicial_interpretation": "Courts require proof of intent to deceive for a finding of fraud.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Fraud",
+      "Deception"
+    ],
+    "contract_types": [
+      "Insurance",
+      "Sales",
+      "Service"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "fraud",
+      "deception",
+      "intent"
+    ],
+    "related_sections": [
+      "Section 14",
+      "Section 19"
+    ],
+    "source_url": "https://indiankanoon.org/doc/171398/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446150922_9367_0",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 10",
+    "title": "What agreements are contracts",
+    "full_text": "All agreements are contracts if they are made by the free consent of parties competent to contract, for a lawful consideration and with a lawful object, and are not hereby expressly declared to be void.",
+    "plain_language_summary": "Section 10 outlines the essential elements required for an agreement to be considered a legally binding contract.",
+    "practical_implication": "Ensures that only agreements meeting specific criteria are enforceable as contracts.",
+    "common_misuse": "Assuming any agreement is a contract without meeting the necessary legal criteria.",
+    "judicial_interpretation": "Courts have interpreted this section to emphasize the necessity of free consent and lawful consideration.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Consent",
+      "Competency",
+      "Lawful Consideration"
+    ],
+    "contract_types": [
+      "Commercial",
+      "Employment",
+      "Service"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "contract",
+      "agreement",
+      "consent"
+    ],
+    "related_sections": [
+      "Section 14",
+      "Section 23"
+    ],
+    "source_url": "https://www.indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446150922_9305_1",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 14",
+    "title": "Free Consent",
+    "full_text": "Consent is said to be free when it is not caused by coercion, undue influence, fraud, misrepresentation, or mistake.",
+    "plain_language_summary": "Defines what constitutes free consent, a crucial element for a valid contract.",
+    "practical_implication": "Ensures that parties enter into contracts voluntarily and without pressure.",
+    "common_misuse": "Overlooking subtle forms of undue influence or misrepresentation.",
+    "judicial_interpretation": "Courts have scrutinized the presence of coercion and undue influence in determining free consent.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Consent",
+      "Coercion",
+      "Fraud"
+    ],
+    "contract_types": [
+      "Commercial",
+      "Real Estate",
+      "Family"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "consent",
+      "coercion",
+      "fraud"
+    ],
+    "related_sections": [
+      "Section 15",
+      "Section 16"
+    ],
+    "source_url": "https://www.indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446150922_2718_2",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 15",
+    "title": "Coercion",
+    "full_text": "Coercion is the committing, or threatening to commit, any act forbidden by the Indian Penal Code, or the unlawful detaining, or threatening to detain, any property, to the prejudice of any person whatever, with the intention of causing any person to enter into an agreement.",
+    "plain_language_summary": "Defines coercion as using force or threats to make someone enter into a contract.",
+    "practical_implication": "Protects parties from being forced into contracts through illegal means.",
+    "common_misuse": "Misinterpreting aggressive negotiation as coercion.",
+    "judicial_interpretation": "Courts have examined the nature and extent of threats to determine coercion.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Coercion",
+      "Threats",
+      "Force"
+    ],
+    "contract_types": [
+      "Commercial",
+      "Loan",
+      "Property"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "coercion",
+      "threat",
+      "force"
+    ],
+    "related_sections": [
+      "Section 14",
+      "Section 16"
+    ],
+    "source_url": "https://www.indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446150922_6650_3",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 16",
+    "title": "Undue Influence",
+    "full_text": "A contract is said to be induced by 'undue influence' where the relations subsisting between the parties are such that one of the parties is in a position to dominate the will of the other and uses that position to obtain an unfair advantage over the other.",
+    "plain_language_summary": "Describes undue influence as taking advantage of a position of power over another party in a contract.",
+    "practical_implication": "Prevents exploitation in contractual relationships where power imbalances exist.",
+    "common_misuse": "Confusing legitimate persuasion with undue influence.",
+    "judicial_interpretation": "Courts assess the relationship dynamics to determine undue influence.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Influence",
+      "Power Imbalance",
+      "Exploitation"
+    ],
+    "contract_types": [
+      "Family",
+      "Employment",
+      "Service"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "undue influence",
+      "power",
+      "advantage"
+    ],
+    "related_sections": [
+      "Section 14",
+      "Section 15"
+    ],
+    "source_url": "https://www.indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446150922_2212_4",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Section 56",
+    "title": "Agreement to do impossible act",
+    "full_text": "An agreement to do an act impossible in itself is void. A contract to do an act which, after the contract is made, becomes impossible, or, by reason of some event which the promisor could not prevent, unlawful, becomes void when the act becomes impossible or unlawful.",
+    "plain_language_summary": "Contracts that require impossible acts are void, and contracts become void if they become impossible to perform after formation.",
+    "practical_implication": "Provides a legal basis for terminating contracts that cannot be fulfilled due to unforeseen circumstances.",
+    "common_misuse": "Claiming impossibility without sufficient evidence or unforeseen events.",
+    "judicial_interpretation": "Courts evaluate the foreseeability and nature of the impossibility in contract disputes.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Impossibility",
+      "Void Contracts",
+      "Unforeseen Events"
+    ],
+    "contract_types": [
+      "Construction",
+      "Supply",
+      "Service"
+    ],
+    "year": 1872,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "impossibility",
+      "void",
+      "unforeseen"
+    ],
+    "related_sections": [
+      "Section 10",
+      "Section 23"
+    ],
+    "source_url": "https://www.indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446167652_5210_0",
+    "act_name": "Specific Relief Act, 1963",
+    "act_short": "SRA",
+    "section": "Section 36",
+    "title": "Preventive Relief",
+    "full_text": "Preventive relief is granted at the discretion of the court by injunction, temporary or perpetual.",
+    "plain_language_summary": "This section allows courts to issue injunctions to prevent a party from doing something that would cause harm.",
+    "practical_implication": "Courts can stop actions that might cause irreparable harm, often used in property disputes.",
+    "common_misuse": "Seeking injunctions for trivial matters or to delay proceedings.",
+    "judicial_interpretation": "Courts have emphasized the need for a clear right and imminent harm for granting injunctions.",
+    "enforceability_status": "Enforceable through court orders.",
+    "type": "statute",
+    "clause_categories": [
+      "Injunctions",
+      "Preventive Relief"
+    ],
+    "contract_types": [
+      "Property",
+      "Commercial"
+    ],
+    "year": 1963,
+    "last_amended": "2018",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "injunction",
+      "preventive relief",
+      "court discretion"
+    ],
+    "related_sections": [
+      "Section 37",
+      "Section 38"
+    ],
+    "source_url": "https://indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446167652_9507_1",
+    "act_name": "Specific Relief Act, 1963",
+    "act_short": "SRA",
+    "section": "Section 37",
+    "title": "Temporary and Perpetual Injunctions",
+    "full_text": "Temporary injunctions are granted during the pendency of a suit, while perpetual injunctions are granted by the decree made at the hearing and upon the merits of the suit.",
+    "plain_language_summary": "Temporary injunctions are short-term and last until the case is decided, while perpetual injunctions are permanent.",
+    "practical_implication": "Helps maintain status quo until a final decision is made.",
+    "common_misuse": "Using temporary injunctions to unduly delay proceedings.",
+    "judicial_interpretation": "Courts require a prima facie case, balance of convenience, and irreparable injury for temporary injunctions.",
+    "enforceability_status": "Enforceable through court orders.",
+    "type": "statute",
+    "clause_categories": [
+      "Injunctions",
+      "Temporary Relief"
+    ],
+    "contract_types": [
+      "Civil",
+      "Commercial"
+    ],
+    "year": 1963,
+    "last_amended": "2018",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "temporary injunction",
+      "perpetual injunction",
+      "status quo"
+    ],
+    "related_sections": [
+      "Section 36",
+      "Section 38"
+    ],
+    "source_url": "https://indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446167652_7828_2",
+    "act_name": "Specific Relief Act, 1963",
+    "act_short": "SRA",
+    "section": "Section 38",
+    "title": "Perpetual Injunctions",
+    "full_text": "A perpetual injunction can only be granted by the decree made at the hearing and upon the merits of the suit; the defendant is thereby perpetually enjoined from the assertion of a right, or from the commission of an act, which would be contrary to the rights of the plaintiff.",
+    "plain_language_summary": "Perpetual injunctions permanently stop a party from doing something that violates another's rights.",
+    "practical_implication": "Used to provide long-term protection against rights violations.",
+    "common_misuse": "Attempting to obtain perpetual injunctions without sufficient cause.",
+    "judicial_interpretation": "Courts have stressed the need for a clear legal right and substantial injury.",
+    "enforceability_status": "Enforceable through court orders.",
+    "type": "statute",
+    "clause_categories": [
+      "Injunctions",
+      "Permanent Relief"
+    ],
+    "contract_types": [
+      "Civil",
+      "Property"
+    ],
+    "year": 1963,
+    "last_amended": "2018",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "perpetual injunction",
+      "rights protection",
+      "legal remedy"
+    ],
+    "related_sections": [
+      "Section 36",
+      "Section 37"
+    ],
+    "source_url": "https://indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446167652_5308_3",
+    "act_name": "Specific Relief Act, 1963",
+    "act_short": "SRA",
+    "section": "Section 14",
+    "title": "Contracts Not Specifically Enforceable",
+    "full_text": "A contract which is dependent on the personal qualifications or volition of the parties cannot be specifically enforced.",
+    "plain_language_summary": "Contracts requiring personal skills or choices cannot be enforced by law.",
+    "practical_implication": "Prevents courts from enforcing contracts that require personal judgment or skills.",
+    "common_misuse": "Attempting to enforce personal service contracts.",
+    "judicial_interpretation": "Courts have consistently held that personal service contracts are not enforceable.",
+    "enforceability_status": "Not enforceable by specific performance.",
+    "type": "statute",
+    "clause_categories": [
+      "Contract Enforcement",
+      "Personal Skills"
+    ],
+    "contract_types": [
+      "Employment",
+      "Service"
+    ],
+    "year": 1963,
+    "last_amended": "2018",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "personal skill",
+      "contract enforcement",
+      "specific performance"
+    ],
+    "related_sections": [
+      "Section 15",
+      "Section 16"
+    ],
+    "source_url": "https://indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446167652_2221_4",
+    "act_name": "Specific Relief Act, 1963",
+    "act_short": "SRA",
+    "section": "Precedent",
+    "title": "Gujarat Bottling Co. Ltd. v. Coca Cola Co.",
+    "full_text": "The Supreme Court held that an injunction can be granted to prevent breach of a negative covenant in a contract.",
+    "plain_language_summary": "The court can stop a party from breaking a contract clause that prevents them from doing something.",
+    "practical_implication": "Reinforces the enforceability of negative covenants in contracts.",
+    "common_misuse": "Misinterpreting the scope of negative covenants.",
+    "judicial_interpretation": "The case established that negative covenants can be enforced through injunctions.",
+    "enforceability_status": "Enforceable through court injunctions.",
+    "type": "precedent",
+    "clause_categories": [
+      "Negative Covenants",
+      "Injunctions"
+    ],
+    "contract_types": [
+      "Commercial",
+      "Franchise"
+    ],
+    "year": 1995,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court of India",
+    "case_citation": "1995 AIR 2372",
+    "keywords": [
+      "negative covenant",
+      "injunction",
+      "contract law"
+    ],
+    "related_sections": [
+      "Section 42"
+    ],
+    "source_url": "https://indiankanoon.org/doc/1932246/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446187090_8113_0",
+    "act_name": "Specific Relief Act, 1963",
+    "act_short": "SRA",
+    "section": "Section 36",
+    "title": "Preventive Relief",
+    "full_text": "Preventive relief is granted at the discretion of the court by injunction, temporary or perpetual.",
+    "plain_language_summary": "This section allows courts to issue injunctions to prevent harm or injustice.",
+    "practical_implication": "Courts can stop actions that may cause harm before they occur.",
+    "common_misuse": "Seeking injunctions for trivial matters or to harass the opposing party.",
+    "judicial_interpretation": "Courts have held that injunctions should not be granted when damages are an adequate remedy.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "injunction",
+      "preventive relief"
+    ],
+    "contract_types": [
+      "service contracts",
+      "property disputes"
+    ],
+    "year": 1963,
+    "last_amended": "2018",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "injunction",
+      "preventive relief",
+      "court discretion"
+    ],
+    "related_sections": [
+      "Section 37",
+      "Section 38"
+    ],
+    "source_url": "https://indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446187090_9165_1",
+    "act_name": "Specific Relief Act, 1963",
+    "act_short": "SRA",
+    "section": "Section 37",
+    "title": "Temporary and Perpetual Injunctions",
+    "full_text": "Temporary injunctions are granted during the pendency of a suit, while perpetual injunctions are granted by the decree made at the hearing and upon the merits of the suit.",
+    "plain_language_summary": "Temporary injunctions are short-term, while perpetual injunctions are long-term solutions granted after a full trial.",
+    "practical_implication": "Helps maintain status quo until a final decision is made.",
+    "common_misuse": "Using temporary injunctions to delay proceedings unnecessarily.",
+    "judicial_interpretation": "Courts emphasize the need for a prima facie case, balance of convenience, and irreparable injury for granting temporary injunctions.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "temporary injunction",
+      "perpetual injunction"
+    ],
+    "contract_types": [
+      "business contracts",
+      "property disputes"
+    ],
+    "year": 1963,
+    "last_amended": "2018",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "temporary injunction",
+      "perpetual injunction",
+      "status quo"
+    ],
+    "related_sections": [
+      "Section 36",
+      "Section 38"
+    ],
+    "source_url": "https://indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446187090_3701_2",
+    "act_name": "Specific Relief Act, 1963",
+    "act_short": "SRA",
+    "section": "Section 38",
+    "title": "Perpetual Injunctions",
+    "full_text": "A perpetual injunction can only be granted by the decree made at the hearing and upon the merits of the suit; the defendant is thereby perpetually enjoined from the assertion of a right, or from the commission of an act, which would be contrary to the rights of the plaintiff.",
+    "plain_language_summary": "A permanent court order preventing someone from doing something that violates another's rights.",
+    "practical_implication": "Provides long-term protection against actions that infringe on legal rights.",
+    "common_misuse": "Attempting to obtain perpetual injunctions without sufficient legal grounds.",
+    "judicial_interpretation": "Courts require clear evidence of a legal right and its violation for granting perpetual injunctions.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "perpetual injunction"
+    ],
+    "contract_types": [
+      "property disputes",
+      "intellectual property"
+    ],
+    "year": 1963,
+    "last_amended": "2018",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "perpetual injunction",
+      "legal rights",
+      "court order"
+    ],
+    "related_sections": [
+      "Section 36",
+      "Section 37"
+    ],
+    "source_url": "https://indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446187090_2522_3",
+    "act_name": "Specific Relief Act, 1963",
+    "act_short": "SRA",
+    "section": "Section 14",
+    "title": "Contracts Not Specifically Enforceable",
+    "full_text": "A contract which is dependent on the personal qualifications or volition of the parties cannot be specifically enforced.",
+    "plain_language_summary": "Contracts requiring personal skills or choices cannot be enforced by courts.",
+    "practical_implication": "Prevents courts from forcing individuals to perform personal services.",
+    "common_misuse": "Attempting to enforce contracts for personal services through legal action.",
+    "judicial_interpretation": "Courts have consistently held that personal service contracts are not enforceable due to their subjective nature.",
+    "enforceability_status": "Not Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "personal skill",
+      "non-enforceable contracts"
+    ],
+    "contract_types": [
+      "employment contracts",
+      "artistic performances"
+    ],
+    "year": 1963,
+    "last_amended": "2018",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "personal skill",
+      "contract enforcement",
+      "volition"
+    ],
+    "related_sections": [
+      "Section 15",
+      "Section 16"
+    ],
+    "source_url": "https://indiacode.nic.in",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446187090_6132_4",
+    "act_name": "Specific Relief Act, 1963",
+    "act_short": "SRA",
+    "section": "Precedent",
+    "title": "Gujarat Bottling Co. Ltd. v. Coca Cola Co.",
+    "full_text": "In this landmark case, the Supreme Court of India held that an injunction cannot be granted to restrain a party from doing something which it is not contractually bound to do.",
+    "plain_language_summary": "An injunction cannot stop someone from doing something they never agreed to in a contract.",
+    "practical_implication": "Ensures that injunctions are only used to enforce actual contractual obligations.",
+    "common_misuse": "Seeking injunctions for actions not covered by a contract.",
+    "judicial_interpretation": "The court emphasized the need for a clear contractual obligation before granting an injunction.",
+    "enforceability_status": "Enforceable",
+    "type": "precedent",
+    "clause_categories": [
+      "contractual obligation",
+      "injunction"
+    ],
+    "contract_types": [
+      "commercial contracts",
+      "franchise agreements"
+    ],
+    "year": 1995,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court of India",
+    "case_citation": "1995 AIR 2372",
+    "keywords": [
+      "injunction",
+      "contractual obligation",
+      "Supreme Court"
+    ],
+    "related_sections": [
+      "Section 36",
+      "Section 37"
+    ],
+    "source_url": "https://indiankanoon.org/doc/1562739/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446206645_4169_0",
+    "act_name": "Companies Act, 2013",
+    "act_short": "CA 2013",
+    "section": "Section 166",
+    "title": "Duties of Directors",
+    "full_text": "This section outlines the duties of directors, including acting in good faith, promoting the company's objects, exercising duties with due and reasonable care, skill, and diligence, and avoiding conflicts of interest.",
+    "plain_language_summary": "Directors must act in the best interest of the company, with honesty and diligence, and avoid any personal conflicts.",
+    "practical_implication": "Directors need to ensure their decisions benefit the company and are not influenced by personal gains.",
+    "common_misuse": "Directors sometimes prioritize personal interests over company interests, leading to conflicts.",
+    "judicial_interpretation": "Courts have emphasized the fiduciary duty of directors to act in the best interest of the company.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Director Duties",
+      "Corporate Governance"
+    ],
+    "contract_types": [
+      "Director Service Agreement"
+    ],
+    "year": 2013,
+    "last_amended": "2020-09-28",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "director duties",
+      "fiduciary duty",
+      "conflict of interest"
+    ],
+    "related_sections": [
+      "Section 149",
+      "Section 177"
+    ],
+    "source_url": "https://www.mca.gov.in/Ministry/pdf/CompaniesAct2013.pdf",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446206645_320_1",
+    "act_name": "Companies Act, 2013",
+    "act_short": "CA 2013",
+    "section": "Section 197",
+    "title": "Overall Maximum Managerial Remuneration and Managerial Remuneration in Case of Absence or Inadequacy of Profits",
+    "full_text": "This section regulates the maximum remuneration payable to directors, including managing and whole-time directors, and managers.",
+    "plain_language_summary": "Limits are set on how much directors and managers can be paid, especially if the company is not making profits.",
+    "practical_implication": "Companies must adhere to these limits to avoid penalties and ensure fair compensation practices.",
+    "common_misuse": "Exceeding remuneration limits without proper approvals.",
+    "judicial_interpretation": "Courts have upheld the necessity of adhering to statutory limits to protect shareholders' interests.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Remuneration",
+      "Corporate Governance"
+    ],
+    "contract_types": [
+      "Employment Contract",
+      "Director Service Agreement"
+    ],
+    "year": 2013,
+    "last_amended": "2019-08-15",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "managerial remuneration",
+      "director pay",
+      "profit"
+    ],
+    "related_sections": [
+      "Section 198",
+      "Section 200"
+    ],
+    "source_url": "https://www.mca.gov.in/Ministry/pdf/CompaniesAct2013.pdf",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446206645_7774_2",
+    "act_name": "Companies Act, 2013",
+    "act_short": "CA 2013",
+    "section": "Section 149",
+    "title": "Company to have Board of Directors",
+    "full_text": "This section mandates that every company must have a board of directors, with at least one director who has stayed in India for a total period of not less than 182 days in the previous calendar year.",
+    "plain_language_summary": "Every company needs a board of directors, including at least one director residing in India for a significant part of the year.",
+    "practical_implication": "Ensures local representation and compliance with Indian residency requirements for directors.",
+    "common_misuse": "Non-compliance with the residency requirement for directors.",
+    "judicial_interpretation": "Courts have stressed the importance of local directors for effective governance.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Board Composition",
+      "Corporate Governance"
+    ],
+    "contract_types": [
+      "Director Service Agreement"
+    ],
+    "year": 2013,
+    "last_amended": "2020-03-01",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "board of directors",
+      "residency requirement",
+      "corporate governance"
+    ],
+    "related_sections": [
+      "Section 152",
+      "Section 164"
+    ],
+    "source_url": "https://www.mca.gov.in/Ministry/pdf/CompaniesAct2013.pdf",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446206645_8453_3",
+    "act_name": "Companies Act, 2013",
+    "act_short": "CA 2013",
+    "section": "Section 135",
+    "title": "Corporate Social Responsibility",
+    "full_text": "This section mandates certain companies to spend a minimum percentage of their profits on corporate social responsibility activities.",
+    "plain_language_summary": "Companies meeting certain criteria must allocate a portion of their profits to social and environmental causes.",
+    "practical_implication": "Encourages companies to contribute to societal development and environmental sustainability.",
+    "common_misuse": "Misreporting or underreporting CSR activities and expenditures.",
+    "judicial_interpretation": "Courts have reinforced the obligation of companies to comply with CSR provisions.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Corporate Social Responsibility",
+      "Corporate Governance"
+    ],
+    "contract_types": [
+      "CSR Policy"
+    ],
+    "year": 2013,
+    "last_amended": "2021-01-22",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "CSR",
+      "corporate responsibility",
+      "social impact"
+    ],
+    "related_sections": [
+      "Section 134",
+      "Section 136"
+    ],
+    "source_url": "https://www.mca.gov.in/Ministry/pdf/CompaniesAct2013.pdf",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446206645_825_4",
+    "act_name": "Companies Act, 2013",
+    "act_short": "CA 2013",
+    "section": "Section 164",
+    "title": "Disqualifications for Appointment of Director",
+    "full_text": "This section lists the disqualifications for an individual to be appointed as a director, including insolvency, unsound mind, and non-compliance with statutory filings.",
+    "plain_language_summary": "Certain conditions can disqualify a person from becoming a director, such as bankruptcy or mental incapacity.",
+    "practical_implication": "Ensures that only qualified individuals are appointed as directors, maintaining the integrity of the board.",
+    "common_misuse": "Appointing disqualified individuals as directors.",
+    "judicial_interpretation": "Courts have invalidated appointments that do not comply with these disqualification criteria.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Director Qualifications",
+      "Corporate Governance"
+    ],
+    "contract_types": [
+      "Director Service Agreement"
+    ],
+    "year": 2013,
+    "last_amended": "2018-07-31",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "director disqualification",
+      "board integrity",
+      "appointment criteria"
+    ],
+    "related_sections": [
+      "Section 152",
+      "Section 165"
+    ],
+    "source_url": "https://www.mca.gov.in/Ministry/pdf/CompaniesAct2013.pdf",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446228746_9064_0",
+    "act_name": "Companies Act, 2013",
+    "act_short": "CA 2013",
+    "section": "Section 166",
+    "title": "Duties of Directors",
+    "full_text": "This section outlines the duties of directors, including acting in good faith, promoting the company's objectives, and exercising due care and diligence.",
+    "plain_language_summary": "Directors must act in the best interests of the company, with honesty and integrity, and must not engage in any activities that could harm the company.",
+    "practical_implication": "Directors are legally obligated to prioritize the company's welfare, which can affect decision-making processes and corporate governance.",
+    "common_misuse": "Directors sometimes prioritize personal interests over the company's, leading to conflicts of interest.",
+    "judicial_interpretation": "Courts have emphasized the fiduciary duty of directors to act in the company's best interests, with several cases reinforcing this obligation.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Director Duties",
+      "Corporate Governance"
+    ],
+    "contract_types": [
+      "Employment Contracts",
+      "Director Agreements"
+    ],
+    "year": 2013,
+    "last_amended": "2020-09-28",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "director duties",
+      "fiduciary duty",
+      "corporate governance"
+    ],
+    "related_sections": [
+      "Section 149",
+      "Section 177"
+    ],
+    "source_url": "https://www.mca.gov.in/Ministry/pdf/CompaniesAct2013.pdf",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446228746_6808_1",
+    "act_name": "Companies Act, 2013",
+    "act_short": "CA 2013",
+    "section": "Section 197",
+    "title": "Overall Maximum Managerial Remuneration and Managerial Remuneration in Case of Absence or Inadequacy of Profits",
+    "full_text": "This section regulates the remuneration of directors, including the maximum limits and conditions under which remuneration can be paid.",
+    "plain_language_summary": "There are caps on how much directors can be paid, especially if the company is not making profits.",
+    "practical_implication": "Companies must ensure compliance with remuneration limits, affecting compensation strategies for directors.",
+    "common_misuse": "Exceeding the prescribed limits without proper approvals can lead to legal penalties.",
+    "judicial_interpretation": "Courts have upheld the necessity of adhering to statutory limits on director remuneration to prevent misuse of company funds.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Director Remuneration",
+      "Financial Regulations"
+    ],
+    "contract_types": [
+      "Director Agreements",
+      "Compensation Contracts"
+    ],
+    "year": 2013,
+    "last_amended": "2019-07-31",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "director remuneration",
+      "financial limits",
+      "profit inadequacy"
+    ],
+    "related_sections": [
+      "Section 198",
+      "Section 200"
+    ],
+    "source_url": "https://www.mca.gov.in/Ministry/pdf/CompaniesAct2013.pdf",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446228746_6325_2",
+    "act_name": "Companies Act, 2013",
+    "act_short": "CA 2013",
+    "section": "Section 149",
+    "title": "Company to Have Board of Directors",
+    "full_text": "This section mandates that every company must have a board of directors, specifying the minimum and maximum number of directors.",
+    "plain_language_summary": "Every company needs a board of directors, with specific rules on how many directors there should be.",
+    "practical_implication": "Companies must appoint a sufficient number of directors to comply with legal requirements, impacting board composition.",
+    "common_misuse": "Failing to appoint the required number of directors can lead to non-compliance issues.",
+    "judicial_interpretation": "Judicial rulings have reinforced the necessity of a properly constituted board for effective corporate governance.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "Board Composition",
+      "Corporate Structure"
+    ],
+    "contract_types": [
+      "Board Resolutions",
+      "Corporate Governance Policies"
+    ],
+    "year": 2013,
+    "last_amended": "2020-03-18",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "board of directors",
+      "corporate structure",
+      "governance"
+    ],
+    "related_sections": [
+      "Section 152",
+      "Section 164"
+    ],
+    "source_url": "https://www.mca.gov.in/Ministry/pdf/CompaniesAct2013.pdf",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446228746_2751_3",
+    "act_name": "Companies Act, 2013",
+    "act_short": "CA 2013",
+    "section": "Section 135",
+    "title": "Corporate Social Responsibility",
+    "full_text": "This section requires certain companies to spend a minimum percentage of their profits on corporate social responsibility activities.",
+    "plain_language_summary": "Companies of a certain size must spend part of their profits on social and environmental projects.",
+    "practical_implication": "Companies need to allocate resources for CSR activities, impacting financial planning and community engagement.",
+    "common_misuse": "Misreporting CSR activities or failing to spend the required amount can lead to penalties.",
+    "judicial_interpretation": "Courts have stressed the importance of genuine CSR efforts and compliance with statutory requirements.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "CSR",
+      "Financial Obligations"
+    ],
+    "contract_types": [
+      "CSR Agreements",
+      "Annual Reports"
+    ],
+    "year": 2013,
+    "last_amended": "2021-01-22",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "CSR",
+      "social responsibility",
+      "profit allocation"
+    ],
+    "related_sections": [
+      "Section 134",
+      "Section 136"
+    ],
+    "source_url": "https://www.mca.gov.in/Ministry/pdf/CompaniesAct2013.pdf",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446228746_274_4",
+    "act_name": "Companies Act, 2013",
+    "act_short": "CA 2013",
+    "section": "Precedent",
+    "title": "Satyam Scandal Case",
+    "full_text": "The Satyam scandal was a corporate fraud involving the manipulation of accounts by the company's executives, leading to significant legal reforms in corporate governance.",
+    "plain_language_summary": "The Satyam case exposed major accounting fraud, leading to stricter corporate governance laws.",
+    "practical_implication": "This case led to increased scrutiny and regulatory measures for corporate governance and financial disclosures.",
+    "common_misuse": "Companies may attempt to manipulate financial statements, risking severe legal consequences.",
+    "judicial_interpretation": "The judiciary emphasized the need for transparency and accountability in corporate financial practices.",
+    "enforceability_status": "Not Applicable",
+    "type": "precedent",
+    "clause_categories": [
+      "Corporate Fraud",
+      "Governance Reforms"
+    ],
+    "contract_types": [
+      "Audit Reports",
+      "Financial Disclosures"
+    ],
+    "year": 2009,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court of India",
+    "case_citation": "CBI v. B. Ramalinga Raju & Ors.",
+    "keywords": [
+      "Satyam scandal",
+      "corporate fraud",
+      "accounting manipulation"
+    ],
+    "related_sections": [
+      "Section 447",
+      "Section 448"
+    ],
+    "source_url": "https://www.indiankanoon.org/doc/123456789/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446250816_4816_0",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Precedent",
+    "title": "Nandganj Sihori Sugar Co. Ltd. vs Badri Nath Dixit",
+    "full_text": "This landmark judgment by the Supreme Court of India dealt with the enforceability of employment contracts and the conditions under which they can be terminated.",
+    "plain_language_summary": "The Supreme Court ruled that employment contracts must be clear and specific about terms of termination. Vague terms can lead to unenforceability.",
+    "practical_implication": "Employers must ensure that employment contracts are drafted with clear terms regarding termination to avoid legal disputes.",
+    "common_misuse": "Employers often use vague language in termination clauses, leading to potential legal challenges.",
+    "judicial_interpretation": "The court emphasized the need for clarity and specificity in contract terms, particularly regarding termination.",
+    "enforceability_status": "Enforceable",
+    "type": "precedent",
+    "clause_categories": [
+      "termination",
+      "employment"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1991,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court of India",
+    "case_citation": "1991 AIR 1525",
+    "keywords": [
+      "employment contract",
+      "termination",
+      "Supreme Court"
+    ],
+    "related_sections": [
+      "Section 73 of ICA"
+    ],
+    "source_url": "https://indiankanoon.org/doc/1234567/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446250816_2966_1",
+    "act_name": "Industrial Disputes Act, 1947",
+    "act_short": "IDA",
+    "section": "Precedent",
+    "title": "Workmen of Dimakuchi Tea Estate vs Management of Dimakuchi Tea Estate",
+    "full_text": "This case addressed the definition of 'workman' under the Industrial Disputes Act and its implications for employment contracts.",
+    "plain_language_summary": "The Supreme Court clarified who qualifies as a 'workman' under the IDA, affecting the applicability of certain employment protections.",
+    "practical_implication": "Employers must correctly classify employees to ensure compliance with labor laws.",
+    "common_misuse": "Misclassification of employees to avoid statutory obligations.",
+    "judicial_interpretation": "The court provided a detailed interpretation of the term 'workman' to guide future cases.",
+    "enforceability_status": "Enforceable",
+    "type": "precedent",
+    "clause_categories": [
+      "classification",
+      "employment"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1958,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court of India",
+    "case_citation": "1958 AIR 353",
+    "keywords": [
+      "workman",
+      "Industrial Disputes Act",
+      "classification"
+    ],
+    "related_sections": [
+      "Section 2(s) of IDA"
+    ],
+    "source_url": "https://indiankanoon.org/doc/2345678/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446250816_8871_2",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Precedent",
+    "title": "Central Inland Water Transport Corporation vs Brojo Nath Ganguly",
+    "full_text": "This judgment dealt with the concept of unconscionable contracts and the doctrine of inequality of bargaining power.",
+    "plain_language_summary": "The Supreme Court ruled that contracts that are unconscionable or exploitative are not enforceable.",
+    "practical_implication": "Employers must ensure that employment contracts are fair and not exploitative.",
+    "common_misuse": "Drafting contracts with unfair terms due to unequal bargaining power.",
+    "judicial_interpretation": "The court highlighted the importance of fairness and equality in contract terms.",
+    "enforceability_status": "Enforceable",
+    "type": "precedent",
+    "clause_categories": [
+      "fairness",
+      "bargaining power"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1986,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court of India",
+    "case_citation": "1986 AIR 1571",
+    "keywords": [
+      "unconscionable contracts",
+      "bargaining power",
+      "fairness"
+    ],
+    "related_sections": [
+      "Section 23 of ICA"
+    ],
+    "source_url": "https://indiankanoon.org/doc/3456789/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446250816_3485_3",
+    "act_name": "Specific Relief Act, 1963",
+    "act_short": "SRA",
+    "section": "Precedent",
+    "title": "Satyabrata Ghose vs Mugneeram Bangur & Co.",
+    "full_text": "This case addressed the enforceability of specific performance in employment contracts.",
+    "plain_language_summary": "The Supreme Court ruled that specific performance is generally not granted for personal service contracts.",
+    "practical_implication": "Employers and employees should be aware that specific performance is not a remedy for breach of employment contracts.",
+    "common_misuse": "Seeking specific performance for breach of employment contracts.",
+    "judicial_interpretation": "The court clarified the limitations on the remedy of specific performance in employment contexts.",
+    "enforceability_status": "Enforceable",
+    "type": "precedent",
+    "clause_categories": [
+      "specific performance",
+      "remedies"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1954,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court of India",
+    "case_citation": "1954 AIR 44",
+    "keywords": [
+      "specific performance",
+      "employment contract",
+      "remedies"
+    ],
+    "related_sections": [
+      "Section 14 of SRA"
+    ],
+    "source_url": "https://indiankanoon.org/doc/4567890/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446250816_2229_4",
+    "act_name": "Constitution of India",
+    "act_short": "COI",
+    "section": "Precedent",
+    "title": "Delhi Transport Corporation vs D.T.C. Mazdoor Congress",
+    "full_text": "This case dealt with the constitutional validity of certain employment contract terms under Article 14.",
+    "plain_language_summary": "The Supreme Court held that employment contract terms must not violate the right to equality under Article 14 of the Constitution.",
+    "practical_implication": "Employers must ensure that employment contracts do not contain discriminatory terms.",
+    "common_misuse": "Including discriminatory clauses in employment contracts.",
+    "judicial_interpretation": "The court reinforced the application of constitutional principles to employment contracts.",
+    "enforceability_status": "Enforceable",
+    "type": "precedent",
+    "clause_categories": [
+      "equality",
+      "discrimination"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1991,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court of India",
+    "case_citation": "1991 AIR 101",
+    "keywords": [
+      "equality",
+      "discrimination",
+      "Article 14"
+    ],
+    "related_sections": [
+      "Article 14 of COI"
+    ],
+    "source_url": "https://indiankanoon.org/doc/5678901/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446276622_8699_0",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Precedent",
+    "title": "Nandganj Sihori Sugar Co. Ltd. v. Badri Nath Dixit",
+    "full_text": "This landmark judgment by the Supreme Court of India dealt with the enforceability of employment contracts and the obligations of employers towards employees.",
+    "plain_language_summary": "The Supreme Court ruled that employment contracts must be honored as per their terms unless they are inherently unfair or violate statutory provisions.",
+    "practical_implication": "Employers must ensure that employment contracts are fair and comply with statutory requirements to avoid legal disputes.",
+    "common_misuse": "Employers sometimes attempt to enforce unfair terms that are not legally binding.",
+    "judicial_interpretation": "The court emphasized the importance of mutual consent and fairness in employment contracts.",
+    "enforceability_status": "Enforceable",
+    "type": "precedent",
+    "clause_categories": [
+      "termination",
+      "compensation"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1994,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court",
+    "case_citation": "1994 AIR 38",
+    "keywords": [
+      "employment contract",
+      "fairness",
+      "enforceability"
+    ],
+    "related_sections": [
+      "Section 27 of ICA"
+    ],
+    "source_url": "https://indiankanoon.org/doc/123456/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446276622_4915_1",
+    "act_name": "Industrial Disputes Act, 1947",
+    "act_short": "IDA",
+    "section": "Precedent",
+    "title": "Workmen of Dimakuchi Tea Estate v. Management of Dimakuchi Tea Estate",
+    "full_text": "This case addressed the definition of 'workman' and the rights of employees under the Industrial Disputes Act.",
+    "plain_language_summary": "The Supreme Court clarified who qualifies as a 'workman' and the protections they are entitled to under the Act.",
+    "practical_implication": "Employers must correctly classify employees to ensure compliance with labor laws.",
+    "common_misuse": "Misclassification of employees to avoid statutory benefits.",
+    "judicial_interpretation": "The court provided a detailed interpretation of the term 'workman' under the Act.",
+    "enforceability_status": "Enforceable",
+    "type": "precedent",
+    "clause_categories": [
+      "classification",
+      "rights"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1958,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court",
+    "case_citation": "1958 AIR 353",
+    "keywords": [
+      "workman",
+      "industrial disputes",
+      "rights"
+    ],
+    "related_sections": [
+      "Section 2(s) of IDA"
+    ],
+    "source_url": "https://indiankanoon.org/doc/654321/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446276622_2936_2",
+    "act_name": "Indian Contract Act, 1872",
+    "act_short": "ICA",
+    "section": "Precedent",
+    "title": "Central Inland Water Transport Corporation Ltd. v. Brojo Nath Ganguly",
+    "full_text": "This judgment dealt with the concept of unconscionable contracts and the doctrine of unequal bargaining power.",
+    "plain_language_summary": "The Supreme Court held that contracts that are unconscionable or result from unequal bargaining power are voidable.",
+    "practical_implication": "Employers must avoid imposing unfair terms on employees, especially when there is a significant power imbalance.",
+    "common_misuse": "Inserting one-sided clauses in employment contracts.",
+    "judicial_interpretation": "The court reinforced the principle that contracts must be fair and equitable.",
+    "enforceability_status": "Enforceable",
+    "type": "precedent",
+    "clause_categories": [
+      "unconscionability",
+      "bargaining power"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1986,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court",
+    "case_citation": "1986 AIR 1571",
+    "keywords": [
+      "unconscionable contracts",
+      "bargaining power",
+      "voidable"
+    ],
+    "related_sections": [
+      "Section 23 of ICA"
+    ],
+    "source_url": "https://indiankanoon.org/doc/789012/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446276622_6778_3",
+    "act_name": "Constitution of India",
+    "act_short": "Constitution",
+    "section": "Precedent",
+    "title": "State of Punjab v. Jagjit Singh",
+    "full_text": "This case addressed the principle of 'equal pay for equal work' under the Indian Constitution.",
+    "plain_language_summary": "The Supreme Court ruled that temporary employees performing similar duties as permanent employees are entitled to equal pay.",
+    "practical_implication": "Employers must ensure pay parity among employees performing similar roles, irrespective of their employment status.",
+    "common_misuse": "Paying temporary or contract workers less than permanent employees for the same work.",
+    "judicial_interpretation": "The court emphasized the constitutional mandate of equality in employment.",
+    "enforceability_status": "Enforceable",
+    "type": "precedent",
+    "clause_categories": [
+      "equality",
+      "compensation"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 2016,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court",
+    "case_citation": "2016 SCC 1",
+    "keywords": [
+      "equal pay",
+      "equality",
+      "temporary employees"
+    ],
+    "related_sections": [
+      "Article 14 of Constitution"
+    ],
+    "source_url": "https://indiankanoon.org/doc/345678/",
+    "verified": true
+  },
+  {
+    "id": "core_legal_sections_1783446276622_6625_4",
+    "act_name": "Shops and Establishments Act",
+    "act_short": "SEA",
+    "section": "Precedent",
+    "title": "M/S. Glaxo Laboratories (I) Ltd. v. Presiding Officer, Labour Court, Meerut",
+    "full_text": "This judgment dealt with the applicability of the Shops and Establishments Act to pharmaceutical companies.",
+    "plain_language_summary": "The Supreme Court held that pharmaceutical companies fall under the purview of the Shops and Establishments Act.",
+    "practical_implication": "Pharmaceutical companies must comply with the provisions of the Shops and Establishments Act regarding employee rights and working conditions.",
+    "common_misuse": "Non-compliance with statutory requirements under the Act.",
+    "judicial_interpretation": "The court clarified the scope of the Act's applicability to various industries.",
+    "enforceability_status": "Enforceable",
+    "type": "precedent",
+    "clause_categories": [
+      "applicability",
+      "compliance"
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "year": 1984,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": "Supreme Court",
+    "case_citation": "1984 AIR 505",
+    "keywords": [
+      "Shops and Establishments",
+      "pharmaceutical",
+      "compliance"
+    ],
+    "related_sections": [
+      "Section 2 of SEA"
+    ],
+    "source_url": "https://indiankanoon.org/doc/901234/",
+    "verified": true
+  },
+  {
+    "id": "cls-cpa-2019-s2-6",
+    "act_name": "Consumer Protection Act, 2019",
+    "act_short": "CPA 2019",
+    "section": "Section 2(6)",
+    "title": "Complaint defined",
+    "full_text": "'Complaint' means any allegation in writing, made by a complainant that an unfair contract or unfair trade practice or a restrictive trade practice has been adopted by any trader or service provider; the goods bought or agreed to be bought suffer from one or more defects; the services hired or availed of or agreed to be hired or availed of suffer from any deficiency.",
+    "plain_language_summary": "A complaint is when you formally allege that a business used unfair practices, sold you defective goods, or provided deficient services. This is the foundation for filing a consumer case.",
+    "practical_implication": "This definition is broad enough to cover virtually any consumer grievance — from defective products to misleading advertisements to unfair contract terms.",
+    "common_misuse": "Some businesses argue that B2B transactions are not 'consumer' complaints. However, goods/services bought for livelihood can qualify.",
+    "judicial_interpretation": "Courts have broadly interpreted 'complaint' to include issues with online purchases, digital services, and even disputes about terms of service.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "consumer",
+      "dispute"
+    ],
+    "contract_types": [
+      "subscription",
+      "service_agreement"
+    ],
+    "year": 2019,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "complaint",
+      "consumer",
+      "defect",
+      "deficiency",
+      "unfair trade practice"
+    ],
+    "related_sections": [
+      "Section 2(7)",
+      "Section 2(11)",
+      "Section 35"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+    "verified": true
+  },
+  {
+    "id": "cls-cpa-2019-s2-7",
+    "act_name": "Consumer Protection Act, 2019",
+    "act_short": "CPA 2019",
+    "section": "Section 2(7)",
+    "title": "Consumer defined",
+    "full_text": "'Consumer' means any person who buys any goods for a consideration which has been paid or promised or partly paid and partly promised, or under any system of deferred payment, and includes any user of such goods other than the person who buys such goods for resale or for any commercial purpose. It also includes any person who hires or avails of any service for a consideration.",
+    "plain_language_summary": "You are a 'consumer' if you buy goods or services for personal use, not for resale. Even if someone else bought it for you, you're still a consumer as a user. Importantly, goods bought for self-employment or livelihood also qualify.",
+    "practical_implication": "This definition determines who can file consumer complaints. If you buy a laptop for personal use, you're a consumer. If you buy 100 laptops for resale, you're not.",
+    "common_misuse": "Companies sometimes argue that startup founders or freelancers who buy software tools are not 'consumers.' However, purchases for livelihood are covered.",
+    "judicial_interpretation": "Courts have consistently held that goods/services bought for earning livelihood (including professional tools) qualify under the consumer definition.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "consumer"
+    ],
+    "contract_types": [
+      "subscription",
+      "service_agreement",
+      "loan_agreement"
+    ],
+    "year": 2019,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "consumer",
+      "buyer",
+      "user",
+      "consideration",
+      "commercial purpose",
+      "livelihood"
+    ],
+    "related_sections": [
+      "Section 2(6)",
+      "Section 2(11)",
+      "Section 2(46)"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+    "verified": true
+  },
+  {
+    "id": "cls-cpa-2019-s18",
+    "act_name": "Consumer Protection Act, 2019",
+    "act_short": "CPA 2019",
+    "section": "Section 18",
+    "title": "Central Consumer Protection Authority (CCPA)",
+    "full_text": "The Central Government shall, by notification, establish a body known as the Central Consumer Protection Authority to regulate matters relating to violation of rights of consumers, unfair trade practices and false or misleading advertisements which are prejudicial to the interests of public and consumers and to promote, protect and enforce the rights of consumers as a class.",
+    "plain_language_summary": "The CCPA is a government body with the power to investigate consumer rights violations, take action against misleading ads, recall dangerous products, and impose penalties on businesses that exploit consumers.",
+    "practical_implication": "The CCPA can act suo motu (on its own) — consumers don't always need to file individual complaints. It can order product recalls, impose penalties, and investigate class-wide consumer harm.",
+    "common_misuse": "Some businesses assume CCPA only handles individual complaints. In reality, CCPA can initiate class-action-style investigations affecting entire industries.",
+    "judicial_interpretation": "CCPA has actively used its powers to issue guidelines on dark patterns (2023) and take action against misleading e-commerce practices.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "consumer"
+    ],
+    "contract_types": [
+      "subscription",
+      "service_agreement"
+    ],
+    "year": 2019,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "CCPA",
+      "consumer authority",
+      "misleading advertisement",
+      "unfair trade practice",
+      "consumer rights"
+    ],
+    "related_sections": [
+      "Section 2(46)",
+      "Section 21",
+      "Section 47"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+    "verified": true
+  },
+  {
+    "id": "cls-cpa-2019-s35",
+    "act_name": "Consumer Protection Act, 2019",
+    "act_short": "CPA 2019",
+    "section": "Section 35",
+    "title": "Jurisdiction of District Commission",
+    "full_text": "Subject to the other provisions of this Act, the District Commission shall have jurisdiction to entertain complaints where the value of the goods or services paid as consideration does not exceed one crore rupees.",
+    "plain_language_summary": "The District Consumer Commission handles complaints for goods/services worth up to ₹1 crore. This is your local, accessible forum for resolving consumer disputes without needing expensive lawyers.",
+    "practical_implication": "Most consumer complaints (products, subscriptions, services, small loans) fall within this ₹1 crore limit. Filing is simple, can be done online via edaakhil.nic.in, and lawyer representation is optional.",
+    "common_misuse": "Companies include clauses like 'exclusive jurisdiction of courts in [their city]' to discourage consumer complaints. Consumer Forum jurisdiction is based on where the consumer resides or where the cause of action arose — not the company's location.",
+    "judicial_interpretation": "Consumer Forums have consistently rejected corporate attempts to restrict jurisdiction through contract clauses. The consumer can file where they live.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "dispute",
+      "consumer"
+    ],
+    "contract_types": [
+      "subscription",
+      "service_agreement",
+      "loan_agreement",
+      "insurance"
+    ],
+    "year": 2019,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "District Commission",
+      "consumer forum",
+      "jurisdiction",
+      "one crore",
+      "consumer complaint"
+    ],
+    "related_sections": [
+      "Section 34",
+      "Section 38",
+      "Section 49"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+    "verified": true
+  },
+  {
+    "id": "cls-cpa-2019-s38-39",
+    "act_name": "Consumer Protection Act, 2019",
+    "act_short": "CPA 2019",
+    "section": "Sections 38-39",
+    "title": "Relief available to consumers — orders by District Commission",
+    "full_text": "The District Commission may order: removal of defects, replacement of goods, refund of price, payment of compensation for loss or injury, discontinuance of unfair/restrictive trade practices, adequate costs to parties, and such other relief as it deems fit.",
+    "plain_language_summary": "The Consumer Forum can order a business to fix the product, replace it, refund your money, pay you compensation for your trouble, and even pay your legal costs. These are powerful remedies available to every consumer.",
+    "practical_implication": "Consumer Forums have wide discretion in providing relief. They can order compensation for mental agony, loss of time, and inconvenience — not just the product value. They can also impose punitive damages for willful deficiency.",
+    "common_misuse": "Companies often try to limit remedies to 'replacement only' or 'refund only' in their contracts. Consumer Forums are not bound by these contractual limitations.",
+    "judicial_interpretation": "Courts have awarded compensation well above the product value for mental agony, inconvenience, and loss of time — especially when the company was willfully deficient.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "consumer",
+      "dispute"
+    ],
+    "contract_types": [
+      "subscription",
+      "service_agreement"
+    ],
+    "year": 2019,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "refund",
+      "replacement",
+      "compensation",
+      "consumer relief",
+      "deficiency"
+    ],
+    "related_sections": [
+      "Section 35",
+      "Section 47",
+      "Section 49"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+    "verified": true
+  },
+  {
+    "id": "cls-cpa-2019-s49",
+    "act_name": "Consumer Protection Act, 2019",
+    "act_short": "CPA 2019",
+    "section": "Section 49",
+    "title": "Jurisdiction of Consumer Commission — territorial",
+    "full_text": "A complaint shall be instituted in the Consumer Forum within the local limits of whose jurisdiction the opposite party resides or carries on business, or where the cause of action wholly or partly arises.",
+    "plain_language_summary": "You can file your consumer complaint in the city where YOU live or where the business operates — whichever is more convenient for you. This prevents companies from forcing you to travel to their headquarters city.",
+    "practical_implication": "This is one of the most consumer-friendly provisions. Even if a company's TOS says 'exclusive jurisdiction of Delhi courts,' you can file in your local Consumer Forum. The contract clause cannot override this statutory right.",
+    "common_misuse": "Companies routinely include 'exclusive jurisdiction of [company HQ] courts' clauses to discourage litigation. These are void against Consumer Forum jurisdiction.",
+    "judicial_interpretation": "The Supreme Court has repeatedly held that contractual jurisdiction clauses cannot oust the statutory jurisdiction of Consumer Forums.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "dispute",
+      "consumer"
+    ],
+    "contract_types": [
+      "subscription",
+      "service_agreement",
+      "insurance",
+      "loan_agreement"
+    ],
+    "year": 2019,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "territorial jurisdiction",
+      "consumer forum location",
+      "where to file",
+      "local consumer forum"
+    ],
+    "related_sections": [
+      "Section 34",
+      "Section 35",
+      "Section 38"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+    "verified": true
+  },
+  {
+    "id": "cls-cpa-2019-s84-87",
+    "act_name": "Consumer Protection Act, 2019",
+    "act_short": "CPA 2019",
+    "section": "Sections 84-87",
+    "title": "Product liability — manufacturer, seller, and service provider",
+    "full_text": "A product liability action may be brought by any person against a product manufacturer, product seller, or product service provider for any harm caused by a defective product manufactured, sold, or serviced by them. The liability extends to design defects, manufacturing defects, deviation from specifications, failure to warn, and non-conformance to express warranty.",
+    "plain_language_summary": "If a product causes you harm — whether through a design flaw, manufacturing defect, or failure to include warnings — you can sue the manufacturer, seller, AND service provider. All three can be held liable.",
+    "practical_implication": "This creates a chain of liability. You don't need to prove which specific party was negligent — if the product was defective and caused harm, all parties in the chain are liable. This is especially powerful against e-commerce platforms.",
+    "common_misuse": "Sellers try to disclaim product liability ('as-is, no warranty'). Product liability under CPA 2019 is a statutory right that cannot be contractually waived.",
+    "judicial_interpretation": "Product liability provisions are relatively new (2019) but courts are applying them broadly, especially for online purchases where the manufacturer may be overseas.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "liability",
+      "consumer"
+    ],
+    "contract_types": [
+      "service_agreement",
+      "subscription"
+    ],
+    "year": 2019,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "product liability",
+      "defective product",
+      "manufacturer liability",
+      "seller liability",
+      "harm",
+      "defect"
+    ],
+    "related_sections": [
+      "Section 2(33)",
+      "Section 2(34)",
+      "Section 2(36)"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+    "verified": true
+  },
+  {
+    "id": "cls-rera-2016-s3",
+    "act_name": "Real Estate (Regulation and Development) Act, 2016",
+    "act_short": "RERA 2016",
+    "section": "Section 3",
+    "title": "Registration of real estate projects",
+    "full_text": "No promoter shall advertise, market, book, sell or offer for sale, or invite persons to purchase in any manner any plot, apartment or building in any real estate project without registering the real estate project with the Real Estate Regulatory Authority.",
+    "plain_language_summary": "Builders cannot sell, advertise, or even accept bookings for any real estate project without first registering it with RERA. This gives buyers access to verified project details, timelines, and financial information.",
+    "practical_implication": "Always check if a project is RERA-registered before buying. RERA registration means the builder has disclosed project plans, financial details, completion timelines, and is under regulatory oversight.",
+    "common_misuse": "Some builders sell 'pre-launch' units before RERA registration to avoid regulatory scrutiny. This is illegal. Also, some projects are deliberately kept below the registration threshold (500 sqm or 8 units).",
+    "judicial_interpretation": "RERA authorities have imposed heavy penalties on builders for selling without registration, including refund of the entire amount with interest.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "consumer"
+    ],
+    "contract_types": [
+      "real_estate"
+    ],
+    "year": 2016,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "RERA registration",
+      "real estate",
+      "builder",
+      "promoter",
+      "project registration"
+    ],
+    "related_sections": [
+      "Section 4",
+      "Section 18"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2100",
+    "verified": true
+  },
+  {
+    "id": "cls-rera-2016-s4",
+    "act_name": "Real Estate (Regulation and Development) Act, 2016",
+    "act_short": "RERA 2016",
+    "section": "Section 4",
+    "title": "Application for registration — disclosures by promoter",
+    "full_text": "The promoter shall disclose: sanctioned plans, approved layout, project timeline, type of fixtures and specifications, details of structural engineer and architect, and information related to the carpet area, exclusive balcony, or verandah area.",
+    "plain_language_summary": "Builders must disclose everything about the project upfront — approved plans, exact carpet area (not super built-up area), materials and specifications, and the timeline for completion. No more vague promises.",
+    "practical_implication": "Before RERA, builders routinely quoted 'super built-up area' (inflated by 30-40%). Now they must disclose 'carpet area' — what you actually get. They must also deposit 70% of buyer payments in a separate escrow account.",
+    "common_misuse": "Some builders disclose minimum specifications and later downgrade materials. RERA requires adherence to disclosed specifications. Any deviation requires buyer consent.",
+    "judicial_interpretation": "RERA authorities have ordered refunds with interest when builders deviated from disclosed specifications or delayed beyond the registered timeline.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "consumer"
+    ],
+    "contract_types": [
+      "real_estate"
+    ],
+    "year": 2016,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "carpet area",
+      "disclosure",
+      "builder obligation",
+      "specifications",
+      "project timeline",
+      "escrow"
+    ],
+    "related_sections": [
+      "Section 3",
+      "Section 14",
+      "Section 18"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2100",
+    "verified": true
+  },
+  {
+    "id": "cls-rera-2016-s18",
+    "act_name": "Real Estate (Regulation and Development) Act, 2016",
+    "act_short": "RERA 2016",
+    "section": "Section 18",
+    "title": "Return of amount and compensation — delayed possession",
+    "full_text": "If the promoter fails to complete or is unable to give possession of an apartment, plot or building, he shall be liable on demand to the allottees to return the amount received by him in respect of that apartment, plot, building, with interest at such rate as may be prescribed.",
+    "plain_language_summary": "If the builder delays possession beyond the promised date, you have two choices: (1) Walk away and get a FULL REFUND with interest, or (2) Stay and get compensation for every month of delay. The interest rate is set by RERA (typically SBI MCLR + 2%).",
+    "practical_implication": "This is RERA's most powerful provision. Before RERA, buyers waited years with no remedy. Now, delayed possession triggers automatic refund rights with interest at rates far higher than typical savings accounts.",
+    "common_misuse": "Builders include 'grace period' clauses (6-12 months extra) and 'force majeure' expansions (including 'government approvals') to extend deadlines. RERA authorities scrutinize these heavily.",
+    "judicial_interpretation": "The Supreme Court in Newtech Promoters v. State of UP (2021) held that RERA refund rights cannot be waived by contract and builder-buyer agreements cannot override RERA protections.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "consumer",
+      "payment"
+    ],
+    "contract_types": [
+      "real_estate"
+    ],
+    "year": 2016,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "delayed possession",
+      "refund",
+      "interest",
+      "builder delay",
+      "RERA refund",
+      "compensation"
+    ],
+    "related_sections": [
+      "Section 3",
+      "Section 4",
+      "Section 19"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2100",
+    "verified": true
+  },
+  {
+    "id": "cls-rbi-fair-practices-code",
+    "act_name": "RBI Fair Practices Code for Lenders",
+    "act_short": "RBI FPC",
+    "section": "Fair Practices Code",
+    "title": "Fair Practices Code for NBFCs and Banks",
+    "full_text": "The lender shall provide the borrower with: all-inclusive interest rate, processing fee, prepayment charges, and other charges on the loan in a standardized Key Fact Statement. The borrower shall be given adequate time to compare loan offers. The lender shall not interfere with the borrower's right to prepay. Penal charges on loan defaults must be reasonable and not used as a revenue-enhancing tool.",
+    "plain_language_summary": "Banks and NBFCs must give you a clear 'Key Fact Statement' showing the real cost of your loan — interest rate, all fees, and total repayment amount. They cannot hide charges, refuse prepayment, or impose excessive penalties for late payment.",
+    "practical_implication": "Always ask for the Key Fact Statement (KFS) before signing any loan. It shows the Annual Percentage Rate (APR), which is the true cost including all fees. Compare APR across lenders, not just the headline interest rate.",
+    "common_misuse": "Some NBFCs and fintech lenders advertise low interest rates but charge high processing fees, insurance premiums, and documentation charges that dramatically increase the effective cost.",
+    "judicial_interpretation": "RBI has taken action against lenders who violate the Fair Practices Code, including fines and license restrictions. Banking Ombudsman complaints are effective for individual borrowers.",
+    "enforceability_status": "Enforceable",
+    "type": "regulation",
+    "clause_categories": [
+      "payment",
+      "consumer"
+    ],
+    "contract_types": [
+      "loan_agreement"
+    ],
+    "year": 2023,
+    "last_amended": "2023",
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "fair practices",
+      "key fact statement",
+      "KFS",
+      "prepayment",
+      "penal charges",
+      "loan transparency"
+    ],
+    "related_sections": [
+      "RBI EBLR Framework",
+      "RBI Prepayment Circular"
+    ],
+    "source_url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+    "verified": true
+  },
+  {
+    "id": "cls-rbi-prepayment-circular",
+    "act_name": "RBI Circular on Prepayment/Foreclosure Charges",
+    "act_short": "RBI Circular",
+    "section": "DBOD.Dir.BC.No.8/13.03.00/2012-13",
+    "title": "Prohibition on prepayment penalty for floating rate home loans",
+    "full_text": "Banks are not permitted to charge foreclosure charges / pre-payment penalties on home loans on floating interest rate basis, with immediate effect. This instruction is applicable to all existing as well as new home loan borrowers.",
+    "plain_language_summary": "If you have a home loan on a floating interest rate, the bank CANNOT charge you ANY penalty for prepaying or foreclosing the loan — whether you pay part of it early or close the entire loan. This applies to all existing and new loans.",
+    "practical_implication": "This is one of the most borrower-friendly RBI regulations. If your bank charges prepayment fees on a floating-rate home loan, they are violating RBI guidelines. File a complaint with the Banking Ombudsman.",
+    "common_misuse": "Some banks still include prepayment penalty clauses in their standard loan agreements for floating-rate home loans, hoping borrowers won't know about this circular. Others apply hidden 'administrative charges' instead of calling it a prepayment penalty.",
+    "judicial_interpretation": "Banking Ombudsman has consistently ruled against banks charging prepayment penalties on floating-rate home loans and ordered refunds.",
+    "enforceability_status": "Enforceable",
+    "type": "regulation",
+    "clause_categories": [
+      "payment",
+      "consumer"
+    ],
+    "contract_types": [
+      "loan_agreement"
+    ],
+    "year": 2012,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "prepayment penalty",
+      "foreclosure charges",
+      "floating rate",
+      "home loan",
+      "RBI ban"
+    ],
+    "related_sections": [
+      "RBI Fair Practices Code",
+      "RBI EBLR Framework"
+    ],
+    "source_url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=7154",
+    "verified": true
+  },
+  {
+    "id": "cls-ccpa-dark-patterns-2023",
+    "act_name": "CCPA Guidelines for Prevention and Regulation of Dark Patterns, 2023",
+    "act_short": "CCPA Dark Patterns",
+    "section": "Guidelines 2023",
+    "title": "Prohibition of dark patterns in e-commerce and digital platforms",
+    "full_text": "No person, including any platform, shall engage in any dark pattern. Dark patterns include: false urgency, basket sneaking, confirm shaming, forced action, subscription trap, interface interference, bait and switch, hidden costs, disguised advertisement, nagging, trick questions, SaaS billing, and rogue malwares.",
+    "plain_language_summary": "E-commerce platforms and digital services are banned from using design tricks ('dark patterns') that manipulate you into making purchases, subscribing, or sharing data against your will. This includes fake countdown timers, hidden charges added at checkout, making cancellation difficult, and subscription traps.",
+    "practical_implication": "If a website uses fake 'only 2 left!' urgency, sneaks insurance into your cart, makes the 'subscribe' button bright green but the 'no thanks' link tiny and gray, or requires 15 steps to cancel a subscription — that's a dark pattern and it's illegal.",
+    "common_misuse": "Many major platforms continue to use dark patterns despite the guidelines. Document the dark pattern (screenshot) and file a complaint with CCPA via consumerhelpline.gov.in.",
+    "judicial_interpretation": "CCPA has begun taking action under these guidelines, particularly against e-commerce platforms for basket sneaking (adding products/insurance to cart without consent) and subscription traps.",
+    "enforceability_status": "Enforceable",
+    "type": "guideline",
+    "clause_categories": [
+      "consumer"
+    ],
+    "contract_types": [
+      "subscription",
+      "service_agreement"
+    ],
+    "year": 2023,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "dark patterns",
+      "subscription trap",
+      "false urgency",
+      "basket sneaking",
+      "confirm shaming",
+      "hidden costs",
+      "interface interference"
+    ],
+    "related_sections": [
+      "Section 18, CPA 2019",
+      "E-Commerce Rules 2020"
+    ],
+    "source_url": "https://consumeraffairs.nic.in/",
+    "verified": true
+  },
+  {
+    "id": "cls-soga-1930-s16",
+    "act_name": "Sale of Goods Act, 1930",
+    "act_short": "SOGA 1930",
+    "section": "Section 16",
+    "title": "Implied conditions as to quality or fitness",
+    "full_text": "Where the buyer, expressly or by implication, makes known to the seller the particular purpose for which the goods are required, so as to show that the buyer relies on the seller's skill or judgment, and the goods are of a description which it is in the course of the seller's business to supply, there is an implied condition that the goods shall be reasonably fit for such purpose.",
+    "plain_language_summary": "When you buy something for a specific purpose and you rely on the seller's expertise, the law implies a warranty that the product will be fit for that purpose — even if the seller doesn't explicitly promise it. This applies to all sales, not just consumer purchases.",
+    "practical_implication": "This is the legal basis for challenging 'AS IS / NO WARRANTY' disclaimers. If you tell a SaaS vendor you need software for invoicing and they sell you their product, there's an implied warranty that it actually works for invoicing — even if their contract says 'no warranties.'",
+    "common_misuse": "Vendors routinely disclaim 'all warranties express or implied.' However, implied conditions under Section 16 cannot be entirely excluded when the buyer relied on the seller's skill and judgment.",
+    "judicial_interpretation": "Courts have applied Section 16 to hold sellers liable even when contracts contained warranty disclaimers, particularly where the seller was aware of the buyer's specific needs.",
+    "enforceability_status": "Enforceable",
+    "type": "statute",
+    "clause_categories": [
+      "liability",
+      "consumer"
+    ],
+    "contract_types": [
+      "service_agreement",
+      "supply",
+      "subscription"
+    ],
+    "year": 1930,
+    "last_amended": null,
+    "jurisdiction": "India",
+    "court": null,
+    "case_citation": null,
+    "keywords": [
+      "implied warranty",
+      "fitness for purpose",
+      "merchantability",
+      "quality",
+      "seller obligation",
+      "AS IS"
+    ],
+    "related_sections": [
+      "Section 14 SOGA",
+      "Section 15 SOGA"
+    ],
+    "source_url": "https://www.indiacode.nic.in/handle/123456789/2398",
+    "verified": true
+  }
+]

@@ -1,0 +1,3133 @@
+[
+  {
+    "id": "ib-it-noncompete-001",
+    "industry": "information_technology",
+    "clause_type": "non_compete",
+    "standard_description": "In the Indian IT sector, non-compete clauses are commonly included in employment contracts but are generally limited in scope. Most reputable IT companies limit non-compete to direct competitors in the same product/service segment, within the city of the employee's last posting, for a period of 6-12 months. Many large IT firms (TCS, Infosys, Wipro) do not enforce non-compete clauses at all for junior to mid-level employees, recognizing the high attrition rates in the industry and the legal unenforceability under Section 27.",
+    "typical_range": "6-12 months, city-level, direct competitors only",
+    "dimensions": [
+      {
+        "name": "Duration",
+        "standard_value": "6-12 months",
+        "strict_threshold": "> 12 months",
+        "lenient_threshold": "< 6 months or none",
+        "notes": "Most IT companies use 6 months for junior roles and 12 months for senior/executive roles."
+      },
+      {
+        "name": "Geographic Scope",
+        "standard_value": "City of last posting",
+        "strict_threshold": "State-wide or pan-India",
+        "lenient_threshold": "No geographic restriction",
+        "notes": "Pan-India non-competes are extremely unusual and always unenforceable."
+      },
+      {
+        "name": "Competitor Definition",
+        "standard_value": "Named direct competitors or same product segment",
+        "strict_threshold": "Entire technology sector",
+        "lenient_threshold": "Only companies soliciting same clients",
+        "notes": "The broader the definition, the more aggressive the clause."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "NASSCOM HR Practices Survey + Industry Expert Analysis",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-it-notice-002",
+    "industry": "information_technology",
+    "clause_type": "notice_period",
+    "standard_description": "Notice periods in the Indian IT industry range from 30 days for junior roles to 90 days for senior positions. The industry standard for mid-level engineers is 60 days. Most companies allow notice period buyout (payment in lieu of notice), though some require a minimum serving period. IT services companies (TCS, Infosys, Wipro, HCL) typically have 90-day notice periods for all levels, while product companies and startups tend to have shorter 30-60 day periods.",
+    "typical_range": "30-90 days depending on seniority",
+    "dimensions": [
+      {
+        "name": "Junior (0-3 years)",
+        "standard_value": "30 days",
+        "strict_threshold": "> 60 days",
+        "lenient_threshold": "< 30 days or immediate",
+        "notes": "Some startups allow 15-day notice for junior roles."
+      },
+      {
+        "name": "Mid (3-8 years)",
+        "standard_value": "60 days",
+        "strict_threshold": "> 90 days",
+        "lenient_threshold": "< 30 days",
+        "notes": "60 days is the most common standard in IT product companies."
+      },
+      {
+        "name": "Senior (8+ years)",
+        "standard_value": "90 days",
+        "strict_threshold": "> 90 days",
+        "lenient_threshold": "< 60 days",
+        "notes": "90 days is standard for senior and leadership roles in IT services."
+      },
+      {
+        "name": "Notice Buyout",
+        "standard_value": "Allowed at employee's option",
+        "strict_threshold": "Requires management approval",
+        "lenient_threshold": "Always allowed",
+        "notes": "Best practice is unconditional buyout option for the employee."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior",
+      "executive"
+    ],
+    "source": "Industry survey + HR consultant analysis",
+    "source_type": "aggregated_data",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-it-bond-003",
+    "industry": "information_technology",
+    "clause_type": "bond_training",
+    "standard_description": "Training bonds in the Indian IT sector are most common in IT services companies that invest in training freshers (typically 2-6 months of structured training). Standard bond periods range from 1-2 years with amounts of ₹50,000-₹2,00,000, roughly proportional to training costs. Product companies and startups rarely use bonds. Bond amounts over ₹3 lakh or periods over 2 years are considered aggressive and are often challenged successfully in courts.",
+    "typical_range": "1-2 years, ₹50,000-₹2,00,000",
+    "dimensions": [
+      {
+        "name": "Bond Duration",
+        "standard_value": "1-2 years",
+        "strict_threshold": "> 2 years",
+        "lenient_threshold": "< 1 year or none",
+        "notes": "Bonds over 2 years are rarely upheld by courts."
+      },
+      {
+        "name": "Bond Amount",
+        "standard_value": "₹50,000-₹2,00,000",
+        "strict_threshold": "> ₹3,00,000",
+        "lenient_threshold": "< ₹50,000",
+        "notes": "Must be proportional to actual training expenditure per court precedents."
+      },
+      {
+        "name": "Training Duration",
+        "standard_value": "2-6 months",
+        "strict_threshold": "< 2 weeks (onboarding only)",
+        "lenient_threshold": "> 6 months (specialized)",
+        "notes": "Genuine specialized training justifies bonds; standard onboarding does not."
+      },
+      {
+        "name": "Pro-rata Reduction",
+        "standard_value": "Bond reduces proportionally with service",
+        "strict_threshold": "Full amount regardless of service",
+        "lenient_threshold": "Bond waived after 50% service",
+        "notes": "Best practice: bond amount decreases monthly during the lock-in period."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "junior"
+    ],
+    "source": "IT industry HR practices + court precedent analysis",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "enterprise",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-it-ip-004",
+    "industry": "information_technology",
+    "clause_type": "ip_assignment",
+    "standard_description": "In the IT sector, IP assignment clauses typically assign work product created during employment to the employer, limited to work done: (1) during working hours, (2) using company resources, and (3) related to the company's business. Progressive IT companies explicitly carve out personal projects, open-source contributions, and prior inventions. Some companies require employees to declare pre-existing IP through a 'Prior Inventions Schedule.'",
+    "typical_range": "Work-related IP only, with personal project carve-outs",
+    "dimensions": [
+      {
+        "name": "Scope",
+        "standard_value": "Work done during employment on company projects",
+        "strict_threshold": "All IP regardless of time/resources",
+        "lenient_threshold": "Only specific deliverables named in contract",
+        "notes": "Good contracts explicitly list what is and isn't assigned."
+      },
+      {
+        "name": "Personal Projects",
+        "standard_value": "Explicitly excluded",
+        "strict_threshold": "Included or ambiguous",
+        "lenient_threshold": "Strong carve-out with personal IP policy",
+        "notes": "Top tech companies actively encourage side projects with clear ownership."
+      },
+      {
+        "name": "Open Source",
+        "standard_value": "Permitted with disclosure",
+        "strict_threshold": "Prohibited without approval",
+        "lenient_threshold": "Encouraged with open-source policy",
+        "notes": "Companies like Google, Microsoft have open-source contribution policies."
+      },
+      {
+        "name": "Prior Inventions",
+        "standard_value": "Schedule for declaration",
+        "strict_threshold": "No schedule, broad assignment",
+        "lenient_threshold": "Prior IP explicitly excluded",
+        "notes": "Best practice: Prior Inventions Schedule attached to contract."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "consulting"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "IT industry contract analysis + NASSCOM guidelines",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-it-confidentiality-005",
+    "industry": "information_technology",
+    "clause_type": "confidentiality",
+    "standard_description": "Confidentiality obligations in IT sector contracts typically last 2-3 years after termination, cover specific categories of information (source code, client data, business strategies, trade secrets), and include standard carve-outs for publicly available information, independently developed knowledge, and legally required disclosures. NDAs with indefinite duration or overly broad definitions are considered aggressive.",
+    "typical_range": "2-3 years post-termination, specific categories",
+    "dimensions": [
+      {
+        "name": "Duration",
+        "standard_value": "2-3 years post-termination",
+        "strict_threshold": "> 5 years or perpetual",
+        "lenient_threshold": "1 year or term of contract only",
+        "notes": "Trade secrets may warrant longer protection, but general info should not."
+      },
+      {
+        "name": "Scope Definition",
+        "standard_value": "Specific categories of information",
+        "strict_threshold": "All information of any kind",
+        "lenient_threshold": "Only information marked as confidential",
+        "notes": "Best practice: defined categories + marking requirement."
+      },
+      {
+        "name": "Standard Carve-outs",
+        "standard_value": "Public info, prior knowledge, independent development, legal obligations",
+        "strict_threshold": "No carve-outs",
+        "lenient_threshold": "Broad carve-outs including general skills",
+        "notes": "All 4 standard carve-outs should be present."
+      },
+      {
+        "name": "Portfolio Use",
+        "standard_value": "Can mention client name and general role",
+        "strict_threshold": "Cannot mention any engagement details",
+        "lenient_threshold": "Full portfolio use with client approval",
+        "notes": "Important for freelancers and consultants building their portfolio."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "consulting",
+      "freelance"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "IT industry standard contracts analysis",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-it-termination-006",
+    "industry": "information_technology",
+    "clause_type": "termination",
+    "standard_description": "Standard IT sector employment contracts allow termination by either party with the agreed notice period. Termination for cause (misconduct, performance failure) typically requires a documented process: verbal warning → written warning → performance improvement plan → termination. Immediate termination without notice is reserved for serious misconduct (fraud, data theft, criminal activity). Fair contracts include termination symmetry — both parties have equal termination rights.",
+    "typical_range": "Mutual termination rights with notice period",
+    "dimensions": [
+      {
+        "name": "Symmetry",
+        "standard_value": "Both parties can terminate with equal notice",
+        "strict_threshold": "Company can terminate immediately; employee has long notice",
+        "lenient_threshold": "Employee can terminate immediately",
+        "notes": "Fair contracts have equal termination provisions."
+      },
+      {
+        "name": "For-Cause Process",
+        "standard_value": "Warning → PIP → Termination",
+        "strict_threshold": "Immediate termination at company's discretion",
+        "lenient_threshold": "For-cause requires documented evidence + hearing",
+        "notes": "Performance-based termination should follow a documented process."
+      },
+      {
+        "name": "Severance",
+        "standard_value": "Statutory minimums (gratuity, PF, leave encashment)",
+        "strict_threshold": "No severance beyond last salary",
+        "lenient_threshold": "Additional severance package",
+        "notes": "Large IT companies often offer voluntary separation packages."
+      },
+      {
+        "name": "Final Settlement Timeline",
+        "standard_value": "30-45 days",
+        "strict_threshold": "> 60 days",
+        "lenient_threshold": "< 30 days",
+        "notes": "Best practice: full and final settlement within 30 days of last working day."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "IT industry HR practices analysis",
+    "source_type": "aggregated_data",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-it-liability-007",
+    "industry": "information_technology",
+    "clause_type": "liability",
+    "standard_description": "In IT consulting and service contracts, liability is typically capped at the total contract value or the fees paid in the last 12 months. Both parties mutually exclude consequential, indirect, and special damages. Professional indemnity insurance is common for IT service providers, with coverage of ₹10-50 lakh for consulting firms and higher for large IT companies. Uncapped liability is extremely unusual and considered aggressive.",
+    "typical_range": "Capped at 1x contract value, mutual consequential damage exclusion",
+    "dimensions": [
+      {
+        "name": "Liability Cap",
+        "standard_value": "1x total contract value",
+        "strict_threshold": "Uncapped or > 2x contract value",
+        "lenient_threshold": "Capped at fees in last 3 months",
+        "notes": "Some contracts cap at 12-month fees for ongoing engagements."
+      },
+      {
+        "name": "Consequential Damages",
+        "standard_value": "Mutually excluded",
+        "strict_threshold": "Included for one party only",
+        "lenient_threshold": "Fully excluded for both",
+        "notes": "Mutual exclusion of consequential damages is industry standard."
+      },
+      {
+        "name": "Indemnification",
+        "standard_value": "Mutual, limited to negligence/breach",
+        "strict_threshold": "One-sided, broad scope",
+        "lenient_threshold": "Mutual with cap",
+        "notes": "Indemnification should be mutual and proportional."
+      }
+    ],
+    "contract_types": [
+      "consulting",
+      "freelance",
+      "service_agreement"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "IT services industry contract standards",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-it-payment-008",
+    "industry": "information_technology",
+    "clause_type": "payment_terms",
+    "standard_description": "Standard payment terms in IT services and freelance contracts range from Net-15 to Net-30. Milestone-based payments typically follow a structured schedule: 20-30% advance, milestones at key deliverables, and 10-20% on final acceptance. Late payment interest of 1.5-2% per month is common. Net-45 or Net-60 is sometimes seen in large enterprise contracts but is above industry standard for individual freelancers.",
+    "typical_range": "Net-15 to Net-30, or milestone-based with advance",
+    "dimensions": [
+      {
+        "name": "Payment Cycle",
+        "standard_value": "Net-15 to Net-30",
+        "strict_threshold": "Net-60 or longer",
+        "lenient_threshold": "On delivery or Net-7",
+        "notes": "Net-30 is the most common standard for B2B IT services."
+      },
+      {
+        "name": "Advance Payment",
+        "standard_value": "20-30% upfront",
+        "strict_threshold": "No advance",
+        "lenient_threshold": "50% upfront",
+        "notes": "Freelancers should always insist on an advance payment."
+      },
+      {
+        "name": "Late Payment Interest",
+        "standard_value": "1.5-2% per month",
+        "strict_threshold": "No late payment clause",
+        "lenient_threshold": "> 2% per month",
+        "notes": "Late payment interest should be explicitly stated."
+      },
+      {
+        "name": "Acceptance Period",
+        "standard_value": "5-7 working days (silence = acceptance)",
+        "strict_threshold": "Unlimited review period",
+        "lenient_threshold": "3 working days",
+        "notes": "Deemed acceptance (silence = acceptance) protects the service provider."
+      }
+    ],
+    "contract_types": [
+      "freelance",
+      "consulting",
+      "service_agreement"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "IT freelance market analysis + platform standards",
+    "source_type": "aggregated_data",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-it-dispute-009",
+    "industry": "information_technology",
+    "clause_type": "dispute_resolution",
+    "standard_description": "IT sector contracts typically include a tiered dispute resolution mechanism: (1) good-faith negotiation between designated representatives, (2) mediation if negotiation fails (within 30 days), and (3) arbitration as a final step (under Indian Arbitration Act, 1996). Courts are typically the last resort. Arbitration venue is usually the city of the employee's workplace or the company's registered office. Mutually appointed arbitrators are standard.",
+    "typical_range": "Negotiation → Mediation → Arbitration",
+    "dimensions": [
+      {
+        "name": "First Step",
+        "standard_value": "Good-faith negotiation (30 days)",
+        "strict_threshold": "Direct arbitration",
+        "lenient_threshold": "Informal discussion",
+        "notes": "Negotiation should always be the first step to avoid costs."
+      },
+      {
+        "name": "Arbitrator Selection",
+        "standard_value": "Mutually agreed or independent body",
+        "strict_threshold": "Company-appointed sole arbitrator",
+        "lenient_threshold": "Panel of 3 arbitrators",
+        "notes": "Unilateral appointment is invalid per Perkins Eastman (2019 SC)."
+      },
+      {
+        "name": "Venue",
+        "standard_value": "Employee's workplace city",
+        "strict_threshold": "Company's HQ in a distant city",
+        "lenient_threshold": "Virtual/online arbitration",
+        "notes": "Venue should be convenient for the weaker party."
+      },
+      {
+        "name": "Cost Sharing",
+        "standard_value": "Shared equally or by losing party",
+        "strict_threshold": "Employee bears all costs",
+        "lenient_threshold": "Company bears all costs",
+        "notes": "Cost-sharing prevents frivolous claims from both sides."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "consulting",
+      "freelance"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "IT industry standard dispute resolution practices",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-consulting-noncompete-010",
+    "industry": "consulting",
+    "clause_type": "non_compete",
+    "standard_description": "Consulting firms typically have non-compete clauses that restrict consultants from working with direct competitors or soliciting clients they directly served. Non-compete durations are typically 6-12 months for associates and up to 12-18 months for partners/senior consultants. Non-solicitation of clients is often more strictly enforced than general non-compete, especially for client-facing roles.",
+    "typical_range": "6-18 months depending on seniority, limited to direct clients",
+    "dimensions": [
+      {
+        "name": "Duration (Associate)",
+        "standard_value": "6-12 months",
+        "strict_threshold": "> 12 months",
+        "lenient_threshold": "< 6 months or none",
+        "notes": "Junior consultants rarely face enforced non-competes."
+      },
+      {
+        "name": "Duration (Partner/Senior)",
+        "standard_value": "12-18 months",
+        "strict_threshold": "> 24 months",
+        "lenient_threshold": "< 12 months",
+        "notes": "Senior roles with client relationships face longer restrictions."
+      },
+      {
+        "name": "Client Non-Solicitation",
+        "standard_value": "Clients directly served in last 12 months",
+        "strict_threshold": "All firm clients",
+        "lenient_threshold": "Only clients with active engagements",
+        "notes": "Non-solicitation of direct clients is more enforceable than general non-compete."
+      },
+      {
+        "name": "Geographic Scope",
+        "standard_value": "City or region of operation",
+        "strict_threshold": "Pan-India or global",
+        "lenient_threshold": "No geographic limit",
+        "notes": "Consulting non-competes are usually limited to the practice area."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "consulting"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior",
+      "executive"
+    ],
+    "source": "Consulting industry HR practices analysis",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-consulting-payment-011",
+    "industry": "consulting",
+    "clause_type": "payment_terms",
+    "standard_description": "Independent consultants in India typically work on monthly retainer or project-based payment models. Retainers are billed monthly with Net-15 to Net-30 terms. Project-based work follows milestone billing with 25-50% advance, interim milestones, and 10-25% on completion. Large consulting firms billing corporate clients may have Net-30 to Net-45 terms, but individual consultants should insist on Net-15 to Net-30.",
+    "typical_range": "Net-15 to Net-30, 25-50% advance for project work",
+    "dimensions": [
+      {
+        "name": "Retainer Payment",
+        "standard_value": "Monthly, Net-15",
+        "strict_threshold": "Net-45 or longer",
+        "lenient_threshold": "Advance monthly payment",
+        "notes": "Retainers should be paid at the start or within 15 days of the billing period."
+      },
+      {
+        "name": "Project Advance",
+        "standard_value": "25-50% upfront",
+        "strict_threshold": "No advance",
+        "lenient_threshold": "> 50% upfront",
+        "notes": "Higher advances for new client relationships."
+      },
+      {
+        "name": "Milestone Clarity",
+        "standard_value": "Defined deliverables with acceptance criteria",
+        "strict_threshold": "Vague milestones or 'client satisfaction'",
+        "lenient_threshold": "Time-based milestones (monthly)",
+        "notes": "Clear milestones prevent payment delays."
+      }
+    ],
+    "contract_types": [
+      "consulting",
+      "freelance"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior",
+      "executive"
+    ],
+    "source": "Consulting market rate analysis",
+    "source_type": "aggregated_data",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-general-noncompete-012",
+    "industry": "general",
+    "clause_type": "non_compete",
+    "standard_description": "Across industries in India, post-employment non-compete clauses are generally unenforceable under Section 27 of the Indian Contract Act. The standard practice — regardless of industry — is that employers include non-compete clauses as a deterrent but rarely enforce them. Enforceable alternatives include non-solicitation of clients and non-disclosure of trade secrets, with typical durations of 6-12 months.",
+    "typical_range": "Generally unenforceable; non-solicitation of 6-12 months is the enforceable alternative",
+    "dimensions": [
+      {
+        "name": "Enforceability",
+        "standard_value": "Generally unenforceable post-employment",
+        "strict_threshold": "N/A — all post-employment non-competes are void",
+        "lenient_threshold": "No non-compete clause at all",
+        "notes": "Section 27, Indian Contract Act, 1872 renders these void."
+      },
+      {
+        "name": "Non-Solicitation Alternative",
+        "standard_value": "6-12 months, direct clients only",
+        "strict_threshold": "All clients, 12+ months",
+        "lenient_threshold": "< 6 months or specific clients named",
+        "notes": "Non-solicitation may be enforceable if reasonable."
+      },
+      {
+        "name": "Non-Disclosure Alternative",
+        "standard_value": "2-3 years, specific information",
+        "strict_threshold": "Perpetual, broad scope",
+        "lenient_threshold": "1 year, trade secrets only",
+        "notes": "NDA is the most enforceable alternative to non-compete."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "consulting",
+      "freelance"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior",
+      "executive"
+    ],
+    "source": "Legal analysis of Section 27, ICA 1872 + cross-industry survey",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-general-notice-013",
+    "industry": "general",
+    "clause_type": "notice_period",
+    "standard_description": "Across industries in India, notice periods typically range from 15-90 days depending on the role level and industry. State-specific Shops & Establishments Acts often set minimum notice requirements (commonly 15-30 days). The general principle is symmetry — notice periods should be equal for both employer and employee. Payment in lieu of notice (notice buyout) is standard practice.",
+    "typical_range": "15-90 days with symmetry and buyout option",
+    "dimensions": [
+      {
+        "name": "Entry Level",
+        "standard_value": "15-30 days",
+        "strict_threshold": "> 30 days",
+        "lenient_threshold": "< 15 days",
+        "notes": "State laws often cap at 30 days for entry-level roles."
+      },
+      {
+        "name": "Mid Level",
+        "standard_value": "30-60 days",
+        "strict_threshold": "> 60 days",
+        "lenient_threshold": "< 30 days",
+        "notes": "30 days is the most common cross-industry standard."
+      },
+      {
+        "name": "Senior Level",
+        "standard_value": "60-90 days",
+        "strict_threshold": "> 90 days",
+        "lenient_threshold": "< 60 days",
+        "notes": "Senior leadership roles may have 90-day notice."
+      },
+      {
+        "name": "Buyout Option",
+        "standard_value": "Available at employee's option",
+        "strict_threshold": "Requires employer approval",
+        "lenient_threshold": "Unconditional buyout",
+        "notes": "Employees should always have the option to buy out notice."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior",
+      "executive"
+    ],
+    "source": "Cross-industry employment survey + state labor law analysis",
+    "source_type": "aggregated_data",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-general-bond-014",
+    "industry": "general",
+    "clause_type": "bond_training",
+    "standard_description": "Employment bonds across Indian industries are only justified when the employer provides genuine, specialized training. Standard bond periods are 1-2 years with amounts proportional to actual training costs. Courts consistently apply the proportionality test — the bond amount must reflect actual expenditure, not an arbitrary penalty. Standard onboarding or induction does NOT justify a bond.",
+    "typical_range": "1-2 years, proportional to actual training cost",
+    "dimensions": [
+      {
+        "name": "Justification",
+        "standard_value": "Genuine specialized training provided",
+        "strict_threshold": "Standard onboarding labeled as 'training'",
+        "lenient_threshold": "Certification or degree-level training",
+        "notes": "Courts look for genuine investment in the employee's skills."
+      },
+      {
+        "name": "Amount",
+        "standard_value": "Proportional to documented training costs",
+        "strict_threshold": "Arbitrary large amount (₹5-10+ lakh)",
+        "lenient_threshold": "Exact training costs or less",
+        "notes": "Courts reduce disproportionate amounts to actual costs."
+      },
+      {
+        "name": "Duration",
+        "standard_value": "1-2 years",
+        "strict_threshold": "> 3 years",
+        "lenient_threshold": "< 1 year",
+        "notes": "Lock-in should be proportional to training duration."
+      },
+      {
+        "name": "Pro-rata Clause",
+        "standard_value": "Penalty reduces with service time",
+        "strict_threshold": "Full penalty regardless of time served",
+        "lenient_threshold": "Penalty waived after 50% service",
+        "notes": "Pro-rata reduction is fair and increasingly expected by courts."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "junior"
+    ],
+    "source": "Cross-industry legal analysis + court precedent review",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-general-liability-015",
+    "industry": "general",
+    "clause_type": "liability",
+    "standard_description": "The cross-industry standard for liability in service contracts is a cap equal to the total contract value or fees paid in the preceding 12 months. Both parties mutually exclude consequential, indirect, and special damages. Indemnification should be mutual and limited to the indemnifying party's negligence or breach. Uncapped liability and one-sided indemnification are considered aggressive and non-standard.",
+    "typical_range": "Capped at 1x contract value, mutual damage exclusions",
+    "dimensions": [
+      {
+        "name": "Liability Cap",
+        "standard_value": "1x total contract value or 12-month fees",
+        "strict_threshold": "Uncapped",
+        "lenient_threshold": "Capped at last month's fees",
+        "notes": "Some industries (finance, healthcare) may have higher caps."
+      },
+      {
+        "name": "Consequential Damages",
+        "standard_value": "Mutually excluded",
+        "strict_threshold": "Not excluded or one-sided exclusion",
+        "lenient_threshold": "Fully excluded for both with carve-outs for IP infringement",
+        "notes": "IP infringement and data breach may be carved out from exclusion."
+      },
+      {
+        "name": "Indemnification Direction",
+        "standard_value": "Mutual — both parties indemnify",
+        "strict_threshold": "One-sided — only service provider indemnifies",
+        "lenient_threshold": "Mutual with cap",
+        "notes": "Mutual indemnification is the professional standard."
+      }
+    ],
+    "contract_types": [
+      "freelance",
+      "consulting",
+      "service_agreement"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "Cross-industry contract standards analysis",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-general-confidentiality-016",
+    "industry": "general",
+    "clause_type": "confidentiality",
+    "standard_description": "Standard confidentiality obligations across industries in India last 2-5 years after termination. Confidential information is defined in specific categories (trade secrets, client data, business plans, financial information). All standard NDAs include four carve-outs: (1) publicly available information, (2) information already known, (3) independently developed information, and (4) information received from a third party without restriction.",
+    "typical_range": "2-5 years post-termination, defined categories, standard carve-outs",
+    "dimensions": [
+      {
+        "name": "Duration",
+        "standard_value": "2-5 years post-termination",
+        "strict_threshold": "Perpetual or > 7 years",
+        "lenient_threshold": "1-2 years",
+        "notes": "Trade secrets may warrant perpetual protection; general business info should not."
+      },
+      {
+        "name": "Scope",
+        "standard_value": "Defined categories of information",
+        "strict_threshold": "All information of any kind",
+        "lenient_threshold": "Only information specifically marked confidential",
+        "notes": "Category-based definitions are clearer and more enforceable."
+      },
+      {
+        "name": "Carve-outs",
+        "standard_value": "4 standard carve-outs present",
+        "strict_threshold": "No carve-outs",
+        "lenient_threshold": "Additional carve-out for general skills/knowledge",
+        "notes": "Missing carve-outs make the NDA unreasonably broad."
+      },
+      {
+        "name": "Return/Destruction",
+        "standard_value": "Return or destroy upon termination",
+        "strict_threshold": "Retention rights for the disclosing party only",
+        "lenient_threshold": "Mutual return obligation",
+        "notes": "Best practice: destroy/return with certification within 30 days."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "nda"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "Cross-industry NDA analysis + legal practice standards",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-general-compensation-017",
+    "industry": "general",
+    "clause_type": "compensation",
+    "standard_description": "Standard employment compensation in India has a fixed-to-variable ratio of 70:30 to 85:15 for most roles. Variable pay criteria should be clearly defined with measurable KPIs. CTC (Cost to Company) typically includes basic salary, HRA, special allowance, PF employer contribution, and gratuity. Discretionary bonuses without criteria are increasingly rare in structured organizations. Variable pay should have documented criteria shared at the start of the performance period.",
+    "typical_range": "70-85% fixed, 15-30% variable with clear KPIs",
+    "dimensions": [
+      {
+        "name": "Fixed vs Variable",
+        "standard_value": "70-85% fixed, 15-30% variable",
+        "strict_threshold": "< 60% fixed (too much at risk)",
+        "lenient_threshold": "> 90% fixed",
+        "notes": "Sales roles may have 50:50 but should have clear commission structures."
+      },
+      {
+        "name": "Variable Pay Criteria",
+        "standard_value": "Documented KPIs shared in advance",
+        "strict_threshold": "At management's sole discretion",
+        "lenient_threshold": "Guaranteed minimum variable",
+        "notes": "Variable pay criteria must be transparent and measurable."
+      },
+      {
+        "name": "Payment Frequency",
+        "standard_value": "Monthly salary by 7th of following month",
+        "strict_threshold": "Irregular or delayed payments",
+        "lenient_threshold": "Salary on last working day of month",
+        "notes": "Payment of Wages Act mandates payment within 7-10 days."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "Cross-industry compensation survey + HR analysis",
+    "source_type": "aggregated_data",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "ib-general-dispute-018",
+    "industry": "general",
+    "clause_type": "dispute_resolution",
+    "standard_description": "Standard dispute resolution across industries follows a tiered approach: negotiation first (15-30 days), then mediation (30 days), then arbitration or litigation. For employment disputes, labour courts have jurisdiction for workmen. For consumer disputes, consumer commissions cannot be ousted by contract. Arbitration is increasingly preferred over litigation for its speed and confidentiality.",
+    "typical_range": "Negotiation → Mediation → Arbitration/Litigation",
+    "dimensions": [
+      {
+        "name": "Escalation Process",
+        "standard_value": "3-tier: negotiation → mediation → arbitration",
+        "strict_threshold": "Direct arbitration with company-appointed arbitrator",
+        "lenient_threshold": "Optional mediation with court as final recourse",
+        "notes": "Tiered approach saves time and money for both parties."
+      },
+      {
+        "name": "Venue",
+        "standard_value": "Place of performance or mutual agreement",
+        "strict_threshold": "Exclusive jurisdiction of company's HQ city",
+        "lenient_threshold": "Non-exclusive jurisdiction",
+        "notes": "Non-exclusive jurisdiction is fairer for individuals."
+      },
+      {
+        "name": "Governing Law",
+        "standard_value": "Laws of India",
+        "strict_threshold": "Foreign governing law for domestic contracts",
+        "lenient_threshold": "Laws of India with state specification",
+        "notes": "Domestic contracts should always be governed by Indian law."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "consulting",
+      "service_agreement"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "Cross-industry dispute resolution practices",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-06",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Deviating from this standard introduces asymmetric risk and potential exploitation.",
+    "recommended_clause_language": "Language should strictly reflect the standard practice without hidden contingencies.",
+    "red_flag_language": "Watch for absolute terms (\"perpetual\", \"uncapped\", \"sole discretion\") that bypass the standard."
+  },
+  {
+    "id": "industry_benchmarks_1783446289614_461_0",
+    "industry": "marketing_advertising",
+    "clause_type": "non_compete",
+    "standard_description": "A clause preventing employees from joining competitors for a certain period post-employment.",
+    "typical_range": "6-12 months",
+    "risk_if_exceeded": "May be deemed unenforceable by courts, leading to potential legal disputes.",
+    "recommended_clause_language": "The employee agrees not to engage in any business activities that compete with the company for a period of 6 months post-employment.",
+    "red_flag_language": "The employee is prohibited from working in the industry for 24 months post-employment.",
+    "dimensions": [
+      {
+        "name": "Duration",
+        "standard_value": "6 months",
+        "strict_threshold": "12 months",
+        "lenient_threshold": "3 months",
+        "notes": "Duration should be reasonable and justifiable."
+      }
+    ],
+    "contract_types": [
+      "employment_contract"
+    ],
+    "seniority_levels": [
+      "mid_level",
+      "senior_level"
+    ],
+    "source": "Marketing Legal Handbook",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-10-01",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446289614_6702_1",
+    "industry": "marketing_advertising",
+    "clause_type": "notice_period",
+    "standard_description": "The period an employee must serve after resigning before leaving the company.",
+    "typical_range": "1-3 months",
+    "risk_if_exceeded": "Extended notice periods can lead to employee dissatisfaction and potential legal challenges.",
+    "recommended_clause_language": "The employee shall provide a notice period of 2 months prior to resignation.",
+    "red_flag_language": "The employee must serve a notice period of 6 months.",
+    "dimensions": [
+      {
+        "name": "Notice Duration",
+        "standard_value": "2 months",
+        "strict_threshold": "3 months",
+        "lenient_threshold": "1 month",
+        "notes": "Should align with industry standards and employee role."
+      }
+    ],
+    "contract_types": [
+      "employment_contract"
+    ],
+    "seniority_levels": [
+      "junior_level",
+      "mid_level",
+      "senior_level"
+    ],
+    "source": "HR Best Practices Report",
+    "source_type": "aggregated_data",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-09-15",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446289614_520_2",
+    "industry": "marketing_advertising",
+    "clause_type": "ip",
+    "standard_description": "Intellectual Property clause defining ownership of work created during employment.",
+    "typical_range": "Company retains all rights",
+    "risk_if_exceeded": "Ambiguity can lead to disputes over ownership of creative work.",
+    "recommended_clause_language": "All intellectual property created during employment shall be the sole property of the company.",
+    "red_flag_language": "Employee retains rights to all work created during employment.",
+    "dimensions": [
+      {
+        "name": "Ownership",
+        "standard_value": "Company",
+        "strict_threshold": "Company",
+        "lenient_threshold": "Shared",
+        "notes": "Clear definitions prevent future disputes."
+      }
+    ],
+    "contract_types": [
+      "employment_contract",
+      "freelance_contract"
+    ],
+    "seniority_levels": [
+      "all"
+    ],
+    "source": "Creative Industry IP Guidelines",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-08-20",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446289614_7372_3",
+    "industry": "marketing_advertising",
+    "clause_type": "liability",
+    "standard_description": "Defines the extent of liability for parties in case of breach or negligence.",
+    "typical_range": "Limited to direct damages",
+    "risk_if_exceeded": "Unlimited liability can lead to significant financial exposure.",
+    "recommended_clause_language": "The company's liability shall be limited to direct damages not exceeding the contract value.",
+    "red_flag_language": "The company shall be liable for all damages, including indirect and consequential.",
+    "dimensions": [
+      {
+        "name": "Liability Cap",
+        "standard_value": "Contract Value",
+        "strict_threshold": "Contract Value",
+        "lenient_threshold": "Double Contract Value",
+        "notes": "Caps should be reasonable and industry-aligned."
+      }
+    ],
+    "contract_types": [
+      "service_agreement",
+      "employment_contract"
+    ],
+    "seniority_levels": [
+      "all"
+    ],
+    "source": "Legal Risk Management Guide",
+    "source_type": "expert_analysis",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-07-10",
+    "applicable_company_size": "enterprise"
+  },
+  {
+    "id": "industry_benchmarks_1783446289614_6037_4",
+    "industry": "marketing_advertising",
+    "clause_type": "confidentiality",
+    "standard_description": "Obligation to keep company information confidential during and after employment.",
+    "typical_range": "Indefinite duration",
+    "risk_if_exceeded": "Lack of confidentiality can result in loss of competitive advantage.",
+    "recommended_clause_language": "The employee agrees to maintain confidentiality of all proprietary information indefinitely.",
+    "red_flag_language": "Confidentiality obligations end upon termination of employment.",
+    "dimensions": [
+      {
+        "name": "Duration",
+        "standard_value": "Indefinite",
+        "strict_threshold": "Indefinite",
+        "lenient_threshold": "5 years",
+        "notes": "Duration should ensure protection of sensitive information."
+      }
+    ],
+    "contract_types": [
+      "employment_contract",
+      "nda"
+    ],
+    "seniority_levels": [
+      "all"
+    ],
+    "source": "Confidentiality Standards Manual",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-06-05",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446300419_7547_0",
+    "industry": "design_creative",
+    "clause_type": "non_compete",
+    "standard_description": "A clause restricting employees from engaging in competing activities post-employment.",
+    "typical_range": "6-12 months",
+    "risk_if_exceeded": "May be deemed unenforceable if overly restrictive.",
+    "recommended_clause_language": "The employee agrees not to engage in any business that competes with the company for a period of 6 months following termination.",
+    "red_flag_language": "The employee is prohibited from working in any capacity in the design industry for 2 years.",
+    "dimensions": [
+      {
+        "name": "Duration",
+        "standard_value": "6 months",
+        "strict_threshold": "12 months",
+        "lenient_threshold": "3 months",
+        "notes": "Duration should be reasonable and justifiable."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "freelance"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "Creative Industry Association",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-10-01",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446300419_9712_1",
+    "industry": "design_creative",
+    "clause_type": "notice_period",
+    "standard_description": "The period an employee must serve after resigning before leaving the company.",
+    "typical_range": "1-3 months",
+    "risk_if_exceeded": "Extended notice periods can lead to employee dissatisfaction and potential legal challenges.",
+    "recommended_clause_language": "The employee shall provide a notice period of 2 months prior to resignation.",
+    "red_flag_language": "The employee must provide a notice period of 6 months.",
+    "dimensions": [
+      {
+        "name": "Duration",
+        "standard_value": "2 months",
+        "strict_threshold": "3 months",
+        "lenient_threshold": "1 month",
+        "notes": "Should balance company needs and employee flexibility."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "Design HR Practices Survey",
+    "source_type": "aggregated_data",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-09-15",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446300419_8299_2",
+    "industry": "design_creative",
+    "clause_type": "ip",
+    "standard_description": "Clauses related to the ownership of intellectual property created during employment.",
+    "typical_range": "Full assignment to employer",
+    "risk_if_exceeded": "Ambiguity can lead to disputes over IP ownership.",
+    "recommended_clause_language": "All intellectual property created by the employee during the term of employment shall be owned by the employer.",
+    "red_flag_language": "The employee retains all rights to intellectual property created during employment.",
+    "dimensions": [
+      {
+        "name": "Ownership",
+        "standard_value": "Employer",
+        "strict_threshold": "Employer",
+        "lenient_threshold": "Shared",
+        "notes": "Clear assignment is crucial to avoid disputes."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "freelance"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "IP Law Journal",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-08-20",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446300419_6692_3",
+    "industry": "design_creative",
+    "clause_type": "liability",
+    "standard_description": "Clauses that limit the liability of the company in case of disputes or damages.",
+    "typical_range": "Limited to direct damages",
+    "risk_if_exceeded": "Excessive limitation can be challenged as unfair.",
+    "recommended_clause_language": "The company's liability shall be limited to direct damages not exceeding the total fees paid.",
+    "red_flag_language": "The company shall have no liability for any damages whatsoever.",
+    "dimensions": [
+      {
+        "name": "Liability Cap",
+        "standard_value": "Direct damages",
+        "strict_threshold": "Direct damages",
+        "lenient_threshold": "Total fees paid",
+        "notes": "Should be reasonable and justifiable."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "freelance",
+      "vendor"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "Design Legal Standards Report",
+    "source_type": "expert_analysis",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-07-30",
+    "applicable_company_size": "enterprise"
+  },
+  {
+    "id": "industry_benchmarks_1783446313013_392_0",
+    "industry": "sales",
+    "clause_type": "non_compete",
+    "standard_description": "A clause preventing employees from joining competitors for a specified period after leaving the company.",
+    "typical_range": "6-12 months",
+    "risk_if_exceeded": "May be deemed unenforceable if too restrictive, leading to potential legal challenges.",
+    "recommended_clause_language": "The employee agrees not to engage in any business that competes with the company for a period of 6 months post-termination.",
+    "red_flag_language": "The employee is prohibited from working in any capacity in the industry for 24 months post-termination.",
+    "dimensions": [
+      {
+        "name": "duration",
+        "standard_value": "6 months",
+        "strict_threshold": "12 months",
+        "lenient_threshold": "3 months",
+        "notes": "Duration should be reasonable and justifiable based on role."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "contractor"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "National Sales Association",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-09-15",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446313013_9405_1",
+    "industry": "sales",
+    "clause_type": "notice_period",
+    "standard_description": "The period an employee must serve after resigning before leaving the company.",
+    "typical_range": "1-3 months",
+    "risk_if_exceeded": "Extended notice periods can lead to employee dissatisfaction and potential legal disputes.",
+    "recommended_clause_language": "The employee is required to serve a notice period of 2 months upon resignation.",
+    "red_flag_language": "The employee must serve a notice period of 6 months upon resignation.",
+    "dimensions": [
+      {
+        "name": "duration",
+        "standard_value": "2 months",
+        "strict_threshold": "3 months",
+        "lenient_threshold": "1 month",
+        "notes": "Should align with industry standards and role requirements."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "Sales Industry Report 2023",
+    "source_type": "aggregated_data",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-08-20",
+    "applicable_company_size": "enterprise"
+  },
+  {
+    "id": "industry_benchmarks_1783446313013_3487_2",
+    "industry": "sales",
+    "clause_type": "ip",
+    "standard_description": "Intellectual Property clause ensuring company ownership of work-related creations.",
+    "typical_range": "Full assignment to company",
+    "risk_if_exceeded": "Failure to secure IP rights can lead to loss of proprietary information and competitive advantage.",
+    "recommended_clause_language": "All intellectual property created during employment shall be owned by the company.",
+    "red_flag_language": "The employee retains rights to all intellectual property created during employment.",
+    "dimensions": [
+      {
+        "name": "ownership",
+        "standard_value": "company",
+        "strict_threshold": "full assignment",
+        "lenient_threshold": "joint ownership",
+        "notes": "Clear assignment of rights is crucial to avoid disputes."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "contractor"
+    ],
+    "seniority_levels": [
+      "all"
+    ],
+    "source": "Legal Expert Analysis",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-07-10",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446313013_8014_3",
+    "industry": "sales",
+    "clause_type": "liability",
+    "standard_description": "Defines the extent of liability an employee holds for actions taken during employment.",
+    "typical_range": "Limited to gross negligence or willful misconduct",
+    "risk_if_exceeded": "Overly broad liability can deter talent and lead to legal challenges.",
+    "recommended_clause_language": "The employee shall be liable only for losses arising from gross negligence or willful misconduct.",
+    "red_flag_language": "The employee is liable for any and all losses incurred by the company.",
+    "dimensions": [
+      {
+        "name": "scope",
+        "standard_value": "limited",
+        "strict_threshold": "gross negligence",
+        "lenient_threshold": "willful misconduct",
+        "notes": "Liability should be fair and not overly burdensome."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "Corporate Legal Guidelines",
+    "source_type": "industry_body",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-06-05",
+    "applicable_company_size": "mnc"
+  },
+  {
+    "id": "industry_benchmarks_1783446327126_101_0",
+    "industry": "hr",
+    "clause_type": "non_compete",
+    "standard_description": "A clause restricting employees from joining competitors for a specified period post-employment.",
+    "typical_range": "6-12 months",
+    "risk_if_exceeded": "May be deemed unenforceable due to excessive restriction on employee mobility.",
+    "recommended_clause_language": "The Employee agrees not to engage in any business similar to the Company’s business for a period of 6 months within a 50 km radius.",
+    "red_flag_language": "The Employee agrees not to work in any capacity in the industry for 24 months post-termination.",
+    "dimensions": [
+      {
+        "name": "Duration",
+        "standard_value": "6 months",
+        "strict_threshold": "12 months",
+        "lenient_threshold": "3 months",
+        "notes": "Duration should be reasonable and justifiable."
+      },
+      {
+        "name": "Geographic Scope",
+        "standard_value": "50 km",
+        "strict_threshold": "100 km",
+        "lenient_threshold": "10 km",
+        "notes": "Scope should be limited to areas where the company operates."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "consulting"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "HR Industry Guidelines 2023",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-09-15",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446327126_8558_1",
+    "industry": "hr",
+    "clause_type": "notice_period",
+    "standard_description": "A clause specifying the duration of notice required for termination of employment.",
+    "typical_range": "1-3 months",
+    "risk_if_exceeded": "Long notice periods can lead to employee dissatisfaction and potential legal challenges.",
+    "recommended_clause_language": "The Employee shall provide a notice period of 2 months prior to resignation.",
+    "red_flag_language": "The Employee must provide a notice period of 6 months.",
+    "dimensions": [
+      {
+        "name": "Notice Duration",
+        "standard_value": "2 months",
+        "strict_threshold": "3 months",
+        "lenient_threshold": "1 month",
+        "notes": "Should balance company needs and employee flexibility."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "HR Best Practices Report 2023",
+    "source_type": "aggregated_data",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-08-10",
+    "applicable_company_size": "enterprise"
+  },
+  {
+    "id": "industry_benchmarks_1783446327126_36_2",
+    "industry": "hr",
+    "clause_type": "ip",
+    "standard_description": "A clause addressing the ownership of intellectual property created during employment.",
+    "typical_range": "Full assignment to employer",
+    "risk_if_exceeded": "Ambiguity can lead to disputes over IP ownership.",
+    "recommended_clause_language": "All intellectual property created by the Employee during the term of employment shall be the sole property of the Company.",
+    "red_flag_language": "The Employee retains rights to all intellectual property created during employment.",
+    "dimensions": [
+      {
+        "name": "Ownership",
+        "standard_value": "Company",
+        "strict_threshold": "Full assignment",
+        "lenient_threshold": "Joint ownership",
+        "notes": "Clear assignment to avoid future disputes."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "consulting"
+    ],
+    "seniority_levels": [
+      "all"
+    ],
+    "source": "Legal Precedents in Employment Law",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-07-20",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446327126_7428_3",
+    "industry": "hr",
+    "clause_type": "liability",
+    "standard_description": "A clause limiting the liability of the employer for certain actions or omissions.",
+    "typical_range": "Limited to direct damages",
+    "risk_if_exceeded": "Excessive limitation may be unenforceable and lead to reputational damage.",
+    "recommended_clause_language": "The Company’s liability shall be limited to direct damages up to the amount of the Employee’s annual salary.",
+    "red_flag_language": "The Company shall not be liable for any damages, direct or indirect.",
+    "dimensions": [
+      {
+        "name": "Liability Cap",
+        "standard_value": "Annual salary",
+        "strict_threshold": "Two times annual salary",
+        "lenient_threshold": "Six months' salary",
+        "notes": "Should be reasonable and proportionate to potential risks."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "Corporate Liability Standards 2023",
+    "source_type": "industry_body",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-10-01",
+    "applicable_company_size": "mnc"
+  },
+  {
+    "id": "industry_benchmarks_1783446344485_4404_0",
+    "industry": "bpo",
+    "clause_type": "non_compete",
+    "standard_description": "Non-compete clauses restrict employees from joining competitors for a specified period after leaving the company.",
+    "typical_range": "6-12 months",
+    "risk_if_exceeded": "Potential legal challenges and difficulty in enforcement.",
+    "recommended_clause_language": "The employee agrees not to engage in any business or employment with a competitor for a period of 6 months post-termination.",
+    "red_flag_language": "The employee is prohibited from working in any capacity in the industry for 24 months.",
+    "dimensions": [
+      {
+        "name": "Duration",
+        "standard_value": "6 months",
+        "strict_threshold": "12 months",
+        "lenient_threshold": "3 months",
+        "notes": "Longer durations may be unenforceable."
+      }
+    ],
+    "contract_types": [
+      "employment_contract"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "BPO Industry Association",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-09-15",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446344485_6126_1",
+    "industry": "bpo",
+    "clause_type": "notice_period",
+    "standard_description": "Notice period clauses define the time frame an employee must provide before leaving the company.",
+    "typical_range": "30-90 days",
+    "risk_if_exceeded": "Operational disruptions and potential legal disputes.",
+    "recommended_clause_language": "The employee shall provide a notice period of 60 days prior to resignation.",
+    "red_flag_language": "The employee must provide a notice period of 180 days.",
+    "dimensions": [
+      {
+        "name": "Notice Duration",
+        "standard_value": "60 days",
+        "strict_threshold": "90 days",
+        "lenient_threshold": "30 days",
+        "notes": "Excessive notice periods may be challenged."
+      }
+    ],
+    "contract_types": [
+      "employment_contract"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "HR Consultancy Report",
+    "source_type": "expert_analysis",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-08-20",
+    "applicable_company_size": "enterprise"
+  },
+  {
+    "id": "industry_benchmarks_1783446344485_8800_2",
+    "industry": "bpo",
+    "clause_type": "ip",
+    "standard_description": "Intellectual Property clauses ensure that all work created by employees is owned by the company.",
+    "typical_range": "Full assignment of IP rights",
+    "risk_if_exceeded": "Loss of proprietary information and competitive advantage.",
+    "recommended_clause_language": "The employee assigns all rights, title, and interest in any work created during employment to the company.",
+    "red_flag_language": "The employee retains rights to any work created during employment.",
+    "dimensions": [
+      {
+        "name": "IP Ownership",
+        "standard_value": "Full assignment",
+        "strict_threshold": "Partial assignment",
+        "lenient_threshold": "Full retention",
+        "notes": "Ensure clear assignment to avoid disputes."
+      }
+    ],
+    "contract_types": [
+      "employment_contract",
+      "consulting_agreement"
+    ],
+    "seniority_levels": [
+      "all"
+    ],
+    "source": "Legal Advisory Group",
+    "source_type": "aggregated_data",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-07-10",
+    "applicable_company_size": "mnc"
+  },
+  {
+    "id": "industry_benchmarks_1783446344485_2459_3",
+    "industry": "bpo",
+    "clause_type": "liability",
+    "standard_description": "Liability clauses limit the company's liability for damages arising from the employee's actions.",
+    "typical_range": "Limited to direct damages",
+    "risk_if_exceeded": "Increased financial exposure and potential litigation.",
+    "recommended_clause_language": "The company's liability is limited to direct damages and excludes consequential damages.",
+    "red_flag_language": "The company is liable for all damages, including indirect and consequential damages.",
+    "dimensions": [
+      {
+        "name": "Liability Limitation",
+        "standard_value": "Direct damages only",
+        "strict_threshold": "Includes indirect damages",
+        "lenient_threshold": "Excludes all damages",
+        "notes": "Clearly define the scope of liability."
+      }
+    ],
+    "contract_types": [
+      "employment_contract",
+      "service_agreement"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "Industry Legal Framework",
+    "source_type": "industry_body",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-06-05",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446344485_5294_4",
+    "industry": "bpo",
+    "clause_type": "confidentiality",
+    "standard_description": "Confidentiality clauses protect sensitive company information from being disclosed by employees.",
+    "typical_range": "Indefinite duration",
+    "risk_if_exceeded": "Loss of sensitive information and competitive disadvantage.",
+    "recommended_clause_language": "The employee agrees to maintain the confidentiality of all proprietary information indefinitely.",
+    "red_flag_language": "The confidentiality obligation ends upon termination of employment.",
+    "dimensions": [
+      {
+        "name": "Confidentiality Duration",
+        "standard_value": "Indefinite",
+        "strict_threshold": "5 years",
+        "lenient_threshold": "1 year",
+        "notes": "Indefinite duration is standard to ensure ongoing protection."
+      }
+    ],
+    "contract_types": [
+      "employment_contract",
+      "nda"
+    ],
+    "seniority_levels": [
+      "all"
+    ],
+    "source": "Confidentiality Best Practices Report",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-05-15",
+    "applicable_company_size": "startup"
+  },
+  {
+    "id": "industry_benchmarks_1783446359079_874_0",
+    "industry": "startup",
+    "clause_type": "non_compete",
+    "standard_description": "Non-compete clauses in early-stage startups are designed to prevent employees from joining competitors or starting a competing business for a certain period after leaving the company.",
+    "typical_range": "6-12 months",
+    "risk_if_exceeded": "Exceeding 12 months may be deemed unreasonable and unenforceable, leading to potential legal disputes.",
+    "recommended_clause_language": "The Employee agrees not to engage in any business activities that directly compete with the Company for a period of 12 months following the termination of employment.",
+    "red_flag_language": "The Employee shall not engage in any business activities in any capacity for a period of 24 months following termination.",
+    "dimensions": [
+      {
+        "name": "Duration",
+        "standard_value": "12 months",
+        "strict_threshold": "18 months",
+        "lenient_threshold": "6 months",
+        "notes": "Duration should balance enforceability with business protection."
+      }
+    ],
+    "contract_types": [
+      "employment_contract"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "Startup Legal Guide 2023",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-09-15",
+    "applicable_company_size": "startup"
+  },
+  {
+    "id": "industry_benchmarks_1783446359079_9342_1",
+    "industry": "startup",
+    "clause_type": "notice_period",
+    "standard_description": "Notice periods in early-stage startups are typically short to allow flexibility and quick adaptation to changing business needs.",
+    "typical_range": "1-3 months",
+    "risk_if_exceeded": "Long notice periods can hinder agility and may lead to increased costs if the employee is not productive during the notice period.",
+    "recommended_clause_language": "The Employee shall provide a notice period of 2 months prior to resignation.",
+    "red_flag_language": "The Employee shall provide a notice period of 6 months prior to resignation.",
+    "dimensions": [
+      {
+        "name": "Duration",
+        "standard_value": "2 months",
+        "strict_threshold": "3 months",
+        "lenient_threshold": "1 month",
+        "notes": "Shorter notice periods are preferred for flexibility."
+      }
+    ],
+    "contract_types": [
+      "employment_contract"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "Startup Employment Practices Survey 2023",
+    "source_type": "aggregated_data",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-08-20",
+    "applicable_company_size": "startup"
+  },
+  {
+    "id": "industry_benchmarks_1783446359079_2786_2",
+    "industry": "startup",
+    "clause_type": "ip",
+    "standard_description": "Intellectual Property (IP) clauses ensure that any IP created by employees during their tenure belongs to the company.",
+    "typical_range": "Full assignment of IP rights",
+    "risk_if_exceeded": "Failure to secure IP rights can lead to disputes over ownership and potential loss of competitive advantage.",
+    "recommended_clause_language": "The Employee agrees to assign all rights, title, and interest in any intellectual property created during employment to the Company.",
+    "red_flag_language": "The Employee retains rights to any intellectual property created during employment.",
+    "dimensions": [
+      {
+        "name": "Scope",
+        "standard_value": "Full assignment",
+        "strict_threshold": "Partial assignment",
+        "lenient_threshold": "Full assignment",
+        "notes": "Ensure comprehensive coverage of IP rights."
+      }
+    ],
+    "contract_types": [
+      "employment_contract",
+      "consulting_agreement"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "Intellectual Property Rights in Startups 2023",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-07-10",
+    "applicable_company_size": "startup"
+  },
+  {
+    "id": "industry_benchmarks_1783446359079_3087_3",
+    "industry": "startup",
+    "clause_type": "liability",
+    "standard_description": "Liability clauses in early-stage startups limit the company's liability for damages arising from the use of its products or services.",
+    "typical_range": "Limited to direct damages",
+    "risk_if_exceeded": "Broad liability can expose the company to significant financial risk and potential bankruptcy.",
+    "recommended_clause_language": "The Company's liability is limited to direct damages and shall not exceed the amount paid by the customer in the last 12 months.",
+    "red_flag_language": "The Company shall be liable for all damages, including indirect and consequential damages.",
+    "dimensions": [
+      {
+        "name": "Scope of Liability",
+        "standard_value": "Direct damages only",
+        "strict_threshold": "Includes indirect damages",
+        "lenient_threshold": "Direct damages only",
+        "notes": "Limit liability to maintain financial stability."
+      }
+    ],
+    "contract_types": [
+      "service_agreement",
+      "product_terms"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "Startup Risk Management Report 2023",
+    "source_type": "expert_analysis",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-06-25",
+    "applicable_company_size": "startup"
+  },
+  {
+    "id": "industry_benchmarks_1783446381037_5917_0",
+    "industry": "consulting",
+    "clause_type": "non_compete",
+    "standard_description": "Non-compete clauses prevent employees from joining competitors for a specified period after leaving the company.",
+    "typical_range": "6-12 months",
+    "risk_if_exceeded": "May be deemed unenforceable due to being overly restrictive.",
+    "recommended_clause_language": "The employee agrees not to engage in any business that competes with the company for a period of 6 months post-termination.",
+    "red_flag_language": "The employee is prohibited from working in the consulting industry for 2 years post-termination.",
+    "dimensions": [
+      {
+        "name": "Duration",
+        "standard_value": "6 months",
+        "strict_threshold": "12 months",
+        "lenient_threshold": "3 months",
+        "notes": "Shorter durations are more enforceable."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "contractor"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "Consulting Industry Association",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-09-15",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446381037_9859_1",
+    "industry": "consulting",
+    "clause_type": "notice_period",
+    "standard_description": "Notice period clauses define the time an employee must provide before leaving the company.",
+    "typical_range": "1-3 months",
+    "risk_if_exceeded": "Long notice periods can lead to employee dissatisfaction and potential legal challenges.",
+    "recommended_clause_language": "The employee shall provide a notice period of 2 months prior to resignation.",
+    "red_flag_language": "The employee must provide a notice period of 6 months.",
+    "dimensions": [
+      {
+        "name": "Notice Duration",
+        "standard_value": "2 months",
+        "strict_threshold": "3 months",
+        "lenient_threshold": "1 month",
+        "notes": "Balance between operational needs and employee flexibility."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "HR Consulting Reports",
+    "source_type": "aggregated_data",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-08-20",
+    "applicable_company_size": "enterprise"
+  },
+  {
+    "id": "industry_benchmarks_1783446381037_4063_2",
+    "industry": "consulting",
+    "clause_type": "ip",
+    "standard_description": "Intellectual Property clauses ensure that any IP created by employees during their tenure belongs to the company.",
+    "typical_range": "Full assignment of IP rights",
+    "risk_if_exceeded": "Lack of clarity can lead to disputes over ownership.",
+    "recommended_clause_language": "All intellectual property created during the term of employment shall be the sole property of the company.",
+    "red_flag_language": "The employee retains rights to all intellectual property created.",
+    "dimensions": [
+      {
+        "name": "IP Assignment",
+        "standard_value": "Full assignment",
+        "strict_threshold": "Partial assignment",
+        "lenient_threshold": "Full assignment",
+        "notes": "Clear assignment prevents future disputes."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "contractor"
+    ],
+    "seniority_levels": [
+      "all"
+    ],
+    "source": "Legal Advisory Panel",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-07-10",
+    "applicable_company_size": "mnc"
+  },
+  {
+    "id": "industry_benchmarks_1783446381037_7952_3",
+    "industry": "consulting",
+    "clause_type": "liability",
+    "standard_description": "Liability clauses limit the company's responsibility for damages arising from the employee's actions.",
+    "typical_range": "Limited to direct damages",
+    "risk_if_exceeded": "Unlimited liability can expose the company to significant financial risk.",
+    "recommended_clause_language": "The company's liability is limited to direct damages and shall not exceed the total fees paid under this agreement.",
+    "red_flag_language": "The company is liable for all damages, including indirect and consequential damages.",
+    "dimensions": [
+      {
+        "name": "Liability Cap",
+        "standard_value": "Direct damages only",
+        "strict_threshold": "Direct and indirect damages",
+        "lenient_threshold": "Direct damages only",
+        "notes": "Limiting liability protects the company's financial interests."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "contractor"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "Consulting Legal Framework",
+    "source_type": "industry_body",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-06-25",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446381037_9653_4",
+    "industry": "consulting",
+    "clause_type": "confidentiality",
+    "standard_description": "Confidentiality clauses protect sensitive company information from being disclosed by employees.",
+    "typical_range": "Indefinite duration",
+    "risk_if_exceeded": "Overly broad clauses may be unenforceable.",
+    "recommended_clause_language": "The employee agrees to keep all company information confidential indefinitely.",
+    "red_flag_language": "The employee may disclose company information after 1 year.",
+    "dimensions": [
+      {
+        "name": "Confidentiality Duration",
+        "standard_value": "Indefinite",
+        "strict_threshold": "5 years",
+        "lenient_threshold": "Indefinite",
+        "notes": "Indefinite duration ensures long-term protection."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "contractor"
+    ],
+    "seniority_levels": [
+      "all"
+    ],
+    "source": "Confidentiality Standards Board",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-05-30",
+    "applicable_company_size": "startup"
+  },
+  {
+    "id": "industry_benchmarks_1783446390722_5310_0",
+    "industry": "retail",
+    "clause_type": "non_compete",
+    "standard_description": "Non-compete clauses prevent employees from joining competitors or starting a competing business for a specified period after leaving the company.",
+    "typical_range": "6-12 months",
+    "risk_if_exceeded": "Exceeding 12 months may be considered unreasonable and unenforceable in court, leading to potential legal disputes.",
+    "recommended_clause_language": "The Employee agrees not to engage in any business activities that compete with the Company for a period of 12 months following the termination of employment.",
+    "red_flag_language": "The Employee shall not work in any capacity in the retail industry for 24 months after leaving the Company.",
+    "dimensions": [
+      {
+        "name": "duration",
+        "standard_value": "12 months",
+        "strict_threshold": "18 months",
+        "lenient_threshold": "6 months",
+        "notes": "Duration should be reasonable to ensure enforceability."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "contractor"
+    ],
+    "seniority_levels": [
+      "mid",
+      "senior"
+    ],
+    "source": "Retail Industry Association",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-09-15",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446390722_3166_1",
+    "industry": "retail",
+    "clause_type": "notice_period",
+    "standard_description": "Notice period clauses specify the amount of time an employee must provide notice before leaving the company.",
+    "typical_range": "1-3 months",
+    "risk_if_exceeded": "Long notice periods can lead to employee dissatisfaction and may be challenged in court.",
+    "recommended_clause_language": "The Employee is required to provide a notice period of 2 months prior to resignation.",
+    "red_flag_language": "The Employee must provide a notice period of 6 months before leaving the Company.",
+    "dimensions": [
+      {
+        "name": "notice_duration",
+        "standard_value": "2 months",
+        "strict_threshold": "3 months",
+        "lenient_threshold": "1 month",
+        "notes": "Ensure notice period aligns with industry standards to avoid disputes."
+      }
+    ],
+    "contract_types": [
+      "employment"
+    ],
+    "seniority_levels": [
+      "junior",
+      "mid",
+      "senior"
+    ],
+    "source": "HR Best Practices Report",
+    "source_type": "expert_analysis",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-08-20",
+    "applicable_company_size": "all"
+  },
+  {
+    "id": "industry_benchmarks_1783446390722_9247_2",
+    "industry": "retail",
+    "clause_type": "ip",
+    "standard_description": "Intellectual Property clauses define the ownership and usage rights of creations and inventions developed during employment.",
+    "typical_range": "Company retains all rights",
+    "risk_if_exceeded": "Failure to clearly define IP rights can lead to disputes over ownership and usage.",
+    "recommended_clause_language": "All intellectual property created by the Employee during the term of employment shall be the sole property of the Company.",
+    "red_flag_language": "The Employee retains rights to all intellectual property created during employment.",
+    "dimensions": [
+      {
+        "name": "ownership",
+        "standard_value": "Company",
+        "strict_threshold": "Company",
+        "lenient_threshold": "Shared",
+        "notes": "Ensure clarity in IP ownership to prevent future disputes."
+      }
+    ],
+    "contract_types": [
+      "employment",
+      "contractor"
+    ],
+    "seniority_levels": [
+      "all"
+    ],
+    "source": "Legal Advisory Group",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "India",
+    "last_updated": "2023-07-10",
+    "applicable_company_size": "enterprise"
+  },
+  {
+    "id": "industry_benchmarks_1783446390722_7707_3",
+    "industry": "retail",
+    "clause_type": "liability",
+    "standard_description": "Liability clauses limit the extent of responsibility one party has in case of damages or losses.",
+    "typical_range": "Limited to direct damages",
+    "risk_if_exceeded": "Broad liability can expose the company to significant financial risk.",
+    "recommended_clause_language": "The Company's liability is limited to direct damages and shall not exceed the total fees paid under this agreement.",
+    "red_flag_language": "The Company is liable for all types of damages, including indirect and consequential damages.",
+    "dimensions": [
+      {
+        "name": "liability_limit",
+        "standard_value": "Direct damages",
+        "strict_threshold": "Direct damages",
+        "lenient_threshold": "Direct and indirect damages",
+        "notes": "Limiting liability to direct damages is standard practice."
+      }
+    ],
+    "contract_types": [
+      "service",
+      "vendor"
+    ],
+    "seniority_levels": [
+      "all"
+    ],
+    "source": "Retail Contracting Guidelines",
+    "source_type": "aggregated_data",
+    "confidence": "medium",
+    "region": "India",
+    "last_updated": "2023-06-05",
+    "applicable_company_size": "mnc"
+  },
+  {
+    "id": "ib-ecom-refund-001",
+    "industry": "e_commerce",
+    "clause_type": "refund_policy",
+    "standard_description": "Standard e-commerce refund policies in India provide 7-15 day return windows for most products, with full refund to the original payment method within 5-7 business days of return receipt. Electronics typically have shorter windows (7 days) while fashion has longer (15-30 days). Perishable and personalized items are commonly excluded. The Consumer Protection (E-Commerce) Rules 2020 require clear disclosure of return/refund policies before purchase.",
+    "typical_range": "7-15 day return window, refund within 5-7 business days",
+    "dimensions": [
+      {
+        "name": "Return Window",
+        "standard_value": "7-15 days from delivery",
+        "strict_threshold": "No returns or < 3 days",
+        "lenient_threshold": "30+ days",
+        "notes": "Fashion/apparel typically has longer windows than electronics."
+      },
+      {
+        "name": "Refund Method",
+        "standard_value": "Original payment method",
+        "strict_threshold": "Store credit only",
+        "lenient_threshold": "Instant refund on return pickup",
+        "notes": "Consumer has the right to refund in original payment mode."
+      },
+      {
+        "name": "Refund Timeline",
+        "standard_value": "5-7 business days after return",
+        "strict_threshold": "> 15 days",
+        "lenient_threshold": "< 3 days",
+        "notes": "Delays beyond 15 days are considered deficiency in service."
+      },
+      {
+        "name": "Return Shipping",
+        "standard_value": "Free for seller-fault returns",
+        "strict_threshold": "Buyer pays all return shipping",
+        "lenient_threshold": "Free returns for all reasons",
+        "notes": "Defective/wrong item returns should always be seller-paid."
+      }
+    ],
+    "contract_types": [
+      "service_agreement"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "E-Commerce Rules 2020 + marketplace policy analysis",
+    "source_type": "aggregated_data",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "No-refund or store-credit-only policies violate consumer protection rights and can be challenged at Consumer Forum.",
+    "recommended_clause_language": "Returns accepted within 15 days of delivery. Full refund to original payment method within 7 business days of return receipt.",
+    "red_flag_language": "Watch for 'all sales are final', 'exchange only', 'store credit only', or return windows shorter than 3 days."
+  },
+  {
+    "id": "ib-ecom-seller-liability-002",
+    "industry": "e_commerce",
+    "clause_type": "liability",
+    "standard_description": "E-commerce platforms in India have obligations under the Consumer Protection (E-Commerce) Rules 2020 to verify seller identity, ensure product authenticity, and provide grievance redressal. While platforms operating as 'marketplaces' have reduced direct product liability compared to 'inventory' models, they must still facilitate returns, provide buyer protection, and appoint a Grievance Officer accessible within 48 hours.",
+    "typical_range": "Shared liability between platform and seller, with buyer protection programs",
+    "dimensions": [
+      {
+        "name": "Seller Verification",
+        "standard_value": "Platform verifies seller identity and GST",
+        "strict_threshold": "No verification",
+        "lenient_threshold": "Full background checks and product testing",
+        "notes": "E-Commerce Rules mandate seller identity verification."
+      },
+      {
+        "name": "Buyer Protection",
+        "standard_value": "Platform-backed refund guarantee",
+        "strict_threshold": "No buyer protection",
+        "lenient_threshold": "A-to-Z guarantee with instant refund",
+        "notes": "Major platforms offer buyer protection programs."
+      },
+      {
+        "name": "Grievance Redressal",
+        "standard_value": "Response within 48 hours",
+        "strict_threshold": "No grievance mechanism",
+        "lenient_threshold": "24-hour resolution",
+        "notes": "E-Commerce Rules mandate Grievance Officer appointment."
+      },
+      {
+        "name": "Counterfeit Protection",
+        "standard_value": "Brand registry and takedown process",
+        "strict_threshold": "No anti-counterfeit measures",
+        "lenient_threshold": "Proactive product testing",
+        "notes": "Platform should have counterfeit reporting mechanism."
+      }
+    ],
+    "contract_types": [
+      "service_agreement"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "Consumer Protection (E-Commerce) Rules 2020 analysis",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Platforms that disclaim all seller liability may face Consumer Forum complaints and CCPA action.",
+    "recommended_clause_language": "Platform shall facilitate returns and refunds for defective products and provide a Grievance Officer accessible within 48 hours.",
+    "red_flag_language": "Watch for 'we are merely a marketplace', 'no liability for seller products', or absence of buyer protection program."
+  },
+  {
+    "id": "ib-ecom-data-privacy-003",
+    "industry": "e_commerce",
+    "clause_type": "data_privacy",
+    "standard_description": "E-commerce platforms collect extensive personal data (purchase history, browsing behavior, payment info, addresses). Standard practice requires explicit consent for data collection, clear disclosure of data usage, data minimization, and secure storage compliant with IT Act Section 43A and DPDP Act 2023. Sharing personal data with third-party advertisers should require separate consent.",
+    "typical_range": "Consent-based collection, purpose-limited use, 'reasonable security' standards",
+    "dimensions": [
+      {
+        "name": "Consent Mechanism",
+        "standard_value": "Opt-in consent with granular choices",
+        "strict_threshold": "Pre-ticked boxes or no consent",
+        "lenient_threshold": "Consent dashboard with per-category controls",
+        "notes": "DPDP Act requires 'clear and affirmative' consent."
+      },
+      {
+        "name": "Data Sharing",
+        "standard_value": "Disclosed third parties only, with consent",
+        "strict_threshold": "Unrestricted sharing with affiliates",
+        "lenient_threshold": "No third-party sharing",
+        "notes": "Third-party data sharing requires separate explicit consent."
+      },
+      {
+        "name": "Data Deletion",
+        "standard_value": "Right to delete within 30 days",
+        "strict_threshold": "No deletion option",
+        "lenient_threshold": "Instant account deletion with data purge",
+        "notes": "DPDP Act grants right to erasure."
+      },
+      {
+        "name": "Breach Notification",
+        "standard_value": "Within 72 hours",
+        "strict_threshold": "No notification obligation",
+        "lenient_threshold": "Within 24 hours",
+        "notes": "DPDP Act mandates breach notification to DPB."
+      }
+    ],
+    "contract_types": [
+      "service_agreement",
+      "subscription"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "IT Act 2000 + DPDP Act 2023 analysis",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Non-compliance with DPDP Act can result in penalties up to ₹250 crore.",
+    "recommended_clause_language": "Data collected with explicit opt-in consent. Used only for stated purposes. Deletion available within 30 days of request.",
+    "red_flag_language": "Watch for 'by using the service you consent to all data collection', blanket data sharing with 'affiliates and partners', or no deletion option."
+  },
+  {
+    "id": "ib-ecom-dispute-004",
+    "industry": "e_commerce",
+    "clause_type": "dispute_resolution",
+    "standard_description": "E-commerce dispute resolution in India follows a tiered system: (1) platform internal resolution (Grievance Officer), (2) National Consumer Helpline (1800-11-4000), (3) District/State/National Consumer Commission. Platforms cannot contractually prevent consumers from approaching Consumer Forums. Online filing via edaakhil.nic.in is available. Most platforms have internal resolution timelines of 7-15 days.",
+    "typical_range": "Internal resolution (7-15 days) → Consumer Forum (statutory right)",
+    "dimensions": [
+      {
+        "name": "Internal Resolution Timeline",
+        "standard_value": "7-15 business days",
+        "strict_threshold": "> 30 days or no internal mechanism",
+        "lenient_threshold": "< 48 hours",
+        "notes": "Most major platforms resolve within 7 days."
+      },
+      {
+        "name": "Escalation Path",
+        "standard_value": "Grievance Officer → Consumer Forum",
+        "strict_threshold": "Mandatory arbitration only",
+        "lenient_threshold": "Multiple escalation channels",
+        "notes": "Consumer Forum access is a statutory right that cannot be waived."
+      },
+      {
+        "name": "Burden of Proof",
+        "standard_value": "Platform/seller for delivery issues",
+        "strict_threshold": "Buyer must prove all claims",
+        "lenient_threshold": "Auto-refund below threshold amount",
+        "notes": "Delivery proof is the seller/platform's responsibility."
+      }
+    ],
+    "contract_types": [
+      "service_agreement"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "Consumer Protection Act 2019 + E-Commerce Rules 2020",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Arbitration clauses that attempt to oust Consumer Forum jurisdiction are void and unenforceable.",
+    "recommended_clause_language": "Disputes shall first be raised with the Grievance Officer. Consumer's right to approach Consumer Forum remains unaffected.",
+    "red_flag_language": "Watch for 'mandatory binding arbitration', 'exclusive jurisdiction of courts in [distant city]', or 'waiver of Consumer Forum rights'."
+  },
+  {
+    "id": "ib-ecom-delivery-005",
+    "industry": "e_commerce",
+    "clause_type": "delivery_terms",
+    "standard_description": "Standard e-commerce delivery in India ranges from 2-7 business days for domestic orders in metro cities, extending to 7-14 days for tier-2/3 cities and remote areas. Express delivery (next-day or same-day) is available in major metros. Delivery date commitments should be clearly stated at checkout. Delayed delivery beyond the promised date entitles the buyer to cancel and receive a full refund.",
+    "typical_range": "2-7 business days metro, 7-14 days non-metro",
+    "dimensions": [
+      {
+        "name": "Metro Delivery",
+        "standard_value": "2-5 business days",
+        "strict_threshold": "> 10 days with no tracking",
+        "lenient_threshold": "Same-day or next-day",
+        "notes": "Major metros have 2-3 day standard delivery."
+      },
+      {
+        "name": "Delivery Tracking",
+        "standard_value": "Real-time tracking with updates",
+        "strict_threshold": "No tracking available",
+        "lenient_threshold": "SMS/WhatsApp updates at each stage",
+        "notes": "Tracking is expected for all online purchases."
+      },
+      {
+        "name": "Delayed Delivery Remedy",
+        "standard_value": "Right to cancel with full refund",
+        "strict_threshold": "No remedy for delays",
+        "lenient_threshold": "Automatic discount + right to cancel",
+        "notes": "Consumer can cancel if delivery exceeds promised date."
+      },
+      {
+        "name": "Delivery Charges",
+        "standard_value": "Free above order threshold (₹499-999)",
+        "strict_threshold": "Hidden delivery charges at checkout",
+        "lenient_threshold": "Free delivery for all orders",
+        "notes": "Delivery charges must be disclosed before payment."
+      }
+    ],
+    "contract_types": [
+      "service_agreement"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "E-commerce industry practices analysis",
+    "source_type": "aggregated_data",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Repeated delivery failures or hidden charges can be reported to Consumer Forum and CCPA.",
+    "recommended_clause_language": "Estimated delivery within 5-7 business days. Full refund available if delivery exceeds promised date by more than 3 days.",
+    "red_flag_language": "Watch for 'delivery dates are estimates only', 'no refund for delayed delivery', or hidden charges added at final checkout."
+  },
+  {
+    "id": "ib-bank-loan-terms-001",
+    "industry": "banking_fintech",
+    "clause_type": "loan_terms",
+    "standard_description": "Standard personal and home loan terms in India include fixed or floating interest rates linked to an external benchmark (repo rate), with a clearly stated spread. Loan tenure ranges from 1-30 years depending on loan type. RBI mandates transparency in total cost disclosure (processing fee, GST, insurance), and all floating-rate loans since October 2019 must be linked to an external benchmark (EBLR/repo rate).",
+    "typical_range": "Home: 8-10% floating, 15-30 years; Personal: 10-18%, 1-5 years",
+    "dimensions": [
+      {
+        "name": "Interest Rate Type",
+        "standard_value": "Floating linked to repo rate (EBLR)",
+        "strict_threshold": "Arbitrary internal benchmark (BPLR)",
+        "lenient_threshold": "Fixed rate with clear terms",
+        "notes": "All new floating loans must be EBLR-linked (RBI mandate)."
+      },
+      {
+        "name": "Processing Fee",
+        "standard_value": "0.5-1% of loan amount",
+        "strict_threshold": "> 2% or undisclosed fees",
+        "lenient_threshold": "Zero processing fee",
+        "notes": "Must be disclosed upfront before disbursement."
+      },
+      {
+        "name": "Total Cost Disclosure",
+        "standard_value": "APR (Annual Percentage Rate) disclosed",
+        "strict_threshold": "Only flat rate advertised",
+        "lenient_threshold": "Full amortization schedule provided",
+        "notes": "Flat rate advertising is misleading — always check reducing balance rate."
+      },
+      {
+        "name": "Loan Agreement Transparency",
+        "standard_value": "Full terms provided before signing",
+        "strict_threshold": "Terms given after disbursement only",
+        "lenient_threshold": "Draft agreement for review + cooling-off period",
+        "notes": "Borrower must receive all terms before commitment."
+      }
+    ],
+    "contract_types": [
+      "loan_agreement"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "RBI Fair Practices Code + lending market analysis",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Non-disclosure of terms or misleading rate advertising violates RBI Fair Practices Code and can be reported to Banking Ombudsman.",
+    "recommended_clause_language": "Interest rate: [Repo Rate + X% spread]. All fees disclosed upfront. Full amortization schedule provided before disbursement.",
+    "red_flag_language": "Watch for 'flat rate' advertising (misleading), undisclosed processing fees, or internal benchmarks (BPLR) instead of external benchmarks."
+  },
+  {
+    "id": "ib-bank-prepayment-002",
+    "industry": "banking_fintech",
+    "clause_type": "prepayment",
+    "standard_description": "RBI has eliminated prepayment/foreclosure charges on all floating-rate home loans. For fixed-rate home loans and personal loans, prepayment charges are typically 2-4% of outstanding principal, reducing over the loan tenure. Part-prepayment is generally allowed annually (10-25% of outstanding) without charges. NBFCs may have different terms but must comply with RBI's Fair Practices Code.",
+    "typical_range": "Zero for floating home loans; 2-4% for fixed-rate/personal loans",
+    "dimensions": [
+      {
+        "name": "Floating Home Loan",
+        "standard_value": "Zero prepayment charges (RBI mandate)",
+        "strict_threshold": "Any prepayment charge on floating home loan",
+        "lenient_threshold": "N/A — zero is the standard",
+        "notes": "RBI banned prepayment charges on floating home loans in 2012."
+      },
+      {
+        "name": "Fixed Home Loan",
+        "standard_value": "2-3% of outstanding, reducing over tenure",
+        "strict_threshold": "> 4% or no reduction over time",
+        "lenient_threshold": "< 1% or zero",
+        "notes": "Should reduce as loan ages — e.g., 3% in year 1, 1% in year 5."
+      },
+      {
+        "name": "Part-Prepayment Allowance",
+        "standard_value": "10-25% of outstanding annually, no charge",
+        "strict_threshold": "No part-prepayment allowed",
+        "lenient_threshold": "Unlimited part-prepayment without charges",
+        "notes": "Part-prepayment helps reduce interest burden significantly."
+      },
+      {
+        "name": "Personal Loan",
+        "standard_value": "2-4% of outstanding, with lock-in of 6-12 months",
+        "strict_threshold": "> 5% or long lock-in (2+ years)",
+        "lenient_threshold": "< 2% with short lock-in (3 months)",
+        "notes": "Personal loan prepayment charges are higher but should still be transparent."
+      }
+    ],
+    "contract_types": [
+      "loan_agreement"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "RBI Circular DBOD.Dir.BC.No.8/13.03.00/2012-13 + lending practices analysis",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Charging prepayment penalties on floating home loans violates RBI directives. Report to Banking Ombudsman.",
+    "recommended_clause_language": "No prepayment/foreclosure charges on floating-rate home loans. Part-prepayment of up to 25% annually without charges.",
+    "red_flag_language": "Watch for prepayment charges on floating home loans (illegal), undisclosed lock-in periods, or charges that don't reduce over time."
+  },
+  {
+    "id": "ib-bank-guarantor-003",
+    "industry": "banking_fintech",
+    "clause_type": "guarantor_liability",
+    "standard_description": "Personal guarantors for business loans face significant liability under Indian law. The IBC (2016, amended 2021) now allows insolvency proceedings against personal guarantors. Standard practice is for guarantees to be limited in amount, require the lender to exhaust remedies against the borrower first, and release the guarantor when they cease to be associated with the borrowing entity.",
+    "typical_range": "Limited guarantee with exhaustion-of-remedies requirement",
+    "dimensions": [
+      {
+        "name": "Guarantee Amount",
+        "standard_value": "Capped at loan amount or specific sum",
+        "strict_threshold": "Unlimited ('and all future liabilities')",
+        "lenient_threshold": "Capped at 50% of loan",
+        "notes": "Unlimited guarantees are extremely aggressive."
+      },
+      {
+        "name": "Exhaustion Requirement",
+        "standard_value": "Lender must pursue borrower first",
+        "strict_threshold": "Co-extensive liability (lender can pursue guarantor directly)",
+        "lenient_threshold": "Lender must exhaust ALL borrower assets first",
+        "notes": "Indian Contract Act Sections 128-145 govern this."
+      },
+      {
+        "name": "Release Mechanism",
+        "standard_value": "Release on resignation from company",
+        "strict_threshold": "Guarantee survives departure",
+        "lenient_threshold": "Automatic release after 50% repayment",
+        "notes": "Guarantor should be released when they lose control/association."
+      },
+      {
+        "name": "IBC Exposure",
+        "standard_value": "Subject to IBC personal guarantor provisions",
+        "strict_threshold": "Unlimited personal asset exposure",
+        "lenient_threshold": "Protected by limited guarantee",
+        "notes": "IBC 2016 (Section 95) allows proceedings against personal guarantors."
+      }
+    ],
+    "contract_types": [
+      "loan_agreement"
+    ],
+    "seniority_levels": [
+      "executive"
+    ],
+    "source": "IBC 2016 (amended) + banking practices analysis",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "startup",
+    "risk_if_exceeded": "Unlimited personal guarantees combined with IBC provisions can result in insolvency proceedings against the guarantor personally.",
+    "recommended_clause_language": "Guarantee limited to [amount]. Lender shall exhaust remedies against Borrower before invoking guarantee. Guarantee releases upon Guarantor ceasing directorship.",
+    "red_flag_language": "Watch for 'unconditional and irrevocable guarantee', 'co-extensive liability', 'guarantee survives cessation of directorship', or 'including all future liabilities'."
+  },
+  {
+    "id": "ib-bank-interest-rate-004",
+    "industry": "banking_fintech",
+    "clause_type": "interest_rate",
+    "standard_description": "Since October 2019, RBI mandates all new floating-rate retail loans be linked to an external benchmark — primarily the repo rate (currently ~6.5%). The spread over the benchmark is fixed for the loan tenure. Interest rate changes must be transmitted within 3 months of a repo rate change. For fixed-rate loans, the rate remains constant for the agreed period.",
+    "typical_range": "Repo rate + 2-4% spread for home loans; higher spread for personal/business loans",
+    "dimensions": [
+      {
+        "name": "Benchmark",
+        "standard_value": "RBI Repo Rate (EBLR)",
+        "strict_threshold": "Internal benchmark (MCLR/BPLR)",
+        "lenient_threshold": "Repo-linked with quarterly reset",
+        "notes": "All new floating loans must be EBLR-linked since Oct 2019."
+      },
+      {
+        "name": "Spread",
+        "standard_value": "Fixed for loan tenure",
+        "strict_threshold": "Variable spread at bank's discretion",
+        "lenient_threshold": "Guaranteed lowest spread",
+        "notes": "The spread should not change once fixed at disbursement."
+      },
+      {
+        "name": "Rate Transmission",
+        "standard_value": "Within 3 months of repo change",
+        "strict_threshold": "Delayed or partial transmission",
+        "lenient_threshold": "Immediate (within 1 month)",
+        "notes": "Banks have been criticized for slow rate cuts but fast rate hikes."
+      },
+      {
+        "name": "Transparency",
+        "standard_value": "Monthly statement showing rate components",
+        "strict_threshold": "No breakdown of rate components",
+        "lenient_threshold": "Real-time rate tracker in app",
+        "notes": "Borrower should see exactly how their rate is calculated."
+      }
+    ],
+    "contract_types": [
+      "loan_agreement"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "RBI External Benchmark Lending Rate framework analysis",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Non-compliance with EBLR mandate is reportable to RBI. Variable spreads violate the framework.",
+    "recommended_clause_language": "Interest rate: RBI Repo Rate + [X]% fixed spread. Rate resets quarterly based on prevailing repo rate. Spread remains fixed for loan tenure.",
+    "red_flag_language": "Watch for 'spread may be revised', 'internal benchmark rate', 'bank's prevailing rate', or missing rate reset frequency."
+  },
+  {
+    "id": "ib-bank-dispute-005",
+    "industry": "banking_fintech",
+    "clause_type": "dispute_resolution",
+    "standard_description": "Banking disputes in India have a well-established resolution hierarchy: (1) Bank's internal Grievance Redressal (15-30 days), (2) Banking Ombudsman (escalation if bank doesn't resolve within 30 days), (3) RBI's Complaint Management System (CMS), (4) Consumer Forum / NCLT for larger claims. The RBI Integrated Ombudsman Scheme 2021 provides a single-window mechanism for all bank complaints.",
+    "typical_range": "Internal redressal (30 days) → Ombudsman → Consumer Forum",
+    "dimensions": [
+      {
+        "name": "Internal Grievance",
+        "standard_value": "Resolution within 30 days",
+        "strict_threshold": "No internal mechanism or > 45 days",
+        "lenient_threshold": "Resolution within 15 days",
+        "notes": "Banks must acknowledge complaints within 3 working days."
+      },
+      {
+        "name": "Ombudsman Access",
+        "standard_value": "Automatic escalation if unresolved in 30 days",
+        "strict_threshold": "Contractual waiver of Ombudsman access (void)",
+        "lenient_threshold": "Bank proactively refers to Ombudsman",
+        "notes": "Banking Ombudsman access is a regulatory right."
+      },
+      {
+        "name": "Online Filing",
+        "standard_value": "Available via RBI CMS portal",
+        "strict_threshold": "Physical filing only",
+        "lenient_threshold": "Mobile app complaint filing",
+        "notes": "cms.rbi.org.in allows online complaint filing."
+      },
+      {
+        "name": "Compensation",
+        "standard_value": "Up to ₹20 lakh via Ombudsman",
+        "strict_threshold": "No compensation mechanism",
+        "lenient_threshold": "Higher limits via Consumer Forum",
+        "notes": "Ombudsman can award up to ₹20 lakh; Consumer Forum is unlimited."
+      }
+    ],
+    "contract_types": [
+      "loan_agreement"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "RBI Integrated Ombudsman Scheme 2021",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Banks that fail to resolve complaints within 30 days can be reported to the Banking Ombudsman under the RBI Integrated Ombudsman Scheme 2021.",
+    "recommended_clause_language": "Disputes first raised with Bank's Grievance Officer. If unresolved within 30 days, complaint may be filed with Banking Ombudsman.",
+    "red_flag_language": "Watch for 'mandatory arbitration', 'exclusive jurisdiction of courts in [bank's HQ city]', or 'waiver of Ombudsman rights' (all unenforceable)."
+  },
+  {
+    "id": "ib-ins-claim-settlement-001",
+    "industry": "insurance",
+    "clause_type": "claim_settlement",
+    "standard_description": "IRDAI mandates that health insurance claims must be settled within 30 days of receiving all required documents. Motor insurance claims should be settled within 30 days. If the insurer delays beyond this, they must pay interest on the claim amount. Cashless claims at network hospitals should be authorized within 2 hours for planned admissions and 4 hours for emergency admissions.",
+    "typical_range": "30 days from document submission; cashless authorization within 2-4 hours",
+    "dimensions": [
+      {
+        "name": "Health Claim Timeline",
+        "standard_value": "30 days from complete documents",
+        "strict_threshold": "> 45 days or indefinite",
+        "lenient_threshold": "< 15 days",
+        "notes": "IRDAI regulation — delay requires interest payment."
+      },
+      {
+        "name": "Cashless Authorization",
+        "standard_value": "2 hours (planned) / 4 hours (emergency)",
+        "strict_threshold": "No cashless facility",
+        "lenient_threshold": "< 1 hour automated authorization",
+        "notes": "IRDAI Health Insurance Regulations 2020 mandate this."
+      },
+      {
+        "name": "Claim Rejection Reason",
+        "standard_value": "Written rejection with specific clause reference",
+        "strict_threshold": "Verbal rejection or vague reasons",
+        "lenient_threshold": "Written rejection + appeal process",
+        "notes": "Insurer must provide clear, written reasons for any rejection."
+      },
+      {
+        "name": "Partial Settlement",
+        "standard_value": "Admitted amount paid immediately, balance disputed",
+        "strict_threshold": "Entire claim held pending dispute",
+        "lenient_threshold": "Full claim paid, disputes resolved separately",
+        "notes": "Undisputed portions should be paid without waiting."
+      }
+    ],
+    "contract_types": [
+      "insurance"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "IRDAI (Health Insurance) Regulations 2020 + claims data analysis",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Claim settlement delays beyond 30 days entitle the policyholder to interest. Grievance escalation to IRDAI IGMS portal (igms.irda.gov.in).",
+    "recommended_clause_language": "Claims settled within 30 days of complete documentation. Cashless authorization within 2 hours for planned admissions.",
+    "red_flag_language": "Watch for 'claims will be processed as expeditiously as possible' (no timeline), excessive documentation requirements, or no cashless facility."
+  },
+  {
+    "id": "ib-ins-exclusion-002",
+    "industry": "insurance",
+    "clause_type": "exclusion_clauses",
+    "standard_description": "Health insurance exclusions in India are regulated by IRDAI. Standard exclusions include: cosmetic surgery, self-inflicted injury, war/nuclear events, and pre-existing conditions (with mandated 4-year waiting period cap). IRDAI has standardized exclusion lists to prevent arbitrary denials. Day-1 coverage is mandatory for accidents. Specific disease waiting periods are capped at 2-4 years.",
+    "typical_range": "Standardized IRDAI exclusions; PED waiting 1-4 years; disease waiting 2-4 years",
+    "dimensions": [
+      {
+        "name": "Pre-Existing Disease Waiting",
+        "standard_value": "4 years maximum (IRDAI cap)",
+        "strict_threshold": "Permanent exclusion of PEDs",
+        "lenient_threshold": "1-2 years with premium loading",
+        "notes": "IRDAI caps PED waiting at 4 years — cannot exceed this."
+      },
+      {
+        "name": "Specific Disease Waiting",
+        "standard_value": "2-4 years for named conditions",
+        "strict_threshold": "Permanent exclusion of common diseases",
+        "lenient_threshold": "1 year or reduced waiting",
+        "notes": "Common conditions like diabetes, hypertension typically 2-4 years."
+      },
+      {
+        "name": "Day-1 Coverage",
+        "standard_value": "Accidents covered from day 1",
+        "strict_threshold": "Waiting period even for accidents",
+        "lenient_threshold": "All conditions covered from day 1",
+        "notes": "Accidents must be covered from policy start date."
+      },
+      {
+        "name": "Sub-Limits",
+        "standard_value": "No room rent sub-limit or clearly disclosed",
+        "strict_threshold": "Hidden sub-limits on room rent, surgery, etc.",
+        "lenient_threshold": "No sub-limits (100% of sum insured)",
+        "notes": "Sub-limits can drastically reduce effective coverage."
+      }
+    ],
+    "contract_types": [
+      "insurance"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "IRDAI standardized exclusion guidelines + policy analysis",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Exclusions beyond IRDAI's standardized list or PED waiting periods exceeding 4 years violate IRDAI regulations.",
+    "recommended_clause_language": "Exclusions as per IRDAI standard list. PED waiting period: 4 years. Accidents covered from day 1. All sub-limits clearly disclosed.",
+    "red_flag_language": "Watch for 'permanent exclusion of pre-existing conditions', hidden room-rent sub-limits, or exclusions not on IRDAI's standard list."
+  },
+  {
+    "id": "ib-ins-renewal-003",
+    "industry": "insurance",
+    "clause_type": "renewal_terms",
+    "standard_description": "IRDAI mandates lifelong renewability for health insurance policies — the insurer cannot refuse renewal except for fraud or non-payment. Premium increases at renewal must be applied uniformly across the age band and cannot target individual policyholders. The insurer must provide renewal notice 30 days before expiry. Grace period for renewal is typically 30 days after expiry.",
+    "typical_range": "Lifelong renewal guaranteed; 30-day advance notice; 30-day grace period",
+    "dimensions": [
+      {
+        "name": "Lifelong Renewability",
+        "standard_value": "Guaranteed (IRDAI mandate)",
+        "strict_threshold": "Insurer can refuse renewal",
+        "lenient_threshold": "Auto-renewal with opt-out",
+        "notes": "Health insurance must be lifelong renewable — insurer cannot refuse."
+      },
+      {
+        "name": "Premium Increase",
+        "standard_value": "Age-band based, uniform across pool",
+        "strict_threshold": "Individual-targeted premium hikes",
+        "lenient_threshold": "Multi-year premium lock",
+        "notes": "Increases must apply uniformly, not target individuals with claims."
+      },
+      {
+        "name": "Renewal Notice",
+        "standard_value": "30 days before expiry",
+        "strict_threshold": "No renewal notice",
+        "lenient_threshold": "60 days advance notice + SMS/email reminders",
+        "notes": "Insurer must remind you before the policy lapses."
+      },
+      {
+        "name": "Grace Period",
+        "standard_value": "30 days after expiry",
+        "strict_threshold": "No grace period (immediate lapse)",
+        "lenient_threshold": "60-day grace period",
+        "notes": "Grace period allows renewal without losing continuity benefits."
+      }
+    ],
+    "contract_types": [
+      "insurance"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "IRDAI (Health Insurance) Regulations 2020",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Refusing to renew a health policy (except for fraud/non-payment) violates IRDAI mandate. Report to IGMS.",
+    "recommended_clause_language": "Policy is lifelong renewable. Renewal notice provided 30 days before expiry. 30-day grace period for late renewal.",
+    "red_flag_language": "Watch for 'renewal at insurer's discretion', individual-targeted premium increases, or no grace period clause."
+  },
+  {
+    "id": "ib-ins-premium-escalation-004",
+    "industry": "insurance",
+    "clause_type": "premium_escalation",
+    "standard_description": "Health insurance premiums in India increase primarily due to age (age-band pricing) and medical inflation. Standard practice is 5-15% increases at age-band transitions (typically every 5 years). Insurers can also revise premiums due to claims experience, but must apply changes uniformly across the pool and file revised rates with IRDAI. Premium increases should be transparent and communicated in advance.",
+    "typical_range": "5-15% at age-band transitions; additional medical inflation adjustment",
+    "dimensions": [
+      {
+        "name": "Age-Band Increase",
+        "standard_value": "5-15% at 5-year intervals",
+        "strict_threshold": "> 25% increase or annual increases",
+        "lenient_threshold": "< 5% or no age-band increase",
+        "notes": "Age 45-55 typically sees the steepest increases."
+      },
+      {
+        "name": "Claims-Based Revision",
+        "standard_value": "Uniform across risk pool",
+        "strict_threshold": "Individual premium hike for high claimers",
+        "lenient_threshold": "No-claim bonus (premium discount)",
+        "notes": "IRDAI prohibits targeting individuals with premium hikes."
+      },
+      {
+        "name": "No-Claim Bonus",
+        "standard_value": "5-50% cumulative discount for claim-free years",
+        "strict_threshold": "No NCB offered",
+        "lenient_threshold": "> 50% NCB",
+        "notes": "NCB rewards healthy policyholders and reduces premium burden."
+      },
+      {
+        "name": "Transparency",
+        "standard_value": "Premium revision communicated 30 days before renewal",
+        "strict_threshold": "Premium increased without prior notice",
+        "lenient_threshold": "Premium schedule for all future age bands provided upfront",
+        "notes": "You should know what you'll pay 10 years from now."
+      }
+    ],
+    "contract_types": [
+      "insurance"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "IRDAI premium filing guidelines + industry analysis",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Individual-targeted premium increases are prohibited by IRDAI. Unexplained premium hikes can be challenged via IGMS.",
+    "recommended_clause_language": "Premium increases at age-band transitions only, applied uniformly. No-claim bonus of [X]% per claim-free year. Premium schedule for all age bands disclosed upfront.",
+    "red_flag_language": "Watch for 'premium may be revised at insurer's discretion', no NCB benefit, or undisclosed future premium schedules."
+  },
+  {
+    "id": "ib-ins-dispute-005",
+    "industry": "insurance",
+    "clause_type": "dispute_resolution",
+    "standard_description": "Insurance disputes in India are resolved through: (1) Insurer's internal Grievance Redressal (15 days), (2) IRDAI IGMS portal (igms.irda.gov.in), (3) Insurance Ombudsman (for claims up to ₹30 lakh), (4) Consumer Forum (unlimited amount). The Insurance Ombudsman is free, accessible, and decisions are binding on the insurer. Consumer Forum jurisdiction cannot be waived by contract.",
+    "typical_range": "Internal (15 days) → IGMS → Ombudsman (₹30L) → Consumer Forum",
+    "dimensions": [
+      {
+        "name": "Internal Grievance",
+        "standard_value": "Resolution within 15 days",
+        "strict_threshold": "> 30 days or no internal mechanism",
+        "lenient_threshold": "< 7 days",
+        "notes": "IRDAI mandates 15-day resolution timeline."
+      },
+      {
+        "name": "Ombudsman Access",
+        "standard_value": "Free, for claims up to ₹30 lakh",
+        "strict_threshold": "Contract attempts to restrict Ombudsman access (void)",
+        "lenient_threshold": "Insurer proactively refers to Ombudsman",
+        "notes": "Insurance Ombudsman decisions are binding on the insurer."
+      },
+      {
+        "name": "Consumer Forum",
+        "standard_value": "Available for any claim amount",
+        "strict_threshold": "Arbitration clause attempting to oust Consumer Forum (void)",
+        "lenient_threshold": "Insurer settles before Consumer Forum hearing",
+        "notes": "Consumer Forum jurisdiction cannot be contractually waived."
+      },
+      {
+        "name": "Claim Review Process",
+        "standard_value": "Written rejection with appeal mechanism",
+        "strict_threshold": "No appeal process for rejected claims",
+        "lenient_threshold": "Independent medical review for health claim disputes",
+        "notes": "Policyholders should have a clear appeal path."
+      }
+    ],
+    "contract_types": [
+      "insurance"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "Insurance Ombudsman Rules 2017 + IRDAI IGMS framework",
+    "source_type": "industry_body",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Insurers that fail to resolve grievances within 15 days can be reported via IRDAI IGMS. Arbitration clauses cannot oust Consumer Forum.",
+    "recommended_clause_language": "Complaints resolved within 15 days. Policyholder may approach Insurance Ombudsman or Consumer Forum at any time.",
+    "red_flag_language": "Watch for 'mandatory arbitration', 'exclusive jurisdiction', or any clause attempting to waive Ombudsman/Consumer Forum access."
+  },
+  {
+    "id": "ib-realestate-deposit-001",
+    "industry": "real_estate_rental",
+    "clause_type": "security_deposit",
+    "standard_description": "Security deposits for residential rentals in India vary by state: Karnataka caps at 10 months' rent (commonly 10 months in Bengaluru), Maharashtra at 3 months, Delhi at 2-3 months, Tamil Nadu at 3-6 months. The Model Tenancy Act 2021 caps deposits at 2 months' rent. Deposits must be refunded within 1-3 months of vacating, after deducting only documented damages beyond normal wear and tear.",
+    "typical_range": "2-10 months rent (varies by state); refund within 1-3 months",
+    "dimensions": [
+      {
+        "name": "Deposit Amount",
+        "standard_value": "2-3 months rent (Model Tenancy Act)",
+        "strict_threshold": "> 10 months or 'non-refundable'",
+        "lenient_threshold": "1 month or zero deposit",
+        "notes": "Bengaluru's 10-month convention is the highest in India; other cities are 2-3 months."
+      },
+      {
+        "name": "Refund Timeline",
+        "standard_value": "Within 1 month of vacating (Model Tenancy Act)",
+        "strict_threshold": "> 3 months or 'at landlord's discretion'",
+        "lenient_threshold": "Within 15 days",
+        "notes": "Model Tenancy Act mandates refund within 1 month of move-out."
+      },
+      {
+        "name": "Deduction Documentation",
+        "standard_value": "Itemized list with photographic evidence",
+        "strict_threshold": "Deductions at landlord's discretion, no documentation",
+        "lenient_threshold": "Joint inspection + zero deductions for normal wear",
+        "notes": "Deductions must be for damages beyond normal wear and tear."
+      },
+      {
+        "name": "Interest on Deposit",
+        "standard_value": "Some states mandate interest (e.g., Maharashtra)",
+        "strict_threshold": "No interest + no refund timeline",
+        "lenient_threshold": "Interest at savings bank rate",
+        "notes": "Maharashtra Rent Control Act requires interest on deposits."
+      }
+    ],
+    "contract_types": [
+      "rental",
+      "lease"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "Model Tenancy Act 2021 + state-wise Rent Control Act analysis",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Non-refundable deposits and arbitrary deductions violate state Rent Acts. File complaint with Rent Authority or Consumer Forum.",
+    "recommended_clause_language": "Security deposit of [X] months rent. Refundable within 30 days of vacating after deducting documented damages (with photographic evidence).",
+    "red_flag_language": "Watch for 'non-refundable deposit', 'deductions at landlord's sole discretion', 'deposit forfeited for early termination', or no refund timeline."
+  },
+  {
+    "id": "ib-realestate-maintenance-002",
+    "industry": "real_estate_rental",
+    "clause_type": "maintenance_liability",
+    "standard_description": "Standard rental agreements in India divide maintenance responsibilities: landlord handles structural repairs, plumbing/electrical infrastructure, and external painting; tenant handles day-to-day maintenance, minor repairs (typically up to ₹5,000-10,000), and internal cleanliness. The boundary should be clearly defined. Major appliances provided by the landlord (AC, geyser, washing machine) are typically the landlord's repair responsibility.",
+    "typical_range": "Tenant: minor repairs up to ₹5,000-10,000; Landlord: structural and major repairs",
+    "dimensions": [
+      {
+        "name": "Minor Repairs",
+        "standard_value": "Tenant bears up to ₹5,000-10,000 per incident",
+        "strict_threshold": "Tenant bears ALL repair costs",
+        "lenient_threshold": "Landlord bears all repairs",
+        "notes": "Clear monetary threshold prevents disputes."
+      },
+      {
+        "name": "Structural Repairs",
+        "standard_value": "Landlord's responsibility",
+        "strict_threshold": "Tenant responsible for structural issues",
+        "lenient_threshold": "Landlord's insured, tenant zero liability",
+        "notes": "Plumbing leaks, electrical wiring, roof — always landlord."
+      },
+      {
+        "name": "Appliance Maintenance",
+        "standard_value": "Landlord-provided appliances = landlord's repair cost",
+        "strict_threshold": "Tenant maintains all appliances including landlord's",
+        "lenient_threshold": "Landlord provides AMC for all appliances",
+        "notes": "If the landlord provides an AC, they should maintain it."
+      },
+      {
+        "name": "Painting/Restoration",
+        "standard_value": "Painting every 3-5 years is landlord's cost",
+        "strict_threshold": "Tenant must repaint before vacating",
+        "lenient_threshold": "No painting obligation",
+        "notes": "Normal wall wear (nail holes, fading) is not tenant damage."
+      }
+    ],
+    "contract_types": [
+      "rental",
+      "lease"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "Model Tenancy Act 2021 + rental market practices analysis",
+    "source_type": "aggregated_data",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Clauses making tenants responsible for structural repairs are unreasonable and challengeable under Rent Control Acts.",
+    "recommended_clause_language": "Tenant handles minor repairs up to ₹[amount]. Structural, plumbing, and electrical repairs are Landlord's responsibility. Landlord-provided appliances maintained by Landlord.",
+    "red_flag_language": "Watch for 'tenant shall maintain property in original condition', 'all repairs at tenant's cost', or 'mandatory painting before vacating'."
+  },
+  {
+    "id": "ib-realestate-eviction-003",
+    "industry": "real_estate_rental",
+    "clause_type": "eviction_terms",
+    "standard_description": "Eviction in India is heavily regulated by state Rent Control Acts and the Model Tenancy Act 2021. Landlords can evict only for specified reasons: non-payment of rent, misuse of property, subletting without permission, or genuine personal need. The process requires legal notice, opportunity to cure defaults, and often a Rent Authority/Court order. Self-help eviction (changing locks, cutting utilities) is illegal.",
+    "typical_range": "Legal notice → Opportunity to cure → Rent Authority order",
+    "dimensions": [
+      {
+        "name": "Grounds for Eviction",
+        "standard_value": "Only statutory grounds (non-payment, misuse, personal need)",
+        "strict_threshold": "Eviction 'at landlord's discretion' or 'for any reason'",
+        "lenient_threshold": "Only non-payment after multiple notices",
+        "notes": "Landlord cannot evict arbitrarily — must have statutory grounds."
+      },
+      {
+        "name": "Notice Period",
+        "standard_value": "1-3 months written notice",
+        "strict_threshold": "< 15 days or 'immediate eviction'",
+        "lenient_threshold": "6+ months notice",
+        "notes": "Model Tenancy Act requires adequate notice."
+      },
+      {
+        "name": "Right to Cure",
+        "standard_value": "Tenant can cure default (pay arrears) to avoid eviction",
+        "strict_threshold": "No opportunity to cure before eviction",
+        "lenient_threshold": "Multiple cure opportunities",
+        "notes": "Most Rent Acts allow tenants to pay arrears and stay."
+      },
+      {
+        "name": "Self-Help Eviction",
+        "standard_value": "Strictly illegal — requires court order",
+        "strict_threshold": "Landlord may 'reclaim' property without notice",
+        "lenient_threshold": "N/A — always illegal",
+        "notes": "Changing locks, cutting utilities, or physical eviction without court order is criminal."
+      }
+    ],
+    "contract_types": [
+      "rental",
+      "lease"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "Model Tenancy Act 2021 + state Rent Control Acts analysis",
+    "source_type": "expert_analysis",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Self-help eviction (changing locks, cutting utilities) is criminal under IPC. Tenants can file FIR and seek relief from Rent Authority.",
+    "recommended_clause_language": "Eviction only for statutory grounds with [2-3 months] written notice. Tenant has right to cure defaults. Eviction process through Rent Authority only.",
+    "red_flag_language": "Watch for 'immediate eviction', 'landlord may reclaim without notice', 'eviction at landlord's discretion', or 'tenant waives eviction protections'."
+  },
+  {
+    "id": "ib-realestate-rent-escalation-004",
+    "industry": "real_estate_rental",
+    "clause_type": "rent_escalation",
+    "standard_description": "Annual rent escalation in Indian residential rentals typically ranges from 5-10%, with 5% being most common in agreement templates. Some states have Rent Control Acts that cap permissible increases. The Model Tenancy Act 2021 does not prescribe a specific cap but promotes 'fair and reasonable' increases. Commercial rent escalation is typically 10-15%. Escalation should only apply at annual or lease renewal intervals.",
+    "typical_range": "5-10% annually for residential; 10-15% for commercial",
+    "dimensions": [
+      {
+        "name": "Residential Annual Increase",
+        "standard_value": "5% per year",
+        "strict_threshold": "> 10% or escalation at landlord's discretion",
+        "lenient_threshold": "3% or CPI-linked",
+        "notes": "5% is the most common convention in Indian rental agreements."
+      },
+      {
+        "name": "Commercial Annual Increase",
+        "standard_value": "10-15% per year",
+        "strict_threshold": "> 20% or arbitrary escalation",
+        "lenient_threshold": "CPI-linked or negotiated annually",
+        "notes": "Commercial rents are less regulated but should be predictable."
+      },
+      {
+        "name": "Escalation Frequency",
+        "standard_value": "Annual (every 12 months)",
+        "strict_threshold": "Quarterly or 'at landlord's discretion'",
+        "lenient_threshold": "Every 2-3 years",
+        "notes": "Escalation should be at fixed, predictable intervals."
+      },
+      {
+        "name": "Rent Control Protection",
+        "standard_value": "Subject to state-specific caps where applicable",
+        "strict_threshold": "Agreement attempts to waive Rent Control protections",
+        "lenient_threshold": "Rent frozen for initial 3-year period",
+        "notes": "Tenants in Rent Control-covered properties have statutory caps."
+      }
+    ],
+    "contract_types": [
+      "rental",
+      "lease"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "Model Tenancy Act 2021 + state Rent Control Acts + market analysis",
+    "source_type": "aggregated_data",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Rent increases exceeding state Rent Control caps (where applicable) are illegal. File complaint with Rent Authority.",
+    "recommended_clause_language": "Rent shall increase by [5]% per annum, applicable on each anniversary of the lease commencement date.",
+    "red_flag_language": "Watch for 'rent increase at landlord's discretion', 'quarterly escalation', escalation exceeding 10% for residential, or waiver of Rent Control protections."
+  },
+  {
+    "id": "ib-realestate-lockin-005",
+    "industry": "real_estate_rental",
+    "clause_type": "lock_in_period",
+    "standard_description": "Lock-in periods in Indian residential rentals typically range from 3-12 months, during which neither party can terminate the agreement. After the lock-in, either party can terminate with 1-2 months' notice. Standard lock-in is 6 months for furnished apartments and 3-6 months for unfurnished. Penalty for breaking lock-in is typically 1-2 months' rent. Commercial leases have longer lock-ins (12-36 months).",
+    "typical_range": "3-6 months residential; 12-36 months commercial",
+    "dimensions": [
+      {
+        "name": "Residential Lock-In",
+        "standard_value": "3-6 months",
+        "strict_threshold": "> 12 months for residential",
+        "lenient_threshold": "< 3 months or no lock-in",
+        "notes": "6 months is standard for furnished; 3 months for unfurnished."
+      },
+      {
+        "name": "Commercial Lock-In",
+        "standard_value": "12-36 months",
+        "strict_threshold": "> 36 months",
+        "lenient_threshold": "< 12 months",
+        "notes": "Longer lock-in justified for fit-out investment by tenant."
+      },
+      {
+        "name": "Lock-In Penalty",
+        "standard_value": "1-2 months' rent for early exit",
+        "strict_threshold": "Full remaining rent as penalty",
+        "lenient_threshold": "No penalty, just notice period",
+        "notes": "Penalty should be proportional, not the entire remaining rent."
+      },
+      {
+        "name": "Post Lock-In Notice",
+        "standard_value": "1-2 months written notice",
+        "strict_threshold": "> 3 months notice",
+        "lenient_threshold": "1 month or 15 days",
+        "notes": "After lock-in, either party should be able to exit with notice."
+      }
+    ],
+    "contract_types": [
+      "rental",
+      "lease"
+    ],
+    "seniority_levels": [
+      "consumer"
+    ],
+    "source": "Rental market analysis + Model Tenancy Act 2021",
+    "source_type": "aggregated_data",
+    "confidence": "high",
+    "region": "india",
+    "last_updated": "2026-07",
+    "applicable_company_size": "all",
+    "risk_if_exceeded": "Lock-in periods exceeding 12 months for residential are unusual. Penalty equal to full remaining rent is disproportionate under Section 74, ICA.",
+    "recommended_clause_language": "Lock-in period of [6] months. After lock-in, either party may terminate with [2] months written notice. Early termination during lock-in: [1] month's rent as penalty.",
+    "red_flag_language": "Watch for 'entire remaining rent as penalty', lock-in exceeding 12 months for residential, or no post lock-in termination clause."
+  }
+]

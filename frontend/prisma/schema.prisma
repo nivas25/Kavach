@@ -1,0 +1,201 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────
+// USER & SESSION
+// ─────────────────────────────────────────────
+
+model User {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sessions Session[]
+}
+
+model Session {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  role          String // job_seeker, freelancer, consumer, custom
+  experience    String?
+  industry      String?
+  concerns      String[] @default([])
+  customContext String?
+
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  document Document?
+  report   Report?
+
+  @@index([userId])
+}
+
+// ─────────────────────────────────────────────
+// DOCUMENT
+// ─────────────────────────────────────────────
+
+model Document {
+  id        String  @id @default(cuid())
+  sessionId String  @unique
+  session   Session @relation(fields: [sessionId], references: [id])
+
+  originalFileName String
+  fileType         String // pdf, docx, text
+  fileSize         Int // bytes
+  rawText          String
+  structuredText   String
+
+  status DocumentStatus @default(UPLOADED)
+
+  createdAt   DateTime  @default(now())
+  processedAt DateTime?
+
+  report Report?
+}
+
+enum DocumentStatus {
+  UPLOADED
+  PROCESSING
+  EXTRACTED
+  FAILED
+}
+
+// ─────────────────────────────────────────────
+// REPORT
+// ─────────────────────────────────────────────
+
+model Report {
+  id         String   @id @default(cuid())
+  sessionId  String   @unique
+  session    Session  @relation(fields: [sessionId], references: [id])
+  documentId String   @unique
+  document   Document @relation(fields: [documentId], references: [id])
+
+  overallRiskScore Int // 0–100
+  overallRiskLevel String // low, medium, high, critical
+
+  keyFindings        Json // string[]
+  recommendedActions Json // { immediate: [], recommended: [], informational: [] }
+
+  // Enkrypt AI validation results
+  hallucinationCheckPassed Boolean @default(false)
+  biasCheckPassed          Boolean @default(false)
+  outputValidationPassed   Boolean @default(false)
+
+  status ReportStatus @default(PROCESSING)
+
+  createdAt   DateTime  @default(now())
+  completedAt DateTime?
+  viewedAt    DateTime?
+
+  clauses ClauseAnalysis[]
+}
+
+enum ReportStatus {
+  PROCESSING
+  DEBATING
+  SCORING
+  VALIDATING
+  COMPLETED
+  FAILED
+}
+
+// ─────────────────────────────────────────────
+// CLAUSE ANALYSIS
+// ─────────────────────────────────────────────
+
+model ClauseAnalysis {
+  id       String @id @default(cuid())
+  reportId String
+  report   Report @relation(fields: [reportId], references: [id])
+
+  // Clause info
+  category     String // ClauseCategory
+  originalText String
+  summary      String
+  position     Int // Order in document
+
+  // Verdict from Neutral Judge
+  riskScore Int // 0–100
+  riskLevel String // low, medium, high, critical
+
+  // 3-Factor Scores
+  harmPotentialScore           Int // 1–10
+  harmPotentialReasoning       String
+  legalStrengthScore           Int // 1–10
+  legalStrengthReasoning       String
+  practicalLikelihoodScore     Int // 1–10
+  practicalLikelihoodReasoning String
+
+  // Judge output
+  verdictExplanation String // Plain language
+  debateSummary      String
+  recommendation     String
+  urgency            String // informational, review_recommended, negotiate, seek_legal_advice
+
+  // Benchmarking
+  legalBenchmark    Json // LegalBenchmark object
+  industryBenchmark Json // IndustryBenchmark object
+
+  // Negotiation
+  negotiationMessage String?
+
+  createdAt DateTime @default(now())
+
+  debateMessages DebateMessage[]
+  alternatives   SaferAlternative[]
+
+  @@index([reportId])
+  @@index([category])
+  @@index([riskLevel])
+}
+
+// ─────────────────────────────────────────────
+// DEBATE MESSAGES
+// ─────────────────────────────────────────────
+
+model DebateMessage {
+  id               String         @id @default(cuid())
+  clauseAnalysisId String
+  clauseAnalysis   ClauseAnalysis @relation(fields: [clauseAnalysisId], references: [id])
+
+  agentRole String // user-advocate, company-defender, india-legal-expert, neutral-judge
+  round     Int // 1, 2, or 3 (verdict)
+  content   String
+
+  agentModel String // llama-3.1-70b-versatile, gemini-2.0-flash
+
+  createdAt DateTime @default(now())
+
+  @@index([clauseAnalysisId])
+  @@index([agentRole])
+}
+
+// ─────────────────────────────────────────────
+// SAFER ALTERNATIVES
+// ─────────────────────────────────────────────
+
+model SaferAlternative {
+  id               String         @id @default(cuid())
+  clauseAnalysisId String
+  clauseAnalysis   ClauseAnalysis @relation(fields: [clauseAnalysisId], references: [id])
+
+  alternativeNumber  Int // 1 or 2
+  rewrittenClause    String
+  estimatedRiskScore Int // 0–100
+  changesExplained   String
+  riskReduction      String
+
+  createdAt DateTime @default(now())
+
+  @@index([clauseAnalysisId])
+}

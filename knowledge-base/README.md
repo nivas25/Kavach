@@ -14,23 +14,24 @@ knowledge-base/
 │
 ├── project/
 │   ├── overview.md                        # Mission, goals, target users, core features
-│   └── technical-decisions.md             # Key architectural decisions and rationale
+│   ├── technical-decisions.md             # Key architectural decisions and rationale
+│   └── technology-tools-plan.md           # Complete tech stack, LLM strategy, API keys, integrations
 │
 ├── architecture/
-│   ├── system-architecture.md             # Layered architecture with component descriptions
+│   ├── system-architecture.md             # 7-layer architecture with all components
 │   ├── data-flow.md                       # End-to-end data flow (upload → report)
-│   └── folder-structure.md                # Recommended Next.js + Mastra project layout
+│   └── folder-structure.md                # Recommended project layout
 │
 ├── agents/
-│   ├── agent-overview.md                  # Summary of all 4 agents and their relationships
+│   ├── agent-overview.md                  # Summary of all 4 agents, 5-round debate structure
 │   ├── user-advocate.md                   # Full spec + system prompt for User Advocate
 │   ├── company-defender.md                # Full spec + system prompt for Company Defender
 │   ├── india-legal-expert.md              # Full spec + system prompt for India Legal Expert
 │   └── neutral-judge.md                   # Full spec + system prompt for Neutral Judge
 │
 ├── workflows/
-│   ├── contract-processing.md             # Document upload, parsing, and section extraction
-│   ├── debate-workflow.md                 # 2-round debate process with message passing
+│   ├── contract-processing.md             # Document upload, LlamaParse, Gemini extraction
+│   ├── debate-workflow.md                 # 5-round debate process with message passing
 │   └── report-generation.md              # Report compilation, alternatives, and delivery
 │
 ├── scoring/
@@ -38,9 +39,9 @@ knowledge-base/
 │   └── benchmarking.md                    # Indian law + industry standard benchmarking
 │
 ├── data/
-│   ├── database-schema.md                 # PostgreSQL tables and relationships
+│   ├── database-schema.md                 # Supabase (PostgreSQL) tables + Redis key patterns
 │   ├── qdrant-setup.md                    # Collections, vector schema, retrieval strategy
-│   └── redis-memory.md                    # Mastra Memory configuration and usage
+│   └── redis-memory.md                    # Mastra Memory config, 5-round debate threads
 │
 └── safety/
     └── enkrypt-ai-integration.md          # 3 safety checkpoints, integration patterns
@@ -50,24 +51,25 @@ knowledge-base/
 
 ## 🔗 Quick Reference for AI Agents
 
-| If you need to...                              | Read this file                          |
-|------------------------------------------------|-----------------------------------------|
-| Understand what Kavach does                    | `project/overview.md`                   |
-| Know why a technology was chosen               | `project/technical-decisions.md`        |
-| Understand system layers and components        | `architecture/system-architecture.md`   |
-| Trace data from upload to report               | `architecture/data-flow.md`             |
-| Create or modify a file in the project         | `architecture/folder-structure.md`      |
-| Implement or modify any agent                  | `agents/<agent-name>.md`                |
-| Understand how agents interact                 | `agents/agent-overview.md`              |
-| Build the document processing pipeline         | `workflows/contract-processing.md`      |
-| Build the debate orchestration                 | `workflows/debate-workflow.md`          |
-| Build the report generation pipeline           | `workflows/report-generation.md`        |
-| Implement risk scoring                         | `scoring/scoring-system.md`             |
-| Implement benchmarking logic                   | `scoring/benchmarking.md`               |
-| Set up PostgreSQL tables                       | `data/database-schema.md`              |
-| Set up Qdrant collections                      | `data/qdrant-setup.md`                  |
-| Configure Redis / Mastra Memory                | `data/redis-memory.md`                  |
-| Integrate Enkrypt AI safety checks             | `safety/enkrypt-ai-integration.md`      |
+| If you need to...                              | Read this file                           |
+|------------------------------------------------|------------------------------------------|
+| Understand what Kavach does                    | `project/overview.md`                    |
+| Know why a technology was chosen               | `project/technical-decisions.md`         |
+| See the full tech stack & API key strategy     | `project/technology-tools-plan.md`       |
+| Understand system layers and components        | `architecture/system-architecture.md`    |
+| Trace data from upload to report               | `architecture/data-flow.md`              |
+| Create or modify a file in the project         | `architecture/folder-structure.md`       |
+| Implement or modify any agent                  | `agents/<agent-name>.md`                 |
+| Understand how agents interact                 | `agents/agent-overview.md`               |
+| Build the document processing pipeline         | `workflows/contract-processing.md`       |
+| Build the 5-round debate orchestration         | `workflows/debate-workflow.md`           |
+| Build the report generation pipeline           | `workflows/report-generation.md`         |
+| Implement risk scoring                         | `scoring/scoring-system.md`              |
+| Implement benchmarking logic                   | `scoring/benchmarking.md`                |
+| Set up Supabase tables + Redis schemas         | `data/database-schema.md`               |
+| Set up Qdrant collections                      | `data/qdrant-setup.md`                   |
+| Configure Redis / Mastra Memory                | `data/redis-memory.md`                   |
+| Integrate Enkrypt AI safety checks             | `safety/enkrypt-ai-integration.md`       |
 
 ---
 
@@ -79,6 +81,8 @@ knowledge-base/
 4. **Implement scoring exactly** as specified in `scoring/scoring-system.md` — the formula and weights are final.
 5. **Never skip Enkrypt AI safety checks** — see `safety/enkrypt-ai-integration.md` for where and how to integrate.
 6. **Use Qdrant for all legal/industry data retrieval** — never hardcode legal information.
+7. **Use dedicated API keys per agent** — see `project/technology-tools-plan.md` for the key strategy.
+8. **The debate is 5 rounds** — Opening, Rebuttal 1, Rebuttal 2, Cross Examination, Closing. See `workflows/debate-workflow.md`.
 
 ---
 
@@ -90,11 +94,40 @@ knowledge-base/
 | Orchestration | **Mastra** | Agent workflows, tool calling, memory |
 | Vector DB | **Qdrant** | Legal docs + industry standards retrieval |
 | Safety | **Enkrypt AI** | Hallucination & bias detection |
-| Primary LLM | Gemini Flash | Legal Expert, Judge, document processing |
-| Debate LLM | Groq Llama | User Advocate, Company Defender |
-| Database | PostgreSQL | Persistent storage |
-| Cache/Memory | Redis (Mastra Memory) | Inter-agent message passing |
+| Primary LLM | **Gemini 2.5 Pro** | Legal Expert, Judge, document extraction |
+| Debate LLM | **Groq Llama 3.3 70B** | User Advocate, Company Defender |
+| Document Parsing | **LlamaParse** | PDF/DOCX → Markdown |
+| Database | **Supabase** (PostgreSQL) | Permanent storage (analyses, debates, tool logs) |
+| Cache/Memory | **Redis** (Mastra Memory) | Temporary storage, inter-agent message passing |
 
 ---
 
-*Last updated: June 2026 — Kavach v1.0*
+## ⚡ API Key Strategy
+
+Each agent uses a **dedicated API key** from a separate account:
+
+| Agent / Task | Provider | Key Variable |
+|-------------|----------|-------------|
+| India Legal Expert | Google | `GEMINI_LEGAL_EXPERT_KEY` |
+| Neutral Judge | Google | `GEMINI_JUDGE_KEY` |
+| Document Extraction | Google | `GEMINI_EXTRACTION_KEY` |
+| User Advocate | Groq | `GROQ_USER_ADVOCATE_KEY` |
+| Company Defender | Groq | `GROQ_COMPANY_DEFENDER_KEY` |
+| Document Parsing | LlamaIndex | `LLAMAPARSE_API_KEY` |
+| Safety | Enkrypt | `ENKRYPT_API_KEY` |
+
+---
+
+## 💾 Storage Strategy
+
+| Data | During Analysis | After Analysis |
+|------|----------------|----------------|
+| Extracted Markdown + JSON | **Redis** | **Supabase** (`analyses` table) |
+| Debate Messages (all rounds) | **Redis** (Mastra Memory) | **Supabase** (`debate_messages` table) |
+| Tool Call History | In-memory | **Supabase** (`tool_usage_log` table) |
+| Final Risk Scores + Report | In-memory | **Supabase** (`analyses.clause_results`) |
+| Legal Knowledge | **Qdrant** | **Qdrant** (static) |
+
+---
+
+*Last updated: July 2026 — Kavach v2.0*
