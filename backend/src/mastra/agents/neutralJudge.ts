@@ -1,10 +1,11 @@
 import { Agent } from '@mastra/core/agent';
-import { createGoogleGenerativeAI } from '@ai-sdk/google';
+import { createOpenAI } from '@ai-sdk/openai';
 import { qdrantSearchTool } from '../tools/qdrantSearchTool';
+import { memory } from '../memory';
 
-// Initialize a custom Gemini provider with Key 3
-const google = createGoogleGenerativeAI({
-  apiKey: process.env.GEMINI_API_KEY_3,
+// Initialize a custom OpenAI provider with the API key from .env
+const openai = createOpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 export const neutralJudge = new Agent({
@@ -21,6 +22,7 @@ When issuing your final verdict:
 4. Provide a final, balanced recommendation on whether the contract is fair, highly skewed, or legally invalid.
 5. Your output must be structured, decisive, and authoritative.
 `,
-  model: google('gemini-2.5-flash'),
-  tools: { qdrantSearchTool }
+  model: openai('gpt-4o'),
+  tools: { qdrantSearchTool },
+  memory
 });

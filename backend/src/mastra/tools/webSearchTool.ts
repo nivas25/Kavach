@@ -1,5 +1,6 @@
 import { createTool } from '@mastra/core/tools';
 import { z } from 'zod';
+import { enkryptService } from '../../services/enkryptService';
 
 export const webSearchTool = createTool({
   id: 'webSearch',
@@ -9,6 +10,13 @@ export const webSearchTool = createTool({
   }),
   execute: async ({ query }: any) => {
     try {
+      console.log(`[WebSearchTool] Enkrypt AI checking query: "${query}"`);
+      const securityCheck = await enkryptService.checkToolCall(query);
+      if (securityCheck.isBlocked) {
+        console.warn(`[WebSearchTool] Blocked by Enkrypt AI: ${securityCheck.reason}`);
+        return `Security Violation: Query blocked by Enkrypt AI guardrails. Reason: ${securityCheck.reason}`;
+      }
+
       console.log(`[WebSearchTool] Searching Tavily for: "${query}"`);
       
       const apiKey = process.env.TAVILY_API_KEY;

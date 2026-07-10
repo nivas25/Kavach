@@ -1,10 +1,10 @@
 import { createTool } from '@mastra/core/tools';
 import { z } from 'zod';
 import { qdrantClient, QDRANT_COLLECTIONS, VECTOR_CONFIG } from '../../lib/qdrant';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { enkryptService } from '../../services/enkryptService';
 
-// Initialize Gemini for embeddings
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY_1 || process.env.GEMINI_API_KEY_2 || process.env.GEMINI_API_KEY_3 || '');
+// Using a dedicated key for embeddings to avoid rate limits
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY_4;
 
 export const qdrantSearchTool = createTool({
   id: 'qdrantSearch',
@@ -16,13 +16,43 @@ export const qdrantSearchTool = createTool({
   }),
   execute: async ({ query, collection = 'risk_patterns', limit = 5 }: any) => {
     try {
-      
+      console.log(`[QdrantSearchTool] Enkrypt AI checking query: "${query}"`);
+      const securityCheck = await enkryptService.checkToolCall(query);
+      if (securityCheck.isBlocked) {
+        console.warn(`[QdrantSearchTool] Blocked by Enkrypt AI: ${securityCheck.reason}`);
+        return `Security Violation: Query blocked by Enkrypt AI guardrails. Reason: ${securityCheck.reason}`;
+      }
+
       console.log(`[QdrantSearchTool] Generating embedding for query: "${query}"`);
       
-      // 1. Generate embedding for the query
-      const model = genAI.getGenerativeModel({ model: "embedding-001" }); // Standard Gemini embedding model
-      const result = await model.embedContent(query);
-      const embedding = result.embedding.values;
+      // 1. Generate embedding using Gemini REST API directly
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:embedContent?key=${GEMINI_API_KEY}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'models/gemini-embedding-2',
+          content: {
+            parts: [{ text: query }]
+          }
+        })
+      });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`Gemini API Error: ${response.statusText} - ${errText}`);
+      }
+
+      const data = await response.json();
+      let embedding = data.embedding.values;
+
+      // Pad the embedding to match Qdrant's expected 3072 dimensions if necessary
+      if (embedding.length < VECTOR_CONFIG.DIMENSION) {
+        console.log(`[QdrantSearchTool] Padding vector from ${embedding.length} to ${VECTOR_CONFIG.DIMENSION} dimensions...`);
+        const padding = Array(VECTOR_CONFIG.DIMENSION - embedding.length).fill(0);
+        embedding = [...embedding, ...padding];
+      }
 
       // 2. Search Qdrant
       console.log(`[QdrantSearchTool] Searching collection: ${collection}`);

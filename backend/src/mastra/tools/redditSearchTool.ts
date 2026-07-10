@@ -1,5 +1,6 @@
 import { createTool } from '@mastra/core/tools';
 import { z } from 'zod';
+import { enkryptService } from '../../services/enkryptService';
 
 export const redditSearchTool = createTool({
   id: 'redditSearch',
@@ -9,6 +10,13 @@ export const redditSearchTool = createTool({
   }),
   execute: async ({ query }: any) => {
     try {
+      console.log(`[RedditSearchTool] Enkrypt AI checking query: "${query}"`);
+      const securityCheck = await enkryptService.checkToolCall(query);
+      if (securityCheck.isBlocked) {
+        console.warn(`[RedditSearchTool] Blocked by Enkrypt AI: ${securityCheck.reason}`);
+        return `Security Violation: Query blocked by Enkrypt AI guardrails. Reason: ${securityCheck.reason}`;
+      }
+
       const fullQuery = `site:reddit.com ${query}`;
       console.log(`[RedditSearchTool] Searching Reddit via Tavily for: "${fullQuery}"`);
       
