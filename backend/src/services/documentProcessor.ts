@@ -194,26 +194,15 @@ export class DocumentProcessorService {
       
       SCORING RUBRICS:
       
-      1. harmPotential: (1-10) How much financial or operational damage could this contract cause to the user?
-      1-2: Minimal / Standard NDA
-      5-6: Moderate / Restrictive covenants
-      9-10: Severe / Unlimited liability, loss of IP
-
-      2. legalStrength: (1-10) How enforceable are the draconian clauses in court?
-      1-2: Highly unenforceable (contrary to law)
-      5-6: Ambiguous (could go either way)
-      9-10: Ironclad (very hard to fight in court)
-
-      3. practicalLikelihood: (1-10) How likely is the counterparty to actually enforce these terms?
-      1-2: Very Unlikely (Almost never invoked / Rare, exists as deterrent)
-      5-6: Moderate (Invoked sometimes / Meaningful percentage)
-      9-10: Almost Certain (Very high probability / Will definitely affect user)
+      1. harmPotential: (1-10) Extract the explicit "Harm Score" provided by the Judge based on the knowledge base.
+      2. legalStrength: (1-10) Extract the explicit "Legal Score" provided by the Judge based on the knowledge base.
+      3. practicalLikelihood: (1-10) Extract the explicit "Likelihood Score" provided by the Judge based on the knowledge base.
 
       REQUIREMENTS:
       1. Output a strict JSON object with:
-         - "harmPotential": number 1-10
-         - "legalStrength": number 1-10
-         - "practicalLikelihood": number 1-10
+         - "harmPotential": number 1-10 (extracted exactly from the verdict)
+         - "legalStrength": number 1-10 (extracted exactly from the verdict)
+         - "practicalLikelihood": number 1-10 (extracted exactly from the verdict)
          - "summary": A concise, 2-3 sentence executive summary of the verdict and main risks.
 
       Verdict:

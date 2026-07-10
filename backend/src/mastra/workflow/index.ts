@@ -13,30 +13,38 @@ export const debateWorkflow = new Workflow({
   })
 } as any);
 
-const round1Step = createStep({
-  id: 'UserAdvocateInitial',
+const initialCritiquesStep = createStep({
+  id: 'InitialCritiques',
   execute: async ({ inputData }: any) => {
     const { contractData, threadId } = inputData as any;
 
-    const prompt = `Review the following contract clauses:\n\n${JSON.stringify(contractData, null, 2)}\n\nProvide your initial critique identifying potential risks to the user.`;
+    const advocatePrompt = `Review the following contract clauses:\n\n${JSON.stringify(contractData, null, 2)}\n\nProvide your initial critique identifying potential risks to the user.`;
+    const indiaPrompt = `Review the following contract clauses:\n\n${JSON.stringify(contractData, null, 2)}\n\nPlease provide a strict analysis under Indian Law identifying potential issues or unenforceable terms.`;
 
-    console.log(`\n\x1b[35m[AGENT: User Advocate]\x1b[0m Thinking...`);
-    const res = await userAdvocate.generate(prompt, { threadId } as any);
-    console.log(`\x1b[35m[AGENT: User Advocate]\x1b[0m Critique Generated:\n${res.text.substring(0, 300)}...\n`);
-    return { critique: res.text, threadId, contractData };
+    console.log(`\n\x1b[35m[AGENT: User Advocate & India Expert]\x1b[0m Thinking in parallel...`);
+    
+    const [advocateRes, indiaRes] = await Promise.all([
+      userAdvocate.generate(advocatePrompt, { threadId } as any),
+      indiaLegalExpert.generate(indiaPrompt, { threadId } as any)
+    ]);
+
+    console.log(`\x1b[35m[AGENT: User Advocate]\x1b[0m Critique Generated:\n${advocateRes.text.substring(0, 200)}...\n`);
+    console.log(`\x1b[33m[AGENT: India Legal Expert]\x1b[0m Analysis Generated:\n${indiaRes.text.substring(0, 200)}...\n`);
+    
+    return { critique: advocateRes.text, legalAnalysis: indiaRes.text, threadId, contractData };
   }
 } as any);
 
 const round2Step = createStep({
   id: 'CompanyDefenderRebuttal',
   execute: async ({ getStepResult }: any) => {
-    const data: any = getStepResult('UserAdvocateInitial');
-    const prompt = `The User Advocate has provided the following critique:\n\n${data.critique}\n\nPlease provide a vigorous corporate defense and rebuttal.`;
+    const data: any = getStepResult('InitialCritiques');
+    const prompt = `The User Advocate provided the following critique:\n\n${data.critique}\n\nAnd the India Legal Expert provided this analysis:\n\n${data.legalAnalysis}\n\nPlease provide a vigorous corporate defense and rebuttal addressing BOTH critiques.`;
 
     console.log(`\n\x1b[34m[AGENT: Company Defender]\x1b[0m Thinking...`);
     const res = await companyDefender.generate(prompt, { threadId: data.threadId } as any);
-    console.log(`\x1b[34m[AGENT: Company Defender]\x1b[0m Rebuttal Generated:\n${res.text.substring(0, 300)}...\n`);
-    return { rebuttal: res.text, threadId: data.threadId, critique: data.critique, contractData: data.contractData };
+    console.log(`\x1b[34m[AGENT: Company Defender]\x1b[0m Rebuttal Generated:\n${res.text.substring(0, 200)}...\n`);
+    return { rebuttal: res.text, threadId: data.threadId, critique: data.critique, legalAnalysis: data.legalAnalysis, contractData: data.contractData };
   }
 } as any);
 
@@ -48,53 +56,42 @@ const round3Step = createStep({
 
     console.log(`\n\x1b[35m[AGENT: User Advocate]\x1b[0m Rebutting...`);
     const res = await userAdvocate.generate(prompt, { threadId: data.threadId } as any);
-    console.log(`\x1b[35m[AGENT: User Advocate]\x1b[0m Counter-Rebuttal Generated:\n${res.text.substring(0, 300)}...\n`);
-    return { advocateRebuttal: res.text, threadId: data.threadId, critique: data.critique, rebuttal: data.rebuttal, contractData: data.contractData };
+    console.log(`\x1b[35m[AGENT: User Advocate]\x1b[0m Counter-Rebuttal Generated:\n${res.text.substring(0, 200)}...\n`);
+    return { advocateRebuttal: res.text, threadId: data.threadId, critique: data.critique, legalAnalysis: data.legalAnalysis, rebuttal: data.rebuttal, contractData: data.contractData };
   }
 } as any);
 
 const round4Step = createStep({
-  id: 'IndiaLegalExpertReview',
-  execute: async ({ getStepResult }: any) => {
-    const data: any = getStepResult('UserAdvocateRebuttal');
-    const prompt = `Review the following contract clauses:\n\n${JSON.stringify(data.contractData, null, 2)}\n\nAnd the ongoing debate so far:\n\nUser Advocate Critique:\n${data.critique}\n\nCompany Defender Rebuttal:\n${data.rebuttal}\n\nUser Advocate Counter-Rebuttal:\n${data.advocateRebuttal}\n\nPlease provide a strict analysis under Indian Law.`;
-
-    console.log(`\n\x1b[33m[AGENT: India Legal Expert]\x1b[0m Analyzing...`);
-    const res = await indiaLegalExpert.generate(prompt, { threadId: data.threadId } as any);
-    console.log(`\x1b[33m[AGENT: India Legal Expert]\x1b[0m Analysis Generated:\n${res.text.substring(0, 300)}...\n`);
-    return { legalAnalysis: res.text, threadId: data.threadId, critique: data.critique, rebuttal: data.rebuttal, advocateRebuttal: data.advocateRebuttal, contractData: data.contractData };
-  }
-} as any);
-
-const round5Step = createStep({
   id: 'NeutralJudgeVerdict',
   execute: async ({ getStepResult }: any) => {
-    const data: any = getStepResult('IndiaLegalExpertReview');
+    const data: any = getStepResult('UserAdvocateRebuttal');
     
     const transcript = `
     --- CONTRACT DATA ---
     ${JSON.stringify(data.contractData, null, 2)}
 
-    --- ROUND 1: USER ADVOCATE ---
+    --- ROUND 1 (Parallel): USER ADVOCATE CRITIQUE ---
     ${data.critique}
+
+    --- ROUND 1 (Parallel): INDIA LEGAL EXPERT ANALYSIS ---
+    ${data.legalAnalysis}
     
-    --- ROUND 2: COMPANY DEFENDER ---
+    --- ROUND 2: COMPANY DEFENDER REBUTTAL ---
     ${data.rebuttal}
     
-    --- ROUND 3: USER ADVOCATE ---
+    --- ROUND 3: USER ADVOCATE COUNTER-REBUTTAL ---
     ${data.advocateRebuttal}
-    
-    --- ROUND 4: INDIA LEGAL EXPERT ---
-    ${data.legalAnalysis}
     `;
 
-    const prompt = `You are the final judge. Review the entire thread below and the contract clauses. Please issue your final, balanced verdict.
+    const prompt = `You are the final judge. Review the entire thread below and the contract clauses. Please issue your final, balanced verdict. 
+    
+    CRITICAL INSTRUCTION: You MUST derive your final Harm Score, Legal Strength, and Likelihood Score based explicitly on the typical scores provided by the Qdrant knowledge base and the arguments made in the debate.
     
     THE DEBATE TRANSCRIPT:
     ${transcript}
     `;
 
-    console.log(`\n\x1b[32m[AGENT: Neutral Judge]\x1b[0m Reviewing full 4-round transcript...`);
+    console.log(`\n\x1b[32m[AGENT: Neutral Judge]\x1b[0m Reviewing full 3-round transcript...`);
     const res = await neutralJudge.generate(prompt, { threadId: data.threadId } as any);
     console.log(`\x1b[32m[AGENT: Neutral Judge]\x1b[0m Final Verdict Reached!\n`);
     
@@ -103,10 +100,9 @@ const round5Step = createStep({
 } as any);
 
 debateWorkflow
-  .then(round1Step)
+  .then(initialCritiquesStep)
   .then(round2Step)
   .then(round3Step)
-  .then(round4Step)
-  .then(round5Step);
+  .then(round4Step);
 
 debateWorkflow.commit();

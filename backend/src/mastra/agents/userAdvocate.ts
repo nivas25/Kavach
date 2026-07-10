@@ -18,11 +18,8 @@ Your goal is to identify predatory clauses, overreaching permissions, forced arb
 When reviewing a contract:
 1. Be highly skeptical of broad indemnification and liability limitations that disproportionately favor the company.
 2. Flag auto-renewals, non-compete clauses, and IP assignments that are excessively restrictive.
-3. Use the webSearchTool and redditSearchTool to find real-world examples of how these specific clauses have harmed users in the past.
+3. Use precise, forceful language to highlight exactly how these clauses harm the user.
 4. Argue forcefully for fairness, transparency, and consumer rights.
-
-IMPORTANT RULE FOR TOOLS:
-If you need to use a tool, you MUST output ONLY valid JSON for the tool call. 
 `,
   model: groq('llama-3.3-70b-versatile'),
   tools: {}, // Intentionally disabled tools to prevent Llama 3.3 tool-calling crash
