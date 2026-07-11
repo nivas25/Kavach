@@ -21,7 +21,7 @@ type ToolBadge = {
 };
 
 type ChatMessage = {
-  id: number;
+  id: number | string;
   role: AgentRole;
   round?: number;
   text: string;
@@ -106,6 +106,23 @@ export default function AnalysisPage() {
         
         if (data.type === 'typing') {
           setIsTyping(data.agent);
+        } else if (data.type === 'stream_start') {
+          setIsTyping(data.agent);
+          setVisibleMessages(prev => {
+            if (prev.find(m => m.id === data.msg.id)) return prev;
+            return [...prev, data.msg];
+          });
+        } else if (data.type === 'stream_chunk') {
+          setVisibleMessages(prev => {
+            const updated = [...prev];
+            const idx = updated.findIndex(m => m.id === data.msg.id);
+            if (idx !== -1) {
+              updated[idx] = { ...updated[idx], text: updated[idx].text + data.msg.text };
+            }
+            return updated;
+          });
+        } else if (data.type === 'stream_end') {
+          setIsTyping(null);
         } else if (data.type === 'message') {
           setIsTyping(null);
           setVisibleMessages(prev => [...prev, { ...data.msg, id: Date.now() }]);

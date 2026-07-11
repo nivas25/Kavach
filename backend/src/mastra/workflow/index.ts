@@ -26,20 +26,43 @@ const initialCritiquesStep = createStep({
     if (emit) emit({ type: 'status', message: 'Analyzing clauses...' });
     
     console.log(`\n\x1b[35m[AGENT: User Advocate & India Expert]\x1b[0m Thinking in parallel...`);
-    if (emit) emit({ type: 'typing', agent: 'advocate' });
     
-    const [advocateRes, indiaRes] = await Promise.all([
-      userAdvocate.generate(advocatePrompt, { threadId } as any),
-      indiaLegalExpert.generate(indiaPrompt, { threadId } as any)
+    const advocateMsgId = `msg_${Date.now()}_advocate`;
+    const indiaMsgId = `msg_${Date.now()}_expert`;
+    
+    if (emit) {
+      emit({ type: 'stream_start', msg: { id: advocateMsgId, role: 'advocate', round: 1, text: '' } });
+      emit({ type: 'stream_start', msg: { id: indiaMsgId, role: 'expert', round: 1, text: '' } });
+    }
+    
+    const [advocateStream, indiaStream] = await Promise.all([
+      userAdvocate.stream(advocatePrompt, { threadId } as any),
+      indiaLegalExpert.stream(indiaPrompt, { threadId } as any)
     ]);
 
-    console.log(`\x1b[35m[AGENT: User Advocate]\x1b[0m Critique Generated:\n${advocateRes.text.substring(0, 200)}...\n`);
-    if (emit) emit({ type: 'message', msg: { role: 'advocate', round: 1, text: advocateRes.text } });
+    let advocateText = '';
+    let indiaText = '';
 
-    console.log(`\x1b[33m[AGENT: India Legal Expert]\x1b[0m Analysis Generated:\n${indiaRes.text.substring(0, 200)}...\n`);
-    if (emit) emit({ type: 'message', msg: { role: 'expert', round: 1, text: indiaRes.text } });
+    await Promise.all([
+      (async () => {
+        for await (const chunk of advocateStream.textStream) {
+          advocateText += chunk;
+          if (emit) emit({ type: 'stream_chunk', msg: { id: advocateMsgId, text: chunk } });
+        }
+        if (emit) emit({ type: 'stream_end' });
+        console.log(`\x1b[35m[AGENT: User Advocate]\x1b[0m Critique Generated:\n${advocateText.substring(0, 200)}...\n`);
+      })(),
+      (async () => {
+        for await (const chunk of indiaStream.textStream) {
+          indiaText += chunk;
+          if (emit) emit({ type: 'stream_chunk', msg: { id: indiaMsgId, text: chunk } });
+        }
+        if (emit) emit({ type: 'stream_end' });
+        console.log(`\x1b[33m[AGENT: India Legal Expert]\x1b[0m Analysis Generated:\n${indiaText.substring(0, 200)}...\n`);
+      })()
+    ]);
     
-    return { critique: advocateRes.text, legalAnalysis: indiaRes.text, threadId, contractData, userType, emit };
+    return { critique: advocateText, legalAnalysis: indiaText, threadId, contractData, userType, emit };
   }
 } as any);
 
@@ -50,14 +73,21 @@ const round2Step = createStep({
     const prompt = `The User Advocate (acting for a ${data.userType}) provided the following critique:\n\n${data.critique}\n\nAnd the India Legal Expert provided this analysis:\n\n${data.legalAnalysis}\n\nPlease provide a vigorous corporate defense and rebuttal addressing BOTH critiques.`;
 
     console.log(`\n\x1b[34m[AGENT: Company Defender]\x1b[0m Thinking...`);
-    if (data.emit) data.emit({ type: 'typing', agent: 'defender' });
-
-    const res = await companyDefender.generate(prompt, { threadId: data.threadId } as any);
-    console.log(`\x1b[34m[AGENT: Company Defender]\x1b[0m Rebuttal Generated:\n${res.text.substring(0, 200)}...\n`);
     
-    if (data.emit) data.emit({ type: 'message', msg: { role: 'defender', round: 1, text: res.text } });
+    const defenderMsgId = `msg_${Date.now()}_defender`;
+    if (data.emit) data.emit({ type: 'stream_start', msg: { id: defenderMsgId, role: 'defender', round: 1, text: '' } });
 
-    return { rebuttal: res.text, threadId: data.threadId, critique: data.critique, legalAnalysis: data.legalAnalysis, contractData: data.contractData, userType: data.userType, emit: data.emit };
+    const streamRes = await companyDefender.stream(prompt, { threadId: data.threadId } as any);
+    let fullText = '';
+    for await (const chunk of streamRes.textStream) {
+      fullText += chunk;
+      if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: defenderMsgId, text: chunk } });
+    }
+    if (data.emit) data.emit({ type: 'stream_end' });
+
+    console.log(`\x1b[34m[AGENT: Company Defender]\x1b[0m Rebuttal Generated:\n${fullText.substring(0, 200)}...\n`);
+    
+    return { rebuttal: fullText, threadId: data.threadId, critique: data.critique, legalAnalysis: data.legalAnalysis, contractData: data.contractData, userType: data.userType, emit: data.emit };
   }
 } as any);
 
@@ -68,14 +98,21 @@ const round3Step = createStep({
     const prompt = `The Company Defender provided this rebuttal:\n\n${data.rebuttal}\n\nPlease counter their arguments strongly to protect the ${data.userType}.`;
 
     console.log(`\n\x1b[35m[AGENT: User Advocate]\x1b[0m Rebutting...`);
-    if (data.emit) data.emit({ type: 'typing', agent: 'advocate' });
-
-    const res = await userAdvocate.generate(prompt, { threadId: data.threadId } as any);
-    console.log(`\x1b[35m[AGENT: User Advocate]\x1b[0m Counter-Rebuttal Generated:\n${res.text.substring(0, 200)}...\n`);
     
-    if (data.emit) data.emit({ type: 'message', msg: { role: 'advocate', round: 2, text: res.text } });
+    const advocateMsgId2 = `msg_${Date.now()}_advocate_2`;
+    if (data.emit) data.emit({ type: 'stream_start', msg: { id: advocateMsgId2, role: 'advocate', round: 2, text: '' } });
 
-    return { advocateRebuttal: res.text, threadId: data.threadId, critique: data.critique, legalAnalysis: data.legalAnalysis, rebuttal: data.rebuttal, contractData: data.contractData, userType: data.userType, emit: data.emit };
+    const streamRes = await userAdvocate.stream(prompt, { threadId: data.threadId } as any);
+    let fullText = '';
+    for await (const chunk of streamRes.textStream) {
+      fullText += chunk;
+      if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: advocateMsgId2, text: chunk } });
+    }
+    if (data.emit) data.emit({ type: 'stream_end' });
+
+    console.log(`\x1b[35m[AGENT: User Advocate]\x1b[0m Counter-Rebuttal Generated:\n${fullText.substring(0, 200)}...\n`);
+    
+    return { advocateRebuttal: fullText, threadId: data.threadId, critique: data.critique, legalAnalysis: data.legalAnalysis, rebuttal: data.rebuttal, contractData: data.contractData, userType: data.userType, emit: data.emit };
   }
 } as any);
 
@@ -111,15 +148,23 @@ const round4Step = createStep({
     `;
 
     console.log(`\n\x1b[32m[AGENT: Neutral Judge]\x1b[0m Reviewing full 3-round transcript...`);
-    if (data.emit) data.emit({ type: 'typing', agent: 'judge' });
+    
+    const judgeMsgId = `msg_${Date.now()}_judge`;
+    if (data.emit) data.emit({ type: 'stream_start', msg: { id: judgeMsgId, role: 'judge', round: 3, text: '' } });
 
-    const res = await neutralJudge.generate(prompt, { threadId: data.threadId } as any);
+    const streamRes = await neutralJudge.stream(prompt, { threadId: data.threadId } as any);
+    let fullText = '';
+    for await (const chunk of streamRes.textStream) {
+      fullText += chunk;
+      if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: judgeMsgId, text: chunk } });
+    }
+    if (data.emit) data.emit({ type: 'stream_end' });
+
     console.log(`\x1b[32m[AGENT: Neutral Judge]\x1b[0m Final Verdict Reached!\n`);
     
-    if (data.emit) data.emit({ type: 'message', msg: { role: 'judge', round: 3, text: res.text } });
-    if (data.emit) data.emit({ type: 'verdict', finalVerdict: res.text });
+    if (data.emit) data.emit({ type: 'verdict', finalVerdict: fullText });
     
-    return { finalVerdict: res.text, threadId: data.threadId, transcript };
+    return { finalVerdict: fullText, threadId: data.threadId, transcript };
   }
 } as any);
 
