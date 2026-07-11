@@ -18,8 +18,8 @@ const server = Fastify({
 
 server.register(cors, {
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://your-domain.com'] // Replace with your production domain
-    : true,   // Allow any origin in dev (reflects the request origin)
+    ? ['https://kavach25.vercel.app', 'http://localhost:3000'] 
+    : true,   // Allow any origin in dev
   credentials: true,
 });
 
