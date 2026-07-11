@@ -5,6 +5,7 @@ import { ArrowLeft, ShieldAlert, FileText, Bot, Scale, Activity, Gavel, CheckCir
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/app/actions/auth";
 import { User } from "@supabase/supabase-js";
@@ -69,11 +70,48 @@ export default function AnalysisPage() {
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // TODO: Connect to Fastify SSE stream in Phase 2
-    // const sse = new EventSource('/api/analyze/stream');
-    // sse.onmessage = (e) => { ... }
-    // return () => sse.close();
-  }, []);
+    if (!sessionId) return;
+    
+    // Connect to the Fastify SSE stream
+    const fastifyUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+    const sse = new EventSource(`${fastifyUrl}/api/documents/${sessionId}/stream`);
+    
+    // Move to Debate Tab automatically since Clauses were parsed in Phase 2
+    setProgressStatus(prev => ({ ...prev, clauses: 'completed', debate: 'running' }));
+    setUnlockedTabs(prev => Array.from(new Set([...prev, 'debate'])));
+    setActiveTab('debate');
+
+    sse.onmessage = (e) => {
+      try {
+        const data = JSON.parse(e.data);
+        
+        if (data.type === 'typing') {
+          setIsTyping(data.agent);
+        } else if (data.type === 'message') {
+          setIsTyping(null);
+          setVisibleMessages(prev => [...prev, { ...data.msg, id: Date.now() }]);
+        } else if (data.type === 'verdict') {
+          setIsTyping(null);
+          setShowVerdict(true);
+          setProgressStatus(prev => ({ ...prev, debate: 'completed' }));
+        } else if (data.type === 'complete') {
+          sse.close();
+        } else if (data.type === 'error') {
+          console.error("SSE Error:", data.error || data.message);
+          sse.close();
+        }
+      } catch (err) {
+        console.error("Error parsing SSE data", err);
+      }
+    };
+
+    sse.onerror = (err) => {
+      console.error("EventSource failed:", err);
+      sse.close();
+    };
+
+    return () => sse.close();
+  }, [sessionId]);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });

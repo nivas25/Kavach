@@ -2,9 +2,10 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import * as dotenv from 'dotenv';
 import path from 'path';
-import { getRedisInfo } from './lib/redis';
+import { getRedisInfo, redis } from './lib/redis';
 import { pingSupabase } from './lib/supabase';
 import { DocumentProcessorService } from './services/documentProcessor';
+import { debateWorkflow } from './mastra/workflow';
 import multipart from '@fastify/multipart';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -102,6 +103,66 @@ server.post('/api/documents/upload', async (request, reply) => {
     server.log.error(error);
     return reply.code(500).send({ error: error.message });
   }
+});
+
+// ═══ Phase 4 & 5: Analysis Stream ════════════
+server.get('/api/documents/:sessionId/stream', async (request, reply) => {
+  const { sessionId } = request.params as { sessionId: string };
+  
+  reply.raw.setHeader('Content-Type', 'text/event-stream');
+  reply.raw.setHeader('Cache-Control', 'no-cache');
+  reply.raw.setHeader('Connection', 'keep-alive');
+  // Need to flush headers to establish SSE connection immediately
+  reply.raw.flushHeaders();
+
+  // Fetch document from Redis
+  const doc = await redis.get(`doc:${sessionId}`);
+  if (!doc) {
+    reply.raw.write(`data: ${JSON.stringify({ type: 'error', error: "Session not found" })}\n\n`);
+    reply.raw.end();
+    return reply;
+  }
+
+  const parsedDoc = typeof doc === 'string' ? JSON.parse(doc) : doc;
+
+  const emit = (data: any) => {
+    reply.raw.write(`data: ${JSON.stringify(data)}\n\n`);
+  };
+
+  try {
+    emit({ type: 'status', message: 'Starting analysis workflow...' });
+
+    // Execute Mastra Workflow
+    const run = await debateWorkflow.createRun({ runId: sessionId });
+    const debateResult = await run.start({
+      inputData: {
+        contractData: parsedDoc.extractedData,
+        threadId: sessionId,
+        userType: parsedDoc.userType || 'User',
+        emit
+      }
+    });
+
+    const finalVerdictText = (debateResult as any).result?.finalVerdict || "Debate failed to reach a final verdict.";
+
+    // Score the verdict
+    const scoreData = await processor.calculateFinalScore(finalVerdictText);
+    await processor.updateFinalState(sessionId, scoreData, finalVerdictText);
+
+    emit({ 
+      type: 'complete', 
+      scoreData, 
+      finalVerdictText 
+    });
+
+  } catch (err: any) {
+    server.log.error(err);
+    emit({ type: 'error', message: err.message });
+  } finally {
+    reply.raw.end();
+  }
+  
+  return reply;
 });
 
 const start = async () => {
