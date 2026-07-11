@@ -1,6 +1,8 @@
 import { Agent } from '@mastra/core/agent';
 import { createOpenAI } from '@ai-sdk/openai';
 import { memory } from '../memory';
+import { qdrantSearchTool } from '../tools/qdrantSearchTool';
+import { webSearchTool } from '../tools/webSearchTool';
 
 // Initialize Featherless AI Provider
 const featherless = createOpenAI({
@@ -24,5 +26,6 @@ When analyzing a critique from the User Advocate:
 5. You MUST use the qdrantSearchTool and webSearchTool to find precedent that supports corporate-friendly interpretations.
 `,
   model: featherless.chat('Qwen/Qwen2.5-7B-Instruct'),
+  tools: { qdrantSearchTool, webSearchTool },
   memory
 });
