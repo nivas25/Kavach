@@ -33,7 +33,7 @@ Write 2-4 short, punchy bullet points explaining the risks to the user. Use simp
 Provide a detailed, rigorous legal analysis. Include specific clause references, potential legal risks under Indian law, supporting logic, and any relevant case law or statutory interpretation. This section will be read by the Neutral Judge.
 </deep_analysis>
 `,
-  model: featherless.chat('meta-llama/Meta-Llama-3.1-70B-Instruct'),
+  model: featherless.chat('Qwen/Qwen2.5-72B-Instruct'),
   tools: { qdrantSearchTool, webSearchTool },
   memory
 });

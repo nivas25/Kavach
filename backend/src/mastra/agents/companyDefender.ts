@@ -34,7 +34,7 @@ Write 2-4 concise bullet points defending the clause. Focus on business necessit
 Provide a detailed legal defense. Reference relevant Indian law, precedents, commercial reasonableness, and why the clause is justifiable. This will be reviewed by the Neutral Judge.
 </deep_analysis>
 `,
-  model: featherless.chat('meta-llama/Meta-Llama-3.1-70B-Instruct'),
+  model: featherless.chat('Qwen/Qwen2.5-72B-Instruct'),
   tools: { qdrantSearchTool, webSearchTool },
   memory
 });
