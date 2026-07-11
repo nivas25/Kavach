@@ -1,1 +1,0 @@
-import { userAdvocate } from './src/mastra/agents/userAdvocate'; async function test() { const res = await userAdvocate.stream('say hello in 5 words'); for await (const chunk of res.textStream) { process.stdout.write(chunk); } } test();

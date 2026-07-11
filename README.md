@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kavach - Agentic Contract Review System
 
-## Getting Started
+Kavach is an advanced, AI-powered contract review system that employs a multi-agent debate architecture to analyze legal documents. It automatically extracts clauses, assesses risks, and hosts a live debate between a User Advocate, an India Legal Expert, and a Company Defender, culminating in a balanced verdict from a Neutral Judge.
 
-First, run the development server:
+## Architecture
 
+The system is split into two parts:
+1. **Frontend:** A Next.js application providing a modern, rich UI with real-time SSE streaming for the debate room.
+2. **Backend:** A Fastify & Mastra-powered Node.js server orchestrating complex multi-agent workflows, utilizing Qdrant (Vector DB), Upstash Redis (Caching), and Supabase.
+
+---
+
+## Local Development
+
+### 1. Backend Setup
+Navigate to the `backend` directory:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd backend
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create a `.env` file using the provided template:
+```bash
+cp .env.example .env
+```
+Fill in the necessary API keys (OpenAI, Featherless, Qdrant, Upstash Redis, etc.).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Run the backend in development mode:
+```bash
+npm run dev
+```
+The backend will run on `http://localhost:8080`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. Frontend Setup
+Navigate to the `frontend` directory:
+```bash
+cd frontend
+npm install
+```
 
-## Learn More
+Create a `.env.local` file using the template:
+```bash
+cp .env.example .env.local
+```
+Ensure `NEXT_PUBLIC_API_URL` points to your local backend (`http://localhost:8080`).
 
-To learn more about Next.js, take a look at the following resources:
+Run the frontend in development mode:
+```bash
+npm run dev
+```
+The frontend will be available at `http://localhost:3000`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Production Deployment
 
-## Deploy on Vercel
+### Deploying the Backend (Railway)
+The backend is configured to be deployed easily on [Railway](https://railway.app/).
+1. Create a new project in Railway and link this GitHub repository.
+2. Set the **Root Directory** to `/backend`.
+3. Railway will automatically use the provided `railway.json` and Nixpacks to build and start the server.
+4. Copy the environment variables from `backend/.env.example` into your Railway project's **Variables** settings.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Deploying the Frontend (Vercel)
+The frontend is configured for a seamless deployment on [Vercel](https://vercel.com/).
+1. Create a new project in Vercel and import this repository.
+2. During the import step, set the **Root Directory** to `frontend`.
+3. Vercel will automatically detect the Next.js framework.
+4. In the Environment Variables section, set `NEXT_PUBLIC_API_URL` to your live Railway backend URL (e.g., `https://kavach-backend.up.railway.app`).
+5. Click **Deploy**.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Technical Stack
+- **Frameworks:** Next.js (React), Fastify (Node.js)
+- **AI / Agentic Framework:** Mastra, AI SDK
+- **Models:** OpenAI (`gpt-4o-mini`), Featherless (`Qwen2.5-7B-Instruct`)
+- **Infrastructure:** Qdrant (Vector Search), Upstash (Redis), Supabase (PostgreSQL)
+- **Styling:** Tailwind CSS + Framer Motion
