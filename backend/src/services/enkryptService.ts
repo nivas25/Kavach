@@ -1,11 +1,29 @@
 export class EnkryptService {
   private apiKey: string;
-  
+  private cache: Map<string, { result: any; timestamp: number }>;
+  private CACHE_TTL = 1000 * 60 * 5; // 5 minutes
+
   constructor() {
     this.apiKey = process.env.ENKRYPT_API_KEY || '';
+    this.cache = new Map();
     if (!this.apiKey) {
       console.warn("ENKRYPT_API_KEY is not defined. Security checks will run in dry-mode.");
     }
+  }
+
+  private async fetchWithRetry(url: string, options: RequestInit, retries = 3, delay = 1000): Promise<Response> {
+    for (let i = 0; i < retries; i++) {
+      const response = await fetch(url, options);
+      if (response.ok) return response;
+      if (response.status === 429) {
+        console.warn(`[Enkrypt AI] Rate limited (429). Retrying in ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        delay *= 2; // Exponential backoff
+      } else {
+        return response; // Return other errors immediately
+      }
+    }
+    throw new Error(`Failed after ${retries} retries`);
   }
 
   /**
@@ -15,8 +33,14 @@ export class EnkryptService {
   async checkToolCall(query: string): Promise<{ isBlocked: boolean; reason: string }> {
     if (!this.apiKey) return { isBlocked: false, reason: 'Dry mode (No API Key)' };
 
+    const cacheKey = `tool:${query}`;
+    const cached = this.cache.get(cacheKey);
+    if (cached && Date.now() - cached.timestamp < this.CACHE_TTL) {
+      return cached.result;
+    }
+
     try {
-      const response = await fetch('https://api.enkryptai.com/guardrails/detect', {
+      const response = await this.fetchWithRetry('https://api.enkryptai.com/guardrails/detect', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,11 +66,9 @@ export class EnkryptService {
       let reason = 'Safe';
 
       if (data.summary) {
-        // If toxicity is an array with items, it's flagged
         if (Array.isArray(data.summary.toxicity) && data.summary.toxicity.length > 0) {
           isBlocked = true;
         }
-        // If injection_attack is a high float, or an array with items
         if (data.summary.injection_attack > 0.7 || (Array.isArray(data.summary.injection_attack) && data.summary.injection_attack.length > 0)) {
           isBlocked = true;
         }
@@ -56,7 +78,9 @@ export class EnkryptService {
         reason = data.result_message || 'Flagged by Enkrypt AI Guardrails';
       }
 
-      return { isBlocked, reason };
+      const result = { isBlocked, reason };
+      this.cache.set(cacheKey, { result, timestamp: Date.now() });
+      return result;
     } catch (error) {
       console.error("[Enkrypt AI] Exception during tool call check:", error);
       return { isBlocked: false, reason: "Security Service Unreachable" };
@@ -74,7 +98,7 @@ export class EnkryptService {
     if (!this.apiKey) return { score: 0, explanation: 'Dry mode (No API Key)', isBlocked: false };
 
     try {
-      const response = await fetch('https://api.enkryptai.com/guardrails/detect', {
+      const response = await this.fetchWithRetry('https://api.enkryptai.com/guardrails/detect', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +123,6 @@ export class EnkryptService {
       let isBlocked = false;
 
       if (data.summary) {
-        // Evaluate hallucination / bias based on payload
         if (Array.isArray(data.summary.bias) && data.summary.bias.length > 0) {
           hallucinationScore = 0.8;
           isBlocked = true;
@@ -109,9 +132,6 @@ export class EnkryptService {
         }
       }
 
-      // If we don't have explicit hallucination metrics in this endpoint, 
-      // we use the toxicity/bias as a proxy, or safely default.
-      
       return {
         score: Math.round(hallucinationScore * 100) || 5,
         explanation: data.result_message || 'Analyzed by Enkrypt AI Policy Engine.',

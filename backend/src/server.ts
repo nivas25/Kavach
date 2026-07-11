@@ -112,6 +112,24 @@ server.post('/api/documents/upload', async (request, reply) => {
 });
 
 // ═══ Phase 4 & 5: Analysis Stream ════════════
+server.get('/api/documents/:sessionId', async (request, reply) => {
+  const { sessionId } = request.params as { sessionId: string };
+  
+  const doc = await redis.get(`doc:${sessionId}`);
+  if (!doc) {
+    return reply.status(404).send({ error: "Session not found" });
+  }
+
+  const parsedDoc = typeof doc === 'string' ? JSON.parse(doc) : doc;
+  
+  // Return the extracted data so the frontend can build the clauses view
+  return reply.send({
+    id: sessionId,
+    userType: parsedDoc.userType || 'User',
+    extractedData: parsedDoc.extractedData
+  });
+});
+
 server.get('/api/documents/:sessionId/stream', async (request, reply) => {
   const { sessionId } = request.params as { sessionId: string };
   

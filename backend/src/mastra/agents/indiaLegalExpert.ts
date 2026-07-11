@@ -1,6 +1,8 @@
 import { Agent } from '@mastra/core/agent';
 import { memory } from '../memory';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
+import { qdrantSearchTool } from '../tools/qdrantSearchTool';
+import { webSearchTool } from '../tools/webSearchTool';
 
 const google = createGoogleGenerativeAI({
   apiKey: process.env.GEMINI_API_KEY_1,
@@ -21,6 +23,6 @@ When reviewing a contract or engaging in a debate:
 5. Provide actionable advice on how to modify the contract to be enforceable in India.
 `,
   model: google('gemini-2.5-flash'),
-  tools: {},
+  tools: { qdrantSearchTool, webSearchTool },
   memory
 });

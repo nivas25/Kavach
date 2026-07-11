@@ -1,6 +1,8 @@
 import { Agent } from '@mastra/core/agent';
 import { memory } from '../memory';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
+import { qdrantSearchTool } from '../tools/qdrantSearchTool';
+import { webSearchTool } from '../tools/webSearchTool';
 
 const google = createGoogleGenerativeAI({
   apiKey: process.env.GEMINI_API_KEY_1,
@@ -19,8 +21,9 @@ When reviewing a contract:
 2. Flag auto-renewals, non-compete clauses, and IP assignments that are excessively restrictive.
 3. Use precise, forceful language to highlight exactly how these clauses harm the user.
 4. Argue forcefully for fairness, transparency, and consumer rights.
+5. You MUST use the qdrantSearchTool and webSearchTool to find precedent or risks.
 `,
   model: google('gemini-2.5-flash'),
-  tools: {},
+  tools: { qdrantSearchTool, webSearchTool },
   memory
 });
