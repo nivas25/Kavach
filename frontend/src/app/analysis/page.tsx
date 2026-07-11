@@ -169,26 +169,26 @@ export default function AnalysisPage() {
 
     const getSectionIcon = (key: string) => {
       const k = key.toLowerCase();
-      if (k.includes('part')) return <Users className="w-5 h-5 text-[#C69C6D]" />;
-      if (k.includes('date') || k.includes('time')) return <Calendar className="w-5 h-5 text-[#C69C6D]" />;
-      if (k.includes('oblig') || k.includes('respons')) return <Briefcase className="w-5 h-5 text-[#C69C6D]" />;
-      if (k.includes('finan') || k.includes('pay') || k.includes('fee')) return <DollarSign className="w-5 h-5 text-[#C69C6D]" />;
-      if (k.includes('law') || k.includes('juris') || k.includes('govern')) return <Landmark className="w-5 h-5 text-[#C69C6D]" />;
-      if (k.includes('critic') || k.includes('risk') || k.includes('liab')) return <AlertCircle className="w-5 h-5 text-red-500" />;
-      return <FileCheck2 className="w-5 h-5 text-gray-500" />;
+      if (k.includes('part')) return { icon: <Users className="w-5 h-5 text-blue-600" />, bg: "bg-blue-50 border border-blue-100" };
+      if (k.includes('date') || k.includes('time')) return { icon: <Calendar className="w-5 h-5 text-purple-600" />, bg: "bg-purple-50 border border-purple-100" };
+      if (k.includes('oblig') || k.includes('respons')) return { icon: <Briefcase className="w-5 h-5 text-indigo-600" />, bg: "bg-indigo-50 border border-indigo-100" };
+      if (k.includes('finan') || k.includes('pay') || k.includes('fee')) return { icon: <DollarSign className="w-5 h-5 text-emerald-600" />, bg: "bg-emerald-50 border border-emerald-100" };
+      if (k.includes('law') || k.includes('juris') || k.includes('govern')) return { icon: <Landmark className="w-5 h-5 text-amber-600" />, bg: "bg-amber-50 border border-amber-100" };
+      if (k.includes('critic') || k.includes('risk') || k.includes('liab')) return { icon: <AlertCircle className="w-5 h-5 text-red-600" />, bg: "bg-red-50 border border-red-100" };
+      return { icon: <FileCheck2 className="w-5 h-5 text-gray-700" />, bg: "bg-gray-100 border border-gray-200" };
     };
 
-    const renderSmartValue = (val: any): React.ReactNode => {
+    const renderSmartValue = (val: any, themeColor: string = "text-gray-900"): React.ReactNode => {
       if (Array.isArray(val)) {
         if (val.length > 0 && typeof val[0] === 'object' && val[0] !== null) {
           return (
             <div className="space-y-3 mt-2">
               {val.map((item, idx) => (
-                <div key={idx} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex flex-col gap-2">
+                <div key={idx} className="bg-white p-5 rounded-xl border border-white/50 shadow-sm flex flex-col gap-3">
                   {Object.entries(item).map(([k, v]) => (
                     <div key={k} className="flex flex-col">
-                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{k.replace(/([A-Z])/g, ' $1').trim()}</span>
-                      <span className="text-[14px] text-gray-800 font-medium leading-relaxed mt-0.5">{String(v)}</span>
+                      <span className="text-[11px] font-extrabold text-black/40 uppercase tracking-widest">{k.replace(/([A-Z])/g, ' $1').trim()}</span>
+                      <span className="text-[15px] text-black font-semibold leading-relaxed mt-0.5">{String(v)}</span>
                     </div>
                   ))}
                 </div>
@@ -197,11 +197,11 @@ export default function AnalysisPage() {
           );
         }
         return (
-          <ul className="space-y-2 mt-2 pl-1">
+          <ul className="space-y-3 mt-2 pl-1">
             {val.map((item, idx) => (
-              <li key={idx} className="flex items-start gap-2">
-                <ChevronRight className="w-4 h-4 text-[#C69C6D] mt-0.5 shrink-0" />
-                <span className="text-[14px] text-[#444746] leading-relaxed">{String(item)}</span>
+              <li key={idx} className="flex items-start gap-3">
+                <ChevronRight className={`w-5 h-5 ${themeColor.split(' ')[0]} mt-0.5 shrink-0`} />
+                <span className="text-[16px] text-black font-medium leading-relaxed">{String(item)}</span>
               </li>
             ))}
           </ul>
@@ -210,45 +210,48 @@ export default function AnalysisPage() {
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
             {Object.entries(val).map(([k, v]) => (
-              <div key={k} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">{k.replace(/([A-Z])/g, ' $1').trim()}</h4>
-                <div className="text-[14px] text-gray-800 font-medium leading-relaxed">{renderSmartValue(v)}</div>
+              <div key={k} className="bg-white p-5 rounded-xl border border-white/50 shadow-sm">
+                <h4 className="text-[11px] font-extrabold text-black/40 uppercase tracking-widest mb-1.5">{k.replace(/([A-Z])/g, ' $1').trim()}</h4>
+                <div className="text-[15px] text-black font-semibold leading-relaxed">{renderSmartValue(v, themeColor)}</div>
               </div>
             ))}
           </div>
         );
       } else {
-        return <span className="text-[#1f1f1f] text-[15px] leading-relaxed whitespace-pre-wrap">{String(val)}</span>;
+        return <span className="text-black text-[16px] font-medium leading-relaxed whitespace-pre-wrap">{String(val)}</span>;
       }
     };
 
     return (
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-8 max-w-4xl mx-auto h-full flex flex-col">
         <div className="mb-10 shrink-0">
-          <h2 className="text-3xl font-bold text-[#1f1f1f] tracking-tight mb-2 flex items-center gap-3">
-            <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center">
-              <FileText className="w-5 h-5 text-[#1f1f1f]" />
+          <h2 className="text-3xl font-bold text-black tracking-tight mb-2 flex items-center gap-3">
+            <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center border border-gray-200">
+              <FileText className="w-5 h-5 text-black" />
             </div>
-            {title} - Breakdown
+            {title}
           </h2>
         </div>
         
         <div className="flex-1 overflow-y-auto custom-scrollbar pb-16 pr-6">
           <div className="space-y-8">
-            {fieldsToRender.map(([key, value], idx) => (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }} key={idx} className="bg-gray-50/50 rounded-3xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-4 mb-6 border-b border-gray-200 pb-4">
-                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center shrink-0">
-                    {getSectionIcon(key)}
+            {fieldsToRender.map(([key, value], idx) => {
+              const style = getSectionIcon(key);
+              return (
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }} key={idx} className={`${style.bg} rounded-3xl p-8 shadow-sm hover:shadow-md transition-all duration-200`}>
+                  <div className="flex items-center gap-4 mb-6 border-b border-black/10 pb-5">
+                    <div className="w-12 h-12 bg-white rounded-2xl shadow-sm border border-white flex items-center justify-center shrink-0">
+                      {style.icon}
+                    </div>
+                    <h3 className="text-2xl font-black text-black capitalize tracking-tight">{key.replace(/([A-Z])/g, ' $1').trim()}</h3>
                   </div>
-                  <h3 className="text-xl font-bold text-[#1f1f1f] capitalize tracking-tight">{key.replace(/([A-Z])/g, ' $1').trim()}</h3>
-                </div>
-                
-                <div className="pl-1">
-                  {renderSmartValue(value)}
-                </div>
-              </motion.div>
-            ))}
+                  
+                  <div className="pl-1">
+                    {renderSmartValue(value, style.icon.props.className)}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </motion.div>
