@@ -50,7 +50,8 @@ const initialCritiquesStep = createStep({
             advocateText += chunk.textDelta;
             if (emit) emit({ type: 'stream_chunk', msg: { id: advocateMsgId, text: chunk.textDelta } });
           } else if (chunk.type === 'tool-call') {
-            if (emit) emit({ type: 'stream_tool', msg: { id: advocateMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName, args: chunk.args } });
+            console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
+            if (emit) emit({ type: 'stream_tool', msg: { id: advocateMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
           } else if (chunk.type === 'tool-result') {
             const isBlocked = typeof chunk.result === 'string' && chunk.result.toLowerCase().includes('enkrypt');
             if (emit) emit({ type: 'stream_tool_result', msg: { id: advocateMsgId, toolCallId: chunk.toolCallId, isBlocked } });
@@ -65,7 +66,8 @@ const initialCritiquesStep = createStep({
             indiaText += chunk.textDelta;
             if (emit) emit({ type: 'stream_chunk', msg: { id: indiaMsgId, text: chunk.textDelta } });
           } else if (chunk.type === 'tool-call') {
-            if (emit) emit({ type: 'stream_tool', msg: { id: indiaMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName, args: chunk.args } });
+            console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
+            if (emit) emit({ type: 'stream_tool', msg: { id: indiaMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
           } else if (chunk.type === 'tool-result') {
             const isBlocked = typeof chunk.result === 'string' && chunk.result.toLowerCase().includes('enkrypt');
             if (emit) emit({ type: 'stream_tool_result', msg: { id: indiaMsgId, toolCallId: chunk.toolCallId, isBlocked } });
@@ -98,7 +100,8 @@ const round2Step = createStep({
         fullText += chunk.textDelta;
         if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: defenderMsgId, text: chunk.textDelta } });
       } else if (chunk.type === 'tool-call') {
-        if (data.emit) data.emit({ type: 'stream_tool', msg: { id: defenderMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName, args: chunk.args } });
+        console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
+        if (data.emit) data.emit({ type: 'stream_tool', msg: { id: defenderMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
       } else if (chunk.type === 'tool-result') {
         const isBlocked = typeof chunk.result === 'string' && chunk.result.toLowerCase().includes('enkrypt');
         if (data.emit) data.emit({ type: 'stream_tool_result', msg: { id: defenderMsgId, toolCallId: chunk.toolCallId, isBlocked } });
@@ -130,7 +133,8 @@ const round3Step = createStep({
         fullText += chunk.textDelta;
         if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: advocateMsgId2, text: chunk.textDelta } });
       } else if (chunk.type === 'tool-call') {
-        if (data.emit) data.emit({ type: 'stream_tool', msg: { id: advocateMsgId2, toolCallId: chunk.toolCallId, toolName: chunk.toolName, args: chunk.args } });
+        console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
+        if (data.emit) data.emit({ type: 'stream_tool', msg: { id: advocateMsgId2, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
       } else if (chunk.type === 'tool-result') {
         const isBlocked = typeof chunk.result === 'string' && chunk.result.toLowerCase().includes('enkrypt');
         if (data.emit) data.emit({ type: 'stream_tool_result', msg: { id: advocateMsgId2, toolCallId: chunk.toolCallId, isBlocked } });
@@ -187,7 +191,8 @@ const round4Step = createStep({
         fullText += chunk.textDelta;
         if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: judgeMsgId, text: chunk.textDelta } });
       } else if (chunk.type === 'tool-call') {
-        if (data.emit) data.emit({ type: 'stream_tool', msg: { id: judgeMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName, args: chunk.args } });
+        console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
+        if (data.emit) data.emit({ type: 'stream_tool', msg: { id: judgeMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
       } else if (chunk.type === 'tool-result') {
         const isBlocked = typeof chunk.result === 'string' && chunk.result.toLowerCase().includes('enkrypt');
         if (data.emit) data.emit({ type: 'stream_tool_result', msg: { id: judgeMsgId, toolCallId: chunk.toolCallId, isBlocked } });

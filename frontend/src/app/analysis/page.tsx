@@ -420,8 +420,9 @@ export default function AnalysisPage() {
   };
 
   const renderToolBadge = (tool: ToolBadge) => {
-    const isQdrant = tool.name.includes("Qdrant");
-    const isEnkrypt = tool.name.includes("Enkrypt");
+    const safeName = tool.name || 'Unknown Tool';
+    const isQdrant = safeName.includes("Qdrant");
+    const isEnkrypt = safeName.includes("Enkrypt");
     
     return (
       <div className="group relative inline-flex items-center mr-2 mb-2">
@@ -431,7 +432,7 @@ export default function AnalysisPage() {
           {tool.status === 'running' && <span className="w-2.5 h-2.5 rounded-full border-2 border-current border-t-transparent animate-spin" />}
           {isQdrant && tool.status !== 'running' && <Database className="w-3 h-3 text-[#C69C6D]" />}
           {isEnkrypt && tool.status !== 'running' && <AlertTriangle className={`w-3 h-3 ${tool.status === 'blocked' ? 'text-red-600' : 'text-emerald-600'}`} />}
-          {tool.name} {tool.status === 'blocked' ? '(BLOCKED)' : ''}
+          {safeName} {tool.status === 'blocked' ? '(BLOCKED)' : ''}
         </div>
         
         {/* Tooltip */}
