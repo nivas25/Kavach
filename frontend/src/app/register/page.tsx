@@ -17,7 +17,8 @@ import {
 import { motion } from "framer-motion";
 import { signUpWithEmail, signInWithGoogle } from "@/app/actions/auth";
 
-export default function RegisterPage() {
+import React, { Suspense } from 'react';
+function RegisterContent() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
@@ -245,5 +246,13 @@ export default function RegisterPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center">Loading...</div>}>
+      <RegisterContent />
+    </Suspense>
   );
 }

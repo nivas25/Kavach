@@ -28,7 +28,7 @@ type ChatMessage = {
   tools?: ToolBadge[];
 };
 
-export default function AnalysisPage() {
+function AnalysisContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('sessionId');
 
@@ -916,5 +916,13 @@ export default function AnalysisPage() {
       </main>
       )}
     </div>
+  );
+}
+
+export default function AnalysisPage() {
+  return (
+    <React.Suspense fallback={<div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center text-white">Loading...</div>}>
+      <AnalysisContent />
+    </React.Suspense>
   );
 }

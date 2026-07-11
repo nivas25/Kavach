@@ -17,7 +17,8 @@ import {
 import { motion } from "framer-motion";
 import { signInWithEmail, signInWithGoogle } from "@/app/actions/auth";
 
-export default function LoginPage() {
+import React, { Suspense } from 'react';
+function LoginContent() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -249,5 +250,13 @@ export default function LoginPage() {
       </div>
       
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center">Loading...</div>}>
+      <LoginContent />
+    </Suspense>
   );
 }
