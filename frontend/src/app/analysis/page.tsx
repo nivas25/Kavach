@@ -80,7 +80,7 @@ function AnalysisContent() {
     if (!sessionId) return;
     
     // Connect to the Fastify API (use 127.0.0.1 to avoid localhost resolution issues)
-    const fastifyUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8080';
+    const fastifyUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8080').replace(/\/$/, '');
     
     // 1. Fetch initial document clauses
     fetch(`${fastifyUrl}/api/documents/${sessionId}`)
