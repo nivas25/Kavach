@@ -1,15 +1,1 @@
-import { userAdvocate } from './src/mastra/agents/userAdvocate';
-
-async function test() {
-  const res = await userAdvocate.stream('say hello in 5 words', { threadId: 'test' });
-  console.log("Keys available on stream response:");
-  console.log(Object.keys(res));
-  
-  if (res.fullStream) {
-    console.log("Reading fullStream...");
-    for await (const part of res.fullStream) {
-      console.log(part.type, part);
-    }
-  }
-}
-test().catch(console.error);
+import { userAdvocate } from './src/mastra/agents/userAdvocate'; async function test() { const res = await userAdvocate.stream('say hello in 5 words'); for await (const chunk of res.textStream) { process.stdout.write(chunk); } } test();

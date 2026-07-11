@@ -3,11 +3,6 @@ import { userAdvocate, companyDefender, indiaLegalExpert, neutralJudge } from '.
 import { z } from 'zod';
 import { memory } from '../memory';
 
-function extractDeepAnalysis(text: string): string {
-  const match = text.match(/<deep_analysis>([\s\S]*?)<\/deep_analysis>/i);
-  return match ? match[1].trim() : text.trim();
-}
-
 // Memory is managed via workflow state now, so we remove manual assignment to agents
 
 export const debateWorkflow = new Workflow({
@@ -50,39 +45,17 @@ const initialCritiquesStep = createStep({
 
     await Promise.all([
       (async () => {
-        for await (const chunk of advocateStream.fullStream) {
-          if (chunk.type === 'text-delta') {
-            const textContent = chunk.textDelta || chunk.text || chunk.delta || '';
-            if (textContent) {
-              advocateText += textContent;
-              if (emit) emit({ type: 'stream_chunk', msg: { id: advocateMsgId, text: textContent } });
-            }
-          } else if (chunk.type === 'tool-call') {
-            console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
-            if (emit) emit({ type: 'stream_tool', msg: { id: advocateMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
-          } else if (chunk.type === 'tool-result') {
-            const isBlocked = typeof chunk.result === 'string' && chunk.result.toLowerCase().includes('enkrypt');
-            if (emit) emit({ type: 'stream_tool_result', msg: { id: advocateMsgId, toolCallId: chunk.toolCallId, isBlocked } });
-          }
+        for await (const chunk of advocateStream.textStream) {
+          advocateText += chunk;
+          if (emit) emit({ type: 'stream_chunk', msg: { id: advocateMsgId, text: chunk } });
         }
         if (emit) emit({ type: 'stream_end' });
         console.log(`\x1b[35m[AGENT: User Advocate]\x1b[0m Critique Generated:\n${advocateText.substring(0, 200)}...\n`);
       })(),
       (async () => {
-        for await (const chunk of indiaStream.fullStream) {
-          if (chunk.type === 'text-delta') {
-            const textContent = chunk.textDelta || chunk.text || chunk.delta || '';
-            if (textContent) {
-              indiaText += textContent;
-              if (emit) emit({ type: 'stream_chunk', msg: { id: indiaMsgId, text: textContent } });
-            }
-          } else if (chunk.type === 'tool-call') {
-            console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
-            if (emit) emit({ type: 'stream_tool', msg: { id: indiaMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
-          } else if (chunk.type === 'tool-result') {
-            const isBlocked = typeof chunk.result === 'string' && chunk.result.toLowerCase().includes('enkrypt');
-            if (emit) emit({ type: 'stream_tool_result', msg: { id: indiaMsgId, toolCallId: chunk.toolCallId, isBlocked } });
-          }
+        for await (const chunk of indiaStream.textStream) {
+          indiaText += chunk;
+          if (emit) emit({ type: 'stream_chunk', msg: { id: indiaMsgId, text: chunk } });
         }
         if (emit) emit({ type: 'stream_end' });
         console.log(`\x1b[33m[AGENT: India Legal Expert]\x1b[0m Analysis Generated:\n${indiaText.substring(0, 200)}...\n`);
@@ -97,7 +70,7 @@ const round2Step = createStep({
   id: 'CompanyDefenderRebuttal',
   execute: async ({ getStepResult }: any) => {
     const data: any = getStepResult('InitialCritiques');
-    const prompt = `The User Advocate (acting for a ${data.userType}) provided the following critique:\n\n${extractDeepAnalysis(data.critique)}\n\nAnd the India Legal Expert provided this analysis:\n\n${extractDeepAnalysis(data.legalAnalysis)}\n\nPlease provide a vigorous corporate defense and rebuttal addressing BOTH critiques.`;
+    const prompt = `The User Advocate (acting for a ${data.userType}) provided the following critique:\n\n${data.critique}\n\nAnd the India Legal Expert provided this analysis:\n\n${data.legalAnalysis}\n\nPlease provide a vigorous corporate defense and rebuttal addressing BOTH critiques.`;
 
     console.log(`\n\x1b[34m[AGENT: Company Defender]\x1b[0m Thinking...`);
     
@@ -106,20 +79,9 @@ const round2Step = createStep({
 
     const streamRes = await companyDefender.stream(prompt, { threadId: data.threadId } as any);
     let fullText = '';
-    for await (const chunk of streamRes.fullStream) {
-      if (chunk.type === 'text-delta') {
-        const textContent = chunk.textDelta || chunk.text || chunk.delta || '';
-        if (textContent) {
-          fullText += textContent;
-          if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: defenderMsgId, text: textContent } });
-        }
-      } else if (chunk.type === 'tool-call') {
-        console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
-        if (data.emit) data.emit({ type: 'stream_tool', msg: { id: defenderMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
-      } else if (chunk.type === 'tool-result') {
-        const isBlocked = typeof chunk.result === 'string' && chunk.result.toLowerCase().includes('enkrypt');
-        if (data.emit) data.emit({ type: 'stream_tool_result', msg: { id: defenderMsgId, toolCallId: chunk.toolCallId, isBlocked } });
-      }
+    for await (const chunk of streamRes.textStream) {
+      fullText += chunk;
+      if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: defenderMsgId, text: chunk } });
     }
     if (data.emit) data.emit({ type: 'stream_end' });
 
@@ -133,7 +95,7 @@ const round3Step = createStep({
   id: 'UserAdvocateRebuttal',
   execute: async ({ getStepResult }: any) => {
     const data: any = getStepResult('CompanyDefenderRebuttal');
-    const prompt = `Company Defense:\n${extractDeepAnalysis(data.rebuttal)}\n\nProvide your final counter-rebuttal on behalf of the user, dismantling the company's defense.`;
+    const prompt = `The Company Defender provided this rebuttal:\n\n${data.rebuttal}\n\nPlease counter their arguments strongly to protect the ${data.userType}.`;
 
     console.log(`\n\x1b[35m[AGENT: User Advocate]\x1b[0m Rebutting...`);
     
@@ -142,20 +104,9 @@ const round3Step = createStep({
 
     const streamRes = await userAdvocate.stream(prompt, { threadId: data.threadId } as any);
     let fullText = '';
-    for await (const chunk of streamRes.fullStream) {
-      if (chunk.type === 'text-delta') {
-        const textContent = chunk.textDelta || chunk.text || chunk.delta || '';
-        if (textContent) {
-          fullText += textContent;
-          if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: advocateMsgId2, text: textContent } });
-        }
-      } else if (chunk.type === 'tool-call') {
-        console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
-        if (data.emit) data.emit({ type: 'stream_tool', msg: { id: advocateMsgId2, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
-      } else if (chunk.type === 'tool-result') {
-        const isBlocked = typeof chunk.result === 'string' && chunk.result.toLowerCase().includes('enkrypt');
-        if (data.emit) data.emit({ type: 'stream_tool_result', msg: { id: advocateMsgId2, toolCallId: chunk.toolCallId, isBlocked } });
-      }
+    for await (const chunk of streamRes.textStream) {
+      fullText += chunk;
+      if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: advocateMsgId2, text: chunk } });
     }
     if (data.emit) data.emit({ type: 'stream_end' });
 
@@ -175,16 +126,16 @@ const round4Step = createStep({
     ${JSON.stringify(data.contractData, null, 2)}
 
     --- ROUND 1 (Parallel): USER ADVOCATE CRITIQUE ---
-    ${extractDeepAnalysis(data.critique)}
+    ${data.critique}
 
     --- ROUND 1 (Parallel): INDIA LEGAL EXPERT ANALYSIS ---
-    ${extractDeepAnalysis(data.legalAnalysis)}
+    ${data.legalAnalysis}
     
     --- ROUND 2: COMPANY DEFENDER REBUTTAL ---
-    ${extractDeepAnalysis(data.rebuttal)}
+    ${data.rebuttal}
     
     --- ROUND 3: USER ADVOCATE COUNTER-REBUTTAL ---
-    ${extractDeepAnalysis(data.advocateRebuttal)}
+    ${data.advocateRebuttal}
     `;
 
     const prompt = `You are the final judge. Review the entire thread below and the contract clauses. Please issue your final, balanced verdict. 
@@ -203,20 +154,9 @@ const round4Step = createStep({
 
     const streamRes = await neutralJudge.stream(prompt, { threadId: data.threadId } as any);
     let fullText = '';
-    for await (const chunk of streamRes.fullStream) {
-      if (chunk.type === 'text-delta') {
-        const textContent = chunk.textDelta || chunk.text || chunk.delta || '';
-        if (textContent) {
-          fullText += textContent;
-          if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: judgeMsgId, text: textContent } });
-        }
-      } else if (chunk.type === 'tool-call') {
-        console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
-        if (data.emit) data.emit({ type: 'stream_tool', msg: { id: judgeMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
-      } else if (chunk.type === 'tool-result') {
-        const isBlocked = typeof chunk.result === 'string' && chunk.result.toLowerCase().includes('enkrypt');
-        if (data.emit) data.emit({ type: 'stream_tool_result', msg: { id: judgeMsgId, toolCallId: chunk.toolCallId, isBlocked } });
-      }
+    for await (const chunk of streamRes.textStream) {
+      fullText += chunk;
+      if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: judgeMsgId, text: chunk } });
     }
     if (data.emit) data.emit({ type: 'stream_end' });
 

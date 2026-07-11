@@ -14,9 +14,8 @@ type TabId = 'clauses' | 'debate' | 'negotiation';
 type AgentRole = 'advocate' | 'defender' | 'expert' | 'judge' | 'user';
 
 type ToolBadge = {
-  id: string;
   name: string;
-  status: 'success' | 'blocked' | 'running';
+  status: 'success' | 'blocked';
   reason?: string;
   query?: string;
 };
@@ -122,33 +121,6 @@ export default function AnalysisPage() {
             }
             return updated;
           });
-        } else if (data.type === 'stream_tool') {
-          setVisibleMessages(prev => {
-            const updated = [...prev];
-            const idx = updated.findIndex(m => m.id === data.msg.id);
-            if (idx !== -1) {
-              const tools = updated[idx].tools || [];
-              updated[idx] = { 
-                ...updated[idx], 
-                tools: [...tools, { id: data.msg.toolCallId, name: data.msg.toolName, status: 'running' }] 
-              };
-            }
-            return updated;
-          });
-        } else if (data.type === 'stream_tool_result') {
-          setVisibleMessages(prev => {
-            const updated = [...prev];
-            const idx = updated.findIndex(m => m.id === data.msg.id);
-            if (idx !== -1 && updated[idx].tools) {
-              const tools = [...updated[idx].tools!];
-              const tIdx = tools.findIndex(t => t.id === data.msg.toolCallId);
-              if (tIdx !== -1) {
-                tools[tIdx] = { ...tools[tIdx], status: data.msg.isBlocked ? 'blocked' : 'success' };
-                updated[idx] = { ...updated[idx], tools };
-              }
-            }
-            return updated;
-          });
         } else if (data.type === 'stream_end') {
           setIsTyping(null);
         } else if (data.type === 'message') {
@@ -196,86 +168,6 @@ export default function AnalysisPage() {
   };
 
   // --- Components ---
-  const DualOutputMessage = ({ text }: { text: string }) => {
-    const [showDeep, setShowDeep] = useState(false);
-    
-    // Parse XML tags loosely
-    const uiMatch = text.match(/<ui_summary>([\s\S]*?)(?:<\/ui_summary>|$)/i);
-    const deepMatch = text.match(/<deep_analysis>([\s\S]*?)(?:<\/deep_analysis>|$)/i);
-    const judgeMatch = text.match(/<detailed_verdict>([\s\S]*?)(?:<\/detailed_verdict>|$)/i);
-    
-    const uiText = uiMatch ? uiMatch[1].trim() : text.trim();
-    const deepText = deepMatch ? deepMatch[1].trim() : judgeMatch ? judgeMatch[1].trim() : '';
-
-    return (
-      <div className="flex flex-col gap-3">
-        <div className="text-[14.5px] leading-relaxed font-medium whitespace-pre-wrap">
-          {uiText}
-        </div>
-        {deepText && (
-          <div className="mt-2 pt-3 border-t border-current/10">
-            <button 
-              onClick={() => setShowDeep(!showDeep)}
-              className="text-[11px] font-bold uppercase tracking-widest opacity-70 hover:opacity-100 flex items-center gap-1 transition-opacity"
-            >
-              {showDeep ? 'Hide Deep Analysis' : 'Read Deep Analysis'}
-              <ChevronRight className={`w-3 h-3 transition-transform ${showDeep ? 'rotate-90' : ''}`} />
-            </button>
-            <AnimatePresence>
-              {showDeep && (
-                <motion.div 
-                  initial={{ height: 0, opacity: 0 }} 
-                  animate={{ height: 'auto', opacity: 1 }} 
-                  exit={{ height: 0, opacity: 0 }}
-                  className="overflow-hidden"
-                >
-                  <div className="pt-3 text-[13px] opacity-90 leading-relaxed whitespace-pre-wrap">
-                    {deepText}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        )}
-      </div>
-    );
-  };
-
-  const DualJSONValue = ({ data }: { data: { ui_summary: string, deep_analysis: string } }) => {
-    const [showDeep, setShowDeep] = useState(false);
-    return (
-      <div className="flex flex-col gap-3">
-        <div className="text-[16px] text-black font-medium leading-relaxed whitespace-pre-wrap">
-          {data.ui_summary}
-        </div>
-        {data.deep_analysis && (
-          <div className="mt-1 pt-3 border-t border-black/10">
-            <button 
-              onClick={() => setShowDeep(!showDeep)}
-              className="text-[11px] font-bold text-black/60 uppercase tracking-widest hover:text-black flex items-center gap-1 transition-colors"
-            >
-              {showDeep ? 'Hide Deep Analysis' : 'Read Deep Analysis'}
-              <ChevronRight className={`w-3 h-3 transition-transform ${showDeep ? 'rotate-90' : ''}`} />
-            </button>
-            <AnimatePresence>
-              {showDeep && (
-                <motion.div 
-                  initial={{ height: 0, opacity: 0 }} 
-                  animate={{ height: 'auto', opacity: 1 }} 
-                  exit={{ height: 0, opacity: 0 }}
-                  className="overflow-hidden"
-                >
-                  <div className="pt-3 text-[14px] text-black/80 font-medium leading-relaxed whitespace-pre-wrap">
-                    {data.deep_analysis}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        )}
-      </div>
-    );
-  };
 
   const renderClausesView = () => {
     if (!documentData || !documentData.extractedData) {
@@ -332,9 +224,6 @@ export default function AnalysisPage() {
           </ul>
         );
       } else if (typeof val === 'object' && val !== null) {
-        if ('ui_summary' in val && 'deep_analysis' in val) {
-          return <DualJSONValue data={val as any} />;
-        }
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
             {Object.entries(val).map(([k, v]) => (
@@ -503,19 +392,17 @@ export default function AnalysisPage() {
   };
 
   const renderToolBadge = (tool: ToolBadge) => {
-    const safeName = tool.name || 'Unknown Tool';
-    const isQdrant = safeName.includes("Qdrant");
-    const isEnkrypt = safeName.includes("Enkrypt");
+    const isQdrant = tool.name.includes("Qdrant");
+    const isEnkrypt = tool.name.includes("Enkrypt");
     
     return (
       <div className="group relative inline-flex items-center mr-2 mb-2">
         <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest border cursor-pointer shadow-sm
-          ${tool.status === 'success' ? 'bg-white border-[#e0e0e0] text-[#444746]' : tool.status === 'blocked' ? 'bg-red-50 border-red-200 text-red-600' : 'bg-blue-50 border-blue-200 text-blue-600 animate-pulse'}
+          ${tool.status === 'success' ? 'bg-white border-[#e0e0e0] text-[#444746]' : 'bg-red-50 border-red-200 text-red-600'}
         `}>
-          {tool.status === 'running' && <span className="w-2.5 h-2.5 rounded-full border-2 border-current border-t-transparent animate-spin" />}
-          {isQdrant && tool.status !== 'running' && <Database className="w-3 h-3 text-[#C69C6D]" />}
-          {isEnkrypt && tool.status !== 'running' && <AlertTriangle className={`w-3 h-3 ${tool.status === 'blocked' ? 'text-red-600' : 'text-emerald-600'}`} />}
-          {safeName} {tool.status === 'blocked' ? '(BLOCKED)' : ''}
+          {isQdrant && <Database className="w-3 h-3 text-[#C69C6D]" />}
+          {isEnkrypt && <AlertTriangle className={`w-3 h-3 ${tool.status === 'blocked' ? 'text-red-600' : 'text-emerald-600'}`} />}
+          {tool.name}
         </div>
         
         {/* Tooltip */}
@@ -593,8 +480,8 @@ export default function AnalysisPage() {
                                 </div>
                               )}
 
-                              <div className="w-full overflow-hidden">
-                                <DualOutputMessage text={msg.text} />
+                              <div className="text-[14.5px] leading-relaxed font-medium whitespace-pre-wrap">
+                                {msg.text}
                               </div>
                             </div>
                           </div>
@@ -689,8 +576,8 @@ export default function AnalysisPage() {
                         </div>
                       )}
 
-                      <div className="w-full overflow-hidden">
-                        <DualOutputMessage text={msg.text} />
+                      <div className="text-[14.5px] leading-relaxed font-medium whitespace-pre-wrap">
+                        {msg.text}
                       </div>
                     </div>
                   </div>
