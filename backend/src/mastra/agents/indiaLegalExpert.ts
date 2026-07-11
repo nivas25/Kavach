@@ -1,8 +1,6 @@
 import { Agent } from '@mastra/core/agent';
 import { memory } from '../memory';
 import { createOpenAI } from '@ai-sdk/openai';
-import { qdrantSearchTool } from '../tools/qdrantSearchTool';
-import { webSearchTool } from '../tools/webSearchTool';
 
 const featherless = createOpenAI({
   baseURL: 'https://api.featherless.ai/v1',
@@ -24,6 +22,5 @@ When reviewing a contract or engaging in a debate:
 5. Provide actionable advice on how to modify the contract to be enforceable in India.
 `,
   model: featherless.chat('Qwen/Qwen2.5-7B-Instruct'),
-  tools: { qdrantSearchTool, webSearchTool },
   memory
 });

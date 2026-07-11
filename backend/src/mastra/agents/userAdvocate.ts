@@ -4,9 +4,8 @@ import { createOpenAI } from '@ai-sdk/openai';
 import { qdrantSearchTool } from '../tools/qdrantSearchTool';
 import { webSearchTool } from '../tools/webSearchTool';
 
-const featherless = createOpenAI({
-  baseURL: 'https://api.featherless.ai/v1',
-  apiKey: process.env.FEATHERLESS_API_KEY_2,
+const openai = createOpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 export const userAdvocate = new Agent({
@@ -24,7 +23,7 @@ When reviewing a contract:
 4. Argue forcefully for fairness, transparency, and consumer rights.
 5. You MUST use the qdrantSearchTool and webSearchTool to find precedent or risks.
 `,
-  model: featherless.chat('Qwen/Qwen2.5-7B-Instruct'),
+  model: openai('gpt-4o-mini'),
   tools: { qdrantSearchTool, webSearchTool },
   memory
 });

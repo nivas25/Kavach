@@ -5,6 +5,31 @@ import { memory } from '../memory';
 
 // Memory is managed via workflow state now, so we remove manual assignment to agents
 
+const formatInstruction = `\n\nCRITICAL FORMAT INSTRUCTION: You MUST format your response exactly like this:
+SUMMARY: <Write a punchy, 2-line summary of your argument here for the user to read quickly>
+DETAILS: <Write your comprehensive, detailed analysis here for the judge to read>`;
+
+async function streamWithSummary(streamObj: any, msgId: string, emit: any) {
+  let fullText = '';
+  let sentToUI = 0;
+  for await (const chunk of streamObj.textStream) {
+    fullText += chunk;
+    const detailsMatch = fullText.indexOf('DETAILS:');
+    if (detailsMatch === -1) {
+      if (emit) emit({ type: 'stream_chunk', msg: { id: msgId, text: chunk } });
+      sentToUI = fullText.length;
+    } else if (sentToUI < detailsMatch) {
+      const remainingToEmit = fullText.substring(sentToUI, detailsMatch);
+      if (remainingToEmit && emit) {
+        emit({ type: 'stream_chunk', msg: { id: msgId, text: remainingToEmit } });
+      }
+      sentToUI = detailsMatch;
+    }
+  }
+  if (emit) emit({ type: 'stream_end' });
+  return fullText;
+}
+
 export const debateWorkflow = new Workflow({
   id: 'ContractDebate',
   triggerSchema: z.object({
@@ -20,8 +45,8 @@ const initialCritiquesStep = createStep({
   execute: async ({ inputData }: any) => {
     const { contractData, threadId, userType = 'User', emit } = inputData as any;
 
-    const advocatePrompt = `Review the following contract clauses from the perspective of a ${userType}:\n\n${JSON.stringify(contractData, null, 2)}\n\nProvide your initial critique identifying potential risks to the user.`;
-    const indiaPrompt = `Review the following contract clauses for a ${userType}:\n\n${JSON.stringify(contractData, null, 2)}\n\nPlease provide a strict analysis under Indian Law identifying potential issues or unenforceable terms.`;
+    const advocatePrompt = `Review the following contract clauses from the perspective of a ${userType}:\n\n${JSON.stringify(contractData, null, 2)}\n\nProvide your initial critique identifying potential risks to the user.` + formatInstruction;
+    const indiaPrompt = `Review the following contract clauses for a ${userType}:\n\n${JSON.stringify(contractData, null, 2)}\n\nPlease provide a strict analysis under Indian Law identifying potential issues or unenforceable terms.` + formatInstruction;
 
     if (emit) emit({ type: 'status', message: 'Analyzing clauses...' });
     
@@ -45,19 +70,11 @@ const initialCritiquesStep = createStep({
 
     await Promise.all([
       (async () => {
-        for await (const chunk of advocateStream.textStream) {
-          advocateText += chunk;
-          if (emit) emit({ type: 'stream_chunk', msg: { id: advocateMsgId, text: chunk } });
-        }
-        if (emit) emit({ type: 'stream_end' });
+        advocateText = await streamWithSummary(advocateStream, advocateMsgId, emit);
         console.log(`\x1b[35m[AGENT: User Advocate]\x1b[0m Critique Generated:\n${advocateText.substring(0, 200)}...\n`);
       })(),
       (async () => {
-        for await (const chunk of indiaStream.textStream) {
-          indiaText += chunk;
-          if (emit) emit({ type: 'stream_chunk', msg: { id: indiaMsgId, text: chunk } });
-        }
-        if (emit) emit({ type: 'stream_end' });
+        indiaText = await streamWithSummary(indiaStream, indiaMsgId, emit);
         console.log(`\x1b[33m[AGENT: India Legal Expert]\x1b[0m Analysis Generated:\n${indiaText.substring(0, 200)}...\n`);
       })()
     ]);
@@ -70,7 +87,7 @@ const round2Step = createStep({
   id: 'CompanyDefenderRebuttal',
   execute: async ({ getStepResult }: any) => {
     const data: any = getStepResult('InitialCritiques');
-    const prompt = `The User Advocate (acting for a ${data.userType}) provided the following critique:\n\n${data.critique}\n\nAnd the India Legal Expert provided this analysis:\n\n${data.legalAnalysis}\n\nPlease provide a vigorous corporate defense and rebuttal addressing BOTH critiques.`;
+    const prompt = `The User Advocate (acting for a ${data.userType}) provided the following critique:\n\n${data.critique}\n\nAnd the India Legal Expert provided this analysis:\n\n${data.legalAnalysis}\n\nPlease provide a vigorous corporate defense and rebuttal addressing BOTH critiques.` + formatInstruction;
 
     console.log(`\n\x1b[34m[AGENT: Company Defender]\x1b[0m Thinking...`);
     
@@ -78,12 +95,7 @@ const round2Step = createStep({
     if (data.emit) data.emit({ type: 'stream_start', agent: 'defender', msg: { id: defenderMsgId, role: 'defender', round: 1, text: '' } });
 
     const streamRes = await companyDefender.stream(prompt, { threadId: data.threadId } as any);
-    let fullText = '';
-    for await (const chunk of streamRes.textStream) {
-      fullText += chunk;
-      if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: defenderMsgId, text: chunk } });
-    }
-    if (data.emit) data.emit({ type: 'stream_end' });
+    const fullText = await streamWithSummary(streamRes, defenderMsgId, data.emit);
 
     console.log(`\x1b[34m[AGENT: Company Defender]\x1b[0m Rebuttal Generated:\n${fullText.substring(0, 200)}...\n`);
     
@@ -95,7 +107,7 @@ const round3Step = createStep({
   id: 'UserAdvocateRebuttal',
   execute: async ({ getStepResult }: any) => {
     const data: any = getStepResult('CompanyDefenderRebuttal');
-    const prompt = `The Company Defender provided this rebuttal:\n\n${data.rebuttal}\n\nPlease counter their arguments strongly to protect the ${data.userType}.`;
+    const prompt = `The Company Defender provided this rebuttal:\n\n${data.rebuttal}\n\nPlease counter their arguments strongly to protect the ${data.userType}.` + formatInstruction;
 
     console.log(`\n\x1b[35m[AGENT: User Advocate]\x1b[0m Rebutting...`);
     
@@ -103,12 +115,7 @@ const round3Step = createStep({
     if (data.emit) data.emit({ type: 'stream_start', agent: 'advocate', msg: { id: advocateMsgId2, role: 'advocate', round: 2, text: '' } });
 
     const streamRes = await userAdvocate.stream(prompt, { threadId: data.threadId } as any);
-    let fullText = '';
-    for await (const chunk of streamRes.textStream) {
-      fullText += chunk;
-      if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: advocateMsgId2, text: chunk } });
-    }
-    if (data.emit) data.emit({ type: 'stream_end' });
+    const fullText = await streamWithSummary(streamRes, advocateMsgId2, data.emit);
 
     console.log(`\x1b[35m[AGENT: User Advocate]\x1b[0m Counter-Rebuttal Generated:\n${fullText.substring(0, 200)}...\n`);
     
