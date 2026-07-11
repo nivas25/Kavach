@@ -19,7 +19,7 @@ const PROTECTED_ROUTES = ['/dashboard', '/analyze', '/analysis', '/report', '/on
 // Routes that should redirect to /dashboard if already logged in
 const AUTH_ROUTES = ['/login', '/register']
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
   })

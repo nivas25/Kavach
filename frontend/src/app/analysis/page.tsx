@@ -29,6 +29,9 @@ type ChatMessage = {
 };
 
 export default function AnalysisPage() {
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get('sessionId');
+
   // User State
   const [user, setUser] = useState<User | null>(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -72,8 +75,8 @@ export default function AnalysisPage() {
   useEffect(() => {
     if (!sessionId) return;
     
-    // Connect to the Fastify SSE stream
-    const fastifyUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+    // Connect to the Fastify SSE stream (use 127.0.0.1 to avoid localhost resolution issues)
+    const fastifyUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8080';
     const sse = new EventSource(`${fastifyUrl}/api/documents/${sessionId}/stream`);
     
     // Move to Debate Tab automatically since Clauses were parsed in Phase 2
@@ -325,11 +328,11 @@ export default function AnalysisPage() {
 
   const getAgentProps = (role: AgentRole) => {
     switch(role) {
-      case 'advocate': return { name: 'User Advocate', icon: <ShieldAlert className="w-5 h-5" />, color: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-100' };
-      case 'defender': return { name: 'Company Defender', icon: <Bot className="w-5 h-5" />, color: 'text-rose-600', bg: 'bg-rose-50', border: 'border-rose-100' };
-      case 'expert': return { name: 'India Legal Expert', icon: <Scale className="w-5 h-5" />, color: 'text-[#C69C6D]', bg: 'bg-[#C69C6D]/10', border: 'border-[#C69C6D]/20' };
-      case 'judge': return { name: 'Neutral Judge', icon: <Gavel className="w-5 h-5" />, color: 'text-emerald-700', bg: 'bg-emerald-50', border: 'border-emerald-100' };
-      case 'user': return { name: 'You', icon: null, color: 'text-gray-800', bg: 'bg-gray-100', border: 'border-gray-200' };
+      case 'advocate': return { name: 'User Advocate', icon: <ShieldAlert className="w-5 h-5" />, color: 'text-[#0084ff]', bubbleBg: 'bg-[#0084ff]', bubbleText: 'text-white' };
+      case 'defender': return { name: 'Company Defender', icon: <Bot className="w-5 h-5" />, color: 'text-[#e53935]', bubbleBg: 'bg-[#e53935]', bubbleText: 'text-white' };
+      case 'expert': return { name: 'India Legal Expert', icon: <Scale className="w-5 h-5" />, color: 'text-[#25D366]', bubbleBg: 'bg-[#25D366]', bubbleText: 'text-white' };
+      case 'judge': return { name: 'Neutral Judge', icon: <Gavel className="w-5 h-5" />, color: 'text-[#673ab7]', bubbleBg: 'bg-[#673ab7]', bubbleText: 'text-white' };
+      case 'user': return { name: 'You', icon: null, color: 'text-gray-800', bubbleBg: 'bg-[#1f1f1f]', bubbleText: 'text-white' };
     }
   };
 
@@ -400,7 +403,7 @@ export default function AnalysisPage() {
                           
                           {/* Avatar (Left) */}
                           {isLeft && (
-                            <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center mt-auto mb-1 shadow-sm border ${agent.bg} ${agent.border} ${agent.color}`}>
+                            <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center mt-auto mb-1 shadow-sm ${agent.bubbleBg} text-white`}>
                               {React.cloneElement(agent.icon as React.ReactElement, { className: 'w-4 h-4' })}
                             </div>
                           )}
@@ -412,8 +415,8 @@ export default function AnalysisPage() {
                             </span>
                             
                             {/* Chat Bubble */}
-                            <div className={`relative px-5 py-3.5
-                              ${!isLeft ? 'bg-[#1f1f1f] text-white rounded-[20px] rounded-br-[4px]' : `bg-[#f0f2f5] text-[#1f1f1f] rounded-[20px] rounded-bl-[4px]`}
+                            <div className={`relative px-5 py-3.5 shadow-sm
+                              ${!isLeft ? `${agent.bubbleBg} ${agent.bubbleText} rounded-[20px] rounded-br-[4px]` : `${agent.bubbleBg} ${agent.bubbleText} rounded-[20px] rounded-bl-[4px]`}
                             `}>
                               {/* Tool Badges */}
                               {msg.tools && msg.tools.length > 0 && (
@@ -496,7 +499,7 @@ export default function AnalysisPage() {
                   
                   {/* Avatar (Left) */}
                   {isLeft && (
-                    <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center mt-auto mb-1 shadow-sm border ${agent.bg} ${agent.border} ${agent.color}`}>
+                    <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center mt-auto mb-1 shadow-sm ${agent.bubbleBg} text-white`}>
                       {React.cloneElement(agent.icon as React.ReactElement, { className: 'w-4 h-4' })}
                     </div>
                   )}
@@ -508,8 +511,8 @@ export default function AnalysisPage() {
                     </span>
                     
                     {/* Chat Bubble */}
-                    <div className={`relative px-5 py-3.5
-                      ${!isLeft ? 'bg-[#1f1f1f] text-white rounded-[20px] rounded-br-[4px]' : `bg-[#f0f2f5] text-[#1f1f1f] rounded-[20px] rounded-bl-[4px]`}
+                    <div className={`relative px-5 py-3.5 shadow-sm
+                      ${!isLeft ? `${agent.bubbleBg} ${agent.bubbleText} rounded-[20px] rounded-br-[4px]` : `${agent.bubbleBg} ${agent.bubbleText} rounded-[20px] rounded-bl-[4px]`}
                     `}>
                       {/* Tool Badges */}
                       {msg.tools && msg.tools.length > 0 && (

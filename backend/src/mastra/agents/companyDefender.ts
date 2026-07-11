@@ -1,10 +1,11 @@
 import { Agent } from '@mastra/core/agent';
-import { createGroq } from '@ai-sdk/groq';
+import { createOpenAI } from '@ai-sdk/openai';
 import { memory } from '../memory';
 
-// Initialize a custom Groq provider with Key 2
-const groq = createGroq({
-  apiKey: process.env.GROQ_API_KEY_2,
+// Initialize Featherless AI Provider
+const featherless = createOpenAI({
+  baseURL: 'https://api.featherless.ai/v1',
+  apiKey: process.env.FEATHERLESS_API_KEY,
 });
 
 export const companyDefender = new Agent({
@@ -25,7 +26,7 @@ If you need to use a tool, you MUST output ONLY valid JSON for the tool call.
 Do NOT use <function> XML tags. Do NOT add any conversational text before or after the JSON.
 Your tool calls must strictly adhere to the OpenAI function calling format.
 `,
-  model: groq('llama-3.3-70b-versatile'),
-  tools: {}, // Intentionally disabled tools to prevent Llama 3.3 tool-calling crash
+  model: featherless.chat('Qwen/Qwen2.5-7B-Instruct'),
+  tools: {},
   memory
 });

@@ -85,18 +85,20 @@ export class DocumentProcessorService {
       Your task is to extract a comprehensive, dynamic JSON representation of the provided legal document.
 
       REQUIREMENTS:
-      1. You MUST include a "title" string field (the name or best guessed title of the document).
-      2. You MUST include a "riskLevel" string field representing the overall legal/business risk. It MUST be exactly one of: "low", "medium", "high", "critical".
-      3. BEYOND those two required fields, you must dynamically create an intelligent schema that best fits the specific type of document provided (e.g., NDA, Lease, Employment, MSA).
-      4. Extract deep, granular details. Examples of dynamic fields you might create:
+      1. You MUST include a boolean field "isLegalDocument". Set this to true ONLY if the document is a valid legal contract, agreement, policy, or legal notice. Set to false if it's a random document (like a recipe, normal essay, etc).
+      2. If "isLegalDocument" is false, you MUST provide a "rejectionReason" string explaining why it was rejected.
+      3. If "isLegalDocument" is true, include a "title" string field (the name or best guessed title of the document).
+      4. If "isLegalDocument" is true, include a "riskLevel" string field representing the overall legal/business risk. It MUST be exactly one of: "low", "medium", "high", "critical".
+      5. BEYOND those required fields, dynamically create an intelligent schema that best fits the specific type of document provided (e.g., NDA, Lease, Employment, MSA).
+      6. Extract deep, granular details. Examples of dynamic fields you might create:
          - "parties": detailed breakdown of entities involved.
          - "keyDates": effective date, expiration, milestones.
          - "coreObligations": what each party is required to do.
          - "financialTerms": payment schedules, penalties.
          - "governingLaw": jurisdiction and dispute resolution.
-         - "criticalClauses": a deep dive into specific clauses, highlighting any unusual liabilities, indemnification, or auto-renewals.
-      5. Do not hallucinate. Only extract what is present in the markdown.
-      6. Return ONLY valid JSON.
+         - "criticalClauses": a deep dive into specific clauses.
+      7. Do not hallucinate. Only extract what is present in the markdown.
+      8. Return ONLY valid JSON.
 
       Document:
       ${markdown}
@@ -138,7 +140,7 @@ export class DocumentProcessorService {
     sessionId: string,
     markdown: string,
     extractedData: any,
-    userId: string,
+    userId: string | null,
     fileName: string,
     userType: string
   ): Promise<void> {
@@ -156,22 +158,27 @@ export class DocumentProcessorService {
     }), { ex: 86400 }); // Expire in 24 hours
 
     // 2. Store Metadata in Supabase
-    console.log(`[Storage] Saving metadata to Supabase 'analyses' table...`);
-    const { error } = await supabaseAdmin.from('analyses').insert({
-      id: sessionId,
-      session_id: sessionId,
-      user_id: userId,
-      title: extractedData.title || fileName,
-      original_file_name: fileName,
-      file_type: fileName.endsWith('.pdf') ? 'pdf' : fileName.endsWith('.docx') ? 'docx' : 'text',
-      status: 'debating',
-      overall_risk_level: (extractedData.riskLevel || 'medium').toLowerCase(),
-      created_at: new Date().toISOString()
-    });
+    if (userId) {
+      console.log(`[Storage] Saving metadata to Supabase 'analyses' table for user ${userId}...`);
+      const { error } = await supabaseAdmin.from('analyses').insert({
+        id: sessionId,
+        session_id: sessionId,
+        user_id: userId,
+        title: extractedData.title || fileName,
+        original_file_name: fileName,
+        file_type: fileName.endsWith('.pdf') ? 'pdf' : fileName.endsWith('.docx') ? 'docx' : 'text',
+        status: 'debating',
+        overall_risk_level: (extractedData.riskLevel || 'medium').toLowerCase(),
+        created_at: new Date().toISOString()
+      });
 
-    if (error) {
-      console.error('[Storage] Supabase Insert Error:', error);
-      throw new Error(`Failed to save to Supabase: ${error.message}`);
+      if (error) {
+        console.error('[Storage] Supabase Insert Error:', error);
+        throw new Error(`Failed to save to Supabase: ${error.message}`);
+      }
+      console.log(`[Storage] Supabase metadata saved successfully.`);
+    } else {
+      console.warn(`[Storage] Skipped Supabase insert because no valid userId was provided.`);
     }
   }
 
@@ -308,16 +315,28 @@ export class DocumentProcessorService {
    * Phase 2: LlamaParse -> Gemini -> Storage
    * Extracts data and stores it, returning the sessionId immediately.
    */
-  async processAndExtractDocument(fileBuffer: Buffer, fileName: string, userId: string, userType: string): Promise<string> {
+  async processAndExtractDocument(fileBuffer: Buffer, fileName: string, userId: string | null, userType: string): Promise<string> {
     const sessionId = uuidv4();
+    console.log(`[Pipeline] Starting document processing Phase 2 | Session: ${sessionId} | File: ${fileName}`);
     
     // 1. Parse PDF/DOCX to Markdown
+    console.log(`[Pipeline] Step 1: Parsing document with LlamaParse...`);
     const markdown = await this.parseWithLlamaParse(fileBuffer, fileName);
     
     // 2. Extract structured JSON using Gemini
+    console.log(`[Pipeline] Step 2: Extracting clauses using Gemini...`);
     const extractedData = await this.extractWithGemini(markdown);
     
+    // 2.5 Check if it's a valid legal document
+    if (extractedData.isLegalDocument === false) {
+      console.warn(`[Pipeline] Document rejected: ${extractedData.rejectionReason}`);
+      const err: any = new Error(extractedData.rejectionReason || "Uploaded file is not a valid legal document.");
+      err.isLegalError = true;
+      throw err;
+    }
+
     // 3. Store initial state with userType
+    console.log(`[Pipeline] Step 3: Storing state to Redis and Supabase...`);
     await this.storeDocumentState(sessionId, markdown, extractedData, userId, fileName, userType);
     
     console.log(`[Pipeline] Document extraction complete. Session ID: ${sessionId}`);

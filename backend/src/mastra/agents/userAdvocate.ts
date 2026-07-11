@@ -1,10 +1,9 @@
 import { Agent } from '@mastra/core/agent';
-import { createGroq } from '@ai-sdk/groq';
 import { memory } from '../memory';
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
 
-// Initialize a custom Groq provider with Key 1
-const groq = createGroq({
-  apiKey: process.env.GROQ_API_KEY_1,
+const google = createGoogleGenerativeAI({
+  apiKey: process.env.GEMINI_API_KEY_1,
 });
 
 export const userAdvocate = new Agent({
@@ -21,7 +20,7 @@ When reviewing a contract:
 3. Use precise, forceful language to highlight exactly how these clauses harm the user.
 4. Argue forcefully for fairness, transparency, and consumer rights.
 `,
-  model: groq('llama-3.3-70b-versatile'),
-  tools: {}, // Intentionally disabled tools to prevent Llama 3.3 tool-calling crash
+  model: google('gemini-2.5-flash'),
+  tools: {},
   memory
 });

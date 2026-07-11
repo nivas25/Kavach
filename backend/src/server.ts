@@ -19,7 +19,7 @@ const server = Fastify({
 server.register(cors, {
   origin: process.env.NODE_ENV === 'production'
     ? ['https://your-domain.com'] // Replace with your production domain
-    : ['http://localhost:3000'],   // Next.js dev server
+    : true,   // Allow any origin in dev (reflects the request origin)
   credentials: true,
 });
 
@@ -84,11 +84,14 @@ server.post('/api/documents/upload', async (request, reply) => {
 
     const fileBuffer = await data.toBuffer();
     const fileName = data.filename;
-    // Extract userType from fields (fastify-multipart populates data.fields)
+    // Extract userType and userId from fields
     const userTypeField = data.fields.userType;
     const userType = userTypeField && 'value' in userTypeField ? String(userTypeField.value) : 'Unknown';
-    // For now, use a dummy userId until auth is fully wired
-    const userId = '00000000-0000-0000-0000-000000000000';
+    
+    const userIdField = data.fields.userId;
+    const userId = userIdField && 'value' in userIdField ? String(userIdField.value) : null;
+
+    server.log.info(`[UPLOAD] Starting process for ${fileName} | UserType: ${userType} | UserId: ${userId || 'None'}`);
 
     const sessionId = await processor.processAndExtractDocument(fileBuffer, fileName, userId, userType);
 
@@ -101,6 +104,9 @@ server.post('/api/documents/upload', async (request, reply) => {
     };
   } catch (error: any) {
     server.log.error(error);
+    if (error.isLegalError) {
+      return reply.code(400).send({ error: error.message, isLegalError: true });
+    }
     return reply.code(500).send({ error: error.message });
   }
 });

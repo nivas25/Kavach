@@ -4,8 +4,8 @@ export async function POST(req: Request) {
   try {
     const formData = await req.formData();
     
-    // Proxy directly to Fastify backend
-    const fastifyUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+    // Proxy directly to Fastify backend (use 127.0.0.1 to avoid Node IPv6 localhost issues)
+    const fastifyUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8080';
     
     const response = await fetch(`${fastifyUrl}/api/documents/upload`, {
       method: 'POST',

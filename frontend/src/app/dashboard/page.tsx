@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Search, Upload, FileText, MoreVertical, FileCheck2, Loader2, Sparkles, Settings, CheckCircle2 } from "lucide-react";
+import { Search, Upload, FileText, MoreVertical, FileCheck2, Loader2, Sparkles, Settings, CheckCircle2, Bot, AlertTriangle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -84,10 +84,46 @@ export default function StylishDashboard() {
   // Processing State
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [progressMessage, setProgressMessage] = useState("Transmitting secure document to backend...");
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const simStarted = useRef(false);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isAnalyzing && uploadProgress >= 90 && uploadProgress < 100 && !simStarted.current) {
+      simStarted.current = true;
+      const messages = [
+        "Parsing document with LlamaParse...",
+        "Extracting key clauses with Featherless AI...",
+        "Analyzing legal risk vectors...",
+        "Generating structured JSON schema...",
+        "Wrapping things up..."
+      ];
+      let msgIndex = 0;
+      setProgressMessage(messages[0]);
+      
+      interval = setInterval(() => {
+        setUploadProgress(prev => (prev < 99 ? prev + 1 : 99));
+        msgIndex = (msgIndex + 1) % messages.length;
+        setProgressMessage(messages[msgIndex]);
+      }, 4000);
+    }
+    
+    if (!isAnalyzing || uploadProgress === 100) {
+       simStarted.current = false;
+       if (uploadProgress === 100) setProgressMessage("Processing complete!");
+       else setProgressMessage("Transmitting secure document to backend...");
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isAnalyzing, uploadProgress]);
   
   // Modal State
   const [showRoleModal, setShowRoleModal] = useState(false);
-  const [selectedRole, setSelectedRole] = useState("");
+  const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const [customRole, setCustomRole] = useState("");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -178,6 +214,8 @@ export default function StylishDashboard() {
 
     setShowRoleModal(false);
     setIsAnalyzing(true);
+    setUploadProgress(0);
+    setUploadError(null);
     
     try {
       const formData = new FormData();
@@ -185,25 +223,72 @@ export default function StylishDashboard() {
       
       const userType = selectedRole === 'Others' ? customRole : selectedRole;
       formData.append('userType', userType);
-
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (!res.ok) {
-        const errText = await res.text();
-        throw new Error(`Upload failed: ${errText}`);
+      
+      if (user?.id) {
+        formData.append('userId', user.id);
       }
 
-      const data = await res.json();
+      const data = await new Promise<any>((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/upload');
+        
+        xhr.upload.onprogress = (event) => {
+          if (event.lengthComputable) {
+            const percentComplete = Math.round((event.loaded / event.total) * 100);
+            // Cap at 90% until the backend extraction finishes
+            setUploadProgress(Math.min(percentComplete, 90));
+          }
+        };
+
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            setUploadProgress(100);
+            try {
+              resolve(JSON.parse(xhr.responseText));
+            } catch (e) {
+              resolve(xhr.responseText);
+            }
+          } else {
+            reject(new Error(xhr.responseText));
+          }
+        };
+
+        xhr.onerror = () => {
+          reject(new Error("Network Error occurred during upload"));
+        };
+
+        xhr.send(formData);
+      });
       
       // Navigate to the analysis theater view with the session ID
       router.push(`/analysis?sessionId=${data.sessionId}`);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
       setIsAnalyzing(false);
-      alert("Failed to upload document. Please ensure the backend server is running.");
+      
+      // Try to parse error to see if it's a legal document rejection
+      let errorMessage = "Failed to upload document.";
+      try {
+        let errorText = error.message;
+        
+        // If it's a JSON string from our XHR response
+        if (errorText.startsWith("{")) {
+          const parsed = JSON.parse(errorText);
+          if (parsed.error && parsed.error.includes("Backend error: ")) {
+             const backendErrStr = parsed.error.replace("Backend error: ", "");
+             const backendErr = JSON.parse(backendErrStr);
+             if (backendErr.isLegalError || backendErr.error) {
+               errorMessage = backendErr.error || backendErr.message || "Document rejected.";
+             }
+          } else if (parsed.error) {
+             errorMessage = parsed.error;
+          }
+        }
+      } catch(e) {
+        // Fallback if parsing fails
+        if (error.message) errorMessage = error.message;
+      }
+      
+      setUploadError(errorMessage);
     }
   };
 
@@ -222,6 +307,36 @@ export default function StylishDashboard() {
   return (
     <div className="min-h-screen w-full bg-[#f8f9fa] text-[#444746] font-sans selection:bg-[#C69C6D]/30 selection:text-[#664229] relative flex flex-col">
       
+
+
+      {/* ERROR MODAL FOR NON-LEGAL DOCUMENTS */}
+      <AnimatePresence>
+        {uploadError && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1f1f1f]/80 backdrop-blur-md"
+          >
+            <div className="bg-white rounded-[32px] p-10 max-w-md w-full text-center shadow-2xl border-t-8 border-red-500">
+              <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <AlertTriangle className="w-10 h-10 text-red-500" />
+              </div>
+              <h3 className="text-2xl font-bold text-[#1f1f1f] mb-3">Document Rejected</h3>
+              <p className="text-red-600 mb-8 text-sm font-medium">
+                {uploadError}
+              </p>
+              <button
+                onClick={() => setUploadError(null)}
+                className="px-6 py-3 bg-[#1f1f1f] text-white rounded-full font-semibold hover:bg-black transition-colors"
+              >
+                Try Another Document
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ROLE SELECTION MODAL */}
       <AnimatePresence>
         {showRoleModal && (
@@ -456,139 +571,129 @@ export default function StylishDashboard() {
 
           {/* 3. CONSTRAINED IN-CANVAS INPUT */}
           <div className="mb-16 w-full">
-            <AnimatePresence mode="wait">
+            <motion.div
+              key="input"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="w-full bg-white rounded-[32px] border border-[#e0e0e0] shadow-sm p-6 sm:p-10 flex flex-col"
+            >
+              <h2 className="text-xl font-medium text-[#1f1f1f] mb-8 text-center">Initiate the analysis. <span className="text-[#444746] font-normal">Select a document or paste text to begin.</span></h2>
               
-              {/* LOADING STATE */}
-              {isAnalyzing ? (
-                <motion.div
-                  key="loading"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="w-full max-w-3xl mx-auto bg-white rounded-[32px] border border-[#e0e0e0] shadow-sm p-12 sm:p-16 min-h-[400px] flex flex-col items-center justify-center text-center relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#C69C6D]/10 via-transparent to-transparent animate-pulse" />
-                  
-                  <div className="relative w-56 h-28 mb-10">
-                    <Image 
-                      src="/trans_logo.png" 
-                      alt="Kavach Logo" 
-                      fill 
-                      className="object-contain drop-shadow-[0_0_20px_rgba(198,156,109,0.4)] animate-[pulse_2s_ease-in-out_infinite]" 
-                      priority 
-                    />
-                  </div>
-                  
-                  <h2 className="text-2xl sm:text-3xl font-medium text-[#1f1f1f] mb-4 flex items-center gap-3">
-                    <Sparkles className="w-6 h-6 text-[#C69C6D] animate-spin-slow" />
-                    Analyzing Document
-                  </h2>
-                  <p className="text-[#664229]/70 text-base sm:text-lg max-w-md">
-                    Uncovering hidden liabilities, compliance risks, and critical legal insights...
-                  </p>
-                  
-                  <div className="mt-10 flex items-center gap-3 text-base text-[#664229] font-medium bg-[#C69C6D]/10 px-6 py-3 rounded-full border border-[#C69C6D]/20">
-                    <Loader2 className="w-5 h-5 animate-spin text-[#C69C6D]" />
-                    <span>Processing natural language models</span>
-                  </div>
-                </motion.div>
-              ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                /* INPUT STATE (CONSTRAINED) */
-                <motion.div
-                  key="input"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="w-full bg-white rounded-[32px] border border-[#e0e0e0] shadow-sm p-6 sm:p-10 flex flex-col"
+                {/* File Upload Box (Highly Visible Branded) */}
+                <div 
+                  className={`h-[200px] sm:h-[260px] rounded-[24px] border-2 transition-all duration-300 relative overflow-hidden group
+                    ${textInput.length > 0 ? 'hidden md:flex flex-col opacity-40 bg-[#f8f9fa] border-[#e0e0e0] pointer-events-none' : 'flex flex-col'}
+                    ${selectedFile ? 'border-[#C69C6D] bg-[#FDFBF7] shadow-[0_8px_30px_rgba(198,156,109,0.15)]' 
+                                   : 'bg-gradient-to-b from-white to-[#FDFBF7] border-[#C69C6D]/40 shadow-sm hover:border-[#C69C6D] hover:shadow-[0_8px_25px_rgba(198,156,109,0.2)] cursor-pointer'}
+                    ${isDragging ? 'border-[#C69C6D] bg-[#FDFBF7] scale-[1.02] shadow-[0_12px_40px_rgba(198,156,109,0.2)]' : ''}
+                  `}
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                  onClick={() => {
+                    if (!selectedFile && !textInput) fileInputRef.current?.click();
+                  }}
                 >
-                  <h2 className="text-xl font-medium text-[#1f1f1f] mb-8 text-center">Initiate the analysis. <span className="text-[#444746] font-normal">Select a document or paste text to begin.</span></h2>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    
-                    {/* File Upload Box (Highly Visible Branded) */}
-                    <div 
-                      className={`h-[200px] sm:h-[260px] rounded-[24px] border-2 transition-all duration-300 relative overflow-hidden group
-                        ${textInput.length > 0 ? 'hidden md:flex flex-col opacity-40 bg-[#f8f9fa] border-[#e0e0e0] pointer-events-none' : 'flex flex-col'}
-                        ${selectedFile ? 'border-[#C69C6D] bg-[#FDFBF7] shadow-[0_8px_30px_rgba(198,156,109,0.15)]' 
-                                       : 'bg-gradient-to-b from-white to-[#FDFBF7] border-[#C69C6D]/40 shadow-sm hover:border-[#C69C6D] hover:shadow-[0_8px_25px_rgba(198,156,109,0.2)] cursor-pointer'}
-                        ${isDragging ? 'border-[#C69C6D] bg-[#FDFBF7] scale-[1.02] shadow-[0_12px_40px_rgba(198,156,109,0.2)]' : ''}
-                      `}
-                      onDragOver={handleDragOver}
-                      onDragLeave={handleDragLeave}
-                      onDrop={handleDrop}
-                      onClick={() => {
-                        if (!selectedFile && !textInput) fileInputRef.current?.click();
-                      }}
-                    >
-                      {!selectedFile ? (
-                        <div className="flex flex-col items-center justify-center h-full text-center p-6 sm:p-8 relative z-10">
-                          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mb-4 sm:mb-5 transition-all duration-300 
-                            ${isDragging ? 'bg-[#C69C6D] text-white scale-110 shadow-lg' 
-                                         : 'bg-[#C69C6D]/15 text-[#664229] group-hover:bg-[#C69C6D] group-hover:text-white group-hover:shadow-md group-hover:scale-105'}`}
-                          >
-                            <Upload className="w-6 h-6 sm:w-7 sm:h-7" />
-                          </div>
-                          <span className="text-base sm:text-lg text-[#1f1f1f] font-semibold mb-1 sm:mb-2 transition-colors group-hover:text-[#664229]">Upload or drag a file</span>
-                          <span className="text-xs sm:text-sm text-[#664229]/70 font-medium">Supports PDF, DOCX, MD, TXT</span>
-                        </div>
-                      ) : (
-                        <div className="flex flex-col items-center justify-center h-full text-center p-6 sm:p-8 relative z-10">
-                          <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl ${getFileBadgeBg(selectedFile.name)} flex flex-col items-center justify-center mb-4 sm:mb-5 shadow-lg transform hover:scale-105 transition-transform cursor-default`}>
-                            <FileCheck2 className="w-6 h-6 sm:w-7 sm:h-7 text-white mb-1" />
-                            <span className="text-[10px] sm:text-[11px] font-bold text-white tracking-widest">{getFileBadgeText(selectedFile.name)}</span>
-                          </div>
-                          <span className="text-base sm:text-lg text-[#1f1f1f] font-bold mb-4 sm:mb-5 line-clamp-1 px-4">{selectedFile.name}</span>
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              removeFile();
-                            }}
-                            className="text-[13px] sm:text-[14px] font-bold text-red-500 hover:text-white hover:bg-red-500 px-5 sm:px-6 py-2 rounded-full transition-all duration-300 border border-red-200 hover:border-red-500 hover:shadow-md"
-                          >
-                            Remove file
-                          </button>
-                        </div>
-                      )}
-                      <input type="file" ref={fileInputRef} className="hidden" accept=".pdf,.docx,.md,.txt" onChange={handleFileChange} />
-                    </div>
-
-                    {/* Text Paste Box (Highly Visible Branded) */}
-                    <div 
-                      className={`h-[200px] sm:h-[260px] transition-all duration-300 relative group
-                        ${selectedFile ? 'hidden md:flex flex-col opacity-40 pointer-events-none' : 'flex flex-col'}
-                      `}
-                    >
-                      <textarea 
-                        value={textInput}
-                        onChange={(e) => setTextInput(e.target.value)}
-                        placeholder="Or securely paste your legal text here..."
-                        className="flex-1 w-full rounded-[24px] border-2 border-[#C69C6D]/40 bg-gradient-to-b from-white to-[#FDFBF7] shadow-sm p-7 text-[16px] leading-relaxed resize-none transition-all duration-300 hover:border-[#C69C6D] hover:shadow-[0_8px_25px_rgba(198,156,109,0.2)] focus:outline-none focus:border-[#C69C6D] focus:ring-4 focus:ring-[#C69C6D]/15 focus:bg-white focus:shadow-[0_12px_30px_rgba(198,156,109,0.25)] text-[#1f1f1f] placeholder:text-[#664229]/50 placeholder:font-medium relative z-10"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Intelligent Action Area */}
-                  <AnimatePresence>
-                    {(selectedFile || textInput.length > 0) && (
-                      <motion.div 
-                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                        animate={{ opacity: 1, height: 'auto', marginTop: 32 }}
-                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                        className="flex justify-end overflow-hidden"
+                  {!selectedFile ? (
+                    <div className="flex flex-col items-center justify-center h-full text-center p-6 sm:p-8 relative z-10">
+                      <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mb-4 sm:mb-5 transition-all duration-300 
+                        ${isDragging ? 'bg-[#C69C6D] text-white scale-110 shadow-lg' 
+                                     : 'bg-[#C69C6D]/15 text-[#664229] group-hover:bg-[#C69C6D] group-hover:text-white group-hover:shadow-md group-hover:scale-105'}`}
                       >
-                        <button 
-                          onClick={handleAnalyzeClick}
-                          className="w-full sm:w-auto px-8 py-3.5 text-[15px] font-semibold text-white bg-[#4a301e] hover:bg-[#3a2618] rounded-[16px] transition-all duration-200 shadow-[0_2px_10px_rgba(74,48,30,0.2)] hover:shadow-[0_4px_20px_rgba(74,48,30,0.3)] active:scale-[0.98] flex items-center justify-center gap-2.5 border-t border-white/15"
+                        <Upload className="w-6 h-6 sm:w-7 sm:h-7" />
+                      </div>
+                      <span className="text-base sm:text-lg text-[#1f1f1f] font-semibold mb-1 sm:mb-2 transition-colors group-hover:text-[#664229]">Upload or drag a file</span>
+                      <span className="text-xs sm:text-sm text-[#664229]/70 font-medium">Supports PDF, DOCX, MD, TXT</span>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center h-full text-center p-6 sm:p-8 relative z-10">
+                      <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl ${getFileBadgeBg(selectedFile.name)} flex flex-col items-center justify-center mb-4 sm:mb-5 shadow-lg transform hover:scale-105 transition-transform cursor-default`}>
+                        <FileCheck2 className="w-6 h-6 sm:w-7 sm:h-7 text-white mb-1" />
+                        <span className="text-[10px] sm:text-[11px] font-bold text-white tracking-widest">{getFileBadgeText(selectedFile.name)}</span>
+                      </div>
+                      <span className="text-base sm:text-lg text-[#1f1f1f] font-bold mb-4 sm:mb-5 line-clamp-1 px-4">{selectedFile.name}</span>
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeFile();
+                        }}
+                        className="text-[13px] sm:text-[14px] font-bold text-red-500 hover:text-white hover:bg-red-500 px-5 sm:px-6 py-2 rounded-full transition-all duration-300 border border-red-200 hover:border-red-500 hover:shadow-md"
+                      >
+                        Remove file
+                      </button>
+                    </div>
+                  )}
+                  <input type="file" ref={fileInputRef} className="hidden" accept=".pdf,.docx,.md,.txt" onChange={handleFileChange} />
+                </div>
+
+                {/* Text Paste Box (Highly Visible Branded) */}
+                <div 
+                  className={`h-[200px] sm:h-[260px] transition-all duration-300 relative group
+                    ${selectedFile ? 'hidden md:flex flex-col opacity-40 pointer-events-none' : 'flex flex-col'}
+                  `}
+                >
+                  <textarea 
+                    value={textInput}
+                    onChange={(e) => setTextInput(e.target.value)}
+                    placeholder="Or securely paste your legal text here..."
+                    className="flex-1 w-full rounded-[24px] border-2 border-[#C69C6D]/40 bg-gradient-to-b from-white to-[#FDFBF7] shadow-sm p-7 text-[16px] leading-relaxed resize-none transition-all duration-300 hover:border-[#C69C6D] hover:shadow-[0_8px_25px_rgba(198,156,109,0.2)] focus:outline-none focus:border-[#C69C6D] focus:ring-4 focus:ring-[#C69C6D]/15 focus:bg-white focus:shadow-[0_12px_30px_rgba(198,156,109,0.25)] text-[#1f1f1f] placeholder:text-[#664229]/50 placeholder:font-medium relative z-10"
+                  />
+                </div>
+              </div>
+
+              {/* Intelligent Action Area OR Loading Area */}
+              <AnimatePresence mode="wait">
+                {isAnalyzing ? (
+                  <motion.div 
+                    key="progress"
+                    initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                    animate={{ opacity: 1, height: 'auto', marginTop: 32 }}
+                    exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                    className="flex flex-col items-center overflow-hidden border-t border-[#e0e0e0] pt-8"
+                  >
+                    <div className="w-full max-w-md">
+                      <div className="flex justify-between items-end mb-2">
+                        <span className="text-sm font-bold text-[#1f1f1f]">
+                          {uploadProgress < 100 ? "Uploading Document..." : "Parsing & Extracting..."}
+                        </span>
+                        <span className="text-xs font-bold text-[#664229]">{uploadProgress}%</span>
+                      </div>
+                      <div className="w-full bg-[#f8f9fa] rounded-full h-3 mb-3 overflow-hidden border border-[#e0e0e0]">
+                        <div 
+                          className="bg-[#C69C6D] h-3 rounded-full transition-all duration-300 ease-out relative overflow-hidden" 
+                          style={{ width: `${uploadProgress}%` }}
                         >
-                          <Sparkles className="w-[18px] h-[18px] text-[#C69C6D]" />
-                          Analyze Document
-                        </button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                          <div className="absolute inset-0 bg-white/20 animate-pulse" />
+                        </div>
+                      </div>
+                      <p className="text-[#664229]/70 text-[13px] text-center font-medium min-h-[40px] flex items-center justify-center">
+                        {progressMessage}
+                      </p>
+                    </div>
+                  </motion.div>
+                ) : (
+                  (selectedFile || textInput.length > 0) && (
+                    <motion.div 
+                      key="action"
+                      initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                      animate={{ opacity: 1, height: 'auto', marginTop: 32 }}
+                      exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                      className="flex justify-end overflow-hidden pt-8 border-t border-[#e0e0e0]"
+                    >
+                      <button 
+                        onClick={handleAnalyzeClick}
+                        className="w-full sm:w-auto px-8 py-3.5 text-[15px] font-semibold text-white bg-[#4a301e] hover:bg-[#3a2618] rounded-[16px] transition-all duration-200 shadow-[0_2px_10px_rgba(74,48,30,0.2)] hover:shadow-[0_4px_20px_rgba(74,48,30,0.3)] active:scale-[0.98] flex items-center justify-center gap-2.5 border-t border-white/15"
+                      >
+                        <Sparkles className="w-[18px] h-[18px] text-[#C69C6D]" />
+                        Analyze Document
+                      </button>
+                    </motion.div>
+                  )
+                )}
+              </AnimatePresence>
+            </motion.div>
           </div>
 
           {/* 4. RECENT ANALYSES */}
