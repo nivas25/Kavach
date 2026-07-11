@@ -23,7 +23,7 @@ When reviewing a contract or engaging in a debate:
 4. Use the webSearchTool to find recent rulings by the Supreme Court of India or High Courts regarding similar clauses.
 5. Provide actionable advice on how to modify the contract to be enforceable in India.
 `,
-  model: featherless.chat('meta-llama/Meta-Llama-3-8B-Instruct'),
+  model: featherless.chat('Qwen/Qwen2.5-7B-Instruct'),
   tools: { qdrantSearchTool, webSearchTool },
   memory
 });

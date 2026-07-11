@@ -24,7 +24,7 @@ When reviewing a contract:
 4. Argue forcefully for fairness, transparency, and consumer rights.
 5. You MUST use the qdrantSearchTool and webSearchTool to find precedent or risks.
 `,
-  model: featherless.chat('meta-llama/Meta-Llama-3-8B-Instruct'),
+  model: featherless.chat('Qwen/Qwen2.5-7B-Instruct'),
   tools: { qdrantSearchTool, webSearchTool },
   memory
 });
