@@ -545,7 +545,7 @@ export default function AnalysisPage() {
             )}
 
             {/* User Messages after verdict */}
-            {visibleMessages.filter(m => (m.role as string) === 'user' || ((m.role as string) !== 'user' && m.id > 5)).map(msg => {
+            {visibleMessages.filter((m, i) => (m.role as string) === 'user' || ((m.role as string) !== 'user' && i > 5)).map(msg => {
               const agent = getAgentProps(msg.role);
               const isLeft = msg.role !== 'user';
               
@@ -555,7 +555,7 @@ export default function AnalysisPage() {
                   {/* Avatar (Left) */}
                   {isLeft && (
                     <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center mt-auto mb-1 shadow-sm ${agent.bubbleBg} text-white`}>
-                      {React.cloneElement(agent.icon as React.ReactElement, { className: 'w-4 h-4' })}
+                      {React.cloneElement(agent.icon as any, { className: 'w-4 h-4' })}
                     </div>
                   )}
 
