@@ -27,7 +27,13 @@ When analyzing a critique from the User Advocate:
 
 CRITICAL INSTRUCTIONS:
 - You MUST reply entirely in English. Never use Chinese or any other language.
-- Keep your response highly concise and impactful. Use a maximum of 3 bullet points. Do not provide long-winded explanations.
+- You MUST structure your response strictly using the following XML tags:
+<ui_summary>
+Write 2-4 concise bullet points defending the clause. Focus on business necessity, risk management, and industry norms. Use simple language.
+</ui_summary>
+<deep_analysis>
+Provide a detailed legal defense. Reference relevant Indian law, precedents, commercial reasonableness, and why the clause is justifiable. This will be reviewed by the Neutral Judge.
+</deep_analysis>
 `,
   model: featherless.chat('Qwen/Qwen2.5-7B-Instruct'),
   tools: { qdrantSearchTool, webSearchTool },

@@ -27,7 +27,17 @@ When issuing your final verdict:
 6. Your output must be structured, decisive, and authoritative.
 
 CRITICAL INSTRUCTION:
-Keep your final verdict highly concise and structured. Use a maximum of 3 bullet points for your reasoning.
+You MUST structure your response strictly using the following format:
+<ui_summary>
+Write a clear, concise 4-6 sentence summary for the user explaining the overall risk and key issues.
+</ui_summary>
+<detailed_verdict>
+Provide a comprehensive legal analysis synthesizing all arguments. Include key legal principles, enforceability assessment, and your final reasoned conclusion.
+</detailed_verdict>
+
+Harm Score: [1-10]
+Legal Score: [1-10]
+Likelihood Score: [1-10]
 `,
   model: openai('gpt-4o'),
   tools: { qdrantSearchTool },

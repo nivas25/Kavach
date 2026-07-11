@@ -89,14 +89,12 @@ export class DocumentProcessorService {
       2. If "isLegalDocument" is false, you MUST provide a "rejectionReason" string explaining why it was rejected.
       3. If "isLegalDocument" is true, include a "title" string field (the name or best guessed title of the document).
       4. If "isLegalDocument" is true, include a "riskLevel" string field representing the overall legal/business risk. It MUST be exactly one of: "low", "medium", "high", "critical".
-      5. BEYOND those required fields, dynamically create an intelligent schema that best fits the specific type of document provided (e.g., NDA, Lease, Employment, MSA).
-      6. Extract deep, granular details. Examples of dynamic fields you might create:
-         - "parties": detailed breakdown of entities involved.
-         - "keyDates": effective date, expiration, milestones.
-         - "coreObligations": what each party is required to do.
-         - "financialTerms": payment schedules, penalties.
-         - "governingLaw": jurisdiction and dispute resolution.
-         - "criticalClauses": a deep dive into specific clauses.
+      5. BEYOND those required fields, dynamically create an intelligent schema that best fits the specific type of document provided (e.g., "parties", "keyDates", "coreObligations").
+      6. CRITICAL: Every single dynamically created field MUST be an object with exactly two keys:
+         - "ui_summary": A very short, 1-2 sentence high-level summary for a non-lawyer.
+         - "deep_analysis": A detailed, comprehensive legal breakdown of that specific section.
+         Example: 
+         "Parties": { "ui_summary": "Company A and User.", "deep_analysis": "Company A is defined as a Delaware Corp. User obligations are..." }
       7. Do not hallucinate. Only extract what is present in the markdown.
       8. Return ONLY valid JSON.
 

@@ -24,7 +24,13 @@ When reviewing a contract:
 5. You MUST use the qdrantSearchTool and webSearchTool to find precedent or risks.
 
 CRITICAL INSTRUCTION:
-Keep your critique highly concise and punchy. Use a maximum of 3 bullet points. Cut out polite filler and long-winded thinking.
+You MUST structure your response strictly using the following XML tags:
+<ui_summary>
+Write 2-4 short, punchy bullet points explaining the risks to the user. Use simple language. Focus on real-world impact. Do not include legal jargon.
+</ui_summary>
+<deep_analysis>
+Provide a detailed, rigorous legal analysis. Include specific clause references, potential legal risks under Indian law, supporting logic, and any relevant case law or statutory interpretation. This section will be read by the Neutral Judge.
+</deep_analysis>
 `,
   model: google('gemini-2.5-flash'),
   tools: { qdrantSearchTool, webSearchTool },

@@ -196,6 +196,86 @@ export default function AnalysisPage() {
   };
 
   // --- Components ---
+  const DualOutputMessage = ({ text }: { text: string }) => {
+    const [showDeep, setShowDeep] = useState(false);
+    
+    // Parse XML tags loosely
+    const uiMatch = text.match(/<ui_summary>([\s\S]*?)(?:<\/ui_summary>|$)/i);
+    const deepMatch = text.match(/<deep_analysis>([\s\S]*?)(?:<\/deep_analysis>|$)/i);
+    const judgeMatch = text.match(/<detailed_verdict>([\s\S]*?)(?:<\/detailed_verdict>|$)/i);
+    
+    const uiText = uiMatch ? uiMatch[1].trim() : text.trim();
+    const deepText = deepMatch ? deepMatch[1].trim() : judgeMatch ? judgeMatch[1].trim() : '';
+
+    return (
+      <div className="flex flex-col gap-3">
+        <div className="text-[14.5px] leading-relaxed font-medium whitespace-pre-wrap">
+          {uiText}
+        </div>
+        {deepText && (
+          <div className="mt-2 pt-3 border-t border-current/10">
+            <button 
+              onClick={() => setShowDeep(!showDeep)}
+              className="text-[11px] font-bold uppercase tracking-widest opacity-70 hover:opacity-100 flex items-center gap-1 transition-opacity"
+            >
+              {showDeep ? 'Hide Deep Analysis' : 'Read Deep Analysis'}
+              <ChevronRight className={`w-3 h-3 transition-transform ${showDeep ? 'rotate-90' : ''}`} />
+            </button>
+            <AnimatePresence>
+              {showDeep && (
+                <motion.div 
+                  initial={{ height: 0, opacity: 0 }} 
+                  animate={{ height: 'auto', opacity: 1 }} 
+                  exit={{ height: 0, opacity: 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-3 text-[13px] opacity-90 leading-relaxed whitespace-pre-wrap">
+                    {deepText}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const DualJSONValue = ({ data }: { data: { ui_summary: string, deep_analysis: string } }) => {
+    const [showDeep, setShowDeep] = useState(false);
+    return (
+      <div className="flex flex-col gap-3">
+        <div className="text-[16px] text-black font-medium leading-relaxed whitespace-pre-wrap">
+          {data.ui_summary}
+        </div>
+        {data.deep_analysis && (
+          <div className="mt-1 pt-3 border-t border-black/10">
+            <button 
+              onClick={() => setShowDeep(!showDeep)}
+              className="text-[11px] font-bold text-black/60 uppercase tracking-widest hover:text-black flex items-center gap-1 transition-colors"
+            >
+              {showDeep ? 'Hide Deep Analysis' : 'Read Deep Analysis'}
+              <ChevronRight className={`w-3 h-3 transition-transform ${showDeep ? 'rotate-90' : ''}`} />
+            </button>
+            <AnimatePresence>
+              {showDeep && (
+                <motion.div 
+                  initial={{ height: 0, opacity: 0 }} 
+                  animate={{ height: 'auto', opacity: 1 }} 
+                  exit={{ height: 0, opacity: 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-3 text-[14px] text-black/80 font-medium leading-relaxed whitespace-pre-wrap">
+                    {data.deep_analysis}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   const renderClausesView = () => {
     if (!documentData || !documentData.extractedData) {
@@ -252,6 +332,9 @@ export default function AnalysisPage() {
           </ul>
         );
       } else if (typeof val === 'object' && val !== null) {
+        if ('ui_summary' in val && 'deep_analysis' in val) {
+          return <DualJSONValue data={val as any} />;
+        }
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
             {Object.entries(val).map(([k, v]) => (
@@ -510,8 +593,8 @@ export default function AnalysisPage() {
                                 </div>
                               )}
 
-                              <div className="text-[14.5px] leading-relaxed font-medium whitespace-pre-wrap">
-                                {msg.text}
+                              <div className="w-full overflow-hidden">
+                                <DualOutputMessage text={msg.text} />
                               </div>
                             </div>
                           </div>
@@ -606,8 +689,8 @@ export default function AnalysisPage() {
                         </div>
                       )}
 
-                      <div className="text-[14.5px] leading-relaxed font-medium whitespace-pre-wrap">
-                        {msg.text}
+                      <div className="w-full overflow-hidden">
+                        <DualOutputMessage text={msg.text} />
                       </div>
                     </div>
                   </div>

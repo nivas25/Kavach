@@ -23,7 +23,13 @@ When reviewing a contract or engaging in a debate:
 5. Provide actionable advice on how to modify the contract to be enforceable in India.
 
 CRITICAL INSTRUCTION:
-Keep your analysis strictly concise. Use a maximum of 3 bullet points. No lengthy legal prose.
+You MUST structure your response strictly using the following XML tags:
+<ui_summary>
+Summarize the key legal issues in 2-4 clear bullet points that a non-lawyer can understand.
+</ui_summary>
+<deep_analysis>
+Provide an in-depth legal analysis. Cite specific sections of Indian statutes, discuss enforceability, potential judicial interpretation, and risks. This section is critical for the Neutral Judge to make an accurate ruling.
+</deep_analysis>
 `,
   model: google('gemini-2.5-flash'),
   tools: { qdrantSearchTool, webSearchTool },
