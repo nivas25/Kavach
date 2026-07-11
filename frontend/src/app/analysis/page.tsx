@@ -182,13 +182,13 @@ export default function AnalysisPage() {
       if (Array.isArray(val)) {
         if (val.length > 0 && typeof val[0] === 'object' && val[0] !== null) {
           return (
-            <div className="space-y-3 mt-2">
+            <div className="space-y-4 mt-4">
               {val.map((item, idx) => (
-                <div key={idx} className="bg-white p-5 rounded-xl border border-white/50 shadow-sm flex flex-col gap-3">
+                <div key={idx} className="bg-white p-6 rounded-2xl border border-white/50 shadow-sm flex flex-col gap-4">
                   {Object.entries(item).map(([k, v]) => (
                     <div key={k} className="flex flex-col">
                       <span className="text-[11px] font-extrabold text-black/40 uppercase tracking-widest">{k.replace(/([A-Z])/g, ' $1').trim()}</span>
-                      <span className="text-[15px] text-black font-semibold leading-relaxed mt-0.5">{String(v)}</span>
+                      <span className="text-[15px] text-black font-semibold leading-relaxed mt-1">{String(v)}</span>
                     </div>
                   ))}
                 </div>
@@ -197,9 +197,9 @@ export default function AnalysisPage() {
           );
         }
         return (
-          <ul className="space-y-3 mt-2 pl-1">
+          <ul className="space-y-4 mt-4 pl-1">
             {val.map((item, idx) => (
-              <li key={idx} className="flex items-start gap-3">
+              <li key={idx} className="flex items-start gap-4">
                 <ChevronRight className={`w-5 h-5 ${themeColor.split(' ')[0]} mt-0.5 shrink-0`} />
                 <span className="text-[16px] text-black font-medium leading-relaxed">{String(item)}</span>
               </li>
@@ -208,22 +208,22 @@ export default function AnalysisPage() {
         );
       } else if (typeof val === 'object' && val !== null) {
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
             {Object.entries(val).map(([k, v]) => (
-              <div key={k} className="bg-white p-5 rounded-xl border border-white/50 shadow-sm">
-                <h4 className="text-[11px] font-extrabold text-black/40 uppercase tracking-widest mb-1.5">{k.replace(/([A-Z])/g, ' $1').trim()}</h4>
+              <div key={k} className="bg-white p-6 rounded-2xl border border-white/50 shadow-sm flex flex-col justify-center">
+                <h4 className="text-[11px] font-extrabold text-black/40 uppercase tracking-widest mb-2">{k.replace(/([A-Z])/g, ' $1').trim()}</h4>
                 <div className="text-[15px] text-black font-semibold leading-relaxed">{renderSmartValue(v, themeColor)}</div>
               </div>
             ))}
           </div>
         );
       } else {
-        return <span className="text-black text-[16px] font-medium leading-relaxed whitespace-pre-wrap">{String(val)}</span>;
+        return <span className="text-black text-[16px] font-medium leading-relaxed whitespace-pre-wrap block mt-2">{String(val)}</span>;
       }
     };
 
     return (
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-8 max-w-4xl mx-auto h-full flex flex-col">
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-4 md:p-8 max-w-4xl mx-auto h-full flex flex-col">
         <div className="mb-10 shrink-0">
           <h2 className="text-3xl font-bold text-black tracking-tight mb-2 flex items-center gap-3">
             <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center border border-gray-200">
@@ -233,20 +233,20 @@ export default function AnalysisPage() {
           </h2>
         </div>
         
-        <div className="flex-1 overflow-y-auto custom-scrollbar pb-16 pr-6">
-          <div className="space-y-8">
+        <div className="flex-1 overflow-y-auto custom-scrollbar pb-16 pr-2 md:pr-6">
+          <div className="space-y-6 md:space-y-8">
             {fieldsToRender.map(([key, value], idx) => {
               const style = getSectionIcon(key);
               return (
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }} key={idx} className={`${style.bg} rounded-3xl p-8 shadow-sm hover:shadow-md transition-all duration-200`}>
-                  <div className="flex items-center gap-4 mb-6 border-b border-black/10 pb-5">
-                    <div className="w-12 h-12 bg-white rounded-2xl shadow-sm border border-white flex items-center justify-center shrink-0">
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }} key={idx} className={`${style.bg} rounded-[32px] p-6 md:p-10 shadow-sm hover:shadow-md transition-all duration-200`}>
+                  <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8 border-b border-black/10 pb-6">
+                    <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-white flex items-center justify-center shrink-0">
                       {style.icon}
                     </div>
-                    <h3 className="text-2xl font-black text-black capitalize tracking-tight">{key.replace(/([A-Z])/g, ' $1').trim()}</h3>
+                    <h3 className="text-2xl md:text-3xl font-black text-black capitalize tracking-tight">{key.replace(/([A-Z])/g, ' $1').trim()}</h3>
                   </div>
                   
-                  <div className="pl-1">
+                  <div className="pl-0 md:pl-2">
                     {renderSmartValue(value, style.icon.props.className)}
                   </div>
                 </motion.div>
@@ -749,10 +749,10 @@ export default function AnalysisPage() {
           {renderReport()}
         </main>
       ) : (
-        <main className="flex-1 w-full flex overflow-hidden">
+        <main className="flex-1 w-full flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden relative">
           
           {/* LEFT PANE: Dynamic Stage (75%) */}
-          <div className="flex-1 h-full bg-[#f8f9fa] relative flex flex-col overflow-hidden">
+          <div className="flex-1 w-full min-h-[70vh] lg:h-full bg-[#f8f9fa] relative flex flex-col lg:overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -770,7 +770,7 @@ export default function AnalysisPage() {
         </div>
 
         {/* RIGHT PANE: Navigation (25%) */}
-        <div className="w-[360px] shrink-0 h-full bg-[#f8f9fa] border-l border-[#e0e0e0] flex flex-col z-10 relative overflow-y-auto custom-scrollbar p-6 space-y-6">
+        <div className="w-full lg:w-[360px] h-auto lg:h-full shrink-0 bg-[#f8f9fa] lg:border-l border-t lg:border-t-0 border-[#e0e0e0] flex flex-col z-10 relative lg:overflow-y-auto custom-scrollbar p-6 space-y-6">
           
           {/* Box 1: Enkrypt AI Security Overview */}
           <div className="bg-white rounded-[24px] border border-[#e0e0e0] shadow-[0_2px_10px_rgba(0,0,0,0.02)] p-6 shrink-0">
