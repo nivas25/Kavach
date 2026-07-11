@@ -459,7 +459,7 @@ export default function AnalysisPage() {
                           {/* Avatar (Left) */}
                           {isLeft && (
                             <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center mt-auto mb-1 shadow-sm ${agent.bubbleBg} text-white`}>
-                              {React.cloneElement(agent.icon as React.ReactElement, { className: 'w-4 h-4' })}
+                              {React.cloneElement(agent.icon as any, { className: 'w-4 h-4' })}
                             </div>
                           )}
 
