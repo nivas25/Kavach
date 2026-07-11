@@ -52,8 +52,11 @@ const initialCritiquesStep = createStep({
       (async () => {
         for await (const chunk of advocateStream.fullStream) {
           if (chunk.type === 'text-delta') {
-            advocateText += chunk.textDelta;
-            if (emit) emit({ type: 'stream_chunk', msg: { id: advocateMsgId, text: chunk.textDelta } });
+            const textContent = chunk.textDelta || chunk.text || chunk.delta || '';
+            if (textContent) {
+              advocateText += textContent;
+              if (emit) emit({ type: 'stream_chunk', msg: { id: advocateMsgId, text: textContent } });
+            }
           } else if (chunk.type === 'tool-call') {
             console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
             if (emit) emit({ type: 'stream_tool', msg: { id: advocateMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
@@ -68,8 +71,11 @@ const initialCritiquesStep = createStep({
       (async () => {
         for await (const chunk of indiaStream.fullStream) {
           if (chunk.type === 'text-delta') {
-            indiaText += chunk.textDelta;
-            if (emit) emit({ type: 'stream_chunk', msg: { id: indiaMsgId, text: chunk.textDelta } });
+            const textContent = chunk.textDelta || chunk.text || chunk.delta || '';
+            if (textContent) {
+              indiaText += textContent;
+              if (emit) emit({ type: 'stream_chunk', msg: { id: indiaMsgId, text: textContent } });
+            }
           } else if (chunk.type === 'tool-call') {
             console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
             if (emit) emit({ type: 'stream_tool', msg: { id: indiaMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
@@ -102,8 +108,11 @@ const round2Step = createStep({
     let fullText = '';
     for await (const chunk of streamRes.fullStream) {
       if (chunk.type === 'text-delta') {
-        fullText += chunk.textDelta;
-        if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: defenderMsgId, text: chunk.textDelta } });
+        const textContent = chunk.textDelta || chunk.text || chunk.delta || '';
+        if (textContent) {
+          fullText += textContent;
+          if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: defenderMsgId, text: textContent } });
+        }
       } else if (chunk.type === 'tool-call') {
         console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
         if (data.emit) data.emit({ type: 'stream_tool', msg: { id: defenderMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
@@ -135,8 +144,11 @@ const round3Step = createStep({
     let fullText = '';
     for await (const chunk of streamRes.fullStream) {
       if (chunk.type === 'text-delta') {
-        fullText += chunk.textDelta;
-        if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: advocateMsgId2, text: chunk.textDelta } });
+        const textContent = chunk.textDelta || chunk.text || chunk.delta || '';
+        if (textContent) {
+          fullText += textContent;
+          if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: advocateMsgId2, text: textContent } });
+        }
       } else if (chunk.type === 'tool-call') {
         console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
         if (data.emit) data.emit({ type: 'stream_tool', msg: { id: advocateMsgId2, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });
@@ -193,8 +205,11 @@ const round4Step = createStep({
     let fullText = '';
     for await (const chunk of streamRes.fullStream) {
       if (chunk.type === 'text-delta') {
-        fullText += chunk.textDelta;
-        if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: judgeMsgId, text: chunk.textDelta } });
+        const textContent = chunk.textDelta || chunk.text || chunk.delta || '';
+        if (textContent) {
+          fullText += textContent;
+          if (data.emit) data.emit({ type: 'stream_chunk', msg: { id: judgeMsgId, text: textContent } });
+        }
       } else if (chunk.type === 'tool-call') {
         console.log('TOOL CALL CHUNK:', JSON.stringify(chunk));
         if (data.emit) data.emit({ type: 'stream_tool', msg: { id: judgeMsgId, toolCallId: chunk.toolCallId, toolName: chunk.toolName || chunk.name || 'Unknown', args: chunk.args } });

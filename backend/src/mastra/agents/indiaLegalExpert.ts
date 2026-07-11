@@ -1,12 +1,9 @@
 import { Agent } from '@mastra/core/agent';
 import { memory } from '../memory';
-import { createGoogleGenerativeAI } from '@ai-sdk/google';
+import { openai } from '@ai-sdk/openai';
 import { qdrantSearchTool } from '../tools/qdrantSearchTool';
 import { webSearchTool } from '../tools/webSearchTool';
 
-const google = createGoogleGenerativeAI({
-  apiKey: process.env.GEMINI_API_KEY_3,
-});
 
 export const indiaLegalExpert = new Agent({
   name: 'India Legal Expert',
@@ -31,7 +28,7 @@ Summarize the key legal issues in 2-4 clear bullet points that a non-lawyer can 
 Provide an in-depth legal analysis. Cite specific sections of Indian statutes, discuss enforceability, potential judicial interpretation, and risks. This section is critical for the Neutral Judge to make an accurate ruling.
 </deep_analysis>
 `,
-  model: google('gemini-2.5-flash'),
+  model: openai('gpt-4o-mini'),
   tools: { qdrantSearchTool, webSearchTool },
   memory
 });
