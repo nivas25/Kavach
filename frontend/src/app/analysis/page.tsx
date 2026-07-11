@@ -72,11 +72,27 @@ export default function AnalysisPage() {
   const [chatInput, setChatInput] = useState("");
   const chatEndRef = useRef<HTMLDivElement>(null);
 
+  const [documentData, setDocumentData] = useState<any>(null);
+  const [finalScoreData, setFinalScoreData] = useState<any>(null);
+  const [finalVerdictText, setFinalVerdictText] = useState<string>("");
+
   useEffect(() => {
     if (!sessionId) return;
     
-    // Connect to the Fastify SSE stream (use 127.0.0.1 to avoid localhost resolution issues)
+    // Connect to the Fastify API (use 127.0.0.1 to avoid localhost resolution issues)
     const fastifyUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8080';
+    
+    // 1. Fetch initial document clauses
+    fetch(`${fastifyUrl}/api/documents/${sessionId}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.extractedData) {
+          setDocumentData(data);
+        }
+      })
+      .catch(err => console.error("Error fetching doc data:", err));
+
+    // 2. Connect to SSE Stream
     const sse = new EventSource(`${fastifyUrl}/api/documents/${sessionId}/stream`);
     
     // Move to Debate Tab automatically since Clauses were parsed in Phase 2
@@ -98,6 +114,8 @@ export default function AnalysisPage() {
           setShowVerdict(true);
           setProgressStatus(prev => ({ ...prev, debate: 'completed' }));
         } else if (data.type === 'complete') {
+          setFinalScoreData(data.scoreData);
+          setFinalVerdictText(data.finalVerdictText);
           sse.close();
         } else if (data.type === 'error') {
           console.error("SSE Error:", data.error || data.message);
@@ -134,197 +152,184 @@ export default function AnalysisPage() {
 
   // --- Components ---
 
-  const renderClausesView = () => (
-    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-8 max-w-4xl mx-auto h-full flex flex-col">
-      <div className="mb-10 shrink-0">
-        <h2 className="text-3xl font-bold text-[#1f1f1f] tracking-tight mb-2 flex items-center gap-3">
-          <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center">
-            <FileText className="w-5 h-5 text-[#1f1f1f]" />
-          </div>
-          Document Breakdown
-        </h2>
-      </div>
-      
-      {/* Scrollable Container with custom scrollbar */}
-      <div className="flex-1 overflow-y-auto custom-scrollbar pb-16 pr-6 relative">
-        
-        {/* Continuous Flow Line */}
-        <div className="absolute left-6 top-8 bottom-8 w-px bg-gray-200"></div>
+  const renderClausesView = () => {
+    if (!documentData || !documentData.extractedData) {
+      return (
+        <div className="p-8 flex items-center justify-center h-full">
+          <p className="text-gray-500 font-medium">Loading document data...</p>
+        </div>
+      );
+    }
 
-        <div className="space-y-10">
+    const { extractedData } = documentData;
+    const title = extractedData.title || "Document Analysis";
+    
+    // Filter out top-level metadata for the clauses list
+    const fieldsToRender = Object.entries(extractedData).filter(([k]) => !['title', 'isLegalDocument', 'riskLevel', 'rejectionReason'].includes(k));
+
+    const renderValue = (val: any): React.ReactNode => {
+      if (Array.isArray(val)) {
+        return (
+          <ul className="list-disc list-inside space-y-2 ml-2 mt-2">
+            {val.map((item, idx) => (
+              <li key={idx} className="text-[#444746]">{renderValue(item)}</li>
+            ))}
+          </ul>
+        );
+      } else if (typeof val === 'object' && val !== null) {
+        return (
+          <div className="mt-3 space-y-3 border-l-2 border-gray-200 pl-4">
+            {Object.entries(val).map(([k, v]) => (
+              <div key={k}>
+                <span className="font-semibold text-gray-700 capitalize text-[13px] tracking-wide">{k.replace(/([A-Z])/g, ' $1').trim()}:</span>
+                <div className="mt-1">{renderValue(v)}</div>
+              </div>
+            ))}
+          </div>
+        );
+      } else {
+        return <span className="text-[#1f1f1f] text-[14px] leading-relaxed whitespace-pre-wrap">{String(val)}</span>;
+      }
+    };
+
+    return (
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-8 max-w-4xl mx-auto h-full flex flex-col">
+        <div className="mb-10 shrink-0">
+          <h2 className="text-3xl font-bold text-[#1f1f1f] tracking-tight mb-2 flex items-center gap-3">
+            <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center">
+              <FileText className="w-5 h-5 text-[#1f1f1f]" />
+            </div>
+            {title} - Breakdown
+          </h2>
+        </div>
+        
+        <div className="flex-1 overflow-y-auto custom-scrollbar pb-16 pr-6 relative">
+          <div className="absolute left-6 top-8 bottom-8 w-px bg-gray-200"></div>
+          <div className="space-y-10">
+            {fieldsToRender.map(([key, value], idx) => (
+              <div key={idx} className="relative pl-16">
+                <div className="absolute left-[1.5rem] top-6 w-3 h-3 rounded-full bg-gray-300 shadow-sm transform -translate-x-1/2"></div>
+                <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                  <div className="mb-4 border-b border-gray-100 pb-4">
+                    <h3 className="font-bold text-[#1f1f1f] text-lg capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</h3>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-[14px] leading-relaxed font-sans">
+                    {renderValue(value)}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    );
+  };
+
+  const renderReport = () => {
+    if (!finalScoreData) {
+      return (
+        <div className="p-8 flex items-center justify-center h-full">
+          <p className="text-gray-500 font-medium animate-pulse">Report is still generating...</p>
+        </div>
+      );
+    }
+
+    const docTitle = documentData?.extractedData?.title || "Document Analysis";
+    const riskLevel = finalScoreData.overall_risk_level || "Unknown";
+    const riskScore = finalScoreData.overall_risk_score || 0;
+    const summary = finalScoreData.summary || "No summary available.";
+    const enkryptScore = finalScoreData.enkrypt_hallucination_score !== undefined ? finalScoreData.enkrypt_hallucination_score : "?";
+    
+    // Determine risk color
+    let riskColor = "text-emerald-600";
+    if (riskLevel === "medium") riskColor = "text-[#C69C6D]";
+    if (riskLevel === "high" || riskLevel === "critical") riskColor = "text-red-600";
+
+    return (
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-5xl mx-auto py-12 px-8">
+        {/* Back Button */}
+        <button 
+          onClick={() => setViewMode('analysis')}
+          className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-[#1f1f1f] transition-colors mb-8 uppercase tracking-widest"
+        >
+          <ArrowLeft className="w-4 h-4" /> Back to Analysis
+        </button>
+
+        {/* Header */}
+        <div className="bg-white rounded-3xl p-10 border border-gray-200 shadow-sm mb-8 flex justify-between items-start">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="px-3 py-1 bg-emerald-50 text-emerald-700 text-[11px] font-bold uppercase tracking-widest rounded-md border border-emerald-200">Finalized Report</span>
+              <span className="text-sm font-semibold text-gray-400">{new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+            </div>
+            <h1 className="text-4xl font-bold text-[#1f1f1f] tracking-tight mb-2">{docTitle}</h1>
+            <p className="text-gray-500 text-lg">Kavach Multi-Agent Security & Risk Analysis</p>
+          </div>
+          <div className="flex gap-3">
+            <button className="px-5 py-2.5 bg-[#1f1f1f] text-white font-bold rounded-xl hover:bg-black transition-colors shadow-sm flex items-center gap-2">
+              <FileOutput className="w-4 h-4" /> Export PDF
+            </button>
+          </div>
+        </div>
+
+        {/* Executive Summary */}
+        <div className="grid grid-cols-3 gap-6 mb-8">
+          <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm col-span-1 flex flex-col justify-center">
+            <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">Contract Risk Score</h3>
+            <div className="flex items-end gap-2 mb-2">
+              <span className="text-6xl font-bold text-[#1f1f1f] leading-none tracking-tighter">{riskScore}</span>
+              <span className="text-lg font-medium text-gray-400 mb-1">/ 100</span>
+            </div>
+            <span className={`text-sm font-semibold capitalize ${riskColor}`}>{riskLevel} Risk Profile</span>
+          </div>
           
-          {/* Node 1 */}
-          <div className="relative pl-16">
-            <div className="absolute left-[1.5rem] top-6 w-3 h-3 rounded-full bg-gray-300 shadow-sm transform -translate-x-1/2"></div>
-            
-            <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm transition-shadow hover:shadow-md">
-              <div className="mb-4 border-b border-gray-100 pb-4">
-                <h3 className="font-bold text-[#1f1f1f] text-lg">Clause 7.2 - Limitation of Liability</h3>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-[14px] text-gray-600 leading-relaxed font-sans">
-                  "IN NO EVENT SHALL THE COMPANY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM YOUR USE OF THE SERVICE..."
+          <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm col-span-2">
+            <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+              <ShieldAlert className="w-3.5 h-3.5" /> Enkrypt AI Security Audit
+            </h3>
+            <div className="grid grid-cols-2 gap-8">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <span className="text-sm font-bold text-[#1f1f1f]">Hallucination Risk</span>
                 </div>
-                
-                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-[14.5px] text-[#1f1f1f] font-medium leading-relaxed">
-                  <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">AI Synthesis</span>
-                  The company is completely absolving itself from any responsibility if you lose money, data, or reputation. This transfers catastrophic risk to the user.
+                <p className="text-2xl font-bold text-[#C69C6D]">{enkryptScore}%</p>
+                <p className="text-xs text-gray-500 mt-1">
+                  {finalScoreData.enkrypt_explanation || "Agent justifications verified against trusted legal corpora."}
+                </p>
+              </div>
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <span className="text-sm font-bold text-[#1f1f1f]">Data Leakage</span>
                 </div>
+                <p className="text-2xl font-bold text-emerald-600">0 Instances</p>
+                <p className="text-xs text-gray-500 mt-1">No PII or proprietary terms leaked during LLM processing.</p>
               </div>
             </div>
           </div>
-
-          {/* Node 2 */}
-          <div className="relative pl-16">
-            <div className="absolute left-[1.5rem] top-6 w-3 h-3 rounded-full bg-gray-300 shadow-sm transform -translate-x-1/2"></div>
-            
-            <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm transition-shadow hover:shadow-md">
-              <div className="mb-4 border-b border-gray-100 pb-4">
-                <h3 className="font-bold text-[#1f1f1f] text-lg">Clause 8.1 - Governing Law</h3>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-[14px] text-gray-600 leading-relaxed font-sans">
-                  "These Terms shall be governed and construed in accordance with the laws of Delaware, without regard to its conflict of law provisions."
-                </div>
-                
-                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-[14.5px] text-[#1f1f1f] font-medium leading-relaxed">
-                  <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">AI Synthesis</span>
-                  Any legal disputes will be handled under the laws of Delaware. This is standard practice for US-based corporations and presents no unusual risk.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Node 3 */}
-          <div className="relative pl-16">
-            <div className="absolute left-[1.5rem] top-6 w-3 h-3 rounded-full bg-gray-300 shadow-sm transform -translate-x-1/2"></div>
-            
-            <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm transition-shadow hover:shadow-md">
-              <div className="mb-4 border-b border-gray-100 pb-4">
-                <h3 className="font-bold text-[#1f1f1f] text-lg">Clause 12.4 - Proprietary AI Data Rights</h3>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-[14px] text-gray-600 leading-relaxed font-sans">
-                  "Customer grants Provider a perpetual, worldwide, royalty-free license to use any data processed through the Service to train, fine-tune..."
-                </div>
-                
-                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-[14.5px] text-[#1f1f1f] font-medium leading-relaxed">
-                  <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">AI Synthesis</span>
-                  This novel clause lacks precedent. It has been extracted and immediately queued for multi-agent debate to determine specific liabilities.
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
-      </div>
-    </motion.div>
-  );
 
-  const renderReport = () => (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-5xl mx-auto py-12 px-8">
-      {/* Back Button */}
-      <button 
-        onClick={() => setViewMode('analysis')}
-        className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-[#1f1f1f] transition-colors mb-8 uppercase tracking-widest"
-      >
-        <ArrowLeft className="w-4 h-4" /> Back to Analysis
-      </button>
-
-      {/* Header */}
-      <div className="bg-white rounded-3xl p-10 border border-gray-200 shadow-sm mb-8 flex justify-between items-start">
-        <div>
-          <div className="flex items-center gap-3 mb-4">
-            <span className="px-3 py-1 bg-emerald-50 text-emerald-700 text-[11px] font-bold uppercase tracking-widest rounded-md border border-emerald-200">Finalized Report</span>
-            <span className="text-sm font-semibold text-gray-400">{new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+        {/* Final Verdict Details */}
+        <div className="bg-white rounded-3xl p-10 border border-gray-200 shadow-sm">
+          <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-widest mb-8 border-b pb-4">Executive Summary</h3>
+          
+          <div className="mb-8">
+            <p className="text-[15px] leading-relaxed text-[#444746] font-medium whitespace-pre-wrap">
+              {summary}
+            </p>
           </div>
-          <h1 className="text-4xl font-bold text-[#1f1f1f] tracking-tight mb-2">SaaS Enterprise Agreement</h1>
-          <p className="text-gray-500 text-lg">Kavach Multi-Agent Security & Risk Analysis</p>
-        </div>
-        <div className="flex gap-3">
-          <button className="px-5 py-2.5 bg-white border-2 border-[#e0e0e0] text-[#1f1f1f] font-bold rounded-xl hover:bg-gray-50 transition-colors shadow-sm flex items-center gap-2">
-            Share
-          </button>
-          <button className="px-5 py-2.5 bg-[#1f1f1f] text-white font-bold rounded-xl hover:bg-black transition-colors shadow-sm flex items-center gap-2">
-            <FileOutput className="w-4 h-4" /> Export PDF
-          </button>
-        </div>
-      </div>
-
-      {/* Executive Summary */}
-      <div className="grid grid-cols-3 gap-6 mb-8">
-        <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm col-span-1 flex flex-col justify-center">
-          <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">Contract Risk Score</h3>
-          <div className="flex items-end gap-2 mb-2">
-            <span className="text-6xl font-bold text-[#1f1f1f] leading-none tracking-tighter">84</span>
-            <span className="text-lg font-medium text-gray-400 mb-1">/ 100</span>
-          </div>
-          <span className="text-sm font-semibold text-emerald-600">Acceptable Risk Profile</span>
-        </div>
-        
-        <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm col-span-2">
-          <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
-            <ShieldAlert className="w-3.5 h-3.5" /> Enkrypt AI Security Audit
-          </h3>
-          <div className="grid grid-cols-2 gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                <span className="text-sm font-bold text-[#1f1f1f]">Hallucination Risk</span>
-              </div>
-              <p className="text-2xl font-bold text-[#C69C6D]">5%</p>
-              <p className="text-xs text-gray-500 mt-1">All agent justifications verified against trusted legal corpora.</p>
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                <span className="text-sm font-bold text-[#1f1f1f]">Data Leakage</span>
-              </div>
-              <p className="text-2xl font-bold text-emerald-600">0 Instances</p>
-              <p className="text-xs text-gray-500 mt-1">No PII or proprietary terms leaked during LLM processing.</p>
-            </div>
+          
+          <div className="mt-8 pt-8 border-t border-gray-100">
+            <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-3">Neutral Judge Rationale</h4>
+            <p className="text-[15px] leading-relaxed text-[#444746] font-medium whitespace-pre-wrap">
+              {finalVerdictText}
+            </p>
           </div>
         </div>
-      </div>
-
-      {/* Detailed Clause Analysis */}
-      <div className="bg-white rounded-3xl p-10 border border-gray-200 shadow-sm">
-        <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-widest mb-8 border-b pb-4">Clause 7.2 &mdash; Limitation of Liability</h3>
-        
-        <div className="grid grid-cols-2 gap-10">
-          <div>
-            <h4 className="text-sm font-bold text-[#1f1f1f] mb-3 flex items-center gap-2">
-              <span className="w-6 h-6 rounded bg-red-100 text-red-600 flex items-center justify-center text-xs">A</span>
-              Original Draft
-            </h4>
-            <div className="p-5 bg-red-50/50 rounded-2xl border border-red-100 text-[14.5px] leading-relaxed text-red-900 font-serif">
-              "IN NO EVENT SHALL THE COMPANY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM YOUR USE OF THE SERVICE..."
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-sm font-bold text-[#1f1f1f] mb-3 flex items-center gap-2">
-              <span className="w-6 h-6 rounded bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs">B</span>
-              Final Suggested Revision
-            </h4>
-            <div className="p-5 bg-emerald-50/50 rounded-2xl border border-emerald-100 text-[14.5px] leading-relaxed text-emerald-900 font-serif">
-              "EXCEPT FOR GROSS NEGLIGENCE, WILLFUL MISCONDUCT, OR BREACH OF CONFIDENTIALITY/DATA SECURITY OBLIGATIONS, IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES..."
-            </div>
-          </div>
-        </div>
-        
-        <div className="mt-8 pt-8 border-t border-gray-100">
-          <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-3">Neutral Judge Rationale</h4>
-          <p className="text-[15px] leading-relaxed text-[#444746] font-medium">
-            While disclaiming indirect damages is standard practice, the complete exclusion of liability for data loss is an unacceptable transfer of risk for an enterprise deployment. The revised clause aligns with Indian Contract Act Section 73 by carving out exceptions for gross negligence and fundamental data security breaches, ensuring equitable risk distribution while maintaining commercial viability.
-          </p>
-        </div>
-      </div>
-    </motion.div>
-  );
+      </motion.div>
+    );
+  };
 
   const getAgentProps = (role: AgentRole) => {
     switch(role) {
