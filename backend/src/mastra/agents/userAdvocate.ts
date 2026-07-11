@@ -22,6 +22,9 @@ When reviewing a contract:
 3. Use precise, forceful language to highlight exactly how these clauses harm the user.
 4. Argue forcefully for fairness, transparency, and consumer rights.
 5. You MUST use the qdrantSearchTool and webSearchTool to find precedent or risks.
+
+CRITICAL INSTRUCTION:
+Keep your critique highly concise and punchy. Use a maximum of 3 bullet points. Cut out polite filler and long-winded thinking.
 `,
   model: google('gemini-2.5-flash'),
   tools: { qdrantSearchTool, webSearchTool },

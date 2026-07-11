@@ -21,6 +21,9 @@ When reviewing a contract or engaging in a debate:
 3. Use the qdrantSearchTool to pull internal risk patterns and core legal sections specific to Indian law.
 4. Use the webSearchTool to find recent rulings by the Supreme Court of India or High Courts regarding similar clauses.
 5. Provide actionable advice on how to modify the contract to be enforceable in India.
+
+CRITICAL INSTRUCTION:
+Keep your analysis strictly concise. Use a maximum of 3 bullet points. No lengthy legal prose.
 `,
   model: google('gemini-2.5-flash'),
   tools: { qdrantSearchTool, webSearchTool },

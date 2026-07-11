@@ -14,8 +14,9 @@ type TabId = 'clauses' | 'debate' | 'negotiation';
 type AgentRole = 'advocate' | 'defender' | 'expert' | 'judge' | 'user';
 
 type ToolBadge = {
+  id: string;
   name: string;
-  status: 'success' | 'blocked';
+  status: 'success' | 'blocked' | 'running';
   reason?: string;
   query?: string;
 };
@@ -121,6 +122,33 @@ export default function AnalysisPage() {
             }
             return updated;
           });
+        } else if (data.type === 'stream_tool') {
+          setVisibleMessages(prev => {
+            const updated = [...prev];
+            const idx = updated.findIndex(m => m.id === data.msg.id);
+            if (idx !== -1) {
+              const tools = updated[idx].tools || [];
+              updated[idx] = { 
+                ...updated[idx], 
+                tools: [...tools, { id: data.msg.toolCallId, name: data.msg.toolName, status: 'running' }] 
+              };
+            }
+            return updated;
+          });
+        } else if (data.type === 'stream_tool_result') {
+          setVisibleMessages(prev => {
+            const updated = [...prev];
+            const idx = updated.findIndex(m => m.id === data.msg.id);
+            if (idx !== -1 && updated[idx].tools) {
+              const tools = [...updated[idx].tools!];
+              const tIdx = tools.findIndex(t => t.id === data.msg.toolCallId);
+              if (tIdx !== -1) {
+                tools[tIdx] = { ...tools[tIdx], status: data.msg.isBlocked ? 'blocked' : 'success' };
+                updated[idx] = { ...updated[idx], tools };
+              }
+            }
+            return updated;
+          });
         } else if (data.type === 'stream_end') {
           setIsTyping(null);
         } else if (data.type === 'message') {
@@ -168,6 +196,25 @@ export default function AnalysisPage() {
   };
 
   // --- Components ---
+  const renderToolBadge = (tool: ToolBadge) => {
+    let baseStyles = "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-bold shadow-sm uppercase tracking-wider ";
+    if (tool.status === 'running') {
+      baseStyles += "bg-blue-100 text-blue-700 border border-blue-200 animate-pulse";
+    } else if (tool.status === 'blocked') {
+      baseStyles += "bg-red-100 text-red-700 border border-red-200";
+    } else {
+      baseStyles += "bg-emerald-100 text-emerald-700 border border-emerald-200";
+    }
+
+    return (
+      <div className={baseStyles}>
+        {tool.status === 'running' && <span className="w-2 h-2 rounded-full border-2 border-current border-t-transparent animate-spin" />}
+        {tool.status === 'blocked' && <AlertCircle className="w-3 h-3" />}
+        {tool.status === 'success' && <CheckCircle2 className="w-3 h-3" />}
+        {tool.name} {tool.status === 'blocked' ? '(BLOCKED BY ENKRYPT AI)' : ''}
+      </div>
+    );
+  };
 
   const renderClausesView = () => {
     if (!documentData || !documentData.extractedData) {

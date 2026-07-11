@@ -25,6 +25,9 @@ When issuing your final verdict:
    - "Legal Score: [1-10]"
    - "Likelihood Score: [1-10]"
 6. Your output must be structured, decisive, and authoritative.
+
+CRITICAL INSTRUCTION:
+Keep your final verdict highly concise and structured. Use a maximum of 3 bullet points for your reasoning.
 `,
   model: openai('gpt-4o'),
   tools: { qdrantSearchTool },
