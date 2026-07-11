@@ -139,7 +139,8 @@ export class DocumentProcessorService {
     markdown: string,
     extractedData: any,
     userId: string,
-    fileName: string
+    fileName: string,
+    userType: string
   ): Promise<void> {
     console.log(`[Storage] Storing document state for session: ${sessionId}...`);
     
@@ -149,6 +150,7 @@ export class DocumentProcessorService {
       markdown,
       extractedData,
       fileName,
+      userType,
       status: 'extracted',
       uploadedAt: new Date().toISOString()
     }), { ex: 86400 }); // Expire in 24 hours
@@ -303,9 +305,10 @@ export class DocumentProcessorService {
   }
 
   /**
-   * Complete Pipeline: LlamaParse -> Gemini -> Mastra Workflow -> Scoring -> Redis/Supabase
+   * Phase 2: LlamaParse -> Gemini -> Storage
+   * Extracts data and stores it, returning the sessionId immediately.
    */
-  async processDocument(fileBuffer: Buffer, fileName: string, userId: string): Promise<string> {
+  async processAndExtractDocument(fileBuffer: Buffer, fileName: string, userId: string, userType: string): Promise<string> {
     const sessionId = uuidv4();
     
     // 1. Parse PDF/DOCX to Markdown
@@ -314,28 +317,10 @@ export class DocumentProcessorService {
     // 2. Extract structured JSON using Gemini
     const extractedData = await this.extractWithGemini(markdown);
     
-    // 3. Store initial state
-    await this.storeDocumentState(sessionId, markdown, extractedData, userId, fileName);
+    // 3. Store initial state with userType
+    await this.storeDocumentState(sessionId, markdown, extractedData, userId, fileName, userType);
     
-    // 4. Trigger 5-Round Debate Workflow
-    console.log(`[Workflow] Triggering 5-Round Mastra Debate for session: ${sessionId}...`);
-    const run = await debateWorkflow.createRun({ runId: sessionId });
-    const debateResult = await run.start({
-      inputData: {
-        contractData: extractedData,
-        threadId: sessionId
-      }
-    });
-
-    const finalVerdict = (debateResult as any).result?.finalVerdict || "Debate failed to reach a final verdict.";
-
-    // 5. Score the Verdict
-    const scoreData = await this.calculateFinalScore(finalVerdict);
-
-    // 6. Update Final State in DB and Cache
-    await this.updateFinalState(sessionId, scoreData, finalVerdict);
-
-    console.log(`[Pipeline] Document processing complete. Final Score: ${scoreData.overall_risk_score}`);
+    console.log(`[Pipeline] Document extraction complete. Session ID: ${sessionId}`);
     
     return sessionId;
   }

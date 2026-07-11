@@ -4,6 +4,9 @@ import * as dotenv from 'dotenv';
 import path from 'path';
 import { getRedisInfo } from './lib/redis';
 import { pingSupabase } from './lib/supabase';
+import { DocumentProcessorService } from './services/documentProcessor';
+import multipart from '@fastify/multipart';
+import { v4 as uuidv4 } from 'uuid';
 
 // Load .env from backend root
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
@@ -17,6 +20,12 @@ server.register(cors, {
     ? ['https://your-domain.com'] // Replace with your production domain
     : ['http://localhost:3000'],   // Next.js dev server
   credentials: true,
+});
+
+server.register(multipart, {
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10MB limit
+  }
 });
 
 // ═══ Health Check ════════════════════════════
@@ -61,6 +70,39 @@ server.get('/health', async (_request, _reply) => {
 //   if (error) return reply.code(500).send({ error: error.message });
 //   return { analyses: data };
 // });
+
+// ═══ Phase 1 & 2: Upload & Initialize ════════════
+const processor = new DocumentProcessorService();
+
+server.post('/api/documents/upload', async (request, reply) => {
+  try {
+    const data = await request.file();
+    if (!data) {
+      return reply.code(400).send({ error: "No file uploaded" });
+    }
+
+    const fileBuffer = await data.toBuffer();
+    const fileName = data.filename;
+    // Extract userType from fields (fastify-multipart populates data.fields)
+    const userTypeField = data.fields.userType;
+    const userType = userTypeField && 'value' in userTypeField ? String(userTypeField.value) : 'Unknown';
+    // For now, use a dummy userId until auth is fully wired
+    const userId = '00000000-0000-0000-0000-000000000000';
+
+    const sessionId = await processor.processAndExtractDocument(fileBuffer, fileName, userId, userType);
+
+    server.log.info(`[UPLOAD] Processing completed for ${fileName}. Assigned Session: ${sessionId}`);
+
+    return { 
+      sessionId, 
+      status: "processing", 
+      message: "File uploaded and extraction completed."
+    };
+  } catch (error: any) {
+    server.log.error(error);
+    return reply.code(500).send({ error: error.message });
+  }
+});
 
 const start = async () => {
   try {

@@ -167,14 +167,44 @@ export default function StylishDashboard() {
     setShowRoleModal(true);
   };
 
-  const handleInitiateAgents = () => {
+  const handleInitiateAgents = async () => {
     if (!selectedRole) return;
+    
+    // For now we only support file uploads in this flow
+    if (!selectedFile) {
+      alert("Please upload a file first.");
+      return;
+    }
+
     setShowRoleModal(false);
     setIsAnalyzing(true);
-    setTimeout(() => {
-      // Navigate to the analysis theater view
-      router.push('/analysis');
-    }, 2000); // Shortened wait time to transition faster
+    
+    try {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      
+      const userType = selectedRole === 'Others' ? customRole : selectedRole;
+      formData.append('userType', userType);
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`Upload failed: ${errText}`);
+      }
+
+      const data = await res.json();
+      
+      // Navigate to the analysis theater view with the session ID
+      router.push(`/analysis?sessionId=${data.sessionId}`);
+    } catch (error) {
+      console.error(error);
+      setIsAnalyzing(false);
+      alert("Failed to upload document. Please ensure the backend server is running.");
+    }
   };
 
   const removeFile = () => {

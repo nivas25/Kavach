@@ -76,26 +76,36 @@ body {
   outline: none;
 }
 
-/* Custom Hair-thin Scrollbar */
-::-webkit-scrollbar {
-  width: 2px;
-  height: 2px;
+/* Ultra-Modern Custom Scrollbar for specific containers */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-::-webkit-scrollbar-track {
+.custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
+  margin: 10px 0;
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(55, 47, 37, 0.4); /* Subtle Kavach Gold */
-  border-radius: 10px;
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(198, 156, 109, 0.3); /* Soft Kavach Gold */
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
-::-webkit-scrollbar-button {
-  display: none; /* Hide up/down arrows */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(198, 156, 109, 0.6);
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
-/* Hide scrollbar utility for specific hidden areas if needed */
+.custom-scrollbar::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
