@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowLeft, ShieldAlert, FileText, Bot, Scale, Activity, Gavel, CheckCircle2, ChevronRight, Send, Database, AlertTriangle, FileOutput, Search, Lightbulb, FileCheck2, MessageSquare } from "lucide-react";
+import { ArrowLeft, ShieldAlert, FileText, Bot, Scale, Activity, Gavel, CheckCircle2, ChevronRight, Send, Database, AlertTriangle, FileOutput, Search, Lightbulb, FileCheck2, MessageSquare, Users, Calendar, Briefcase, DollarSign, Landmark, AlertCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -167,28 +167,58 @@ export default function AnalysisPage() {
     // Filter out top-level metadata for the clauses list
     const fieldsToRender = Object.entries(extractedData).filter(([k]) => !['title', 'isLegalDocument', 'riskLevel', 'rejectionReason'].includes(k));
 
-    const renderValue = (val: any): React.ReactNode => {
+    const getSectionIcon = (key: string) => {
+      const k = key.toLowerCase();
+      if (k.includes('part')) return <Users className="w-5 h-5 text-[#C69C6D]" />;
+      if (k.includes('date') || k.includes('time')) return <Calendar className="w-5 h-5 text-[#C69C6D]" />;
+      if (k.includes('oblig') || k.includes('respons')) return <Briefcase className="w-5 h-5 text-[#C69C6D]" />;
+      if (k.includes('finan') || k.includes('pay') || k.includes('fee')) return <DollarSign className="w-5 h-5 text-[#C69C6D]" />;
+      if (k.includes('law') || k.includes('juris') || k.includes('govern')) return <Landmark className="w-5 h-5 text-[#C69C6D]" />;
+      if (k.includes('critic') || k.includes('risk') || k.includes('liab')) return <AlertCircle className="w-5 h-5 text-red-500" />;
+      return <FileCheck2 className="w-5 h-5 text-gray-500" />;
+    };
+
+    const renderSmartValue = (val: any): React.ReactNode => {
       if (Array.isArray(val)) {
+        if (val.length > 0 && typeof val[0] === 'object' && val[0] !== null) {
+          return (
+            <div className="space-y-3 mt-2">
+              {val.map((item, idx) => (
+                <div key={idx} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex flex-col gap-2">
+                  {Object.entries(item).map(([k, v]) => (
+                    <div key={k} className="flex flex-col">
+                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{k.replace(/([A-Z])/g, ' $1').trim()}</span>
+                      <span className="text-[14px] text-gray-800 font-medium leading-relaxed mt-0.5">{String(v)}</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          );
+        }
         return (
-          <ul className="list-disc list-inside space-y-2 ml-2 mt-2">
+          <ul className="space-y-2 mt-2 pl-1">
             {val.map((item, idx) => (
-              <li key={idx} className="text-[#444746]">{renderValue(item)}</li>
+              <li key={idx} className="flex items-start gap-2">
+                <ChevronRight className="w-4 h-4 text-[#C69C6D] mt-0.5 shrink-0" />
+                <span className="text-[14px] text-[#444746] leading-relaxed">{String(item)}</span>
+              </li>
             ))}
           </ul>
         );
       } else if (typeof val === 'object' && val !== null) {
         return (
-          <div className="mt-3 space-y-3 border-l-2 border-gray-200 pl-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
             {Object.entries(val).map(([k, v]) => (
-              <div key={k}>
-                <span className="font-semibold text-gray-700 capitalize text-[13px] tracking-wide">{k.replace(/([A-Z])/g, ' $1').trim()}:</span>
-                <div className="mt-1">{renderValue(v)}</div>
+              <div key={k} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">{k.replace(/([A-Z])/g, ' $1').trim()}</h4>
+                <div className="text-[14px] text-gray-800 font-medium leading-relaxed">{renderSmartValue(v)}</div>
               </div>
             ))}
           </div>
         );
       } else {
-        return <span className="text-[#1f1f1f] text-[14px] leading-relaxed whitespace-pre-wrap">{String(val)}</span>;
+        return <span className="text-[#1f1f1f] text-[15px] leading-relaxed whitespace-pre-wrap">{String(val)}</span>;
       }
     };
 
@@ -203,21 +233,21 @@ export default function AnalysisPage() {
           </h2>
         </div>
         
-        <div className="flex-1 overflow-y-auto custom-scrollbar pb-16 pr-6 relative">
-          <div className="absolute left-6 top-8 bottom-8 w-px bg-gray-200"></div>
-          <div className="space-y-10">
+        <div className="flex-1 overflow-y-auto custom-scrollbar pb-16 pr-6">
+          <div className="space-y-8">
             {fieldsToRender.map(([key, value], idx) => (
-              <div key={idx} className="relative pl-16">
-                <div className="absolute left-[1.5rem] top-6 w-3 h-3 rounded-full bg-gray-300 shadow-sm transform -translate-x-1/2"></div>
-                <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                  <div className="mb-4 border-b border-gray-100 pb-4">
-                    <h3 className="font-bold text-[#1f1f1f] text-lg capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</h3>
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }} key={idx} className="bg-gray-50/50 rounded-3xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-4 mb-6 border-b border-gray-200 pb-4">
+                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center shrink-0">
+                    {getSectionIcon(key)}
                   </div>
-                  <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-[14px] leading-relaxed font-sans">
-                    {renderValue(value)}
-                  </div>
+                  <h3 className="text-xl font-bold text-[#1f1f1f] capitalize tracking-tight">{key.replace(/([A-Z])/g, ' $1').trim()}</h3>
                 </div>
-              </div>
+                
+                <div className="pl-1">
+                  {renderSmartValue(value)}
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
