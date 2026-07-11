@@ -5,7 +5,7 @@ import { qdrantSearchTool } from '../tools/qdrantSearchTool';
 import { webSearchTool } from '../tools/webSearchTool';
 
 const google = createGoogleGenerativeAI({
-  apiKey: process.env.GEMINI_API_KEY_1,
+  apiKey: process.env.GEMINI_API_KEY_3,
 });
 
 export const indiaLegalExpert = new Agent({
