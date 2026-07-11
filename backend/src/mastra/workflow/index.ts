@@ -31,8 +31,8 @@ const initialCritiquesStep = createStep({
     const indiaMsgId = `msg_${Date.now()}_expert`;
     
     if (emit) {
-      emit({ type: 'stream_start', msg: { id: advocateMsgId, role: 'advocate', round: 1, text: '' } });
-      emit({ type: 'stream_start', msg: { id: indiaMsgId, role: 'expert', round: 1, text: '' } });
+      emit({ type: 'stream_start', agent: 'advocate', msg: { id: advocateMsgId, role: 'advocate', round: 1, text: '' } });
+      emit({ type: 'stream_start', agent: 'expert', msg: { id: indiaMsgId, role: 'expert', round: 1, text: '' } });
     }
     
     const [advocateStream, indiaStream] = await Promise.all([
@@ -75,7 +75,7 @@ const round2Step = createStep({
     console.log(`\n\x1b[34m[AGENT: Company Defender]\x1b[0m Thinking...`);
     
     const defenderMsgId = `msg_${Date.now()}_defender`;
-    if (data.emit) data.emit({ type: 'stream_start', msg: { id: defenderMsgId, role: 'defender', round: 1, text: '' } });
+    if (data.emit) data.emit({ type: 'stream_start', agent: 'defender', msg: { id: defenderMsgId, role: 'defender', round: 1, text: '' } });
 
     const streamRes = await companyDefender.stream(prompt, { threadId: data.threadId } as any);
     let fullText = '';
@@ -100,7 +100,7 @@ const round3Step = createStep({
     console.log(`\n\x1b[35m[AGENT: User Advocate]\x1b[0m Rebutting...`);
     
     const advocateMsgId2 = `msg_${Date.now()}_advocate_2`;
-    if (data.emit) data.emit({ type: 'stream_start', msg: { id: advocateMsgId2, role: 'advocate', round: 2, text: '' } });
+    if (data.emit) data.emit({ type: 'stream_start', agent: 'advocate', msg: { id: advocateMsgId2, role: 'advocate', round: 2, text: '' } });
 
     const streamRes = await userAdvocate.stream(prompt, { threadId: data.threadId } as any);
     let fullText = '';
@@ -150,7 +150,7 @@ const round4Step = createStep({
     console.log(`\n\x1b[32m[AGENT: Neutral Judge]\x1b[0m Reviewing full 3-round transcript...`);
     
     const judgeMsgId = `msg_${Date.now()}_judge`;
-    if (data.emit) data.emit({ type: 'stream_start', msg: { id: judgeMsgId, role: 'judge', round: 3, text: '' } });
+    if (data.emit) data.emit({ type: 'stream_start', agent: 'judge', msg: { id: judgeMsgId, role: 'judge', round: 3, text: '' } });
 
     const streamRes = await neutralJudge.stream(prompt, { threadId: data.threadId } as any);
     let fullText = '';

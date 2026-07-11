@@ -136,6 +136,15 @@ server.get('/api/documents/:sessionId/stream', async (request, reply) => {
   reply.raw.setHeader('Content-Type', 'text/event-stream');
   reply.raw.setHeader('Cache-Control', 'no-cache');
   reply.raw.setHeader('Connection', 'keep-alive');
+  
+  // Explicitly add CORS headers since flushHeaders bypasses the @fastify/cors plugin
+  if (request.headers.origin) {
+    reply.raw.setHeader('Access-Control-Allow-Origin', request.headers.origin);
+    reply.raw.setHeader('Access-Control-Allow-Credentials', 'true');
+  } else {
+    reply.raw.setHeader('Access-Control-Allow-Origin', '*');
+  }
+
   // Need to flush headers to establish SSE connection immediately
   reply.raw.flushHeaders();
 
