@@ -7,7 +7,7 @@ import { webSearchTool } from '../tools/webSearchTool';
 // Initialize Featherless AI Provider
 const featherless = createOpenAI({
   baseURL: 'https://api.featherless.ai/v1',
-  apiKey: process.env.FEATHERLESS_API_KEY,
+  apiKey: process.env.FEATHERLESS_API_KEY_1,
 });
 
 export const companyDefender = new Agent({

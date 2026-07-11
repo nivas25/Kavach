@@ -1,11 +1,12 @@
 import { Agent } from '@mastra/core/agent';
 import { memory } from '../memory';
-import { createGroq } from '@ai-sdk/groq';
+import { createOpenAI } from '@ai-sdk/openai';
 import { qdrantSearchTool } from '../tools/qdrantSearchTool';
 import { webSearchTool } from '../tools/webSearchTool';
 
-const groq = createGroq({
-  apiKey: process.env.GROQ_API_KEY_2,
+const featherless = createOpenAI({
+  baseURL: 'https://api.featherless.ai/v1',
+  apiKey: process.env.FEATHERLESS_API_KEY_2,
 });
 
 export const indiaLegalExpert = new Agent({
@@ -22,7 +23,7 @@ When reviewing a contract or engaging in a debate:
 4. Use the webSearchTool to find recent rulings by the Supreme Court of India or High Courts regarding similar clauses.
 5. Provide actionable advice on how to modify the contract to be enforceable in India.
 `,
-  model: groq('llama-3.3-70b-versatile'),
+  model: featherless.chat('meta-llama/Meta-Llama-3-8B-Instruct'),
   tools: { qdrantSearchTool, webSearchTool },
   memory
 });

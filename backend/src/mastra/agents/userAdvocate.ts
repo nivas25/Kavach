@@ -1,11 +1,12 @@
 import { Agent } from '@mastra/core/agent';
 import { memory } from '../memory';
-import { createGroq } from '@ai-sdk/groq';
+import { createOpenAI } from '@ai-sdk/openai';
 import { qdrantSearchTool } from '../tools/qdrantSearchTool';
 import { webSearchTool } from '../tools/webSearchTool';
 
-const groq = createGroq({
-  apiKey: process.env.GROQ_API_KEY_1,
+const featherless = createOpenAI({
+  baseURL: 'https://api.featherless.ai/v1',
+  apiKey: process.env.FEATHERLESS_API_KEY_2,
 });
 
 export const userAdvocate = new Agent({
@@ -23,7 +24,7 @@ When reviewing a contract:
 4. Argue forcefully for fairness, transparency, and consumer rights.
 5. You MUST use the qdrantSearchTool and webSearchTool to find precedent or risks.
 `,
-  model: groq('llama-3.3-70b-versatile'),
+  model: featherless.chat('meta-llama/Meta-Llama-3-8B-Instruct'),
   tools: { qdrantSearchTool, webSearchTool },
   memory
 });
