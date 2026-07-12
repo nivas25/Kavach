@@ -5,26 +5,13 @@ import { memory } from '../memory';
 
 // Memory is managed via workflow state now, so we remove manual assignment to agents
 
-const formatInstruction = `\n\nCRITICAL FORMAT INSTRUCTION: You MUST format your response exactly like this:
-SUMMARY: <Write a punchy, 2-line summary of your argument here for the user to read quickly>
-DETAILS: <Write your comprehensive, detailed analysis here for the judge to read>`;
+const formatInstruction = `\n\nCRITICAL FORMAT INSTRUCTION: You MUST write a punchy, extremely concise and authoritative argument directly to the user. Do not use prefixes like 'SUMMARY:' or 'DETAILS:'. Be direct and brief.`;
 
 async function streamWithSummary(streamObj: any, msgId: string, emit: any) {
   let fullText = '';
-  let sentToUI = 0;
   for await (const chunk of streamObj.textStream) {
     fullText += chunk;
-    const detailsMatch = fullText.indexOf('DETAILS:');
-    if (detailsMatch === -1) {
-      if (emit) emit({ type: 'stream_chunk', msg: { id: msgId, text: chunk } });
-      sentToUI = fullText.length;
-    } else if (sentToUI < detailsMatch) {
-      const remainingToEmit = fullText.substring(sentToUI, detailsMatch);
-      if (remainingToEmit && emit) {
-        emit({ type: 'stream_chunk', msg: { id: msgId, text: remainingToEmit } });
-      }
-      sentToUI = detailsMatch;
-    }
+    if (emit) emit({ type: 'stream_chunk', msg: { id: msgId, text: chunk } });
   }
   if (emit) emit({ type: 'stream_end' });
   return fullText;

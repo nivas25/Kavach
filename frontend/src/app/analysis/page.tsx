@@ -411,13 +411,25 @@ function AnalysisContent() {
     const isQdrant = tool.name.includes("Qdrant");
     const isEnkrypt = tool.name.includes("Enkrypt");
     
+    let badgeStyle = "bg-white border-[#e0e0e0] text-[#444746]";
+    let iconStyle = "text-[#C69C6D]";
+
+    if (tool.status === 'blocked') {
+      badgeStyle = "bg-red-50 border-red-200 text-red-600";
+      iconStyle = "text-red-600";
+    } else if (isQdrant) {
+      badgeStyle = "bg-[#E8415F] border-[#E8415F] text-white";
+      iconStyle = "text-white";
+    } else if (isEnkrypt) {
+      badgeStyle = "bg-[#7c3aed] border-[#7c3aed] text-white";
+      iconStyle = "text-white";
+    }
+
     return (
       <div className="group relative inline-flex items-center mr-2 mb-2">
-        <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest border cursor-pointer shadow-sm
-          ${tool.status === 'success' ? 'bg-white border-[#e0e0e0] text-[#444746]' : 'bg-red-50 border-red-200 text-red-600'}
-        `}>
-          {isQdrant && <Database className="w-3 h-3 text-[#C69C6D]" />}
-          {isEnkrypt && <AlertTriangle className={`w-3 h-3 ${tool.status === 'blocked' ? 'text-red-600' : 'text-emerald-600'}`} />}
+        <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest border cursor-pointer shadow-sm transition-colors ${badgeStyle}`}>
+          {isQdrant && <Database className={`w-3 h-3 ${iconStyle}`} />}
+          {isEnkrypt && <AlertTriangle className={`w-3 h-3 ${iconStyle}`} />}
           {tool.name}
         </div>
         
