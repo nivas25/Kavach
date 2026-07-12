@@ -12,8 +12,8 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@ai-sdk/google": "^4.0.10",
-    "@ai-sdk/groq": "^4.0.6",
+    "@ai-sdk/google": "^4.0.12",
+    "@ai-sdk/groq": "^4.0.8",
     "@ai-sdk/openai": "^4.0.11",
     "@fastify/cors": "^11.3.0",
     "@fastify/multipart": "^10.1.0",
@@ -24,7 +24,7 @@
     "@qdrant/js-client-rest": "^1.18.0",
     "@supabase/supabase-js": "^2.110.2",
     "@upstash/redis": "^1.38.0",
-    "ai": "^6.0.221",
+    "ai": "^7.0.22",
     "dotenv": "^16.4.5",
     "fastify": "^5.0.0",
     "googlethis": "^1.8.0",
