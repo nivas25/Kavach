@@ -556,8 +556,8 @@ function AnalysisContent() {
                   </div>
                 </div>
 
-                <p className="text-white/90 text-[15px] leading-relaxed mb-8 relative z-10 font-serif">
-                  While disclaiming indirect damages is standard practice, the complete exclusion of liability for data loss is an unacceptable transfer of risk for an enterprise deployment. Indian courts may view this as an unconscionable contract under Section 73 if a fundamental security breach occurs. The Company Defender's justification relies on hallucinations blocked by Enkrypt AI.
+                <p className="text-white/90 text-[15px] leading-relaxed mb-8 relative z-10 font-serif whitespace-pre-wrap">
+                  {finalVerdictText}
                 </p>
 
                 <div className="flex justify-end relative z-10">
