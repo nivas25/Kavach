@@ -198,6 +198,16 @@ server.get('/api/documents/:sessionId/stream', async (request, reply) => {
   return reply;
 });
 
+server.get('/api/documents/:sessionId/negotiation', async (request, reply) => {
+  const { sessionId } = request.params as { sessionId: string };
+  try {
+    const suggestions = await processor.generateNegotiationSuggestions(sessionId);
+    return { suggestions };
+  } catch (err: any) {
+    server.log.error(err);
+    return reply.status(500).send({ error: err.message });
+  }
+});
 const start = async () => {
   try {
     const port = process.env.PORT ? parseInt(process.env.PORT) : 8080;

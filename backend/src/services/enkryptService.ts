@@ -11,16 +11,26 @@ export class EnkryptService {
     }
   }
 
-  private async fetchWithRetry(url: string, options: RequestInit, retries = 3, delay = 1000): Promise<Response> {
+  private async fetchWithRetry(url: string, options: RequestInit, retries = 3, delay = 1000, timeoutMs = 15000): Promise<Response> {
     for (let i = 0; i < retries; i++) {
-      const response = await fetch(url, options);
-      if (response.ok) return response;
-      if (response.status === 429) {
-        console.warn(`[Enkrypt AI] Rate limited (429). Retrying in ${delay}ms...`);
-        await new Promise(resolve => setTimeout(resolve, delay));
-        delay *= 2; // Exponential backoff
-      } else {
-        return response; // Return other errors immediately
+      try {
+        const fetchOptions = { ...options, signal: AbortSignal.timeout(timeoutMs) };
+        const response = await fetch(url, fetchOptions);
+        if (response.ok) return response;
+        if (response.status === 429) {
+          console.warn(`[Enkrypt AI] Rate limited (429). Retrying in ${delay}ms...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          delay *= 2; // Exponential backoff
+        } else {
+          return response; // Return other errors immediately
+        }
+      } catch (err: any) {
+        if (err.name === 'TimeoutError' || err.name === 'AbortError') {
+          console.warn(`[Enkrypt AI] Timeout reached (${timeoutMs}ms) on attempt ${i + 1}`);
+          if (i === retries - 1) throw err; // throw on final attempt
+        } else {
+          throw err;
+        }
       }
     }
     throw new Error(`Failed after ${retries} retries`);
@@ -53,7 +63,7 @@ export class EnkryptService {
             injection_attack: { enabled: true }
           }
         })
-      });
+      }, 1, 1000, 2500); // 1 attempt, 2500ms strict timeout
 
       if (!response.ok) {
         console.error(`[Enkrypt AI] Error checking tool call: ${response.statusText}`);

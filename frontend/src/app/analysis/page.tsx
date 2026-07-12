@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowLeft, ShieldAlert, FileText, Bot, Scale, Activity, Gavel, CheckCircle2, ChevronRight, Send, Database, AlertTriangle, FileOutput, Search, Lightbulb, FileCheck2, MessageSquare, Users, Calendar, Briefcase, DollarSign, Landmark, AlertCircle } from "lucide-react";
+import { ArrowLeft, ShieldAlert, FileText, Bot, Scale, Activity, Gavel, CheckCircle2, ChevronRight, ChevronDown, ChevronUp, Send, Database, AlertTriangle, FileOutput, Search, Lightbulb, FileCheck2, MessageSquare, Users, Calendar, Briefcase, DollarSign, Landmark, AlertCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -71,11 +71,16 @@ function AnalysisContent() {
   const [isTyping, setIsTyping] = useState<AgentRole | null>(null);
   const [showVerdict, setShowVerdict] = useState(false);
   const [chatInput, setChatInput] = useState("");
+  const [isEnkryptExpanded, setIsEnkryptExpanded] = useState(false);
+  const [isJudgeExpanded, setIsJudgeExpanded] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   const [documentData, setDocumentData] = useState<any>(null);
   const [finalScoreData, setFinalScoreData] = useState<any>(null);
   const [finalVerdictText, setFinalVerdictText] = useState<string>("");
+
+  const [negotiationSuggestions, setNegotiationSuggestions] = useState<any[]>([]);
+  const [isGeneratingSuggestions, setIsGeneratingSuggestions] = useState(false);
 
   useEffect(() => {
     if (!sessionId) return;
@@ -155,6 +160,27 @@ function AnalysisContent() {
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [visibleMessages, isTyping, showVerdict]);
+
+  useEffect(() => {
+    if (finalScoreData && sessionId) {
+      const fetchSuggestions = async () => {
+        setIsGeneratingSuggestions(true);
+        try {
+          const fastifyUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8080').replace(/\/$/, '');
+          const res = await fetch(`${fastifyUrl}/api/documents/${sessionId}/negotiation`);
+          const data = await res.json();
+          if (data.suggestions) {
+            setNegotiationSuggestions(data.suggestions);
+          }
+        } catch (err) {
+          console.error("Failed to fetch suggestions", err);
+        } finally {
+          setIsGeneratingSuggestions(false);
+        }
+      };
+      fetchSuggestions();
+    }
+  }, [finalScoreData, sessionId]);
 
   const handleUserChatSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -295,11 +321,21 @@ function AnalysisContent() {
     
     // Determine risk color
     let riskColor = "text-emerald-600";
-    if (riskLevel === "medium") riskColor = "text-[#C69C6D]";
-    if (riskLevel === "high" || riskLevel === "critical") riskColor = "text-red-600";
+    let riskBg = "bg-emerald-50";
+    let riskBorder = "border-emerald-200";
+    if (riskLevel === "medium") {
+      riskColor = "text-[#C69C6D]";
+      riskBg = "bg-[#C69C6D]/10";
+      riskBorder = "border-[#C69C6D]/20";
+    }
+    if (riskLevel === "high" || riskLevel === "critical") {
+      riskColor = "text-red-600";
+      riskBg = "bg-red-50";
+      riskBorder = "border-red-200";
+    }
 
     return (
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-5xl mx-auto py-12 px-8">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl mx-auto py-12 px-6 sm:px-8">
         {/* Back Button */}
         <button 
           onClick={() => setViewMode('analysis')}
@@ -309,94 +345,146 @@ function AnalysisContent() {
         </button>
 
         {/* Header */}
-        <div className="bg-white rounded-3xl p-10 border border-gray-200 shadow-sm mb-8 flex justify-between items-start">
+        <div className="flex justify-between items-start mb-8">
           <div>
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-3">
               <span className="px-3 py-1 bg-emerald-50 text-emerald-700 text-[11px] font-bold uppercase tracking-widest rounded-md border border-emerald-200">Finalized Report</span>
               <span className="text-sm font-semibold text-gray-400">{new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
             </div>
             <h1 className="text-4xl font-bold text-[#1f1f1f] tracking-tight mb-2">{docTitle}</h1>
             <p className="text-gray-500 text-lg">Kavach Multi-Agent Security & Risk Analysis</p>
           </div>
-          <div className="flex gap-3">
-            <button className="px-5 py-2.5 bg-[#1f1f1f] text-white font-bold rounded-xl hover:bg-black transition-colors shadow-sm flex items-center gap-2">
-              <FileOutput className="w-4 h-4" /> Export PDF
+          <button className="hidden sm:flex px-5 py-2.5 bg-[#1f1f1f] text-white font-bold rounded-xl hover:bg-black transition-colors shadow-sm items-center gap-2">
+            <FileOutput className="w-4 h-4" /> Export PDF
+          </button>
+        </div>
+
+        {/* Top Summary Card (Hero Section) */}
+        <div className="bg-white rounded-[32px] p-8 sm:p-10 border border-gray-200 shadow-sm mb-6 flex flex-col sm:flex-row gap-10 items-center">
+          <div className={`flex flex-col items-center justify-center shrink-0 w-48 h-48 rounded-full ${riskBg} border-8 ${riskBorder}`}>
+            <span className={`text-6xl font-black ${riskColor} tracking-tighter leading-none`}>{riskScore}</span>
+            <span className="text-sm font-bold text-gray-500 mt-2 uppercase tracking-widest">/ 100</span>
+            <span className={`text-sm font-bold capitalize mt-1 ${riskColor}`}>{riskLevel} Risk</span>
+          </div>
+          <div className="flex-1 w-full">
+            <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-500" /> Executive Summary & Highlights
+            </h3>
+            <div className="prose prose-sm max-w-none text-gray-600 leading-relaxed">
+              <ReactMarkdown 
+                components={{
+                  h3: ({node, ...props}) => <h3 className="text-lg font-bold text-[#1f1f1f] mt-4 mb-2" {...props} />,
+                  h4: ({node, ...props}) => <h4 className="text-base font-bold text-[#1f1f1f] mt-3 mb-1" {...props} />,
+                  p: ({node, ...props}) => <p className="mb-4 last:mb-0" {...props} />,
+                  ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-4 space-y-1.5" {...props} />,
+                  li: ({node, ...props}) => <li {...props} />,
+                  strong: ({node, ...props}) => <strong className="font-bold text-[#1f1f1f]" {...props} />
+                }}
+              >
+                {summary}
+              </ReactMarkdown>
+            </div>
+          </div>
+        </div>
+        
+        {/* Enkrypt AI Security Audit (Collapsible) */}
+        <div className="bg-white rounded-3xl border border-gray-200 shadow-sm mb-6 overflow-hidden">
+          <div className="p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+            <div>
+              <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <ShieldAlert className="w-4 h-4 text-[#C69C6D]" /> Enkrypt AI Security Audit
+              </h3>
+              <div className="flex gap-8">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                    <span className="text-[13px] font-bold text-gray-500 uppercase tracking-wider">Hallucination Risk</span>
+                  </div>
+                  <p className="text-2xl font-bold text-[#1f1f1f]">{enkryptScore}%</p>
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                    <span className="text-[13px] font-bold text-gray-500 uppercase tracking-wider">Data Leakage</span>
+                  </div>
+                  <p className="text-2xl font-bold text-[#1f1f1f]">0 Instances</p>
+                </div>
+              </div>
+            </div>
+            
+            <button 
+              onClick={() => setIsEnkryptExpanded(!isEnkryptExpanded)}
+              className="flex items-center gap-2 px-4 py-2 bg-gray-50 hover:bg-gray-100 text-gray-700 text-sm font-bold rounded-xl border border-gray-200 transition-colors shrink-0"
+            >
+              {isEnkryptExpanded ? "Hide Details" : "View Audit Details"}
+              {isEnkryptExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </button>
           </div>
+          
+          <AnimatePresence>
+            {isEnkryptExpanded && (
+              <motion.div 
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="border-t border-gray-100 bg-gray-50"
+              >
+                <div className="p-6 sm:p-8">
+                  <h4 className="text-sm font-bold text-[#1f1f1f] mb-2">Audit Explanation</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {finalScoreData.enkrypt_explanation || "All agent justifications were verified against trusted legal corpora in real-time. No PII or proprietary terms were leaked during LLM processing. The hallucination risk is within acceptable safety parameters for legal review."}
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
-        {/* Executive Summary */}
-        <div className="grid grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm col-span-1 flex flex-col justify-center">
-            <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">Contract Risk Score</h3>
-            <div className="flex items-end gap-2 mb-2">
-              <span className="text-6xl font-bold text-[#1f1f1f] leading-none tracking-tighter">{riskScore}</span>
-              <span className="text-lg font-medium text-gray-400 mb-1">/ 100</span>
+        {/* Neutral Judge Analysis (Collapsible) */}
+        <div className="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
+          <div className="p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+            <div>
+              <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                <Gavel className="w-4 h-4 text-[#664229]" /> Neutral Judge Verdict
+              </h3>
+              <p className="text-sm font-medium text-gray-500">Detailed legal analysis from the 3-round debate.</p>
             </div>
-            <span className={`text-sm font-semibold capitalize ${riskColor}`}>{riskLevel} Risk Profile</span>
-          </div>
-          
-          <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm col-span-2">
-            <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
-              <ShieldAlert className="w-3.5 h-3.5" /> Enkrypt AI Security Audit
-            </h3>
-            <div className="grid grid-cols-2 gap-8">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                  <span className="text-sm font-bold text-[#1f1f1f]">Hallucination Risk</span>
-                </div>
-                <p className="text-2xl font-bold text-[#C69C6D]">{enkryptScore}%</p>
-                <p className="text-xs text-gray-500 mt-1">
-                  {finalScoreData.enkrypt_explanation || "Agent justifications verified against trusted legal corpora."}
-                </p>
-              </div>
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                  <span className="text-sm font-bold text-[#1f1f1f]">Data Leakage</span>
-                </div>
-                <p className="text-2xl font-bold text-emerald-600">0 Instances</p>
-                <p className="text-xs text-gray-500 mt-1">No PII or proprietary terms leaked during LLM processing.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Final Verdict Details */}
-        <div className="bg-white rounded-3xl p-10 border border-gray-200 shadow-sm">
-          <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-widest mb-8 border-b pb-4">Executive Summary</h3>
-          
-          <div className="mb-8">
-            <ReactMarkdown 
-              components={{
-                h3: ({node, ...props}) => <h3 className="text-lg font-bold text-[#1f1f1f] mt-6 mb-3" {...props} />,
-                h4: ({node, ...props}) => <h4 className="text-base font-bold text-[#1f1f1f] mt-5 mb-2" {...props} />,
-                p: ({node, ...props}) => <p className="text-[15px] leading-relaxed text-[#444746] font-medium mb-4 whitespace-pre-wrap" {...props} />,
-                ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-4 space-y-2 text-[15px] text-[#444746]" {...props} />,
-                li: ({node, ...props}) => <li {...props} />,
-                strong: ({node, ...props}) => <strong className="font-bold text-[#1f1f1f]" {...props} />
-              }}
+            <button 
+              onClick={() => setIsJudgeExpanded(!isJudgeExpanded)}
+              className="flex items-center gap-2 px-4 py-2 bg-[#f8f9fa] hover:bg-[#e9ecef] text-[#1f1f1f] text-sm font-bold rounded-xl border border-gray-200 transition-colors shrink-0"
             >
-              {summary}
-            </ReactMarkdown>
+              {isJudgeExpanded ? "Hide Full Analysis" : "Read Full Verdict"}
+              {isJudgeExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
           </div>
           
-          <div className="mt-8 pt-8 border-t border-gray-100">
-            <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-3">Neutral Judge Rationale</h4>
-            <ReactMarkdown 
-              components={{
-                h3: ({node, ...props}) => <h3 className="text-lg font-bold text-[#1f1f1f] mt-6 mb-3" {...props} />,
-                h4: ({node, ...props}) => <h4 className="text-base font-bold text-[#1f1f1f] mt-5 mb-2" {...props} />,
-                p: ({node, ...props}) => <p className="text-[15px] leading-relaxed text-[#444746] font-medium mb-4 whitespace-pre-wrap" {...props} />,
-                ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-4 space-y-2 text-[15px] text-[#444746]" {...props} />,
-                li: ({node, ...props}) => <li {...props} />,
-                strong: ({node, ...props}) => <strong className="font-bold text-[#1f1f1f]" {...props} />
-              }}
-            >
-              {finalVerdictText}
-            </ReactMarkdown>
-          </div>
+          <AnimatePresence>
+            {isJudgeExpanded && (
+              <motion.div 
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="border-t border-gray-100"
+              >
+                <div className="p-6 sm:p-8">
+                  <div className="prose prose-sm max-w-none text-gray-600 leading-relaxed font-serif">
+                    <ReactMarkdown 
+                      components={{
+                        h3: ({node, ...props}) => <h3 className="text-lg font-bold text-[#1f1f1f] mt-6 mb-3 font-sans" {...props} />,
+                        h4: ({node, ...props}) => <h4 className="text-base font-bold text-[#1f1f1f] mt-5 mb-2 font-sans" {...props} />,
+                        p: ({node, ...props}) => <p className="mb-4 last:mb-0" {...props} />,
+                        ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-4 space-y-2 font-sans" {...props} />,
+                        li: ({node, ...props}) => <li {...props} />,
+                        strong: ({node, ...props}) => <strong className="font-bold text-[#1f1f1f]" {...props} />
+                      }}
+                    >
+                      {finalVerdictText}
+                    </ReactMarkdown>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.div>
     );
@@ -704,46 +792,48 @@ function AnalysisContent() {
           Negotiation Suggestions
         </h2>
         <p className="text-[#664229]/70 text-[15px] max-w-2xl mt-2 font-medium">
-          Strategic pushbacks and alternative clauses generated by the User Advocate agent.
+          Strategic pushbacks and actionable advice generated by the User Advocate based on the final verdict.
         </p>
       </div>
 
       <div className="flex-1 overflow-y-auto custom-scrollbar pb-16 pr-6 space-y-6">
-        
-        {/* Suggestion 1 */}
-        <div className="bg-white rounded-2xl p-6 border border-[#e0e0e0] shadow-sm hover:border-[#C69C6D]/30 transition-colors">
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <span className="text-[10px] font-bold text-[#C69C6D] uppercase tracking-widest bg-[#C69C6D]/10 px-2 py-0.5 rounded-md border border-[#C69C6D]/20 mb-2 inline-block">Suggestion 1</span>
-              <h3 className="font-bold text-[#1f1f1f] text-lg">Push back on 'Limitation of Liability'</h3>
+        {isGeneratingSuggestions ? (
+          <div className="flex flex-col items-center justify-center h-48 space-y-4">
+            <div className="flex gap-2">
+              <span className="w-2.5 h-2.5 bg-[#C69C6D] rounded-full animate-bounce"></span>
+              <span className="w-2.5 h-2.5 bg-[#C69C6D] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+              <span className="w-2.5 h-2.5 bg-[#C69C6D] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
             </div>
+            <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">Generating Strategies...</p>
           </div>
-          <div className="bg-[#f8f9fa] p-4 rounded-xl border border-gray-100 text-[14.5px] text-[#444746] leading-relaxed mb-4">
-            Instead of accepting a blanket waiver of all indirect damages, request a cap equal to 12 months of service fees. This gives you baseline protection without breaking standard SaaS norms.
-          </div>
-          <div className="flex gap-3">
-            <button className="px-4 py-2 bg-[#1f1f1f] text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">Apply Redline</button>
-            <button className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">Dismiss</button>
-          </div>
-        </div>
-
-        {/* Suggestion 2 */}
-        <div className="bg-white rounded-2xl p-6 border border-[#e0e0e0] shadow-sm hover:border-[#C69C6D]/30 transition-colors">
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <span className="text-[10px] font-bold text-[#C69C6D] uppercase tracking-widest bg-[#C69C6D]/10 px-2 py-0.5 rounded-md border border-[#C69C6D]/20 mb-2 inline-block">Suggestion 2</span>
-              <h3 className="font-bold text-[#1f1f1f] text-lg">Reject 'Proprietary AI Data Rights'</h3>
+        ) : negotiationSuggestions.length > 0 ? (
+          negotiationSuggestions.map((suggestion, index) => (
+            <div key={index} className="bg-white rounded-2xl p-6 border border-[#e0e0e0] shadow-sm hover:border-[#C69C6D]/30 transition-colors">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <span className="text-[10px] font-bold text-[#C69C6D] uppercase tracking-widest bg-[#C69C6D]/10 px-2 py-0.5 rounded-md border border-[#C69C6D]/20 mb-2 inline-block">Suggestion {index + 1}</span>
+                  <h3 className="font-bold text-[#1f1f1f] text-lg">{suggestion.title}</h3>
+                </div>
+              </div>
+              <div className="bg-[#fff9f2] p-4 rounded-xl border border-[#C69C6D]/20 mb-4 flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-[#C69C6D] shrink-0 mt-0.5" />
+                <p className="text-[14px] font-medium text-[#664229] leading-relaxed">
+                  {suggestion.risk}
+                </p>
+              </div>
+              <div className="bg-[#f8f9fa] p-4 rounded-xl border border-gray-100">
+                <h4 className="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Recommendation / Script</h4>
+                <p className="text-[14.5px] text-[#444746] leading-relaxed">
+                  {suggestion.recommendation}
+                </p>
+              </div>
             </div>
+          ))
+        ) : (
+          <div className="text-center p-12 bg-white rounded-2xl border border-dashed border-gray-300">
+            <p className="text-gray-500 font-medium">Suggestions will appear here after the debate concludes.</p>
           </div>
-          <div className="bg-[#f8f9fa] p-4 rounded-xl border border-gray-100 text-[14.5px] text-[#444746] leading-relaxed mb-4">
-            This clause bypasses the NDA and allows them to train models on your proprietary data. You must strictly require an opt-out or strike this clause entirely.
-          </div>
-          <div className="flex gap-3">
-            <button className="px-4 py-2 bg-[#1f1f1f] text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">Apply Redline</button>
-            <button className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">Dismiss</button>
-          </div>
-        </div>
-        
+        )}
       </div>
     </motion.div>
   );

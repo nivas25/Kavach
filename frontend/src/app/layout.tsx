@@ -8,8 +8,21 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Kavach | Your AI Legal Shield",
-  description: "AI-powered legal document intelligence to analyze contracts and uncover hidden risks.",
+  title: "Kavach | AI-Powered Legal Contract Analysis",
+  description: "Protect yourself from predatory clauses. Kavach uses a multi-agent AI debate system to analyze legal contracts, uncover hidden risks, and provide actionable negotiation strategies.",
+  openGraph: {
+    title: "Kavach | AI-Powered Legal Contract Analysis",
+    description: "Protect yourself from predatory clauses with a multi-agent AI debate system.",
+    url: "https://kavach.ai",
+    siteName: "Kavach",
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kavach | AI-Powered Legal Contract Analysis",
+    description: "Protect yourself from predatory clauses with a multi-agent AI debate system.",
+  },
 };
 
 export default function RootLayout({

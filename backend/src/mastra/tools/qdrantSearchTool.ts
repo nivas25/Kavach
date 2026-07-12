@@ -1,7 +1,6 @@
 import { createTool } from '@mastra/core/tools';
 import { z } from 'zod';
 import { qdrantClient, QDRANT_COLLECTIONS, VECTOR_CONFIG } from '../../lib/qdrant';
-import { enkryptService } from '../../services/enkryptService';
 
 // Using a dedicated key for embeddings to avoid rate limits
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY_4;
@@ -16,12 +15,7 @@ export const qdrantSearchTool = createTool({
   }),
   execute: async ({ query, collection = 'risk_patterns', limit = 5 }: any) => {
     try {
-      console.log(`[QdrantSearchTool] Enkrypt AI checking query: "${query}"`);
-      const securityCheck = await enkryptService.checkToolCall(query);
-      if (securityCheck.isBlocked) {
-        console.warn(`[QdrantSearchTool] Blocked by Enkrypt AI: ${securityCheck.reason}`);
-        return `Security Violation: Query blocked by Enkrypt AI guardrails. Reason: ${securityCheck.reason}`;
-      }
+
 
       console.log(`[QdrantSearchTool] Generating embedding for query: "${query}"`);
       

@@ -5,14 +5,71 @@ import { memory } from '../memory';
 
 // Memory is managed via workflow state now, so we remove manual assignment to agents
 
-const formatInstruction = `\n\nCRITICAL FORMAT INSTRUCTION: You MUST write a punchy, extremely concise and authoritative argument directly to the user. Do not use prefixes like 'SUMMARY:' or 'DETAILS:'. Be direct and brief.`;
+const formatInstruction = `\n\nCRITICAL FORMAT INSTRUCTION: You MUST structure your response EXACTLY as follows using these XML tags:
+<UI_SUMMARY>
+[Your punchy, extremely concise and authoritative argument directly to the user. Do not use prefixes inside.]
+</UI_SUMMARY>
+<DEEP_ANALYSIS>
+[Your full detailed reasoning, legal points, citations, and complete context. This will be sent to the judge.]
+</DEEP_ANALYSIS>`;
 
 async function streamWithSummary(streamObj: any, msgId: string, emit: any) {
   let fullText = '';
+  let buffer = '';
+  let isStreamingToUI = false;
+  let hasSeenFormat = false;
+
+  const startTag = '<UI_SUMMARY>';
+  const endTag = '</UI_SUMMARY>';
+  const maxTagLen = Math.max(startTag.length, endTag.length);
+  
+  let charCount = 0;
+
   for await (const chunk of streamObj.textStream) {
     fullText += chunk;
-    if (emit) emit({ type: 'stream_chunk', msg: { id: msgId, text: chunk } });
+    
+    if (hasSeenFormat && !isStreamingToUI) {
+      continue; // Skip processing buffer if we already sent the UI summary
+    }
+    
+    buffer += chunk;
+    charCount += chunk.length;
+
+    if (!hasSeenFormat) {
+      if (buffer.includes(startTag)) {
+        hasSeenFormat = true;
+        isStreamingToUI = true;
+        buffer = buffer.slice(buffer.indexOf(startTag) + startTag.length).trimStart();
+      } else if (charCount > 100 && !buffer.includes('<')) {
+        // Fallback: if LLM didn't use tags at all after 100 chars, just stream everything
+        hasSeenFormat = true;
+        isStreamingToUI = true;
+      }
+    }
+
+    if (isStreamingToUI) {
+      if (buffer.includes(endTag)) {
+        isStreamingToUI = false;
+        const toEmit = buffer.slice(0, buffer.indexOf(endTag));
+        if (emit && toEmit) emit({ type: 'stream_chunk', msg: { id: msgId, text: toEmit } });
+        buffer = '';
+      } else {
+        if (buffer.length > maxTagLen) {
+          const safeLength = buffer.length - maxTagLen;
+          const toEmit = buffer.slice(0, safeLength);
+          if (emit && toEmit) emit({ type: 'stream_chunk', msg: { id: msgId, text: toEmit } });
+          buffer = buffer.slice(safeLength);
+        }
+      }
+    }
   }
+
+  // Flush remaining buffer if still streaming to UI
+  if (isStreamingToUI && buffer.length > 0) {
+    const toEmit = buffer.replace(endTag, '');
+    if (emit && toEmit) emit({ type: 'stream_chunk', msg: { id: msgId, text: toEmit } });
+  }
+
   if (emit) emit({ type: 'stream_end' });
   return fullText;
 }

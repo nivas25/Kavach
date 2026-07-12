@@ -3,6 +3,9 @@ import { supabaseAdmin } from '../lib/supabase';
 import { v4 as uuidv4 } from 'uuid';
 import { debateWorkflow } from '../mastra/workflow';
 import { enkryptService } from './enkryptService';
+import { generateObject } from 'ai';
+import { groq } from '@ai-sdk/groq';
+import { z } from 'zod';
 
 export class DocumentProcessorService {
   private llamaParseApiKey: string;
@@ -360,5 +363,55 @@ export class DocumentProcessorService {
     console.log(`[Pipeline] Document extraction complete. Session ID: ${sessionId}`);
     
     return sessionId;
+  }
+
+  /**
+   * Generates dynamic negotiation suggestions based on the contract and debate verdict.
+   */
+  async generateNegotiationSuggestions(sessionId: string): Promise<any[]> {
+    console.log(`[DocumentProcessor] Generating negotiation suggestions for ${sessionId}...`);
+    const docKey = `doc:${sessionId}`;
+    const docData = await redis.get(docKey);
+
+    if (!docData) {
+      throw new Error("Missing document data in Redis.");
+    }
+
+    const parsedDoc = typeof docData === 'string' ? JSON.parse(docData) : docData;
+    
+    if (!parsedDoc.finalVerdict) {
+      throw new Error("Cannot generate suggestions: Debate verdict not found.");
+    }
+
+    const contractDataStr = JSON.stringify(parsedDoc.extractedData || {}, null, 2);
+    const verdictStr = parsedDoc.finalVerdict || "";
+    const userType = parsedDoc.userType || "User";
+
+    const prompt = `You are an expert contract negotiator acting as a ${userType} Advocate.
+Your goal is to provide practical, non-legalistic, and highly actionable negotiation advice based on the provided contract clauses and the Neutral Judge's verdict.
+
+Generate 3 to 5 negotiation suggestions to protect the user's interests. Focus on the most critical risks. Keep the language professional but simple enough for a layperson to understand.
+
+[CONTRACT CLAUSES]
+${contractDataStr}
+
+[JUDGE VERDICT]
+${verdictStr}
+`;
+
+    const { object } = await generateObject({
+      model: groq('llama-3.3-70b-versatile') as any,
+      schema: z.object({
+        suggestions: z.array(z.object({
+          title: z.string().describe("Short name of the risky clause (e.g., \"Push back on 'Limitation of Liability'\")"),
+          risk: z.string().describe("A brief, 1-2 sentence explanation of why this clause is dangerous for the user."),
+          recommendation: z.string().describe("A clear, actionable script or redline instruction (e.g., \"Instead of accepting X, request Y...\")")
+        }))
+      }),
+      prompt,
+      maxRetries: 2
+    });
+
+    return object.suggestions;
   }
 }
