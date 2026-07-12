@@ -402,19 +402,6 @@ function AnalysisContent() {
     );
   };
 
-  const formatMessageText = (text: string) => {
-    return text.split('\n').map((line, i) => (
-      <React.Fragment key={i}>
-        {line.split(/(\*\*.*?\*\*)/g).map((part, j) => {
-          if (part.startsWith('**') && part.endsWith('**')) {
-            return <strong key={j} className="font-black opacity-90">{part.slice(2, -2)}</strong>;
-          }
-          return <span key={j}>{part}</span>;
-        })}
-        {i !== text.split('\n').length - 1 && <br />}
-      </React.Fragment>
-    ));
-  };
 
   const getAgentProps = (role: AgentRole) => {
     switch(role) {
@@ -496,7 +483,7 @@ function AnalysisContent() {
                   </div>
 
                   <div className="space-y-6">
-                    {roundMsgs.map(msg => {
+                    {roundMsgs.map((msg, i) => {
                       const agent = getAgentProps(msg.role);
                       const isLeft = msg.role !== 'user';
                       
@@ -523,12 +510,23 @@ function AnalysisContent() {
                               {/* Tool Badges */}
                               {msg.tools && msg.tools.length > 0 && (
                                 <div className="flex flex-wrap gap-1.5 mb-2.5">
-                                  {msg.tools.map((t, i) => <div key={i}>{renderToolBadge(t)}</div>)}
+                                  {msg.tools.map((t, idx) => <div key={idx}>{renderToolBadge(t)}</div>)}
                                 </div>
                               )}
 
                               <div className="text-[14.5px] leading-relaxed font-medium whitespace-pre-wrap">
-                                {formatMessageText(msg.text)}
+                                <ReactMarkdown
+                                  components={{
+                                    h3: ({node, ...props}) => <strong className="block mt-2 mb-1" {...props} />,
+                                    h4: ({node, ...props}) => <strong className="block mt-2 mb-1" {...props} />,
+                                    p: ({node, ...props}) => <p className="mb-2 last:mb-0" {...props} />,
+                                    ul: ({node, ...props}) => <ul className="list-disc pl-4 mb-2 space-y-1" {...props} />,
+                                    li: ({node, ...props}) => <li {...props} />,
+                                    strong: ({node, ...props}) => <strong className="font-bold opacity-90" {...props} />
+                                  }}
+                                >
+                                  {msg.text}
+                                </ReactMarkdown>
                               </div>
                             </div>
                           </div>
@@ -619,12 +617,23 @@ function AnalysisContent() {
                       {/* Tool Badges */}
                       {msg.tools && msg.tools.length > 0 && (
                         <div className="flex flex-wrap gap-1.5 mb-2.5">
-                          {msg.tools.map((t, i) => <div key={i}>{renderToolBadge(t)}</div>)}
+                          {msg.tools.map((t, idx) => <div key={idx}>{renderToolBadge(t)}</div>)}
                         </div>
                       )}
 
                       <div className="text-[14.5px] leading-relaxed font-medium whitespace-pre-wrap">
-                        {formatMessageText(msg.text)}
+                        <ReactMarkdown
+                          components={{
+                            h3: ({node, ...props}) => <strong className="block mt-2 mb-1" {...props} />,
+                            h4: ({node, ...props}) => <strong className="block mt-2 mb-1" {...props} />,
+                            p: ({node, ...props}) => <p className="mb-2 last:mb-0" {...props} />,
+                            ul: ({node, ...props}) => <ul className="list-disc pl-4 mb-2 space-y-1" {...props} />,
+                            li: ({node, ...props}) => <li {...props} />,
+                            strong: ({node, ...props}) => <strong className="font-bold opacity-90" {...props} />
+                          }}
+                        >
+                          {msg.text}
+                        </ReactMarkdown>
                       </div>
                     </div>
                   </div>
