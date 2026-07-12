@@ -202,11 +202,11 @@ function AnalysisContent() {
             <div className="flex flex-col gap-4 mt-2">
               {val.map((item, idx) => (
                 <div key={idx} className="bg-white p-6 rounded-2xl border border-black/5 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-5">
                     {Object.entries(item).map(([k, v]) => (
-                      <div key={k} className="flex flex-col bg-[#f8f9fa] p-4 rounded-xl border border-[#e0e0e0]">
-                        <span className="text-[11px] font-bold text-[#C69C6D] uppercase tracking-widest mb-1">{k.replace(/([A-Z])/g, ' $1').trim()}</span>
-                        <span className="text-[14.5px] text-[#1f1f1f] font-semibold leading-relaxed break-words">{String(v)}</span>
+                      <div key={k} className="flex flex-col">
+                        <span className="text-[11px] font-bold text-black/40 uppercase tracking-widest mb-1.5">{k.replace(/([A-Z])/g, ' $1').trim()}</span>
+                        <span className="text-[15px] text-black font-semibold leading-relaxed break-words">{String(v)}</span>
                       </div>
                     ))}
                   </div>
