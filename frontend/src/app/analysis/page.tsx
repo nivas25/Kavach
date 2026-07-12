@@ -199,15 +199,17 @@ function AnalysisContent() {
       if (Array.isArray(val)) {
         if (val.length > 0 && typeof val[0] === 'object' && val[0] !== null) {
           return (
-            <div className="space-y-3 mt-2">
+            <div className="flex flex-col gap-4 mt-2">
               {val.map((item, idx) => (
-                <div key={idx} className="bg-white p-5 rounded-xl border border-white/50 shadow-sm flex flex-col gap-3">
-                  {Object.entries(item).map(([k, v]) => (
-                    <div key={k} className="flex flex-col">
-                      <span className="text-[11px] font-extrabold text-black/40 uppercase tracking-widest">{k.replace(/([A-Z])/g, ' $1').trim()}</span>
-                      <span className="text-[15px] text-black font-semibold leading-relaxed mt-0.5">{String(v)}</span>
-                    </div>
-                  ))}
+                <div key={idx} className="bg-white p-6 rounded-2xl border border-black/5 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-auto-fit min-[400px]:grid-cols-2 gap-6">
+                    {Object.entries(item).map(([k, v]) => (
+                      <div key={k} className="flex flex-col">
+                        <span className="text-[11px] font-bold text-black/40 uppercase tracking-widest mb-1.5">{k.replace(/([A-Z])/g, ' $1').trim()}</span>
+                        <span className="text-[15px] text-black font-semibold leading-relaxed break-words">{String(v)}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
@@ -216,26 +218,26 @@ function AnalysisContent() {
         return (
           <ul className="space-y-3 mt-2 pl-1">
             {val.map((item, idx) => (
-              <li key={idx} className="flex items-start gap-3">
+              <li key={idx} className="flex items-start gap-3 bg-white p-4 rounded-xl shadow-sm border border-black/5">
                 <ChevronRight className={`w-5 h-5 ${themeColor.split(' ')[0]} mt-0.5 shrink-0`} />
-                <span className="text-[16px] text-black font-medium leading-relaxed">{String(item)}</span>
+                <span className="text-[15px] text-black font-medium leading-relaxed break-words">{String(item)}</span>
               </li>
             ))}
           </ul>
         );
       } else if (typeof val === 'object' && val !== null) {
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
             {Object.entries(val).map(([k, v]) => (
-              <div key={k} className="bg-white p-5 rounded-xl border border-white/50 shadow-sm">
-                <h4 className="text-[11px] font-extrabold text-black/40 uppercase tracking-widest mb-1.5">{k.replace(/([A-Z])/g, ' $1').trim()}</h4>
-                <div className="text-[15px] text-black font-semibold leading-relaxed">{renderSmartValue(v, themeColor)}</div>
+              <div key={k} className="bg-white p-6 rounded-2xl border border-black/5 shadow-sm">
+                <h4 className="text-[11px] font-bold text-black/40 uppercase tracking-widest mb-2">{k.replace(/([A-Z])/g, ' $1').trim()}</h4>
+                <div className="text-[15px] text-black font-semibold leading-relaxed break-words">{renderSmartValue(v, themeColor)}</div>
               </div>
             ))}
           </div>
         );
       } else {
-        return <span className="text-black text-[16px] font-medium leading-relaxed whitespace-pre-wrap">{String(val)}</span>;
+        return <span className="text-black text-[15px] font-medium leading-relaxed whitespace-pre-wrap break-words">{String(val)}</span>;
       }
     };
 
@@ -766,10 +768,10 @@ function AnalysisContent() {
           {renderReport()}
         </main>
       ) : (
-        <main className="flex-1 w-full flex overflow-hidden">
+        <main className="flex-1 w-full flex flex-col lg:flex-row overflow-hidden">
           
-          {/* LEFT PANE: Dynamic Stage (75%) */}
-          <div className="flex-1 h-full bg-[#f8f9fa] relative flex flex-col overflow-hidden">
+          {/* LEFT PANE: Dynamic Stage */}
+          <div className="flex-1 h-full bg-[#f8f9fa] relative flex flex-col overflow-y-auto lg:overflow-hidden min-h-[60vh] lg:min-h-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -786,8 +788,8 @@ function AnalysisContent() {
           </AnimatePresence>
         </div>
 
-        {/* RIGHT PANE: Navigation (25%) */}
-        <div className="w-[360px] shrink-0 h-full bg-[#f8f9fa] border-l border-[#e0e0e0] flex flex-col z-10 relative overflow-y-auto custom-scrollbar p-6 space-y-6">
+        {/* RIGHT PANE: Navigation */}
+        <div className="w-full lg:w-[360px] shrink-0 h-auto lg:h-full bg-[#f8f9fa] border-t lg:border-t-0 lg:border-l border-[#e0e0e0] flex flex-col z-10 relative overflow-y-auto custom-scrollbar p-6 space-y-6">
           
           {/* Box 1: Enkrypt AI Security Overview */}
           <div className="bg-white rounded-[24px] border border-[#e0e0e0] shadow-[0_2px_10px_rgba(0,0,0,0.02)] p-6 shrink-0">
