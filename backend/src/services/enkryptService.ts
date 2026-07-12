@@ -98,6 +98,7 @@ export class EnkryptService {
     if (!this.apiKey) return { score: 0, explanation: 'Dry mode (No API Key)', isBlocked: false };
 
     try {
+      console.log(`[Enkrypt AI] Initiating API call to /guardrails/detect...`);
       const response = await this.fetchWithRetry('https://api.enkryptai.com/guardrails/detect', {
         method: 'POST',
         headers: {
@@ -118,22 +119,42 @@ export class EnkryptService {
       }
 
       const data = await response.json();
+      console.log(`[Enkrypt AI] Raw Response Details:`, JSON.stringify(data.details, null, 2));
       
-      let hallucinationScore = 0;
+      let maxRiskProb = 0;
       let isBlocked = false;
 
+      // Extract precise probabilities from toxicity if available
+      if (data.details && data.details.toxicity) {
+        const tox = data.details.toxicity;
+        const probs = [
+          tox.HATE || 0,
+          tox.HARASSMENT || 0,
+          tox.ILLICIT_BEHAVIOR || 0,
+          tox.SELF_HARM || 0,
+          tox.VIOLENCE_THREATS || 0
+        ];
+        maxRiskProb = Math.max(...probs);
+      }
+
+      // Add a heavy penalty if bias is flagged
+      if (data.summary && Array.isArray(data.summary.bias) && data.summary.bias.length > 0) {
+        maxRiskProb = Math.max(maxRiskProb, 0.8);
+      }
+
+      // Check if Enkrypt explicitly blocked it
       if (data.summary) {
-        if (Array.isArray(data.summary.bias) && data.summary.bias.length > 0) {
-          hallucinationScore = 0.8;
-          isBlocked = true;
-        }
-        if (Array.isArray(data.summary.toxicity) && data.summary.toxicity.length > 0) {
+        if ((Array.isArray(data.summary.bias) && data.summary.bias.length > 0) ||
+            (Array.isArray(data.summary.toxicity) && data.summary.toxicity.length > 0)) {
           isBlocked = true;
         }
       }
 
+      const finalScore = Math.round(maxRiskProb * 100);
+      console.log(`[Enkrypt AI] Computed dynamic risk/hallucination score: ${finalScore}%`);
+
       return {
-        score: Math.round(hallucinationScore * 100) || 5,
+        score: finalScore,
         explanation: data.result_message || 'Analyzed by Enkrypt AI Policy Engine.',
         isBlocked
       };
