@@ -10,6 +10,7 @@ import ReactMarkdown from 'react-markdown';
 import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/app/actions/auth";
 import { User } from "@supabase/supabase-js";
+import { ScoringSystemModal } from "@/components/ScoringSystemModal";
 
 type TabId = 'clauses' | 'debate' | 'negotiation';
 type AgentRole = 'advocate' | 'defender' | 'expert' | 'judge' | 'user';
@@ -73,6 +74,7 @@ function AnalysisContent() {
   const [chatInput, setChatInput] = useState("");
   const [isEnkryptExpanded, setIsEnkryptExpanded] = useState(false);
   const [isJudgeExpanded, setIsJudgeExpanded] = useState(false);
+  const [isScoringModalOpen, setIsScoringModalOpen] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   const [documentData, setDocumentData] = useState<any>(null);
@@ -948,8 +950,14 @@ function AnalysisContent() {
           
           {/* Box 1: Enkrypt AI Security Overview */}
           <div className="bg-white rounded-[24px] border border-[#e0e0e0] shadow-[0_2px_10px_rgba(0,0,0,0.02)] p-6 shrink-0">
-            <h2 className="text-[11px] font-bold text-[#a0a0a0] uppercase tracking-widest mb-6 flex items-center gap-2">
-              <ShieldAlert className="w-3.5 h-3.5" /> Safety Overview
+            <h2 className="text-[11px] font-bold text-[#a0a0a0] uppercase tracking-widest mb-6 flex items-center justify-between gap-2">
+              <span className="flex items-center gap-2"><ShieldAlert className="w-3.5 h-3.5" /> Safety Overview</span>
+              <button 
+                onClick={() => setIsScoringModalOpen(true)}
+                className="text-[9px] bg-gray-100 hover:bg-gray-200 text-gray-500 px-2.5 py-1 rounded-md border border-gray-200 transition-colors"
+              >
+                SCORING SYSTEM
+              </button>
             </h2>
             
             <div className="space-y-6">
@@ -1072,6 +1080,9 @@ function AnalysisContent() {
         </div>
       </main>
       )}
+      
+      {/* Modals */}
+      <ScoringSystemModal isOpen={isScoringModalOpen} onClose={() => setIsScoringModalOpen(false)} />
     </div>
   );
 }
