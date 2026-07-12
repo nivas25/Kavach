@@ -383,13 +383,27 @@ function AnalysisContent() {
     );
   };
 
+  const formatMessageText = (text: string) => {
+    return text.split('\n').map((line, i) => (
+      <React.Fragment key={i}>
+        {line.split(/(\*\*.*?\*\*)/g).map((part, j) => {
+          if (part.startsWith('**') && part.endsWith('**')) {
+            return <strong key={j} className="font-black opacity-90">{part.slice(2, -2)}</strong>;
+          }
+          return <span key={j}>{part}</span>;
+        })}
+        {i !== text.split('\n').length - 1 && <br />}
+      </React.Fragment>
+    ));
+  };
+
   const getAgentProps = (role: AgentRole) => {
     switch(role) {
-      case 'advocate': return { name: 'User Advocate', icon: <ShieldAlert className="w-5 h-5" />, color: 'text-[#0084ff]', bubbleBg: 'bg-[#0084ff]', bubbleText: 'text-white' };
-      case 'defender': return { name: 'Company Defender', icon: <Bot className="w-5 h-5" />, color: 'text-[#e53935]', bubbleBg: 'bg-[#e53935]', bubbleText: 'text-white' };
-      case 'expert': return { name: 'India Legal Expert', icon: <Scale className="w-5 h-5" />, color: 'text-[#25D366]', bubbleBg: 'bg-[#25D366]', bubbleText: 'text-white' };
-      case 'judge': return { name: 'Neutral Judge', icon: <Gavel className="w-5 h-5" />, color: 'text-[#673ab7]', bubbleBg: 'bg-[#673ab7]', bubbleText: 'text-white' };
-      case 'user': return { name: 'You', icon: null, color: 'text-gray-800', bubbleBg: 'bg-[#1f1f1f]', bubbleText: 'text-white' };
+      case 'advocate': return { name: 'User Advocate', icon: <ShieldAlert className="w-5 h-5" />, color: 'text-[#1f1f1f]', bubbleBg: 'bg-[#1f1f1f]', bubbleText: 'text-white' };
+      case 'defender': return { name: 'Company Defender', icon: <Bot className="w-5 h-5" />, color: 'text-[#4a301e]', bubbleBg: 'bg-[#4a301e]', bubbleText: 'text-white' };
+      case 'expert': return { name: 'India Legal Expert', icon: <Scale className="w-5 h-5" />, color: 'text-[#C69C6D]', bubbleBg: 'bg-[#C69C6D]', bubbleText: 'text-white' };
+      case 'judge': return { name: 'Neutral Judge', icon: <Gavel className="w-5 h-5" />, color: 'text-[#664229]', bubbleBg: 'bg-white border border-[#C69C6D]/30', bubbleText: 'text-[#1f1f1f]' };
+      case 'user': return { name: 'You', icon: null, color: 'text-gray-800', bubbleBg: 'bg-[#f8f9fa] border border-[#e0e0e0]', bubbleText: 'text-[#1f1f1f]' };
     }
   };
 
@@ -483,7 +497,7 @@ function AnalysisContent() {
                               )}
 
                               <div className="text-[14.5px] leading-relaxed font-medium whitespace-pre-wrap">
-                                {msg.text}
+                                {formatMessageText(msg.text)}
                               </div>
                             </div>
                           </div>
@@ -579,7 +593,7 @@ function AnalysisContent() {
                       )}
 
                       <div className="text-[14.5px] leading-relaxed font-medium whitespace-pre-wrap">
-                        {msg.text}
+                        {formatMessageText(msg.text)}
                       </div>
                     </div>
                   </div>
