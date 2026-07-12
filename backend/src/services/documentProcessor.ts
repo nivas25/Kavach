@@ -199,19 +199,37 @@ export class DocumentProcessorService {
   }> {
     console.log(`[Scoring] Calculating final risk score from verdict...`);
     const prompt = `
-      You are a legal scoring system. Read the following judge's verdict and evaluate the contract across three factors (each 1-10).
+      You are a legal scoring system evaluating a contract based on a judge's verdict. 
+      You MUST evaluate the contract across three factors (each 1-10) using the EXACT rubrics below.
       
       SCORING RUBRICS:
       
-      1. harmPotential: (1-10) Evaluate the potential harm and risk level described in the verdict.
-      2. legalStrength: (1-10) Evaluate the legal enforceability and compliance based on the verdict.
-      3. practicalLikelihood: (1-10) Evaluate the practical likelihood of enforcement and real-world impact.
+      1. harmPotential: (1-10) How severe could the negative impact be on the user's career, finances, or personal interests?
+         - 1-2: Negligible (Trivial inconvenience)
+         - 3-4: Minor (Short-term limitation)
+         - 5-6: Moderate (Noticeable effect on career / Meaningful financial impact)
+         - 7-8: Serious (Significant career restriction / Major financial loss)
+         - 9-10: Severe (Career-damaging / Can destroy future opportunities / Unlimited liability)
+
+      2. legalStrength: (1-10) How enforceable is this clause under Indian law? (Higher Legal Strength = MORE enforceable = HIGHER risk to user)
+         - 1-2: Unenforceable (Explicitly void under Indian law, clear judicial precedent against)
+         - 3-4: Weak (Partially conflicts with law, likely challenged successfully)
+         - 5-6: Uncertain (Ambiguous, case-by-case basis)
+         - 7-8: Strong (Clear statutory basis, well-drafted)
+         - 9-10: Very Strong (Fully compliant, ironclad under Indian law)
+
+      3. practicalLikelihood: (1-10) How likely is this clause to actually be invoked against the user in a real-world scenario?
+         - 1-2: Very Unlikely (Almost never invoked, rare deterrent)
+         - 3-4: Low (Unusual circumstances only)
+         - 5-6: Moderate (Invoked sometimes / Meaningful percentage)
+         - 7-8: High (Frequently invoked / Common source of disputes)
+         - 9-10: Almost Certain (Very high probability / Will definitely affect user)
 
       REQUIREMENTS:
       1. Output a strict JSON object with:
-         - "harmPotential": number 1-10 (extracted exactly from the verdict)
-         - "legalStrength": number 1-10 (extracted exactly from the verdict)
-         - "practicalLikelihood": number 1-10 (extracted exactly from the verdict)
+         - "harmPotential": number 1-10 (evaluated based on the exact rubric above)
+         - "legalStrength": number 1-10 (evaluated based on the exact rubric above)
+         - "practicalLikelihood": number 1-10 (evaluated based on the exact rubric above)
          - "summary": A concise, 2-3 sentence executive summary of the verdict and main risks.
 
       Verdict:
