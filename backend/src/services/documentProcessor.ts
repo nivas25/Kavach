@@ -203,9 +203,9 @@ export class DocumentProcessorService {
       
       SCORING RUBRICS:
       
-      1. harmPotential: (1-10) Extract the explicit "Harm Score" provided by the Judge based on the knowledge base.
-      2. legalStrength: (1-10) Extract the explicit "Legal Score" provided by the Judge based on the knowledge base.
-      3. practicalLikelihood: (1-10) Extract the explicit "Likelihood Score" provided by the Judge based on the knowledge base.
+      1. harmPotential: (1-10) Evaluate the potential harm and risk level described in the verdict.
+      2. legalStrength: (1-10) Evaluate the legal enforceability and compliance based on the verdict.
+      3. practicalLikelihood: (1-10) Evaluate the practical likelihood of enforcement and real-world impact.
 
       REQUIREMENTS:
       1. Output a strict JSON object with:

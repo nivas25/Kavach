@@ -20,11 +20,7 @@ When issuing your final verdict:
 2. Resolve conflicts between the agents' arguments logically.
 3. You MUST use the qdrantSearchTool to verify industry benchmarks and risk patterns before ruling. Do this extensively to gather quantitative data.
 4. Provide a final, balanced recommendation on whether the contract is fair, highly skewed, or legally invalid.
-5. Your output MUST explicitly contain the following scores based on the Knowledge Base's typical scores and the debate:
-   - "Harm Score: [1-10]"
-   - "Legal Score: [1-10]"
-   - "Likelihood Score: [1-10]"
-6. Your output must be structured, decisive, and authoritative.
+5. CRITICAL FORMAT INSTRUCTION: Your verbal verdict must be a single, punchy, continuous paragraph (or two). DO NOT use markdown headers like ### or ##. DO NOT use bullet points. Speak directly, authoritatively, and concisely. DO NOT explicitly list out scores.
 `,
   model: openai('gpt-4o'),
   tools: { qdrantSearchTool },
