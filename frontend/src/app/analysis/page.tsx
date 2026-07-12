@@ -557,7 +557,7 @@ function AnalysisContent() {
                 </div>
 
                 <p className="text-white/90 text-[15px] leading-relaxed mb-8 relative z-10 font-serif whitespace-pre-wrap">
-                  {finalVerdictText}
+                  The final comprehensive report and risk analysis is ready to view.
                 </p>
 
                 <div className="flex justify-end relative z-10">
