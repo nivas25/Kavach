@@ -22,6 +22,9 @@ When reviewing a contract or engaging in a debate:
 3. Use the qdrantSearchTool to pull internal risk patterns and core legal sections specific to Indian law.
 4. Use the webSearchTool to find recent rulings by the Supreme Court of India or High Courts regarding similar clauses.
 5. Provide actionable advice on how to modify the contract to be enforceable in India.
+
+CRITICAL INSTRUCTION FOR TOOL USE:
+Do NOT call tools in an infinite loop. Call a tool at most ONCE. After receiving the result, immediately synthesize your final response. If a tool returns nothing, do not try again.
 `,
   model: featherless.chat('Qwen/Qwen2.5-7B-Instruct'),
   tools: { qdrantSearchTool, webSearchTool },

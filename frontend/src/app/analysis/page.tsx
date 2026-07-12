@@ -228,12 +228,12 @@ function AnalysisContent() {
           return (
             <div className="flex flex-col gap-4 mt-2">
               {val.map((item, idx) => (
-                <div key={idx} className="bg-white p-6 rounded-2xl border border-black/5 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex flex-col gap-5">
+                <div key={idx} className="bg-white p-5 rounded-2xl border border-black/5 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex flex-col gap-3">
                     {Object.entries(item).map(([k, v]) => (
-                      <div key={k} className="flex flex-col">
-                        <span className="text-[11px] font-bold text-black/40 uppercase tracking-widest mb-1.5">{k.replace(/([A-Z])/g, ' $1').trim()}</span>
-                        <span className="text-[15px] text-black font-semibold leading-relaxed break-words">{String(v)}</span>
+                      <div key={k} className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-gray-50 last:border-0 pb-3 last:pb-0">
+                        <span className="text-[11px] font-bold text-black/40 uppercase tracking-widest shrink-0 w-1/3 pt-0.5">{k.replace(/([A-Z])/g, ' $1').trim()}</span>
+                        <span className="text-[14px] text-black font-medium leading-relaxed break-words text-left sm:text-right">{String(v)}</span>
                       </div>
                     ))}
                   </div>
@@ -255,12 +255,23 @@ function AnalysisContent() {
       } else if (typeof val === 'object' && val !== null) {
         return (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
-            {Object.entries(val).map(([k, v]) => (
-              <div key={k} className="bg-white p-6 rounded-2xl border border-black/5 shadow-sm">
-                <h4 className="text-[11px] font-bold text-black/40 uppercase tracking-widest mb-2">{k.replace(/([A-Z])/g, ' $1').trim()}</h4>
-                <div className="text-[15px] text-black font-semibold leading-relaxed break-words">{renderSmartValue(v, themeColor)}</div>
-              </div>
-            ))}
+            {Object.entries(val).map(([k, v]) => {
+              const isPrimitive = typeof v !== 'object' || v === null;
+              if (isPrimitive) {
+                return (
+                  <div key={k} className="bg-white px-5 py-4 rounded-2xl border border-black/5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <span className="text-[11px] font-bold text-black/40 uppercase tracking-widest shrink-0">{k.replace(/([A-Z])/g, ' $1').trim()}</span>
+                    <div className="text-[14px] text-black font-medium leading-relaxed break-words text-left sm:text-right">{String(v)}</div>
+                  </div>
+                );
+              }
+              return (
+                <div key={k} className="bg-white p-6 rounded-2xl border border-black/5 shadow-sm col-span-1 sm:col-span-2">
+                  <h4 className="text-[12px] font-bold text-black/40 uppercase tracking-widest mb-4">{k.replace(/([A-Z])/g, ' $1').trim()}</h4>
+                  <div className="text-[15px] text-black font-semibold leading-relaxed break-words">{renderSmartValue(v, themeColor)}</div>
+                </div>
+              );
+            })}
           </div>
         );
       } else {

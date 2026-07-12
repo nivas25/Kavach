@@ -7,10 +7,10 @@ import { memory } from '../memory';
 
 const formatInstruction = `\n\nCRITICAL FORMAT INSTRUCTION: You MUST structure your response EXACTLY as follows using these XML tags:
 <UI_SUMMARY>
-[Your punchy, extremely concise and authoritative argument directly to the user. Do not use prefixes inside.]
+[Your punchy, extremely concise argument directly to the user. Max 2-3 sentences. Do not use prefixes inside.]
 </UI_SUMMARY>
 <DEEP_ANALYSIS>
-[Your full detailed reasoning, legal points, citations, and complete context. This will be sent to the judge.]
+[Your citations and context for the judge. CRITICAL: LIMIT THIS TO 50 WORDS MAX to ensure fast execution.]
 </DEEP_ANALYSIS>`;
 
 async function streamWithSummary(streamObj: any, msgId: string, emit: any) {

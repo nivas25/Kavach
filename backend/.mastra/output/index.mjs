@@ -105,6 +105,9 @@ When analyzing a critique from the User Advocate:
 3. Use aggressive, confident, corporate legal speak. 
 4. Never concede a point without highlighting how removing the clause would expose the company to frivolous lawsuits.
 5. You MUST use the qdrantSearchTool and webSearchTool to find precedent that supports corporate-friendly interpretations.
+
+CRITICAL INSTRUCTION FOR TOOL USE:
+Do NOT call tools in an infinite loop. Call a tool at most ONCE. After receiving the result, immediately synthesize your final response. If a tool returns nothing, do not try again.
 `,
   model: featherless$1.chat("Qwen/Qwen2.5-7B-Instruct"),
   tools: { qdrantSearchTool, webSearchTool },
@@ -128,6 +131,9 @@ When reviewing a contract or engaging in a debate:
 3. Use the qdrantSearchTool to pull internal risk patterns and core legal sections specific to Indian law.
 4. Use the webSearchTool to find recent rulings by the Supreme Court of India or High Courts regarding similar clauses.
 5. Provide actionable advice on how to modify the contract to be enforceable in India.
+
+CRITICAL INSTRUCTION FOR TOOL USE:
+Do NOT call tools in an infinite loop. Call a tool at most ONCE. After receiving the result, immediately synthesize your final response. If a tool returns nothing, do not try again.
 `,
   model: featherless.chat("Qwen/Qwen2.5-7B-Instruct"),
   tools: { qdrantSearchTool, webSearchTool },
@@ -160,10 +166,10 @@ const formatInstruction = `
 
 CRITICAL FORMAT INSTRUCTION: You MUST structure your response EXACTLY as follows using these XML tags:
 <UI_SUMMARY>
-[Your punchy, extremely concise and authoritative argument directly to the user. Do not use prefixes inside.]
+[Your punchy, extremely concise argument directly to the user. Max 2-3 sentences. Do not use prefixes inside.]
 </UI_SUMMARY>
 <DEEP_ANALYSIS>
-[Your full detailed reasoning, legal points, citations, and complete context. This will be sent to the judge.]
+[Your citations and context for the judge. CRITICAL: LIMIT THIS TO 50 WORDS MAX to ensure fast execution.]
 </DEEP_ANALYSIS>`;
 async function streamWithSummary(streamObj, msgId, emit) {
   let fullText = "";

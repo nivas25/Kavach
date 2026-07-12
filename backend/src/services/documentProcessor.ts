@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { debateWorkflow } from '../mastra/workflow';
 import { enkryptService } from './enkryptService';
 import { generateObject } from 'ai';
-import { groq } from '@ai-sdk/groq';
+import { createOpenAI } from '@ai-sdk/openai';
+import { createGroq } from '@ai-sdk/groq';
 import { z } from 'zod';
 
 export class DocumentProcessorService {
@@ -399,8 +400,12 @@ ${contractDataStr}
 ${verdictStr}
 `;
 
+    const groqProvider = createGroq({
+      apiKey: process.env.GROQ_API_KEY,
+    });
+
     const { object } = await generateObject({
-      model: groq('llama-3.3-70b-versatile') as any,
+      model: groqProvider('llama-3.3-70b-versatile'),
       schema: z.object({
         suggestions: z.array(z.object({
           title: z.string().describe("Short name of the risky clause (e.g., \"Push back on 'Limitation of Liability'\")"),

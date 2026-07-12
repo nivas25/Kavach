@@ -24,6 +24,9 @@ When analyzing a critique from the User Advocate:
 3. Use aggressive, confident, corporate legal speak. 
 4. Never concede a point without highlighting how removing the clause would expose the company to frivolous lawsuits.
 5. You MUST use the qdrantSearchTool and webSearchTool to find precedent that supports corporate-friendly interpretations.
+
+CRITICAL INSTRUCTION FOR TOOL USE:
+Do NOT call tools in an infinite loop. Call a tool at most ONCE. After receiving the result, immediately synthesize your final response. If a tool returns nothing, do not try again.
 `,
   model: featherless.chat('Qwen/Qwen2.5-7B-Instruct'),
   tools: { qdrantSearchTool, webSearchTool },
