@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import ReactMarkdown from 'react-markdown';
 import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/app/actions/auth";
 import { User } from "@supabase/supabase-js";
@@ -367,16 +368,34 @@ function AnalysisContent() {
           <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-widest mb-8 border-b pb-4">Executive Summary</h3>
           
           <div className="mb-8">
-            <p className="text-[15px] leading-relaxed text-[#444746] font-medium whitespace-pre-wrap">
+            <ReactMarkdown 
+              components={{
+                h3: ({node, ...props}) => <h3 className="text-lg font-bold text-[#1f1f1f] mt-6 mb-3" {...props} />,
+                h4: ({node, ...props}) => <h4 className="text-base font-bold text-[#1f1f1f] mt-5 mb-2" {...props} />,
+                p: ({node, ...props}) => <p className="text-[15px] leading-relaxed text-[#444746] font-medium mb-4 whitespace-pre-wrap" {...props} />,
+                ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-4 space-y-2 text-[15px] text-[#444746]" {...props} />,
+                li: ({node, ...props}) => <li {...props} />,
+                strong: ({node, ...props}) => <strong className="font-bold text-[#1f1f1f]" {...props} />
+              }}
+            >
               {summary}
-            </p>
+            </ReactMarkdown>
           </div>
           
           <div className="mt-8 pt-8 border-t border-gray-100">
             <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-3">Neutral Judge Rationale</h4>
-            <p className="text-[15px] leading-relaxed text-[#444746] font-medium whitespace-pre-wrap">
+            <ReactMarkdown 
+              components={{
+                h3: ({node, ...props}) => <h3 className="text-lg font-bold text-[#1f1f1f] mt-6 mb-3" {...props} />,
+                h4: ({node, ...props}) => <h4 className="text-base font-bold text-[#1f1f1f] mt-5 mb-2" {...props} />,
+                p: ({node, ...props}) => <p className="text-[15px] leading-relaxed text-[#444746] font-medium mb-4 whitespace-pre-wrap" {...props} />,
+                ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-4 space-y-2 text-[15px] text-[#444746]" {...props} />,
+                li: ({node, ...props}) => <li {...props} />,
+                strong: ({node, ...props}) => <strong className="font-bold text-[#1f1f1f]" {...props} />
+              }}
+            >
               {finalVerdictText}
-            </p>
+            </ReactMarkdown>
           </div>
         </div>
       </motion.div>
